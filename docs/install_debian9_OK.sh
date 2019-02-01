@@ -1,5 +1,6 @@
-##chmod +x before start !
 #!/bin/bash
+#chmod +x before start !
+
 # Settings you will have to adapt to your environment
 BASE_PROTOCOL=http
 INSTANCE_NAME=gogocarto
