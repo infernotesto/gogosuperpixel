@@ -49,6 +49,9 @@ RUN \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
+# Prestissimo
+RUN composer global require hirak/prestissimo --prefer-dist --no-progress --no-suggest --classmap-authoritative
+
 # MongoDB extension
 RUN pecl install mongodb \
     && docker-php-ext-enable mongodb
