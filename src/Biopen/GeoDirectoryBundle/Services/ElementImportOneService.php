@@ -2,6 +2,7 @@
 
 namespace Biopen\GeoDirectoryBundle\Services;
 
+use Biopen\GeoDirectoryBundle\Document\Import;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Biopen\GeoDirectoryBundle\Document\Element;
 use Biopen\GeoDirectoryBundle\Document\ElementStatus;
@@ -14,6 +15,7 @@ use Biopen\GeoDirectoryBundle\Document\UserInteractionContribution;
 use Biopen\GeoDirectoryBundle\Document\PostalAddress;
 use Biopen\GeoDirectoryBundle\Document\ElementImage;
 use Biopen\GeoDirectoryBundle\Document\ElementFile;
+use Doctrine\ODM\MongoDB\Query\Builder;
 
 class ElementImportOneService
 {
@@ -49,6 +51,12 @@ class ElementImportOneService
     $this->privateDataProps = $config->getApi()->getPublicApiPrivateProperties();
   }
 
+  /**
+   * @param array $row
+   * @param Import $import
+   *
+   * @return string
+   */
 	public function createElementFromArray($row, $import)
 	{
 		$updateExisting = false; // if we create a new element or update an existing one
@@ -60,37 +68,11 @@ class ElementImportOneService
       $row[$missingField] = ($missingField == 'categories') ? [] : "";
     }
 
-    $element = null;
+    if (in_array($row['id'], $import->getIdsToIgnore())) {
+      return 'ignored';
+    }
 
-		if ($row['id'])
-		{
-			if (in_array($row['id'], $import->getIdsToIgnore())) return;
-			$qb = $this->em->createQueryBuilder('BiopenGeoDirectoryBundle:Element');
-			$qb->field('source')->references($import);
-			$qb->field('oldId')->equals("" . $row['id']);
-			$element = $qb->getQuery()->getSingleResult();
-		}
-		else if (is_string($row['name']) && strlen($row['name']) > 0)
-		{
-			$qb = $this->em->createQueryBuilder('BiopenGeoDirectoryBundle:Element');
-			$qb->field('source')->references($import);
-			$qb->field('name')->equals($row['name']);
-
-			if (is_string($row['latitude']) && strlen($row['latitude']) > 0 && is_string($row['longitude']) && strlen($row['longitude']) > 0)
-			{
-				$geo = new Coordinates($row['latitude'], $row['longitude']);
-				$qb->field('geo.latitude')->equals($geo->getLatitude());
-				$qb->field('geo.longitude')->equals($geo->getLongitude());
-				$element = $qb->getQuery()->getSingleResult();
-			}
-			else if (strlen($row['streetAddress']) > 0)
-			{
-				if (strlen($row['streetAddress']) > 0) $qb->field('address.streetAddress')->equals($row['streetAddress']);
-				if (strlen($row['addressLocality']) > 0) $qb->field('address.addressLocality')->equals($row['addressLocality']);
-				if (strlen($row['postalCode']) > 0) $qb->field('address.postalCode')->equals($row['postalCode']);
-				$element = $qb->getQuery()->getSingleResult();
-			}
-		}
+    $element = $this->matchElement($row, $import);
 
 		if ($element) // if the element already exists, we update it
 		{
@@ -181,6 +163,77 @@ class ElementImportOneService
 
 		return $updateExisting ? "updated" : "created";
 	}
+
+  /**
+   * @param array $row
+   * @param Import $import
+   *
+   * @return Element|null
+   */
+	private function matchElement($row, $import)
+  {
+    $element = null;
+
+    if ($row['id'])
+    {
+      $qb = $this->createImportElementQueryBuilder($import);
+      $qb->field('oldId')->equals("" . $row['id']);
+      $element = $qb->getQuery()->getSingleResult();
+    }
+    else
+    {
+      if (is_string($row['name']) && '' !== $row['name']) {
+        $qb = $this->createImportElementQueryBuilder($import);
+        $qb->field('name')->equals($row['name']);
+        $result = $qb->getQuery()->getSingleResult();
+        if ($result) {
+          $element = $result;
+        }
+      }
+      if (is_string($row['latitude']) && '' !== $row['latitude'] && is_string($row['longitude']) && '' !== $row['longitude'])
+      {
+        $geo = new Coordinates($row['latitude'], $row['longitude']);
+        $qb = $this->createImportElementQueryBuilder($import);
+        $qb->field('geo.latitude')->equals($geo->getLatitude());
+        $qb->field('geo.longitude')->equals($geo->getLongitude());
+        $result = $qb->getQuery()->getSingleResult();
+        if ($result) {
+          $element = $result;
+        }
+      }
+      if ('' !== $row['streetAddress'])
+      {
+        $qb = $this->createImportElementQueryBuilder($import);
+        $qb->field('address.streetAddress')->equals($row['streetAddress']);
+        if ('' !== $row['addressLocality']) {
+          $qb->field('address.addressLocality')->equals($row['addressLocality']);
+        }
+        if ('' !== $row['postalCode']) {
+          $qb->field('address.postalCode')->equals($row['postalCode']);
+        }
+        $result = $qb->getQuery()->getSingleResult();
+        if ($result) {
+          $element = $result;
+        }
+      }
+    }
+
+    /** @var Element|null $element */
+    return $element;
+  }
+
+  /**
+   * @param Import $import
+   *
+   * @return Builder
+   */
+	private function createImportElementQueryBuilder($import)
+  {
+    $qb = $this->em->createQueryBuilder('BiopenGeoDirectoryBundle:Element');
+    $qb->field('source')->references($import);
+
+    return $qb;
+  }
 
 	private function saveCustomFields($element, $raw_data)
 	{
