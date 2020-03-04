@@ -8,7 +8,7 @@ WEB_USR=www-data # Linux user for this app (if something else then www-data, you
 WEB_GRP=www-data # Linux user group for this app (if something else then www-data, you may have to change php-fpm default user)
 SSL_GENERATOR=selfsigned # SSL generator : certbot for production or on real internet dev, selfsigned for local dev
 GIT_REPO=https://gitlab.adullact.net/pixelhumain/GoGoCarto.git # git repository for GoGoCarto
-GIT_BRANCH=master # git branch for GoGoCarto
+GIT_BRANCH=stable # git branch for GoGoCarto
 WEB_URL=gogocarto.local # main url for GoGoCarto
 CONTACT_EMAIL=contact@gogocarto.local # default email contact
 USE_AS_SAAS=true # true = allow to create a farm of map, false = single map
