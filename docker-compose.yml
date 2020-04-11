@@ -3,10 +3,18 @@ version: '3'
 services:
 
   gogocarto:
-    build: server
+    build:
+      context: .
+      dockerfile: docker/server/Dockerfile
+    depends_on:
+      - mongo
     container_name: gogocarto
     volumes:
-      - ..:/var/www
+      - ./app:/var/www/app:cached
+      - ./bin:/var/www/bin:cached
+      - ./src:/var/www/src:cached
+      - ./var:/var/www/var:cached
+      - ./web:/var/www/web:cached
       - /var/www/var/cache
       - /var/www/var/logs
       - /var/www/var/sessions

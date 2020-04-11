@@ -61,10 +61,17 @@ RUN apt-get --yes --force-yes install nodejs
 RUN npm install -g gulp
 
 # Config files
-COPY custom-php-conf.ini /usr/local/etc/php/conf.d/
-COPY apache.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/server/custom-php-conf.ini /usr/local/etc/php/conf.d/
+COPY docker/server/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # We don't need this directory
 RUN rm -R /var/www/html
 
 WORKDIR /var/www
+
+## Copy files needed for post install script
+RUN apt-get install unzip
+COPY post_install.sh .
+COPY composer* ./
+COPY gulpfile.js .
+COPY package* ./
