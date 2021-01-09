@@ -15,7 +15,6 @@ services:
       - "3008:80"
     links:
       - mongo:mongo
-    tty: true
 
   mongo:
     image: shikhir/alpine-mongodb
@@ -24,7 +23,6 @@ services:
       - mongo:/data/mongodb
     ports:
       - "27017:27017"
-    tty: true
 
 volumes:
   mongo: {}
