@@ -93,7 +93,8 @@ class UserController extends GoGoController
         return $this->render('user/contributions/reports.html.twig', ['reports' => $reports]);
     }
 
-    public function becomeOwnerAction($id, Request $request, SessionInterface $session, DocumentManager $dm)
+    public function becomeOwnerAction($id, Request $request, SessionInterface $session, DocumentManager $dm, 
+                                    TranslatorInterface $t)
     {
         $element = $dm->get('Element')->find($id);
 
@@ -101,7 +102,7 @@ class UserController extends GoGoController
             $user = $this->getUser();
             $userEmail = $user->getEmail();
             $element->setUserOwnerEmail($userEmail);
-            $session->getFlashBag()->add('success', $t->trans('add_element.success_becomeOwner', $name=$element->getName() ));
+            $session->getFlashBag()->add('success', $t->trans('add_element.success_becomeOwner', ['%name%' => $element->getName()] ));
             $dm->flush();
         } else {
             $session->getFlashBag()->add('error', $t->trans('add_element.success_becomeOwner'));

@@ -11,9 +11,10 @@
 		<div class="checkbox-container col s12">
 			<input type="checkbox" name="send_mail" id="send_mail" checked/>
 			<label for="send_mail">
-			{{ "admin.send_mail.add"|trans({feature: config.elementDisplayNameIndefinite}) }}
-			{{ "admin.send_mail.modify"|trans({feature: config.elementDisplayNameIndefinite}) }}
-			{{ editMode ? 'des modifications' : "de l'ajout" }}
+			{{ editMode ?
+				"admin.send_mail.modify"|trans({element: config.elementDisplayNameIndefinite}) :
+				"admin.send_mail.add"|trans({element: config.elementDisplayNameIndefinite})
+			}}
 			</label> 	
 		</div>
 	{% endif %}

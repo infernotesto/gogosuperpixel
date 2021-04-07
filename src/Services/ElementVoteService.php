@@ -7,6 +7,7 @@ use App\Document\ModerationState;
 use App\Document\UserInteractionVote;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElementVoteService
 {
@@ -27,6 +28,7 @@ class ElementVoteService
     {
         // Check user don't vote for his own creation
         if ($element->isLastContributorEqualsTo($this->user, $userEmail)) {
+            //return $t->trans('vote.user_vote_for_him'); // TODO need translation
             return 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
                         Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! ';
         }
@@ -71,7 +73,7 @@ class ElementVoteService
         $this->dm->persist($element);
         $this->dm->flush();
 
-        $resultMessage = $hasAlreadyVoted ? 'Merci '.$this->user.' : votre vote a bien été modifié !' : 'Merci de votre contribution !';
+        $resultMessage = $hasAlreadyVoted ? 'Merci '.$this->user.' : votre vote a bien été modifié !' : 'Merci de votre contribution !';// TODO need translation
         if ($procedureCompleteMessage) {
             $resultMessage .= '</br>'.$procedureCompleteMessage;
         }
@@ -143,16 +145,16 @@ class ElementVoteService
 
         if (ElementStatus::PendingAdd == $element->getStatus()) {
             if (ValidationType::Collaborative == $voteType) {
-                $flashMessage = $positiveVote ? 'Félicitations, '.$elDisplayName.' a reçu assez de vote pour être validé !'
-                                      : ucwords($elDisplayName).' a reçu suffisamment de votes négatifs, il va être supprimé.';
+                $flashMessage = $positiveVote ? 'Félicitations, '.$elDisplayName.' a reçu assez de vote pour être validé !'// TODO need translation
+                                      : ucwords($elDisplayName).' a reçu suffisamment de votes négatifs, il va être supprimé.';// TODO need translation
             } elseif (ValidationType::Admin == $voteType) {
-                $flashMessage = $positiveVote ? ucwords($elDisplayName).' a bien été validé' : ucwords($elDisplayName).' a bien été refusé';
+                $flashMessage = $positiveVote ? ucwords($elDisplayName).' a bien été validé' : ucwords($elDisplayName).' a bien été refusé';// TODO need translation
             }
         } elseif (ElementStatus::PendingModification == $element->getStatus()) {
             if ($positiveVote) {
-                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été acceptées' : 'Félicitations, les modifications ont reçues assez de vote pour être validées !';
+                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été acceptées' : 'Félicitations, les modifications ont reçues assez de vote pour être validées !';// TODO need translation
             } else {
-                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été refusées' : 'La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.';
+                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été refusées' : 'La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.';// TODO need translation
             }
         }
 

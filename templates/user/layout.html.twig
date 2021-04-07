@@ -12,7 +12,7 @@
 
     <div id="menu-user" class="menu-user side-nav">
       <ul>
-        <li class="title">Menu</li>
+        <li class="title">{{ 'commons.menu'|trans }}</li>
 
         <a href="{{ path('gogo_user_profile') }}">
           <li><i class="gogo-icon-filters-1"></i>{{ "my_parameters._label"|trans }}</li>
@@ -26,13 +26,13 @@
 
         {% if is_user_allowed('vote') %}
           <a href="{{ path('gogo_user_votes') }}">
-            <li><i class="gogo-icon-vote"></i>Mes votes</li>
+            <li><i class="gogo-icon-vote"></i>{{ 'my_contributions.my_votes'|trans }}</li>
           </a>
         {% endif %}
 
         {% if is_user_allowed('report') %}
           <a href="{{ path('gogo_user_reports') }}">
-            <li><i class="gogo-icon-exclamation-1"></i>Mes signalements</li>
+            <li><i class="gogo-icon-exclamation-1"></i>{{ 'my_contributions.my_reports'|trans }}</li>
           </a>
         {% endif %}
       </ul>

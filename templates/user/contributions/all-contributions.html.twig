@@ -1,12 +1,12 @@
-<h2>Historique de mes contributions</h2>
+<h2>{{ 'my_contributions.history'|trans }}</h2>
 {% if allContributions|length > 0 %}
   <table class="bordered">
     <thead>
       <tr>
           <th>Name</th>
-          <th class="type">Type</th>
-          <th class="date">Date</th>
-          <th class="small-status">Status</th>
+          <th class="type">{{ 'my_contributions.type'|trans }}</th>
+          <th class="date">{{ 'my_contributions.date'|trans }}</th>
+          <th class="small-status">{{ 'my_contributions.status'|trans }}</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +25,6 @@
   </table>
 {% else %}
   <p class="empty-secton-message">
-    Vous n'avez encore fait aucune contribution
+    {{ 'my_contributions.none'|trans }}
   </p>
 {% endif %}

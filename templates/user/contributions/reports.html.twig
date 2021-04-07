@@ -1,27 +1,27 @@
 {% extends "user/contributions-layout.html.twig" %}
 
-{% set navTitle = "Mes Signalements" %}
-{% block title %}Mes Signalements{% endblock %}
+{% set navTitle = 'reports._label'|trans %}
+{% block title %}{{ 'reports._label'|trans }}{% endblock %}
 
 {% block contribution_page %}
 
   {% set reportValues = {
-    0: "L'élément n'existe plus",
-    1: 'Les informations sont incorrectes',
-    2: "L'élément ne respecte pas la charte",
-    4: "L'élément est référencé plusieurs fois"
+    0: 'reports.reportValues.v0'|trans,
+    1: 'reports.reportValues.v1'|trans,
+    2: 'reports.reportValues.v2'|trans,
+    4: 'reports.reportValues.v4'|trans,
     }
   %}
 
-  <h1 style="margin-bottom: 3rem;">Mes Signalements</h1>
+  <h1 style="margin-bottom: 3rem;">{{ 'reports._label'|trans }}</h1>
   {% if reports|length > 0 %}
     <table class="bordered">
       <thead>
         <tr>
-            <th>Name</th>
-            <th class="report">Signalement</th>
-            <th class="date">Date</th>
-            <th class="status">Status</th>
+            <th>{{ 'reports.element'|trans }}</th>
+            <th class="report">{{ 'reports.report'|trans }}</th>
+            <th class="date">{{ 'reports.date'|trans }}</th>
+            <th class="status">{{ 'reports.status'|trans }}</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +40,7 @@
                     <i>{{ report.resolvedMessage }}</i>
                   {% endif %}
                 {% else %}
-                  <span>En attente de modération</span>
+                  <span>{{ 'reports.pending_moderation'|trans }}</span>
                 {% endif %}
               </td>
             </tr>
@@ -49,7 +49,7 @@
     </table>
   {% else %}
     <p class="empty-secton-message">
-      Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle parfaite ? :P
+      {{ 'reports.empty'|trans }}
     </p>
   {% endif %}
 

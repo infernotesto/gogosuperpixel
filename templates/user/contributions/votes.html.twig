@@ -1,28 +1,28 @@
 {% extends "user/contributions-layout.html.twig" %}
 
-{% set navTitle = "Mes Votes" %}
-{% block title %}Mes Votes{% endblock %}
+{% set navTitle = 'votes._label'|trans %}
+{% block title %}{{ 'votes._label'|trans }}{% endblock %}
 
 {% block contribution_page %}
 
   {% set voteValues = {
-    '-2': 'Ne respecte pas la charte',
-    '-1': "N'existe pas",
-    '0': 'Existe mais infos mauvaises',
-    '1': 'Existe',
-    '2': 'Existe et valide info'
+    '-2': 'votes.voteValues.v-2'|trans,
+    '-1': 'votes.voteValues.v-1'|trans,
+    '0': 'votes.voteValues.v0'|trans,
+    '1': 'votes.voteValues.v1'|trans,
+    '2': 'votes.voteValues.v2'|trans
     }
   %}
 
-  <h1 style="margin-bottom: 3rem;">Mes Votes</h1>
+  <h1 style="margin-bottom: 3rem;">{{ 'votes._label'|trans }}</h1>
   {% if votes|length > 0 %}
     <table class="bordered">
       <thead>
         <tr>
-            <th>Name</th>
-            <th class="vote">Vote</th>
-            <th class="date">Date</th>
-            <th class="status">Status</th>
+            <th>{{ 'votes.element'|trans }}</th>
+            <th class="vote">{{ 'votes.vote'|trans }}</th>
+            <th class="date">{{ 'votes.date'|trans }}</th>
+            <th class="status">{{ 'votes.status'|trans }}</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +40,7 @@
     </table>
   {% else %}
     <p class="empty-secton-message">
-      Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la modération collaborative !
+      {{ 'votes.empty'|trans }}
     </p>
   {% endif %}
 

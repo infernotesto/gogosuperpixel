@@ -1,11 +1,11 @@
 {% if elementsOwned|length > 0 %}
-<h2>Mes Fiches</h2>
+<h2>{{ 'my_contributions.my_elements'|trans }}</h2>
   <table class="bordered">
     <thead>
       <tr>
-          <th>Fiche</th>
-          <th class="status">Status</th>
-          <th class="action">Action</th>
+          <th>{{ 'my_contributions.element'|trans }}</th>
+          <th class="status">{{ 'my_contributions.status'|trans }}</th>
+          <th class="action">{{ 'my_contributions.action'|trans }}</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
             <td>
               {% if element.isValid() or element.isPending() and element.currContribution.userEmail != app.user.email %}
                 <a href="{{ path('gogo_element_edit', {'id': element.id, 'hash': element.randomHash}) }}">
-                  <button class="btn-gogo btn-secondary small waves-light waves-effect btn">Editer</button>
+                  <button class="btn-gogo btn-secondary small waves-light waves-effect btn">{{ 'my_contributions.edit'|trans }}</button>
                 </a>
               {% endif %}
             </td>

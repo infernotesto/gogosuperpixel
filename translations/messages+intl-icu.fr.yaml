@@ -5,6 +5,11 @@ home:
   my_space: Mon Espace
   logout: Se Déconnecter
   credits: Propulsé par {ggc}
+  search:
+    placeholder: Entrez
+    address: une adresse
+    category: une catégorie
+    all: Toutes
 
 add_element:
   _label: Ajouter {feature}
@@ -32,9 +37,33 @@ my_parameters:
 
 my_contributions:
   _label: Mes contributions
+  history: Historique de mes contributions
+  my_elements: Mes Fiches
+  my_votes: Mes votes
+  my_reports: Mes signalements
+  element: Fiche
+  type: Type
+  date: Date
+  status: Status
+  owner: Propriétaire
+  action: Action
+  none: Vous n'avez encore fait aucune contribution
+  element_contributed: Autres fiches auxquelles j'ai contribué
+  me: Moi
+  become_owner: Devenir Propriétaire
+  edit: Editer # TODO move to action ?
+  show: Voir   # TODO move to action ?
+  confirmation: Confirmation
+  confirmation_hint: Pour devenir propriétaire d'une fiche, vous devez certifier participer à la gestion de cette structure
+  confirmation_button: Je confirme
+  confirmation_cancel: Annuler
+
+element-form:
+  title_add: Ajouter {element}
+  title_edit: Modification des données
 
 pending-contributions:
-  _label: Mes Contributions en attente
+  _label: Mes contributions en attente
   form: Fiche
   empty_section: Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter une fiche</a> !
 
@@ -45,10 +74,78 @@ login:
 admin:
   title: Validation
   send_mail:
-    add: Avertir des modifications {element} en lui envoyant un mail
-    modify: Avertir de l'ajout" {element} en lui envoyant un mail
+    add: Avertir des modifications d' {element} en lui envoyant un mail # TODO espace avant {element}. Si il est supprimé, pas de remplacement
+    modify: Avertir de l'ajout d' {element} en lui envoyant un mail # TODO espace avant {element}. Si il est supprimé, pas de remplacement
   recopy_info: Recopier les informations dans un nouveau formulaire
   admin_message: Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques
+
+vote:
+  user_vote_for_him: 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
+                        Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! '
+  vote_modified: 'Merci {user} : votre vote a bien été modifié !'
+  vote_added: Merci de votre contribution !
+  collaborative:
+      positive: Félicitations, {element} a reçu assez de vote pour être validé !
+      negative: '{element} a reçu suffisamment de votes négatifs, il va être supprimé.'
+  admin:
+    positive: '{element} a bien été validé'
+    negative: '{element} a bien été refusé'
+  pending:
+    admin_validated:
+      positive: Les modifications ont bien été acceptées
+      negative: Les modifications ont bien été refusées
+    user_validated:
+      positive: Félicitations, les modifications ont reçues assez de vote pour être validées !
+      negative: La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.
+
+votes:
+  _label: Mes Votes
+  element: Nom
+  vote: Vote
+  date: Date
+  status: Status
+  empty: Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la modération collaborative !
+  voteValues:
+    v-2: Ne respecte pas la charte'
+    v-1: N'existe pas
+    v0: Existe mais infos mauvaises
+    v1: Existe
+    v2: Existe et valide info
+
+reports:
+  _label: Mes Signalements
+  element: Nom
+  report: Signalement
+  date: Date
+  status: Status
+  pending_moderation: En attente de modération
+  empty: "Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle parfaite ? :P"
+  reportValues:
+    v0: L'élément n'existe plus
+    v1: Les informations sont incorrectes
+    v2: L'élément ne respecte pas la charte
+    v3: L'élément est référencé plusieurs fois
+
+create:
+  _label: GoGoCarto - Des cartes à GoGo
+  title: Créer un projet
+  project_name: Nom du projet
+  data-error: Oups, ce nom est trop long !
+  domaine_name: Nom du domaine
+  contrib: Ouverture à la contribution publique
+  choose_option: Veuillez choisir une option
+  contribOptions:
+    open: Ouvert
+    intermediate: Intermédiaire
+    closed: Fermé
+    inherit: Défaut
+  contribHints:
+    open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
+    intermediate: Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des administrateurs
+    closed: Seuls les administrateurs peuvent contribuer
+    inherit: 'Utiliser les paramètres par défaut de {base_url}'
+  cgu: Conditions d'utilisation
+  accept_cgu: J'accepte les conditions générales d'utilisation
 
 load_configuration:
   AppBaseline: Créez des cartes à GoGo
@@ -76,11 +173,45 @@ commons:
     month: Chaque mois
   never: Jamais
   username: Nom d'utilisateur
+  menu: Menu
 
-# If some messages are reused over diffeents pages
+  elementStatus:
+    s:    En attente
+    s-6:  Doublon
+    s-5:  modifié en attente
+    s-4:  Supprimé
+    s-3:  Refusé (votes)
+    s-2:  Refusé (admin)
+    s-1:  En attente (modifs)
+    s0:   En attente (ajout)
+    s1:   Validé (admin)
+    s2:   Validé (votes)
+    s3:   Ajouté par admin
+    s4:   Modifié par admin
+    s5:   Modifié par propriétaire
+    s6:   Modifié avec lien direct
+    s7:   Importé
+
+  contributionType:
+    t-1:  Suppression
+    t0:   Ajout
+    t1:   Modif
+    t2:   Vote
+    t3:   Signalement
+    t4:   Import
+    t5:   Restauration
+    t6:   Résolution modération
+
+errors: # TODO erreurs ajax
+  e1: Les identifiants de connexion ne sont pas corrects
+  e2: Une erreur s'est produite lors de la tentative de connexion
+
+# If some messages are reused over differents pages
 action:
   search: Rechercher # just an example, can be deleted
   submit: Enregistrer
+  geolocalize_me: Géolocaliser ma position # TODO doublon avec home.geolocalize ??
+  create: Créer
 
 directory: # just an example, can be deleted
 

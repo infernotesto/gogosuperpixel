@@ -14,17 +14,17 @@ class LoadAbout implements FixtureInterface
         $lipsum = new LoremIpsum();
 
         $new_about = new About();
-        $new_about->setName('Crédits');
+        $new_about->setName('Crédits'); // TODO need translation
         $new_about->setContent($lipsum->paragraph());
         $manager->persist($new_about);
 
         $new_about = new About();
-        $new_about->setName('Mentions légales');
+        $new_about->setName('Mentions légales'); // TODO need translation
         $new_about->setContent($lipsum->paragraphs(3, 'p'));
         $manager->persist($new_about);
 
         $new_about = new About();
-        $new_about->setName('Contact');
+        $new_about->setName('Contact'); // TODO need translation
         $new_about->setContent($lipsum->sentences(4, ['p']));
         $manager->persist($new_about);
 

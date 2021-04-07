@@ -41,11 +41,11 @@
 			</a>
 
 			{# Set the search placeholder depending on different search authorizations #}
-			{% set placeholder = "Entrez " %}
-			{% set delimiter = '' %}
+			{% set placeholder = 'home.search.placeholder'|trans %}
+			{% set delimiter = ' ' %}
 			{% set inIframe = app.request.get('iframe') %}
 			{% if config.searchPlaceFeature.isAllowed(app.user, inIframe) %}
-				{% set placeholder = placeholder ~ delimiter ~ 'une adresse' %}
+				{% set placeholder = placeholder ~ delimiter ~ 'home.search.address'|trans %}
 				{% set delimiter = ', ' %}
 			{% endif %}
 			{% if config.searchElementsFeature.isAllowed(app.user, inIframe) %}
@@ -53,7 +53,7 @@
 				{% set delimiter = ', ' %}
 			{% endif %}
 			{% if config.searchCategoriesFeature.isAllowed(app.user, inIframe) %}
-				{% set placeholder = placeholder ~ delimiter ~ 'une catégorie' %}
+				{% set placeholder = placeholder ~ delimiter ~ 'home.search.category'|trans %}
 			{% endif %}
 			<a href="annuaire#/carte/autour-de-moi"
 				 class="gogo-icon-locate gogo-h-primary search-icon tooltipped" id="search-geolocalize"
@@ -64,7 +64,7 @@
 		{% if config.home.displayCategoriesToPick %}
 			<div class="main-options-container">
 				<input class="main-option-radio-btn" data-name="all" name="mainOption" type="radio" id="option-all" checked/>
-		    <label class="main-option-radio-label" for="option-all">Toutes</label>
+		    <label class="main-option-radio-label" for="option-all">{{ 'home.search.all'|trans }}</label>
 
 				{% for option in mainOptions %}
 					<input class="main-option-radio-btn" data-name="{{ option.nameShort ? option.nameShort : option.name }}" name="mainOption" type="radio" id="option-{{option.id}}" />
@@ -83,9 +83,9 @@
 	  	</span>
   	{% endif %}
 
-		<button id="btn-directory" class="primary-button btn waves-effect waves-light search-bar-btn">Rechercher</button>
+		<button id="btn-directory" class="primary-button btn waves-effect waves-light search-bar-btn">{{ 'action.search'|trans }}</button>
 		<a href="annuaire#/carte/autour-de-moi">
-			<button id="btn-geolocation" class="primary-button gogo-bg-neutral btn btn-neutral waves-effect waves-light">Géolocaliser ma position</button>
+			<button id="btn-geolocation" class="primary-button gogo-bg-neutral btn btn-neutral waves-effect waves-light">{{ 'action.geolocalize_me'|trans }}</button>
 		</a>
 
 		<div class="divider"></div>

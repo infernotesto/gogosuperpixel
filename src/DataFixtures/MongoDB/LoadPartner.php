@@ -16,19 +16,19 @@ class LoadPartner implements FixtureInterface
 
         $new_partner = new Partner();
 
-        $new_partner->setName('Explications');
-        $new_partner->setContent("Cette page permet de lister des informations comme la description du projet, des partenaires etc.. Vous pouvez modifier le contenu depuis l'interface admin dans \"Contenu\" puis \"Qui sommes nous\"");
-        $new_partner->setWebsiteUrl('https://github.com/pixelhumain/GoGoCarto');
+        $new_partner->setName('Explications'); // TODO need translation
+        $new_partner->setContent("Cette page permet de lister des informations comme la description du projet, des partenaires etc.. Vous pouvez modifier le contenu depuis l'interface admin dans \"Contenu\" puis \"Qui sommes nous\""); // TODO need translation
+        $new_partner->setWebsiteUrl('https://github.com/pixelhumain/GoGoCarto'); // TODO need translation
         $manager->persist($new_partner);
 
-        $names = ['Texte numéro un', 'Texte numéro deux'];
+        $names = ['Texte numéro un', 'Texte numéro deux']; // TODO need translation
         foreach ($names as $key => $name) {
             $new_partner = new Partner();
 
             $new_partner->setName($name);
             $new_partner->setContent($lipsum->words(rand(30, 100)));
             $new_partner->setLogo(new PartnerImage('http://lorempixel.com/300/300/abstract/'.$key));
-            $new_partner->setWebsiteUrl('www.partenaire.com');
+            $new_partner->setWebsiteUrl('www.partenaire.com'); // TODO need translation ?
             $manager->persist($new_partner);
         }
 
