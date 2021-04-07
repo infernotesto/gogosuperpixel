@@ -22,7 +22,9 @@ add_element:
   error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
   error_geocode: Impossible de localiser cette adresse
   controller:
-    error: L'élément demandé n'existe pas...
+    error_dont_exist: L'élément demandé n'existe pas...
+    error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
+    http_error_dont_exist: Cet élément n'existe pas.
     thankyou_edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
     thankyou_added: Merci de votre aide ! {name} a bien été ajouté
     
@@ -146,6 +148,7 @@ create:
     inherit: 'Utiliser les paramètres par défaut de {base_url}'
   cgu: Conditions d'utilisation
   accept_cgu: J'accepte les conditions générales d'utilisation
+  message: Votre projet est en cours de création, veuillez patienter...
 
 load_configuration:
   AppBaseline: Créez des cartes à GoGo

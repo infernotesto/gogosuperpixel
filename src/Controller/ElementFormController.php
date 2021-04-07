@@ -56,7 +56,7 @@ class ElementFormController extends GoGoController
         $element = $dm->get('Element')->find($id);
 
         if (!$element) {
-            $this->addFlash('error', $t->trans('add_element.controller.error'));
+            $this->addFlash('error', $t->trans('add_element.controller.error_dont_exist'));
 
             return $this->redirectToRoute('gogo_directory');
         } elseif ($element->getStatus() > ElementStatus::PendingAdd && $element->isEditable()
@@ -64,7 +64,7 @@ class ElementFormController extends GoGoController
             || ($element->isPending() && $element->getRandomHash() == $request->get('hash'))) {
             return $this->renderForm($element, true, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager);
         } else {
-            $this->addFlash('error', "Désolé, vous n'êtes pas autorisé à modifier cet élement !");
+            $this->addFlash('error', $t->trans('add_element.controller.error_unauthorized');
 
             return $this->redirectToRoute('gogo_directory');
         }
