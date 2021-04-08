@@ -4,7 +4,7 @@
 {% set navTitle = "Identification" %}
 
 {% block title %}
-	Identification
+	{{ 'login._label'|trans }}
 {% endblock %}
 
 {# Stylessheets #}
@@ -20,22 +20,22 @@
 	{# NOT ACTIVE #}
 	{% if not featureConfig.getActive() %}
 
-		<h1>Erreur</h1>
-		<p><center>Désolé, cette fonctionnalité n'est pas activée pour le moment</center></p>
+		<h1>{{ 'contributor-login.error'|trans }}</h1>
+		<p><center>{{ 'contributor-login.error.inactive_feature'|trans }}</center></p>
 
 	{# NOT ACTIVE IN IFRAME #}
 	{% elseif app.request.get('iframe') and not featureConfig.getActiveInIframe() %}
 
-		<h1>Erreur</h1>
-		<p><center>Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe</center></p>
+		<h1>{{ 'contributor-login.error'|trans }}</h1>
+		<p><center>{{ 'contributor-login.error.inactive_iframe'|trans }}</center></p>
 
 	{% else %}
 
-		<h1>Identification</h1>
+		<h1>{{ 'contributor-login._label'|trans }}</h1>
 		<section>
 			{# Only Admins warning #}
 			{% if featureConfig.isOnlyAllowedForAdmin() %}
-				<p>Attention ! Cette fonctionnalité est reservée aux administrateur</p>
+				<p>{{ 'contributor-login.error.admin_only'|trans }}</p>
 			{% endif %}
 
 			{# Login button #}
@@ -44,7 +44,7 @@
 					{% set oauthLoginAvailable = config.user.loginWithLesCommuns and oauth_communs != 'disabled' or config.user.loginWithMonPrintemps and oauth_communs != 'disabled' or config.user.loginWithGoogle and oauth_google != 'disabled' or config.user.loginWithFacebook and oauth_facebook != 'disabled' %}
 
 					{% if oauthLoginAvailable %}
-						<h3>Connectez vous avec votre compte :</h3>
+						<h3>{{ 'contributor-login.oauth'|trans }}</h3>
 						<div class="oauth-section">
 							<a class="oauth-btn waves-effect waves-light instance-login" onclick="$('#popup-login').openModal()">
 								{% set logo = config.favicon ? config.favicon : config.logo %}
@@ -70,7 +70,7 @@
 						</div>
 					{% else %}
 						<a class="btn btn-primary waves-effect waves-light" onclick="$('#popup-login').openModal()">
-							Se Connecter
+							{{ 'contributor-login.login'|trans }}
 						</a>
 					{% endif %}
 				</div>

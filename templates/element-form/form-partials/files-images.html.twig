@@ -65,7 +65,7 @@
     </div>
     <span class="btn-close far fa-times-circle" onclick="$(this).closest('li').remove();"></span>
     <div class="error file-too-big" style="display:none">
-      Ce fichier est trop lourd, la taille maximum autorisée est {{ (maxFilesize / 1024 / 1024) | round(2) }} Mb
+      {{ 'commons.errors.file-too-big'|trans({size: (maxFilesize / 1024 / 1024) | round(2)}) }}
     </div>
   </div>
 </div>

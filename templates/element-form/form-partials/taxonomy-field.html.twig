@@ -17,7 +17,7 @@
       <select id="category-field-{{category.id}}" class="category-select keep-title-option depth-{{ categoryDepth }}"
               data-id="{{category.id}}" name="category-field-{{category.id}}"
               data-single-option="{{category.singleOption}}">
-     	  <option disabled selected>Choisissez {{ category.pickingOptionText }} {{ category.isMandatory ? '' : '(optionnel)' }}</option>
+     	  <option disabled selected>{{ 'commons.choose_category'|trans({cat: category.pickingOptionText}) }} {{ category.isMandatory ? '' : 'commons.optional'|trans }}</option>
 
         {% for key, option in category.options %}
         	{% if option.displayInForm %}
@@ -60,7 +60,7 @@
 
   				{% if category.enableDescription %}
     				<div class="input-field option-field-description">
-  				  	<input placeholder="Précisez si nécessaire" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
+  				  	<input placeholder="{{ 'commons.category_placeholder'|trans }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
     				</div>
   				{% endif %}
 

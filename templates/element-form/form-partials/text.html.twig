@@ -23,13 +23,13 @@
   {% set errorMsg = fields.errorMsg|default(null) %}
   {% if not errorMsg %}
     {% if field.subtype is defined and field.subtype == "email" or field.type == 'email' %}
-      {% set errorMsg = "Veuillez renseigner une adresse email valide" %}
+      {% set errorMsg = 'commons.errors.bad_email'|trans %}
     {% elseif field.subtype is defined and field.subtype == "url" or field.type == 'image' %}
-      {% set errorMsg = "Veuillez renseigner une url du type http://..." %}
+      {% set errorMsg = 'commons.errors.bad_url'|trans %}
     {% elseif field.type == "number" %}
-      {% set errorMsg = "Ceci n'est pas un nombre !" %}
+      {% set errorMsg = 'commons.errors.bad_number'|trans %}
     {% elseif field.maxlength is defined %}
-      {% set errorMsg = "Oups, ce texte est un peu long !" %}
+      {% set errorMsg = 'commons.errors.too_long'|trans %}
     {% endif %}
   {% endif %}
 

@@ -1,8 +1,8 @@
 <div class="row ">
 	
 	{% set dayKey = 0 %}
-	{% set frenchDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
-	{% set frenchDaysShort = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] %}
+	{% set frenchDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %} {# TODO translation (need localization: week could start a sunday ;) #}
+	{% set frenchDaysShort = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] %} {# TODO translation (need localization: week could start a sunday ;) #}
 
 	{# pour chaque day de la semaine on crée un ligne pour entrée une plage horaire
 	   une deuxième ligne cachée est crée pour pouvoir ajouter une deuxième plage si besoin #}
@@ -35,21 +35,21 @@
 	  				   class="redo-time-slot-button btn-flat tooltipped" 
 	  				   data-position="top" 
 	  				   data-delay="250" 
-	  				   data-tooltip="Recopier les horaires précédentes" 
+	  				   data-tooltip={{ 'open_hours.recopy_tooltip'|trans }}
 	  				   style="padding:0;">
 	  				   	<i class="material-icons gogo-icon-icon-copy-hours"></i>
 	  				</a>
 	  			</div>	 
 	  		{% endif %}
 	  		
-	  		<div class="col s1 center-align">De</div>
+	  		<div class="col s1 center-align">{{ 'open_hours.from'|trans }}</div>
 	  		<div class="col s3 center-align">
 	  			{{ form_widget(day.children.slot1start, { 'id' : dayKey ~'-input-1',	  														
   							  'attr': {'class': 'timepicker_1 timepicker',
 	  									   'data-slot-number' : 1,
 	  									   'name' : dayKey ~ '-open-hours-1', }}) }}
 	  		</div>
-			<div class="col s1 center-align">à</div>
+			<div class="col s1 center-align">{{ 'open_hours.to'|trans }}</div>
 			<div class="col s3 center-align">
 				{{ form_widget(day.children.slot1end, {'id': dayKey ~'-input-2',
   							  'attr': {'class': 'timepicker_2 timepicker',
@@ -63,7 +63,7 @@
 				   class="add-time-slot-button btn-flat tooltipped" 
 				   data-position="right" 
 				   data-delay="0" 
-				   data-tooltip="Ajouter plage horaire" 
+				   data-tooltip={{ 'open_hours.add_tooltip'|trans }} 
 				   style="padding:0;{{ isSecondTimeSlot ? 'visibility: hidden;' : ''}}">
 				   	<i class="material-icons gogo-icon-add-circle openhours-icons"></i>
 				</a>
@@ -73,14 +73,14 @@
 		{# // deuxième ligne de plagehoraire (cachée) #}
 		<div id="{{ dayKey }}-open-hours-second-line" 
 				 class="valign-wrapper second-line-slot {{ isSecondTimeSlot ? 'active' : ''}}">	
-			<div class="col s1 offset-s3 center-align">Et</div>
+			<div class="col s1 offset-s3 center-align">{{ 'open_hours.and'|trans }}</div>
 	  		<div class="col s3 center-align">
 	  			{{ form_widget(day.children.slot2start, {'id': dayKey ~'-input-3',
   							  'attr': {'class': 'timepicker_3 timepicker',
   									   'data-slot-number' : 3,
   									   'name':'{{ dayKey }}-open-hours-3'   }}) }}
   			</div>
-			<div class="col s1 center-align">à</div>
+			<div class="col s1 center-align">{{ 'open_hours.to'|trans }}</div>
 			<div class="col s3 center-align">
 				{{ form_widget(day.children.slot2end, {'id': dayKey ~'-input-4',
   							  'attr': {'class': 'timepicker_4 timepicker',

@@ -1,10 +1,10 @@
 {% extends "page-layout.html.twig" %}
 
 {% set pageName = 'check-for-duplicates' %}
-{% set navTitle = "Doublons" %}
+{% set navTitle = "Doublons" %} {# TODO translate ?? #}
 
 {% block title %}
-	Détection de doublons
+	{{ 'duplicates._label'|trans }}
 {% endblock %}
 
 {# Stylessheets #}
@@ -20,9 +20,9 @@
 
   {{ form_start(duplicateForm) }}
 
-  <h1>Recherche de doublons</h1>
+  <h1>{{ 'duplicates.title'|trans }}</h1>
 
-  <h2>Des éléments similaires ont été détectés, vous vouliez peut être ajouter l'un d'eux?</h2>
+  <h2>{{ 'duplicates.subtitle'|trans }}</h2>
 
 	<div class="duplicate-list">
 	  {% for key, element in duplicatesElements %}
@@ -33,7 +33,7 @@
 		  		<div class="name">
 				  {{ element.name | capitalize }} 
 				  {% if element.osmId is defined %}
-				  	<a href={{ config.osm.getFormattedOsmHost ~ element.osmId }} target="_blank">(Voir sur OpenStreetMap)</a>
+				  	<a href={{ config.osm.getFormattedOsmHost ~ element.osmId }} target="_blank">{{ 'duplicates.see_on_map'|trans }}</a>
 				  {% endif %}
 				</div>
 				{# Description #}
@@ -53,12 +53,12 @@
 			<div class="col s3 m2 right-align">
 				{% if element.osmId is defined %}
 					<button type="submit" name="osm[{{ element.osmId }}]" class="btn-gogo btn-secondary small waves-light waves-effect btn">
-						C'est lui !
+						{{ 'duplicates.duplicated_element'|trans }}
 					</button>
 				{% else %}
 					{% set url = path('gogo_directory_showElement', {'id': element.id }) | replace({"%23":'#'}) %}
 					<a href="{{ url }}"><button type="button" class="btn-gogo btn-secondary small waves-light waves-effect btn">
-						C'est lui !
+						{{ 'duplicates.duplicated_element'|trans }}
 					</button></a>
 				{% endif %}					
 			</div>
@@ -68,7 +68,7 @@
   	</div>	
 
 	<center>
-		<button type="submit" class="btn-gogo btn-primary waves-light waves-effect btn">Non, c'est un nouvel élément, je continue !</button>
+		<button type="submit" class="btn-gogo btn-primary waves-light waves-effect btn">{{ 'duplicates.new_element'|trans }}</button>
 	</center>
 
 	{{ form_rest(duplicateForm) }}

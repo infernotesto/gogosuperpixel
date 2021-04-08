@@ -11,7 +11,7 @@
     <input type="hidden" name="data-json[{{ field.name }}]" class="select-encoded-result" />
   </div>
 
-  {% set errorMsg = fields.errorMsg|default('Veuillez choisir une option') %}
+  {% set errorMsg = fields.errorMsg|default('commons.choose_option'|trans) %}
 
   {% if field.label is defined and field.label != "undefined" %}
     <label>

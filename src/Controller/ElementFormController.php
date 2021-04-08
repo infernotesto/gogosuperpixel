@@ -44,7 +44,7 @@ class ElementFormController extends GoGoController
                               ElementActionService $elementActionService, LoginManagerInterface $loginManager, 
                               TranslatorInterface $t)
     {
-        return $this->renderForm(new Element(), false, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager);
+        return $this->renderForm(new Element(), false, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager, $t);
     }
 
     public function editAction($id, Request $request, SessionInterface $session, DocumentManager $dm,
@@ -62,9 +62,9 @@ class ElementFormController extends GoGoController
         } elseif ($element->getStatus() > ElementStatus::PendingAdd && $element->isEditable()
             || $configService->isUserAllowed('directModeration')
             || ($element->isPending() && $element->getRandomHash() == $request->get('hash'))) {
-            return $this->renderForm($element, true, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager);
+            return $this->renderForm($element, true, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager, $t);
         } else {
-            $this->addFlash('error', $t->trans('add_element.controller.error_unauthorized');
+            $this->addFlash('error', $t->trans('add_element.controller.error_unauthorized'));
 
             return $this->redirectToRoute('gogo_directory');
         }
@@ -72,10 +72,10 @@ class ElementFormController extends GoGoController
 
     // render for both Add and Edit actions
     private function renderForm($element, $editMode, $request, $session, $dm, $configService,
-                                $elementFormService, $userManager, $elementActionService, $loginManager)
+                                $elementFormService, $userManager, $elementActionService, $loginManager, TranslatorInterface $t)
     {
         if (null === $element) {
-            throw new NotFoundHttpException("Cet élément n'existe pas.");
+            throw new NotFoundHttpException($t->trans('add_element.controller.http_error_dont_exist'));
         }
 
         $addOrEditComplete = false;
@@ -101,7 +101,7 @@ class ElementFormController extends GoGoController
             $userManager->updateUser($user, true);
             $dm->persist($user);
 
-            $text = 'Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="'.$this->generateUrl('gogo_user_profile').'" >votre profil</a> !';
+            $text = $t->trans('add_element.controller.success', $url=$this->generateUrl('gogo_user_profile'));
             $session->getFlashBag()->add('success', $text);
 
             $this->authenticateUser($user, $loginManager);
@@ -282,7 +282,7 @@ class ElementFormController extends GoGoController
             if ($editMode) {
                 $noticeText = $t->trans('add_element.controller.thankyou.edited');
             } else {
-                $noticeText = $t->trans('add_element.controller.thankyou.thankyou_added', $name=ucwords($configService->getConfig()->getElementDisplayNameDefinite()));
+                $noticeText = $t->trans('add_element.controller.thankyou.thankyou_added', [$name=ucwords($configService->getConfig()->getElementDisplayNameDefinite())]);
             }
 
             if ($element->isPending()) {

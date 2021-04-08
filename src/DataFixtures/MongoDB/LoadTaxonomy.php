@@ -49,13 +49,13 @@ class LoadTaxonomy implements FixtureInterface
 
         // Liste des noms de catégorie à ajouter
         $mains = [
-            ['Agriculture & Alimentation', 'fa fa-envira', 'green', '', 'Agriculture', true], // TODO need translation
-            ['Habitat', 'fa fa-home', 'brown', '', '', false], // TODO need translation
-            ['Education & Formation', 'fa fa-graduation-cap', 'blue', '', 'Education', false], // TODO need translation
-            ['Mobilité', 'fa fa-paper-plane', 'lightblue', '', '', false], // TODO need translation
-            ['Sortie & Culture', 'fa fa-coffee', 'pink', '', 'Sorties', false], // TODO need translation
-            ['Voyages', 'fa fa-suitcase', 'darkgreen', '', '', false], // TODO need translation
-            ['Economie & Finance', 'fa fa-euro', 'yellow', '', 'Economie/Finance', false], // TODO need translation
+            ['Agriculture & Alimentation', 'fa fa-envira', 'green', '', 'Agriculture', true], // TODO  translate
+            ['Habitat', 'fa fa-home', 'brown', '', '', false], // TODO  translate
+            ['Education & Formation', 'fa fa-graduation-cap', 'blue', '', 'Education', false], // TODO  translate
+            ['Mobilité', 'fa fa-paper-plane', 'lightblue', '', '', false], // TODO  translate
+            ['Sortie & Culture', 'fa fa-coffee', 'pink', '', 'Sorties', false], // TODO  translate
+            ['Voyages', 'fa fa-suitcase', 'darkgreen', '', '', false], // TODO  translate
+            ['Economie & Finance', 'fa fa-euro', 'yellow', '', 'Economie/Finance', false], // TODO  translate
         ];
 
         foreach ($mains as $key => $main) {

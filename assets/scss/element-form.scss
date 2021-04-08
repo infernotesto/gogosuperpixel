@@ -158,7 +158,7 @@
 
     &:after
     {
-      content: "Impossible de localiser cette adresse";
+      content: "Impossible de localiser cette adresse"; /* TODO translate */
       position: absolute;
       width: 600px;
       top: 3.5rem;
