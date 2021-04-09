@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use App\Document\ModerationState;
 use App\Services\ElementDuplicatesService;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DuplicatesManagementController extends GoGoController
 {
@@ -40,7 +41,8 @@ class DuplicatesManagementController extends GoGoController
     }
 
     public function mergeDuplicateAction(Request $request, ElementDuplicatesService $duplicateService,
-                                         DocumentManager $dm, ElementActionService $elementActionService)
+                                         DocumentManager $dm, ElementActionService $elementActionService,
+                                         TranslatorInterface $t)
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
@@ -52,19 +54,20 @@ class DuplicatesManagementController extends GoGoController
             foreach($duplicates as $duplicate) {
                 $duplicate->setIsDuplicateNode(false);
                 $duplicate->clearPotentialDuplicates();
-                $elementActionService->resolveReports($duplicate, 'Cet élément a été fusionné avec un doublon potentiel', true);
+                $elementActionService->resolveReports($duplicate, $t->trans('duplicates.controller.merged'), true);
                 $duplicate->setModerationState(ModerationState::NotNeeded);
             }            
             $dm->flush();
             
-            return new Response('Elements successfully merged');
+            return new Response('Elements successfully merged'); # TODO translation ??
         } else {
-            return new Response('Not valid ajax request');
+            return new Response('Not valid ajax request'); # TODO translation ??
         }
     }
 
     // Will mark all the
-    public function markAsNonDuplicateAction(Request $request, DocumentManager $dm, ElementActionService $elementActionService)
+    public function markAsNonDuplicateAction(Request $request, DocumentManager $dm, ElementActionService $elementActionService,
+                                             TranslatorInterface $t)
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
@@ -88,15 +91,15 @@ class DuplicatesManagementController extends GoGoController
                 }
                 // resolve
                 foreach ($duplicates as $key => $duplicate) {
-                    $elementActionService->resolveReports($duplicate, 'Marqué comme non doublon', true);
+                    $elementActionService->resolveReports($duplicate, $t->trans('duplicates.controller.marked'), true);
                 }
                 $element->clearPotentialDuplicates();
                 $dm->flush();
             }
 
-            return new Response('Les éléments ont bien été marqués comme non doublons');
+            return new Response($t->trans('duplicates.controller.marked_long'));
         } else {
-            return new Response('Not valid ajax request');
+            return new Response('Not valid ajax request'); # TODO translation ??
         }
     }
 }

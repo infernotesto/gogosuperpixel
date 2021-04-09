@@ -25,9 +25,12 @@ add_element:
     error_dont_exist: L'élément demandé n'existe pas...
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
     http_error_dont_exist: Cet élément n'existe pas.
-    thankyou_edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
-    thankyou_added: Merci de votre aide ! {name} a bien été ajouté
-    success: 'Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}}" >votre profil</a> !'
+    thankyou:
+      edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
+      added: Merci de votre aide ! {name} a bien été ajouté
+    success: 'Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}" >votre profil</a> !'
+    pending: "Votre contribution est pour l'instant en attente de validation, <a class='validation-process' onclick=\"$('#popup-collaborative-explanation').openModal()\">cliquez ici</a> pour en savoir plus sur le processus de modération collaborative !"
+    user_contributions: 'Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes Contributions</a>'
 
 validate:
   input-password: Mot de passe pour créer votre compte
@@ -99,6 +102,10 @@ duplicates:
   see_on_map: (Voir sur OpenStreetMap)
   duplicated_element: C'est lui !
   new_element: Non, c'est un nouvel élément, je continue !
+  controller:
+      merged: Cet élément a été fusionné avec un doublon potentiel
+      marked: Marqué comme non doublon
+      marked_long: Les éléments ont bien été marqués comme non doublons
 
 vote:
   user_vote_for_him: 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
@@ -193,8 +200,13 @@ contributor-login:
     #inactive_feature: "Désolé, cette fonctionnalité n'est pas activée pour le moment" # TODO translation pb avec ces chaines ?????
     #inactive_iframe: "Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe"
     admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
-    oauth: Connectez-vous avec votre compte
-    login: Se connecter
+    invalid_email: Veuillez renseigner une adresse mail valide
+    used_email: Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre adresse !
+  oauth: Connectez-vous avec votre compte
+  printemps: "Printemps de l'éducation"
+  communs: LesCommuns.org
+  login: Se connecter
+  email: Entrez simplement une adresse mail
     
 commons:
   newsletter-explanation: Soyez informé par mail des nouveaux points référencés près de chez vous !
@@ -257,9 +269,47 @@ action:
   send: Envoyer
   send_stay: Envoyer et rester sur le formulaire
   cancel: Annuler
+  continue: Continuer
+  error: "Erreur : {message}"
+  element: # element controller
+    vote:
+      unallowed: "Désolé, vous n'êtes pas autorisé à voter !"
+      uncomplete: Les paramètres du vote sont incomplets
+    report:
+      unallowed: "Désolé, vous n'êtes pas autorisé à signaler d'erreurs !"
+      done: Merci, votre signalement a bien été enregistré !
+    delete:
+      unallowed: "Désolé, vous n'êtes pas autorisé à supprimer un élément !"
+      uncomplete: Les paramètres sont incomplets
+      done: "L'élément a bien été supprimé"
+    resolveReports:
+      unallowed: "Désolé, vous n'êtes pas autorisé à modérer cet élément !"
+      uncomplete: Les paramètres sont incomplets
+      done: "L'élément a bien été modéré"
+    sendMail:
+      uncomplete: Les paramètres sont incomplets
+      mailSubject: 'Message reçu depuis la plateforme {instance}'
+      mailContent: '<p>Bonjour <i>{element}</i>,</p>
+            <p>Vous avez reçu un message de la part de <a href="mailto:{sender}">{sender}</a></br>
+            </p>
+            <p><b>Titre du message</b></p><p> {subject}</p>
+            <p><b>Contenu</b></p><p>{content}</p>'
+      done: "L'email a bien été envoyé"
+    stamp:
+      unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
+      uncomplete: Les paramètres sont incomplets
+      done: "L'étiquette a bien été modifiée"
+  mailtest:
+    draftAutomated:
+      uncomplete: No visible elements in database, please create an element
+    sentTestAutomated:
+      uncomplete: "Aucune adresse mail n'a été renseignée"
+      database_empty: No elements in database, please create an element for email testing
+      done: 'Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs'
+    draftTest:
+      done: 'Un customMessage de test'
+
 
 directory: # just an example, can be deleted
 
 partners: # just an example, can be deleted
-
-  

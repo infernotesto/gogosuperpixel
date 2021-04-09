@@ -24,7 +24,7 @@ class MailTestController extends Controller
         $draftResponse = $this->draftTest($mailType);
 
         if (null == $draftResponse) {
-            return new Response('No visible elements in database, please create an element');
+            return new Response($t->trans('action.mailtest.draftAutomated.uncomplete'));
         }
 
         if ($draftResponse['success']) {
@@ -43,13 +43,13 @@ class MailTestController extends Controller
         $mail = $request->get('email');
 
         if (!$mail) {
-            return new Response('Aucune adresse mail n\'a été renseignée');
+            return new Response($t->trans('action.mailtest.sentTestAutomated.uncomplete'));
         }
 
         $draftResponse = $this->draftTest($mailType);
 
         if (null == $draftResponse) {
-            $this->addFlash('error', 'No elements in database, please create an element for email testing');
+            $this->addFlash('error', $t->trans('action.mailtest.sentTestAutomated.database_empty'));
 
             return $this->redirectToRoute('admin_app_configuration_list');
         }
@@ -57,12 +57,12 @@ class MailTestController extends Controller
         if ($draftResponse['success']) {
             $result = $this->mailService->sendMail($mail, $draftResponse['subject'], $draftResponse['content']);
             if ($result['success']) {
-                $this->addFlash('success', 'Le mail a bien été envoyé à '.$mail.'</br>Si vous ne le voyez pas vérifiez dans vos SPAMs');
+                $this->addFlash('success', $t->trans('action.mailtest.sentTestAutomated.done', ['%mail%' => $mail]));
             } else {
                 $this->addFlash('error', $result['message']);
             }
         } else {
-            $this->addFlash('error', 'Erreur : '.$draftResponse['message']);
+            $this->addFlash('error', $t->trans('action.error', ['%message%' => $draftResponse['message']] ));
         }
 
         return $this->redirectToRoute('gogo_mail_draft_automated', ['mailType' => $mailType]);
@@ -88,7 +88,7 @@ class MailTestController extends Controller
             return null;
         }
 
-        $draftResponse = $this->mailService->draftEmail($mailType, $element, 'Un customMessage de test', $options);
+        $draftResponse = $this->mailService->draftEmail($mailType, $element, $t->trans('action.mailtest.draftTest.done'), $options); 
 
         return $draftResponse;
     }

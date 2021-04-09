@@ -20,19 +20,20 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElementInteractionController extends Controller
 {
     public function voteAction(Request $request, DocumentManager $dm, ConfigurationService $confService,
-                               ElementVoteService $voteService)
+                               ElementVoteService $voteService, TranslatorInterface $t)
     {
         if (!$confService->isUserAllowed('vote', $request)) {
-            return $this->returnResponse(false, "Désolé, vous n'êtes pas autorisé à voter !");
+            return $this->returnResponse(false, $t->trans('action.element.vote.unallowed'));
         }
 
         // CHECK REQUEST IS VALID
         if (!$request->get('elementId') || null === $request->get('value')) {
-            return $this->returnResponse(false, 'Les paramètres du vote sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.vote.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -44,15 +45,16 @@ class ElementInteractionController extends Controller
         return $this->returnResponse(true, $resultMessage, $element->getStatus());
     }
 
-    public function reportErrorAction(Request $request, DocumentManager $dm, ConfigurationService $confService)
+    public function reportErrorAction(Request $request, DocumentManager $dm, ConfigurationService $confService,
+                                      TranslatorInterface $t)
     {
         if (!$confService->isUserAllowed('report', $request)) {
-            return $this->returnResponse(false, "Désolé, vous n'êtes pas autorisé à signaler d'erreurs !");
+            return $this->returnResponse(false, $t->trans('action.element.report.unallowed'));
         }
 
         // CHECK REQUEST IS VALID
         if (!$request->get('elementId') || null === $request->get('value') || !$request->get('userEmail')) {
-            return $this->returnResponse(false, 'Les paramètres du signalement sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.report.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -72,19 +74,20 @@ class ElementInteractionController extends Controller
         $dm->persist($element);
         $dm->flush();
 
-        return $this->returnResponse(true, 'Merci, votre signalement a bien été enregistré !');
+        return $this->returnResponse(true, $t->trans('action.element.report.done'));
     }
 
     public function deleteAction(Request $request, DocumentManager $dm, ConfigurationService $confService,
-                                 ElementActionService $elementActionService)
+                                 ElementActionService $elementActionService,
+                                 TranslatorInterface $t)
     {
         if (!$confService->isUserAllowed('delete', $request)) {
-            return $this->returnResponse(false, "Désolé, vous n'êtes pas autorisé à supprimer un élément !");
+            return $this->returnResponse(false, $t->trans('action.element.delete.unallowed'));
         }
 
         // CHECK REQUEST IS VALID
         if (!$request->get('elementId')) {
-            return $this->returnResponse(false, 'Les paramètres sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.delete.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -94,20 +97,21 @@ class ElementInteractionController extends Controller
 
         $dm->flush();
 
-        return $this->returnResponse(true, "L'élément a bien été supprimé");
+        return $this->returnResponse(true, $t->trans('action.element.delete.done'));
     }
 
     public function resolveReportsAction(Request $request, DocumentManager $dm,
                                          ConfigurationService $confService,
-                                         ElementActionService $elementActionService)
+                                         ElementActionService $elementActionService,
+                                         TranslatorInterface $t)
     {
         if (!$confService->isUserAllowed('directModeration', $request)) {
-            return $this->returnResponse(false, "Désolé, vous n'êtes pas autorisé à modérer cet élément !");
+            return $this->returnResponse(false, $t->trans('action.element.resolveReports.unallowed'));
         }
 
         // CHECK REQUEST IS VALID
         if (!$request->get('elementId')) {
-            return $this->returnResponse(false, 'Les paramètres sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.resolveReports.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -117,15 +121,15 @@ class ElementInteractionController extends Controller
         $dm->persist($element);
         $dm->flush();
 
-        return $this->returnResponse(true, "L'élément a bien été modéré");
+        return $this->returnResponse(true, $t->trans('action.element.resolveReports.done'));
     }
 
     public function sendMailAction(Request $request, DocumentManager $dm, ConfigurationService $confService,
-                                   MailService $mailService)
+                                   MailService $mailService, TranslatorInterface $t)
     {
         // CHECK REQUEST IS VALID
         if (!$request->get('elementId') || !$request->get('subject') || !$request->get('content') || !$request->get('userEmail')) {
-            return $this->returnResponse(false, 'Les paramètres sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.sendMail.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -133,24 +137,21 @@ class ElementInteractionController extends Controller
         $senderMail = $request->get('userEmail');
 
         // TODO make it configurable
-        $mailSubject = 'Message reçu depuis la plateforme '.$this->getParameter('instance_name');
-        $mailContent =
-            '<p>Bonjour <i>'.$element->getName().'</i>,</p>
-            <p>Vous avez reçu un message de la part de <a href="mailto:'.$senderMail.'">'.$senderMail.'</a></br>
-            </p>
-            <p><b>Titre du message</b></p><p> '.$request->get('subject').'</p>
-            <p><b>Contenu</b></p><p> '.$request->get('content').'</p>';
-
+        $mailSubject = $t->trans('action.element.sendMail.mailSubject', ['%instance%' => $this->getParameter('instance_name')]);
+        $mailContent = $t->trans('action.element.sendMail.mailContent', ['%element%' => $element->getName(),
+                                                                             '%sender%' => $senderMail,
+                                                                             '%subject%' => $request->get('subject'),
+                                                                             '%content%' => $request->get('content') ]);
         $mailService->sendMail($element->getEmail(), $mailSubject, $mailContent);
 
-        return $this->returnResponse(true, "L'email a bien été envoyé");
+        return $this->returnResponse(true, $t->trans('action.element.sendMail.done'));
     }
 
-    public function stampAction(Request $request, DocumentManager $dm)
+    public function stampAction(Request $request, DocumentManager $dm, TranslatorInterface $t)
     {
         // CHECK REQUEST IS VALID
         if (!$request->get('stampId') || null === $request->get('value') || !$request->get('elementId')) {
-            return $this->returnResponse(false, 'Les paramètres sont incomplets');
+            return $this->returnResponse(false, $t->trans('action.element.stamp.uncomplete'));
         }
 
         $element = $dm->get('Element')->find($request->get('elementId'));
@@ -158,7 +159,7 @@ class ElementInteractionController extends Controller
         $user = $this->getUser();
 
         if (!in_array($stamp, $user->getAllowedStamps()->toArray())) {
-            return $this->returnResponse(false, "Vous n'êtes pas autorisé à utiliser cette étiquette");
+            return $this->returnResponse(false, $t->trans('action.element.stamp.unallowed'));
         }
 
         if ('true' == $request->get('value')) {
@@ -172,7 +173,7 @@ class ElementInteractionController extends Controller
         $dm->persist($element);
         $dm->flush();
 
-        return $this->returnResponse(true, "L'étiquette a bien été modifiée", $element->getStampIds());
+        return $this->returnResponse(true, $t->trans('action.element.stamp.done'), $element->getStampIds() );
     }
 
     private function returnResponse($success, $message, $data = null)

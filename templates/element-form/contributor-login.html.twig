@@ -52,10 +52,10 @@
 								{{ config.appName }}
 							</a>
 							{% if config.user.loginWithMonPrintemps and oauth_communs != 'disabled' %}
-								<a class="oauth-btn waves-effect waves-light printemps" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-printemps left"></i>Printemps de l'éducation</a>
+								<a class="oauth-btn waves-effect waves-light printemps" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-printemps left"></i>{{ 'contributor-login.printemps'|trans }}</a>
 							{% endif %}
 							{% if config.user.loginWithLesCommuns and oauth_communs != 'disabled' %}
-								<a class="oauth-btn waves-effect waves-light communs" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-communs left"></i>LesCommuns.org</a>
+								<a class="oauth-btn waves-effect waves-light communs" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-communs left"></i>{{ 'contributor-login.communs'|trans }}</a>
 							{% endif %}
 						{% if config.user.loginWithMonPrintemps and oauth_communs != 'disabled' %}
 						</div>
@@ -85,13 +85,13 @@
 				<div class="input-field col s12">
 					<i class="material-icons gogo-icon-mail prefix"></i>
 					{{ form_widget(loginForm.email, {'id': 'inputMail',
-					'attr': {'class': 'validate required', 'placeholder':'Entrez simplement une adresse mail' }}) }}
-					<label for="inputMail" data-error="Veuillez renseigner une adresse mail valide" class="gogo-form-label" style="margin-left: 2.5rem;"></label>
+					'attr': {'class': 'validate required', 'placeholder':'contributor-login.email'|trans }}) }}
+					<label for="inputMail" data-error="{{ 'contributor-login.error.invalid_email'|trans }}" class="gogo-form-label" style="margin-left: 2.5rem;"></label>
 				</div>
 
 				{% if emailAlreadyUsed %}
 					<div class="email-already-in-use">
-						Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre adresse !
+						{{ 'contributor-login.error.used_email'|trans }}
 					</div>
 				{% endif %}
 
@@ -104,7 +104,7 @@
 				{{ form_end(loginForm) }}
 
 				<center>
-					<button onclick="checkLoginAndSend()" class="btn btn-secondary waves-effect waves-light">Continuer</button>
+					<button onclick="checkLoginAndSend()" class="btn btn-secondary waves-effect waves-light">{{ 'action.continue'|trans }}</button>
 				</center>
 			{% endif %}
 		</section>

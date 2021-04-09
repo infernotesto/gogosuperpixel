@@ -101,7 +101,7 @@ class ElementFormController extends GoGoController
             $userManager->updateUser($user, true);
             $dm->persist($user);
 
-            $text = $t->trans('add_element.controller.success', $url=$this->generateUrl('gogo_user_profile'));
+            $text = $t->trans('add_element.controller.success', ['%url%' => $this->generateUrl('gogo_user_profile')] );
             $session->getFlashBag()->add('success', $text);
 
             $this->authenticateUser($user, $loginManager);
@@ -282,15 +282,15 @@ class ElementFormController extends GoGoController
             if ($editMode) {
                 $noticeText = $t->trans('add_element.controller.thankyou.edited');
             } else {
-                $noticeText = $t->trans('add_element.controller.thankyou.thankyou_added', [$name=ucwords($configService->getConfig()->getElementDisplayNameDefinite())]);
+                $noticeText = $t->trans('add_element.controller.thankyou.added', ['%name%' => ucwords($configService->getConfig()->getElementDisplayNameDefinite())]);
             }
 
             if ($element->isPending()) {
-                $noticeText .= "</br>Votre contribution est pour l'instant en attente de validation, <a class='validation-process' onclick=\"$('#popup-collaborative-explanation').openModal()\">cliquez ici</a> pour en savoir plus sur le processus de modération collaborative !";
+                $noticeText .= "</br>".$t->trans('add_element.controller.pending');
             }
 
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') || $session->has('userEmail')) {
-                $noticeText .= '</br>Retrouvez et modifiez vos contributions sur la page <a href="'.$this->generateUrl('gogo_user_contributions').'">Mes Contributions</a>';
+                $noticeText .= '</br>'.$t->trans('add_element.controller.user_contributions', ['%url%' => $this->generateUrl('gogo_user_contributions')]);
             }
 
             $isAllowedPending = $configService->isUserAllowed('pending');

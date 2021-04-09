@@ -51,7 +51,7 @@ class RegistrationController extends FosController
     {
         $config = $this->dm->get('Configuration')->findConfiguration();
         if (!$config->getUser()->getEnableRegistration()) {
-            $this->session->getFlashBag()->add('error', "Désolé, vous n'êtes pas autorisé à créer un compte.");
+            $this->session->getFlashBag()->add('error', "Désolé, vous n'êtes pas autorisé à créer un compte."); // TODO translate
             return $this->redirectToRoute('gogo_directory');
         }
 
@@ -112,10 +112,10 @@ class RegistrationController extends FosController
             } else {
                 // VALIDATION ERROR
                 if ($locationSetToReceiveNewsletter) {
-                    $form->get('location')->addError(new FormError('Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse'));
+                    $form->get('location')->addError(new FormError('Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse')); // TODO translate
                 }
                 if ($geocodeError) {
-                    $form->get('location')->addError(new FormError('Impossible de localiser cette adresse'));
+                    $form->get('location')->addError(new FormError('Impossible de localiser cette adresse')); // TODO translate
                 }
                 $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
             }

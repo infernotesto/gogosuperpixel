@@ -77,8 +77,8 @@ class ProjectController extends Controller
 
             // Generate basic categories
             $mainCategory = new Category();
-            $mainCategory->setName('Catégories Principales');
-            $mainCategory->setPickingOptionText('Une catégorie principale');
+            $mainCategory->setName('Catégories Principales'); // TODO translate
+            $mainCategory->setPickingOptionText('Une catégorie principale');// TODO translate
             $projectDm->persist($mainCategory);
 
             $mains = [
@@ -174,7 +174,7 @@ class ProjectController extends Controller
 
             $this->addFlash('success', "<b>Bienvenue dans votre espace Administrateur !</b></br>
                 L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
-                <a target='_blank' href='https://doc.gogocarto.fr/'>Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions...");
+                <a target='_blank' href='https://doc.gogocarto.fr/'>Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions..."); // TODO translate
             $response = $this->redirectToRoute('sonata_admin_dashboard');
 
             $this->authenticateUser($user, $response, $loginManager);
@@ -207,10 +207,10 @@ class ProjectController extends Controller
         $dbName = $dmFactory->getCurrentDbName();
 
         if (!$user || !$user->hasRole('ROLE_SUPER_ADMIN')) {
-            $username = $user ? 'Unknown User' : $user->getUsername();
-            $projectsLogger->error("The user $username have tried to delete $dbName but is not a super admin");
+            $username = $user ? 'Unknown User' : $user->getUsername(); // TODO translate ??
+            $projectsLogger->error("The user $username have tried to delete $dbName but is not a super admin"); // TODO translate ??
         } else {
-            $projectsLogger->info("Project $dbName being deleted by {$user->getUsername()}");
+            $projectsLogger->info("Project $dbName being deleted by {$user->getUsername()}"); // TODO translate ??
         }    
 
         $mongo = $dm->getConnection()->getMongoClient();
