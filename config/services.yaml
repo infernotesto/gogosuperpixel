@@ -146,14 +146,14 @@ services:
         arguments: [~, App\Document\Wrapper, 'PixSortableBehaviorBundle:SortableAdmin']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "contents", label: Bandeaux de la page d'accueil }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "contents", label: wrappers._label }
 
     admin.partners:
         class: App\Admin\PartnerAdmin
         arguments: [~, App\Document\Partner, 'PixSortableBehaviorBundle:SortableAdmin']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "contents", label: Partenaires }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "contents", label: partners._label  }
 
     admin.abouts:
         class: App\Admin\AboutAdmin
@@ -177,42 +177,42 @@ services:
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Style / Couleurs / Icones }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_style._label }
 
     admin.config_home:
         class: App\Admin\ConfigurationHomeAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Page d'Accueil }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_home._label }
 
     admin.categories:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Document\Category, 'App\Controller\Admin\CategoryAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Catégories }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: categories._label }
 
     admin.config_map:
         class: App\Admin\ConfigurationMapAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Carte / Fonctionalités }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_map._label }
 
     admin.config_meun:
         class: App\Admin\ConfigurationMenuAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Menu / Filtres / Recherche }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: ConfigurationMenuAdmin._label }
 
     admin.tile_layers:
         class: App\Admin\TileLayerAdmin
         arguments: [~, App\Document\TileLayer, 'PixSortableBehaviorBundle:SortableAdmin']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Fonds de Carte }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: tile_layers._label }
 
     admin.config_infobar:
         class: App\Admin\ConfigurationInfoBarAdmin
@@ -226,42 +226,42 @@ services:
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Marqueur / Popup }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_marker._label }
 
     admin.config_form:
         class: App\Admin\ConfigurationFormAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Formulaire }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_form._label }
 
     admin.config_contributions:
         class: App\Admin\ConfigurationContributionsAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Qui peut Contribuer? }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_contributions._label }
 
     admin.config_mobile:
         class: App\Admin\ConfigurationMobileAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: App Mobile }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_mobile._label }
     
     admin.config_custom_js_css:
         class: App\Admin\ConfigurationCustomJsCssAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: Custom Css / Js }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: custom, label: config_custom_js_css._label }
 
     admin.config_emails:
         class: App\Admin\ConfigurationMailAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: emailing, label: Mails / Newsletter }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: emailing, label: config_emails._label }
 
     admin.news:
         class: App\Admin\NewsAdmin
@@ -277,14 +277,14 @@ services:
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: APIs }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: config_api._label }
     
     admin.config_osm:
         class: App\Admin\ConfigurationOsmAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: OpenStreetMap }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: config_osm._label }
 
     # -- USER CONF ---
 
@@ -302,14 +302,14 @@ services:
         arguments: [~, App\Document\Stamp, '' ]
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: Etiquettes }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: stamps._label }
 
     admin.webhooks:
         class: App\Admin\WebhookAdmin
         arguments: [~, App\Document\Webhook, '']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: Webhooks }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: other_config, label: webhooks._label }
 
 
     # --------- HIDDEN -----------
@@ -356,21 +356,21 @@ services:
         arguments: [~, App\Document\Element, 'App\Controller\Admin\ElementAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: Éléments }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: elements._label }
 
     admin.imports:
         class: App\Admin\ImportAdmin
         arguments: [~, App\Document\Import, 'App\Controller\Admin\ImportAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: Import }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: imports._label }
 
     admin.dynamic_imports:
         class: App\Admin\ImportAdmin
         arguments: [~, App\Document\ImportDynamic, 'App\Controller\Admin\ImportAdminController' ]
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: Import dynamique }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "data", label: dynamic_imports._label }
 
     admin.element_image_hidden:
         class: App\Admin\ImageAdmin
@@ -391,7 +391,7 @@ services:
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: data, label: Gestion des Doublons }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: data, label: config_duplicates._label }
 
     # ------- SAAS ---------
 

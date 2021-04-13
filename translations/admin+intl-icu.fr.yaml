@@ -4,6 +4,72 @@ abouts:
     content: Contenu
     name: Nom
 
+wrappers:
+  _label: Bandeaux de la page d'accueil
+
+partners:
+  _label: Partenaires
+
+elements:
+  _label: Éléments
+
+imports:
+  _label: Import
+
+dynamic_imports:
+  _label: Import dynamique
+
+config_duplicates:
+  _label: Gestion des Doublons
+
+config_style:
+  _label: Style / Couleurs / Icones
+
+config_home:
+  _label: Page d'Accueil
+
+categories:
+  _label: Catégories
+
+config_map:
+  _label: Carte / Fonctionalités
+
+ConfigurationMenuAdmin:
+  _label: Menu / Filtres / Recherche
+
+tile_layers:
+  _label: Fonds de Carte
+
+config_marker:
+  _label: Marqueur / Popup
+
+config_form:
+  _label: Formulaire
+
+config_contributions:
+  _label: Qui peut Contribuer ?
+
+config_mobile:
+  _label: App Mobile
+
+config_custom_js_css:
+  _label: Custom Css / Js
+
+config_emails:
+  _label: Mails / Newsletter
+
+config_api:
+  _label: APIs
+
+config_osm:
+  _label: OpenStreetMap
+
+stamps:
+  _label: Etiquettes
+
+webhooks:
+  _label: Webhooks
+
 commons:
   fields:
     image_placeholder: Séléctionnez une image déjà importée, ou ajoutez en une !
