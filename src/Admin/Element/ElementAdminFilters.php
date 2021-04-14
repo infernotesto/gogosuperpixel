@@ -47,7 +47,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                 'field_type' => CheckboxType::class,
             ])
       ->add('pending', 'doctrine_mongo_callback', [
-                'label' => 'En attente',
+                'label' => 'En attente', // TODO translate
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
                         return;
@@ -59,7 +59,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                 'field_type' => CheckboxType::class,
             ])
       ->add('moderationNeeded', 'doctrine_mongo_callback', [
-            'label' => 'Modération Nécessaire',
+            'label' => 'Modération Nécessaire', // TODO translate
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
                         return;
@@ -71,7 +71,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                 },
                 'field_type' => CheckboxType::class,
             ])
-      ->add('moderationState', 'doctrine_mongo_choice', ['label' => 'Type de Modération'],
+      ->add('moderationState', 'doctrine_mongo_choice', ['label' => 'Type de Modération'], // TODO translate
           ChoiceType::class,
           [
              'choices' => array_flip($this->moderationChoices),
@@ -80,7 +80,7 @@ class ElementAdminFilters extends ElementAdminAbstract
             ]
           )
       ->add('optionValuesAll', 'doctrine_mongo_callback', [
-               'label' => 'Catégories (contient toutes)',
+               'label' => 'Catégories (contient toutes)', // TODO translate
                'callback' => function ($queryBuilder, $alias, $field, $value) {
                    if (!$value || !$value['value']) {
                        return;
@@ -98,7 +98,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                ]
             )
       ->add('optionValuesIn', 'doctrine_mongo_callback', [
-               'label' => 'Catégories (contient une parmis)',
+               'label' => 'Catégories (contient une parmis)', // TODO translate
                'callback' => function ($queryBuilder, $alias, $field, $value) {
                    if (!$value || !$value['value']) {
                        return;
@@ -116,7 +116,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                ]
             )
       ->add('optionValuesNotIn', 'doctrine_mongo_callback', [
-               'label' => 'Catégories (ne contient pas)',
+               'label' => 'Catégories (ne contient pas)', // TODO translate
                'callback' => function ($queryBuilder, $alias, $field, $value) {
                    if (!$value || !$value['value']) {
                        return;
@@ -134,7 +134,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                ]
             )
       ->add('postalCode', 'doctrine_mongo_callback', [
-                'label' => 'Code Postal',
+                'label' => 'Code Postal', // TODO translate
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
                         return;
@@ -145,7 +145,7 @@ class ElementAdminFilters extends ElementAdminAbstract
                 },
             ])
       ->add('departementCode', 'doctrine_mongo_callback', [
-                'label' => 'Numéro de département',
+                'label' => 'Numéro de département', // TODO translate
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
                         return;

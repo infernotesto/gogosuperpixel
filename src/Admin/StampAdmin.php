@@ -17,7 +17,7 @@ class StampAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name');
-        $formMapper->add('isPublic', null, ['required' => false, 'label' => "Publique (tout le monde peut l'assigner)"]);
+        $formMapper->add('isPublic');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

@@ -27,13 +27,9 @@ class WrapperAdmin extends GoGoAbstractAdmin
         $formMapper->add('title', null);
         $formMapper->add('content', SimpleFormatterType::class, [
                 'format' => 'richhtml',
-                'label' => 'Contenu du bandeau',
-                'required' => false,
                 'ckeditor_context' => 'full',
             ]);
         $formMapper->add('rawContent', null, [
-                'label' => 'Contenu en raw html (optionel)',
-                'required' => false,
                 'attr' => ['class' => 'gogo-code-editor', 'format' => 'html', 'height' => '150'],
             ]);
         $formMapper->add('textColor', null, ['required' => false, 'attr' => ['class' => 'gogo-color-picker']]);

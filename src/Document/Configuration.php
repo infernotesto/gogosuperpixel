@@ -471,6 +471,7 @@ class Configuration implements \JsonSerializable
     public function __toString()
     {
         return 'Configuration Générale';
+        //return $this->t('config_general._label'); TODO translate
     }
 
     public function __construct()
@@ -565,7 +566,7 @@ class Configuration implements \JsonSerializable
         $privateFieldsUsed = array_diff($privateFieldsUsed, ['email']);
         if (count($privateFieldsUsed) > 0) {
             $fieldsList = strtoupper(implode(', ', $privateFieldsUsed));
-            $context->buildViolation("Les champs \"$fieldsList\" ont été configuré pour ne pas être partagés. Vous ne pouvez pas les utiliser dans la fiche détail. Pour changer la configuration allez dans : Autre Configuration / API")
+            $context->buildViolation("Les champs \"$fieldsList\" ont été configuré pour ne pas être partagés. Vous ne pouvez pas les utiliser dans la fiche détail. Pour changer la configuration allez dans : Autre Configuration / API") // TODO translate
                 ->atPath($path)
                 ->addViolation()
             ;

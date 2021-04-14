@@ -97,7 +97,7 @@ class ElementAdminBulkController extends Controller
                         $element->setPreventJsonUpdate(true);
                     }
                 } elseif ($sendMail || 'resolveReports' == $actionName) {
-                    $this->addFlash('sonata_flash_error', "Les emails n'ont pas été envoyés, trop d'éléments à traiter d'un coup");
+                    $this->addFlash('sonata_flash_error', "Les emails n'ont pas été envoyés, trop d'éléments à traiter d'un coup"); // TODO translate
                 }
 
                 // CREATE CONTRIBUTION
@@ -177,12 +177,12 @@ class ElementAdminBulkController extends Controller
                 $this->dm->clear();
             }
         } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'Une erreur est survenue :'.$e->getMessage());
+            $this->addFlash('sonata_flash_error', 'Une erreur est survenue :'.$e->getMessage()); // TODO translate
 
             return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));
         }
 
-        $this->addFlash('sonata_flash_success', 'Les '.$nbreModelsToProceed.' élements ont bien été traités');
+        $this->addFlash('sonata_flash_success', 'Les '.$nbreModelsToProceed.' élements ont bien été traités'); // TODO translate
         // if ($nbreModelsToProceed >= $limit) $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement " . $limit . " ont été traités");
 
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));
@@ -284,22 +284,22 @@ class ElementAdminBulkController extends Controller
         }
 
         if (!$request->get('mail-subject') || !$request->get('mail-content')) {
-            $this->addFlash('sonata_flash_error', 'Vous devez renseigner un objet et un contenu. Veuillez recommencer');
+            $this->addFlash('sonata_flash_error', 'Vous devez renseigner un objet et un contenu. Veuillez recommencer'); // TODO translate
         } elseif (count($mails) > 0) {
             $result = $this->mailService->sendMail(null, $request->get('mail-subject'), $request->get('mail-content'), $request->get('from'), $mails);
             if ($result['success']) {
-                $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés');
+                $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés'); // TODO translate
             } else {
                 $this->addFlash('sonata_flash_error', $result['message']);
             }
         }
 
         if ($elementWithoutEmail > 0) {
-            $this->addFlash('sonata_flash_error', $elementWithoutEmail." mails n'ont pas pu être envoyé car aucune adresse n'était renseignée");
+            $this->addFlash('sonata_flash_error', $elementWithoutEmail." mails n'ont pas pu être envoyé car aucune adresse n'était renseignée"); // TODO translate
         }
 
         if ($nbreModelsToProceed >= 5000) {
-            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement 5000 ont été traités");
+            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement 5000 ont été traités"); // TODO translate
         }
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
@@ -361,14 +361,14 @@ class ElementAdminBulkController extends Controller
             $this->dm->flush();
             $this->dm->clear();
         } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'Une erreur est survenue :'.$e->getMessage());
+            $this->addFlash('sonata_flash_error', 'Une erreur est survenue :'.$e->getMessage()); // TODO translate
 
             return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));
         }
 
-        $this->addFlash('sonata_flash_success', 'Les catégories des '.min([$nbreModelsToProceed, $limit]).' élements ont bien été mis à jour');
+        $this->addFlash('sonata_flash_success', 'Les catégories des '.min([$nbreModelsToProceed, $limit]).' élements ont bien été mis à jour'); // TODO translate
         if ($nbreModelsToProceed >= $limit) {
-            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement ".$limit.' ont été traités');
+            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement ".$limit.' ont été traités'); // TODO translate
         }
 
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));

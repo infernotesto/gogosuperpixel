@@ -51,16 +51,14 @@ class ElementAdminList extends ElementAdminFilters
                'template' => 'admin/partials/list_choice_status.html.twig',
                ])
          ->add('updatedAt', 'date', ['format' => 'd/m/Y'])
-         ->add('sourceKey', null, ['label' => 'Source'])
-         ->add('optionsString', null, ['header_style' => 'width: 250px','label' => 'Catégories'])
+         ->add('sourceKey')
+         ->add('optionsString', null, ['header_style' => 'width: 250px'])
          ->add('moderationState', ChoiceType::class, [
-               'label' => 'Modération',
                'choices' => $this->moderationChoices,
-               'editable' => true,
                'template' => 'admin/partials/list_choice_moderation.html.twig',
                ])
          // use fake attribute createdAt, we then access full object inside template
-         ->add('createdAt', null, ['template' => 'admin/partials/list_votes.html.twig', 'label' => 'Votes'])
+         ->add('createdAt', null, ['template' => 'admin/partials/list_votes.html.twig', 'label' => 'Votes']) // TODO translate ??
 
          ->add('_action', 'actions', [
              'actions' => [
@@ -76,32 +74,32 @@ class ElementAdminList extends ElementAdminFilters
     public function configureBatchActions($actions)
     {
         $actions = [];
-        $actions['validation'] = $this->createBatchConfig('Valider', 'validation');
-        $actions['refusal'] = $this->createBatchConfig('Refuser', 'refusal');
-        $actions['softDelete'] = $this->createBatchConfig('Supprimer (changement de status)', 'softDelete');
-        $actions['restore'] = $this->createBatchConfig('Restaurer', 'restore');
-        $actions['resolveReports'] = $this->createBatchConfig('Résoudre la modération', 'resolveReports');
+        $actions['validation'] = $this->createBatchConfig('Valider', 'validation'); // TODO translate
+        $actions['refusal'] = $this->createBatchConfig('Refuser', 'refusal'); // TODO translate
+        $actions['softDelete'] = $this->createBatchConfig('Supprimer (changement de status)', 'softDelete'); // TODO translate
+        $actions['restore'] = $this->createBatchConfig('Restaurer', 'restore'); // TODO translate
+        $actions['resolveReports'] = $this->createBatchConfig('Résoudre la modération', 'resolveReports'); // TODO translate
 
         $actions['sendMail'] = [
-            'label' => 'Envoyer un mail',
+            'label' => 'Envoyer un mail', // TODO translate
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'text',      'label' => 'Votre adresse mail',  'id' => 'from'],
-                ['type' => 'text',      'label' => 'Object',  'id' => 'mail-subject'],
-                ['type' => 'textarea',  'label' => 'Contenu', 'id' => 'mail-content'],
-                ['type' => 'checkbox',      'label' => "Envoyer l'email aux éléments",  'id' => 'send-to-element', 'checked' => 'true'],
-                ['type' => 'checkbox',      'label' => "Envoyer l'email aux derniers contributeurs",  'id' => 'send-to-last-contributor', 'checked' => 'false'],
+                ['type' => 'text',      'label' => 'Votre adresse mail',  'id' => 'from'], // TODO translate
+                ['type' => 'text',      'label' => 'Object',  'id' => 'mail-subject'], // TODO translate
+                ['type' => 'textarea',  'label' => 'Contenu', 'id' => 'mail-content'], // TODO translate
+                ['type' => 'checkbox',      'label' => "Envoyer l'email aux éléments",  'id' => 'send-to-element', 'checked' => 'true'], // TODO translate
+                ['type' => 'checkbox',      'label' => "Envoyer l'email aux derniers contributeurs",  'id' => 'send-to-last-contributor', 'checked' => 'false'], // TODO translate
             ],
         ];
         $actions['editOptions'] = [
-            'label' => 'Modifier les catégories',
+            'label' => 'Modifier les catégories', // TODO translate
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToRemove', 'label' => 'Catégories à supprimer'],
-                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToAdd', 'label' => 'Catégories à ajouter'],
+                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToRemove', 'label' => 'Catégories à supprimer'], // TODO translate
+                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToAdd', 'label' => 'Catégories à ajouter'], // TODO translate
             ],
         ];
-        $actions['delete'] = ['label' => 'Supprimer définitivement'];
+        $actions['delete'] = ['label' => 'Supprimer définitivement']; // TODO translate
 
         return $actions;
     }
@@ -112,8 +110,8 @@ class ElementAdminList extends ElementAdminFilters
             'label' => $name,
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'text',  'label' => 'Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques', 'id' => 'comment-'.$id],
-                ['type' => 'checkbox',  'checked' => true, 'label' => 'Ne pas envoyer de mail',  'id' => 'dont-send-mail-'.$id],
+                ['type' => 'text',  'label' => 'Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques', 'id' => 'comment-'.$id], // TODO translate
+                ['type' => 'checkbox',  'checked' => true, 'label' => 'Ne pas envoyer de mail',  'id' => 'dont-send-mail-'.$id], // TODO translate
             ],
         ];
     }

@@ -26,17 +26,14 @@ class PartnerAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, ['required' => false])
+            ->add('name')
             ->add('content', SimpleFormatterType::class, [
                     'format' => 'richhtml', 'required' => false, 'ckeditor_context' => 'full',
                 ])
             ->add('logo', ModelType::class, [
                 'class' => 'App\Document\PartnerImage',
-                'placeholder' => 'Séléctionnez une image déjà importée, ou ajoutez en une !',
-                'required' => false,
-                'label' => 'Logo',
                 'mapped' => true, ])
-            ->add('websiteUrl', null, ['required' => false]);
+            ->add('websiteUrl');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

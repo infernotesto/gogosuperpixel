@@ -8,6 +8,7 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
+{% trans_default_domain 'admin' %}
 
 {% block sonata_security_roles_widget %}
 {% spaceless %}
@@ -15,13 +16,13 @@ file that was distributed with this source code.
         {% set object = form.vars.sonata_admin.admin.subject %}
 
         <div class="role-group">
-            <h4 class="role-group-title main-roles">Roles Principaux</h4>
+            <h4 class="role-group-title main-roles">{{ 'sonata.user.user.form.main-roles'|trans }}</h4>
             {% set mainRoles = {
-                'ROLE_SUPER_ADMIN': 'SUPER ADMIN (tous les pouvoirs)',
-                'ROLE_ADMIN': "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)",
-                'ROLE_DIRECTMODERATION_ADD': "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)",
-                'ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB': "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)",
-                'ROLE_SONATA_ADMIN': "INTERFACE ADMINISTRATEUR"
+                'ROLE_SUPER_ADMIN':                       'sonata.user.user.role.ROLE_SUPER_ADMIN'|trans,
+                'ROLE_ADMIN':                             'sonata.user.user.role.ROLE_ADMIN'|trans,
+                'ROLE_DIRECTMODERATION_ADD':              'sonata.user.user.role.ROLE_DIRECTMODERATION_ADD'|trans,
+                'ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB': 'sonata.user.user.role.ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB'|trans,
+                'ROLE_SONATA_ADMIN':                      'sonata.user.user.role.ROLE_SONATA_ADMIN'|trans
             }%}
             {% for role, label in mainRoles %}
                 <div class="checkbox role-checkbox {{ role }}">
@@ -86,9 +87,8 @@ file that was distributed with this source code.
                 });
             });
 
-            $('.btn-check-all').click(function() {
+            $('.btn-check-all:not(.initialized)').click(function() {
                 var value = $(this).hasClass('checked');
-                console.log("vakye", value);
                 $(this).toggleClass('checked', !value);
                 var checkboxes = $('.role-group.object input[type=checkbox]');
                 $.each(checkboxes, function() {
@@ -96,7 +96,7 @@ file that was distributed with this source code.
                     if (value) $(this).parent().addClass('checked');
                     else $(this).parent().removeClass('checked');
                 });
-            });
+            }).addClass('.initialized');
 
             checkForChanges();
         });

@@ -22,8 +22,8 @@ class ConfigurationUserAdmin extends ConfigurationAbstractAdmin
         $container = $this->getConfigurationPool()->getContainer();
 
         $formMapper
-            ->add('user.enableRegistration', CheckboxType::class, ['label' => 'Autoriser la création de compte', 'required' => false])
-            ->add('user.sendConfirmationEmail', CheckboxType::class, ['label' => 'Valider la création avec un email de confirmation', 'required' => false]);
+            ->add('user.enableRegistration', CheckboxType::class)
+            ->add('user.sendConfirmationEmail', CheckboxType::class);
 
         // provide oauth id if configured
         if ('disabled' != $container->getParameter('oauth_communs_id')) {

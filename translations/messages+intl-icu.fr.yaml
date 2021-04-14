@@ -91,19 +91,10 @@ admin:
   # subform
   _label: Validation
   send_mail:
-    add: "Avertir des modifications d''{element} en lui envoyant un mail" # TODO espace avant {element}. Si il est supprimé, pas de remplacement
+    add: "Avertir des modifications d''{element} en lui envoyant un mail"
     modify: "Avertir de l'ajout d''{element} en lui envoyant un mail"
   recopy_info: Recopier les informations dans un nouveau formulaire
   admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
-
-  # Admin templates !!
-  # TODO move to translations/admin+intl-icu.fr.yaml ??
-  bulk:
-    _label: Actions de masse
-    delete: "Supprimer les éléments reportés comme n'existant plus"
-  help:
-    _label: Aide
-    doc: "Un problème, une question? c'est par ici : "
 
 duplicates:
   label: Détection de doublons

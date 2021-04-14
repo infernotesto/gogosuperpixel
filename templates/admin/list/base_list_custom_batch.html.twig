@@ -1,4 +1,5 @@
 {% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
+{% trans_default_domain 'admin' %}
 
 {% block batch %}
     <script>
@@ -36,7 +37,7 @@
 
         <select id="batch-select" name="action" style="width:auto;height: auto" class="form-control">
             {% for action, options in batchactions %}
-                <option value="{{ action }}" data-modal="{{ options.modal is defined }}">{{ options.label }}</option>
+                <option value="{{ action }}" data-modal="{{ options.modal is defined }}">{{ options.label|trans }}</option>
             {% endfor %}
         </select>
 
@@ -52,7 +53,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                        <h4 class="modal-title">{{ options.label }}</h4>
+                        <h4 class="modal-title">{{ options.label|trans }}</h4>
                     </div>
                     <div class="modal-body">
                         {% for field in options.modal %}
@@ -79,7 +80,7 @@
                         {% endfor %}
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary submit-btn">Envoyer</button>
+                        <button class="btn btn-primary submit-btn">{{ 'batch.send'|trans }}</button>
                     </div>
 
                     <style> .width-100 { width: 100% !important; margin-bottom: 1.5rem;}</style>

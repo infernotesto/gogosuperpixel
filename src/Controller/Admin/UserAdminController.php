@@ -41,22 +41,23 @@ class UserAdminController extends Controller
         }
 
         if (!$request->get('mail-subject') || !$request->get('mail-content')) {
-            $this->addFlash('sonata_flash_error', 'Vous devez renseigner un objet et un contenu. Veuillez recommencer');
+            $this->addFlash('sonata_flash_error', 'Vous devez renseigner un objet et un contenu. Veuillez recommencer'); // TODO translate
         } elseif (count($mails) > 0) {
             $result = $this->mailService->sendMail(null, $request->get('mail-subject'), $request->get('mail-content'), $request->get('from'), $mails);
             if ($result['success']) {
-                $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés');
+                $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés'); // TODO translate
+                // $this->addFlash('sonata_flash_success', $this->t('sendmails', $count=count($mails))); // $this->t not found
             } else {
                 $this->addFlash('sonata_flash_error', $result['message']);
             }
         }
 
         if ($usersWithoutEmail > 0) {
-            $this->addFlash('sonata_flash_error', $usersWithoutEmail." mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée");
+            $this->addFlash('sonata_flash_error', $usersWithoutEmail." mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée"); // TODO translate
         }
 
         if ($nbreModelsToProceed >= 5000) {
-            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement 5000 ont été traités");
+            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement 5000 ont été traités"); // TODO translate
         }
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));

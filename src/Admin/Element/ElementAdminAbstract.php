@@ -13,7 +13,7 @@ use App\Admin\GoGoAbstractAdmin;
 
 class ElementAdminAbstract extends GoGoAbstractAdmin
 {
-    protected $statusChoices = [
+    protected $statusChoices = [ // TODO translate
       '' => 'Inconnu',
       '-6' => 'Doublon supprimé',
       '-4' => 'Supprimé',
@@ -30,7 +30,7 @@ class ElementAdminAbstract extends GoGoAbstractAdmin
       '7' => 'Importé'
     ];
 
-    protected $moderationChoices = [
+    protected $moderationChoices = [ // TODO translate
       '-2' => 'Erreur geolocalisation',
       '-1' => 'Aucune catégorie renseignée',
       '0' => 'Pas de modération nécessaire',
@@ -40,7 +40,7 @@ class ElementAdminAbstract extends GoGoAbstractAdmin
       '4' => 'Doublon potentiel',
     ];
 
-    protected $reportsValuesChoice = [
+    protected $reportsValuesChoice = [ // TODO translate
       '0' => "L'élément n'existe plus",
       '1' => 'Les informations sont incorrectes',
       '2' => "L'élément ne respecte pas la charte",

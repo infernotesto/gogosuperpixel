@@ -39,10 +39,10 @@ class UserAdmin extends GoGoAbstractAdmin
             ->addIdentifier('username')
             ->add('email')
             ->add('groups')
-            ->add('gamification', null, ['label' => 'Interaction Score'])
-            ->add('contributionsCount', null, ['label' => 'Contributions'])
-            ->add('votesCount', null, ['label' => 'Votes'])
-            ->add('reportsCount', null, ['label' => 'Signalements'])
+            ->add('gamification')
+            ->add('contributionsCount')
+            ->add('votesCount')
+            ->add('reportsCount')
             ->add('createdAt', 'date', ['format' => 'd/m/Y'])
         ;
 
@@ -129,106 +129,46 @@ class UserAdmin extends GoGoAbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
-            ->panel('General')
-                ->add('username')
-                ->add('email')
-            ->end()
-            ->panel('Groups')
-                ->add('groups')
-            ->end()
-            ->panel('Profile')
-                ->add('dateOfBirth')
-                ->add('firstname')
-                ->add('lastname')
-                ->add('website')
-                ->add('biography')
-                ->add('gender')
-                ->add('locale')
-                ->add('timezone')
-                ->add('phone')
-            ->end()
-            ->panel('Social')
-                ->add('facebookUid')
-                ->add('facebookName')
-                ->add('communsUid')
-                ->add('communsName')
-                ->add('gplusUid')
-                ->add('gplusName')
-            ->end()
-            ->panel('Security')
-                ->add('token')
-            ->end()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        // define group zoning
         $formMapper
-            ->tab('User')
-                ->panel('General', ['class' => 'col-md-6'])->end()
-                ->panel('Status', ['class' => 'col-md-6'])->end()
-                ->panel('Groups', ['class' => 'col-md-6'])->end()
-                ->panel('Notifications', ['class' => 'col-md-12'])
-                    ->add('watchModeration', null, ['label' => "Etre notifié par email lorsque des éléments sont à modérer", 'required' => false])
-                    ->add('watchModerationOnlyWithOptions', ModelType::class, [
-                        'class' => 'App\Document\Option',
-                        'required' => false,
-                        'multiple' => true,
-                        'btn_add' => false,
-                        'label' => 'Seulement pour les éléments ayant une des catégories suivante', ], ['admin_code' => 'admin.option_hidden'])
-                    ->add('watchModerationOnlyWithPostCodes', null, [
-                        'label' => "Seulement pour les éléments avec code postal", 
-                        'label_attr' => ['title' => "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"],
-                        'required' => false,
-                        'attr' => ['placeholder' => '40*, 47*, 48500']])
-                ->end()
-            ->end()
-            ->tab('Security')
-                ->panel('Roles', ['class' => 'col-md-12'])->end()
-            ->end()
-        ;
-
-        $now = new \DateTime();
-
-        $modelType = ModelType::class;
-
-        $formMapper
-            ->tab('User')
-                ->panel('General')
+            ->tab('user')
+                ->halfPanel('general')
                     ->add('username')
                     ->add('email')
                     ->add('plainPassword', PasswordType::class, [
                         'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
                     ])
-                    ->add('allowedStamps', $modelType, [
+                    ->add('allowedStamps', ModelType::class, [
                         'required' => false,
                         'expanded' => false,
                         'multiple' => true,
                     ])
                 ->end()
-                ->panel('Status')
-                    ->add('locked', CheckboxType::class, ['required' => false])
-                    ->add('expired', CheckboxType::class, ['required' => false])
-                    ->add('enabled', CheckboxType::class, ['required' => false])
-                    ->add('credentialsExpired', CheckboxType::class, ['required' => false])
+                ->halfPanel('status')
+                    ->add('locked', CheckboxType::class)
+                    ->add('expired', CheckboxType::class)
+                    ->add('enabled', CheckboxType::class)
+                    ->add('credentialsExpired', CheckboxType::class)
                 ->end()
-                ->panel('Groups')
-                    ->add('groups', $modelType, [
-                        'required' => false,
+                ->halfPanel('groups')
+                    ->add('groups', ModelType::class, [
                         'expanded' => true,
                         'multiple' => true,
                     ])
                 ->end()
+                ->panel('notifications')
+                    ->add('watchModeration')
+                    ->add('watchModerationOnlyWithOptions', ModelType::class, [
+                        'class' => 'App\Document\Option',
+                        'multiple' => true,
+                        'btn_add' => false,
+                        ], ['admin_code' => 'admin.option_hidden'])
+                    ->add('watchModerationOnlyWithPostCodes')
+                ->end()
             ->end()
-            ->tab('Security')
-                ->panel('Roles')
+            ->tab('security')
+                ->panel('roles')
                     ->add('realRoles', SecurityRolesType::class, [
                         'label' => false,
                         'expanded' => true,
@@ -256,12 +196,11 @@ class UserAdmin extends GoGoAbstractAdmin
         $actions = [];
 
         $actions['sendMail'] = [
-         'label' => 'Envoyer un mail',
          'ask_confirmation' => false,
          'modal' => [
-            ['type' => 'text',      'label' => 'Votre adresse mail',  'id' => 'from'],
-            ['type' => 'text',      'label' => 'Object',  'id' => 'mail-subject'],
-            ['type' => 'textarea',  'label' => 'Contenu', 'id' => 'mail-content'],
+            ['type' => 'text',      'label' => $this->t('sonata.user.user.fields.email'),  'id' => 'from'],
+            ['type' => 'text',      'label' => $this->t('sonata.user.user.fields.object'),  'id' => 'mail-subject'],
+            ['type' => 'textarea',  'label' => $this->t('sonata.user.user.fields.content'), 'id' => 'mail-content'],
          ],
       ];
 

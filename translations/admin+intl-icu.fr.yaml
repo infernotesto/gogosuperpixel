@@ -6,12 +6,49 @@ abouts:
 
 wrappers:
   _label: Bandeaux de la page d'accueil
+  form:
+    content: Contenu du bandeau
+    rawContent: Contenu en raw html (optionel)
+    textColor: Couleur du texte
+    backgroundColor: Couleur du fond
 
 partners:
   _label: Partenaires
+  form:
+    name: Nom
+    content: Contenu
+    logo: Logo
+    logo_placeholder: Sélectionnez une image déjà importée, ou ajoutez en une !
+    websiteUrl: URL du site Internet
 
 elements:
   _label: Éléments
+  fields:
+    name: Nom
+    status: Statut
+    updatedAt: Mise à jour le 
+    sourceKey: Source
+    optionsString: Catégories
+    moderationState: Modération
+    # Votes ??
+    # Action ??
+
+  form:
+    groups:
+      general: Informations générales
+      localisation: Localisation
+    optionIds: Catégories
+
+  address:
+    streetAddress: Rue
+    addressLocality: Ville
+    postalCode: Code Postal
+    addressCountry: Pays
+    customFormatedAddress: Address Complète
+      
+      
+show_contributions: Historique des contributions toto
+
 
 imports:
   _label: Import
@@ -65,12 +102,16 @@ config_osm:
   _label: OpenStreetMap
 
 stamps:
-  _label: Etiquettes
+  _label: Étiquettes
+  fields:
+    name: Nom
+    isPublic: Publique (tout le monde peut l'assigner)
 
 webhooks:
   _label: Webhooks
 
 commons:
+  btn_update_and_edit: Mettre à jour
   fields:
     image_placeholder: Séléctionnez une image déjà importée, ou ajoutez en une !
 
@@ -150,3 +191,75 @@ config_infobar:
           Contenu de la fiche détail
           <span class='btn btn-primary' id='generate-body-template' onclick='generateBodyTemplate()'>Générer automatiquement le contenu de la fiche détail</span>
         </h2>
+
+        sonata:
+  user:
+    user:
+      _label: Utilisateurs
+      fields:
+        contributionsCount: Contributions
+        votesCount: Votes
+        reportsCount: Signalements
+        gamification: Interactions #Interaction Score
+        createdAt: Créé le
+        impersonating: # TODO translate
+        username: Nom
+        groups: Groupes
+        sendMail: Envoyer un mail
+        email: Mail # Destinataire ou De ?
+        object: Titre
+        content: Message
+        
+      form:
+        plainPassword: Mot de passe
+        allowedStamps: Étiquettes autorisées # TODO check translation
+        locked: Verrouillée
+        expired: Expérée
+        enabled: Activée
+        credentialsExpired: # TODO translate
+        watchModeration: Être notifié par email lorsque des éléments sont à modérer
+        watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories suivante
+        watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
+        watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
+        watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
+        main-roles: Roles Principaux
+        groups:
+          user: Utilisateur
+          security: Sécurité
+      role:
+        ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
+        ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"
+        ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
+        ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
+        ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
+
+batch:
+  send: Envoyer
+  sendmails: '{count} mails ont bien été envoyés' # TODO plurals
+
+config_users:
+  _label: Configuration
+  form:
+    user:
+      enableRegistration: Autoriser la création de compte
+      sendConfirmationEmail: Valider la création avec un email de confirmation
+      loginWithLesCommuns: 'Activer la connexion avec "LesCommuns.org"'
+      loginWithMonPrintemps: Activer la connexion avec MonPrintemps
+      loginWithGoogle: Activer la connexion avec Google
+      loginWithFacebook: Activer la connexion avec Facebook
+
+sidebar:
+  gogo_homepage: Retour au site
+  toggle_dropdown: Toggle Dropdown
+  gogo_directory: La Carte
+  gogo_element_add: Formulaire
+  gogo_partners: Qui sommes nous
+
+bulk:
+  _label: Actions de masse
+  delete: "Supprimer les éléments reportés comme n'existant plus"
+  update_gamification: Mettre à jour les scores (nombre de votes, de contributions, et score total par utilisateur)
+help:
+  _label: Aide
+  doc: "Un problème, une question? c'est par ici : "
+

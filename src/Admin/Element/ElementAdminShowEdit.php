@@ -32,13 +32,11 @@ class ElementAdminShowEdit extends ElementAdminList
         $elementProperties = array_values(array_diff($elementProperties, array_keys($this->getSubject()->getData())));
 
         $formMapper
-          ->panel('Informations générales', ['class' => 'col-md-6'])
-            ->add('name', null, ['required' => true, 'label' => "Nom / Titre"])
+          ->panel('general', ['class' => 'col-md-6'])
+            ->add('name', null, ['required' => true])
             ->add('optionIds', ChoiceType::class, [
-              'required' => false,
               'multiple' => true,
-              'choices' => $categoriesChoices,
-              'label' => 'Catégories'], ['admin_code' => 'admin.option_hidden'])
+              'choices' => $categoriesChoices], ['admin_code' => 'admin.option_hidden'])
             ->add('data', null, [
               'label_attr' => ['style' => 'display:none;'],
               'attr' => [
@@ -63,7 +61,7 @@ class ElementAdminShowEdit extends ElementAdminList
             ])
             // ->add('openHours', OpenHoursType::class, ['required' => false])
           ->end()
-          ->panel('Localisation', ['class' => 'col-md-6'])
+          ->panel('localisation', ['class' => 'col-md-6'])
             ->add('address.streetAddress', TextType::class, ['label_attr' => ['style' => 'display:none;'], 'attr' => ['class' => 'gogo-element-address']])
           ->end()
         ;
@@ -74,7 +72,7 @@ class ElementAdminShowEdit extends ElementAdminList
         $needModeration = 0 != $this->subject->getModerationState();
 
         $show
-          ->with('Autre infos', ['class' => 'col-md-6 col-sm-12'])
+          ->with('Autre infos', ['class' => 'col-md-6'])
             ->add('id')
             ->add('randomHash')
             ->add('oldId', null, ['label' => 'Id dans la base de données importée'])
@@ -107,7 +105,7 @@ class ElementAdminShowEdit extends ElementAdminList
         }
 
         $show
-          ->with('Historique des contributions', ['class' => 'col-sm-12'])
+          ->with('show_contributions', ['class' => 'col-sm-12'])
             ->add('contributions', null, ['template' => 'admin/partials/show_contributions.html.twig'])
           ->end();
 

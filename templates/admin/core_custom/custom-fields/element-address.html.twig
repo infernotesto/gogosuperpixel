@@ -1,12 +1,13 @@
 {% set element = form.vars.sonata_admin.admin.subject %}
 {% set config = form.vars.sonata_admin.admin.config %}
+{% trans_default_domain 'admin' %}
 
 {% set fields = { 
-  'streetAddress': 'Rue', 
-  'addressLocality': 'Ville',
-  'postalCode': 'Code Postal',
-  'addressCountry': 'Pays',
-  'customFormatedAddress': 'Address Complète'
+  'streetAddress': 'elements.address.streetAddress'|trans, 
+  'addressLocality': 'elements.address.addressLocality'|trans,
+  'postalCode': 'elements.address.postalCode'|trans,
+  'addressCountry': 'elements.address.addressCountry'|trans,
+  'customFormatedAddress': 'elements.address.customFormatedAddress'|trans
 } %}
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
