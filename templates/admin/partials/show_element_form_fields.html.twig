@@ -1,7 +1,9 @@
+{% trans_default_domain 'admin' %}
+
 {# put this hidden input otherwise the elementFomFieldJson is overwritten with blank string #}
 <input type="hidden" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="{{ form.vars.value }}" />
 
-<h3 style="margin-top: -30px">Liste des champs disponibles via le formulaire</h3>
+<h3 style="margin-top: -30px">{{ 'config_infobar.fields_list.form'|trans }}</h3>
 {% set fields = value|json_decode %}
 
 {% set filterFromType = {
@@ -29,10 +31,10 @@
 {% set formFields = [] %}
 <table style="width:100%;margin-bottom: 20px;">
   <tr>
-    <th>Label dans le formulaire</th>
-    <th>Nom du champ</th>
-    <th>Type</th>
-    <th>Exemple de filtre à utiliser</th>
+    <th>{{ 'config_infobar.fields.label'|trans }}</th>
+    <th>{{ 'config_infobar.fields.name'|trans }}</th>
+    <th>{{ 'config_infobar.fields.type'|trans }}</th>
+    <th>{{ 'config_infobar.fields.exemple'|trans }}</th>
   </tr>
 
   {% for field in fields %}
@@ -74,24 +76,24 @@
   {% if field not in formFields %}{% set otherFields = otherFields|merge([field]) %}{% endif %}
 {% endfor %}
 
-<h3>Champs / Variables fournies par le système</h3>
+<h3>{{ 'config_infobar.fields_list.system'|trans }}</h3>
 
 <table style="margin-bottom: 20px;">
   <tr>
-    <th>Nom du champ</th>
-    <th>Description</th>
-    <th>Utilisation</th>
+    <th>{{ 'config_infobar.fields.name'|trans }}</th>
+    <th>{{ 'config_infobar.fields.description._label'|trans }}</th>
+    <th>{{ 'config_infobar.fields.usage'|trans }}</th>
   </tr>
 
   <tr>
     <td>categories</td>
-    <td>Liste des noms des catégories de l'élément</td>
+    <td>{{ 'config_infobar.fields.description.categories'|trans }}</td>
     <td>{% verbatim %}{% if "ma catégorie" in categories %} ... {% endif %}{% endverbatim %}</td>
   </tr>
 
   <tr>
     <td>categoriesFull</td>
-    <td>Liste des catégories complète, inclus l'id, le nom, la description et la position</td>
+    <td>{{ 'config_infobar.fields.description.categoriesFull'|trans }}</td>
     <td>{% verbatim %}
       {% for category in categoriesFull %}
         <div>  Id: {{ category.id }}</div>
@@ -104,7 +106,7 @@
 
   <tr>
     <td>originalAddress</td>
-    <td>L'adresse détaillée avec le code postal, la ville etc...</td>
+    <td>{{ 'config_infobar.fields.description.originalAddress'|trans }}</td>
     <td>{% verbatim %}
       {{ originalAddress.streetAddress ~ ' - ' ~ originalAddress.addressLocality ~ ' - ' ~ originalAddress.postalCode ~ ' - ' ~ originalAddress.addressCountry }}
     {% endverbatim %}</td>
@@ -112,8 +114,8 @@
 
   <tr>
     <td>distance</td>
-    <td>Si une adresse a été rentrée, distance entre le point et cette adresse</td>
-    <td>{% verbatim %}{% if distance is defined %} <span>{{ distance }}</span> {% endif %}{% endverbatim %}</td>
+    <td>{{ 'config_infobar.fields.description.distance'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.distance'|trans }}</td>
   </tr>
 
   <tr>
@@ -139,61 +141,54 @@
 
   <tr>
     <td>isPending</td>
-    <td>Raccourci pour status == En attente (modifs ou ajout)</td>
+    <td>{{ 'config_infobar.fields.description.isPending'|trans }}</td>
     <td>{{ '{% if isPending %} ... {% endif %} '}}</td>
   </tr>
 
   <tr>
     <td>isDeleted</td>
-    <td>Raccourci pour status = Refusé ou Supprimé </td>
+    <td>{{ 'config_infobar.fields.description.isDeleted'|trans }}</td>
     <td>{{ '{% if isDeleted %} ... {% endif %} '}}</td>
   </tr>
 
   <tr>
     <td>colorOptionId</td>
-    <td>L'id de la categorie qui donne la couleur principale de cet élément</td>
-    <td>
-      <div>{{ '<div class="gogo-color-as" option-id="{{colorOptionId}}">Texte de la couleur de la catégorie principale</div>'|e }}</div>
-      <div>{{ '<div class="gogo-bg-color-as" option-id="{{colorOptionId}}">Arrière plan de la couleur de la catégorie principale</div>'|e }}</div>
-      <div>{{ '<div class="gogo-border-color-as" option-id="{{colorOptionId}}">Bordure de la couleur de la catégorie principale</div>'|e }}</div>
-      <div>Vous pouvez aussi utiliser les classes "gogo-soft-color-as" et "gogo-soft-bg-bolor-as"</div>
-    </td>
+    <td>{{ 'config_infobar.fields.description.colorOptionId'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.colorOptionId'|trans }}</td>
   </tr>
 
   <tr>
     <td>images</td>
-    <td>Tableau des urls des différentes images</td>
-    <td>Les images sont affichées par default dans la fiche détail et vous n'avez pas besoin d'inclure ce champ. Mais vous pouvez toujours utiliser cette variable selon vos besoins</td>
+    <td>{{ 'config_infobar.fields.description.images'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.images'|trans }}</td>
   </tr>
 
   <tr>
     <td>createdAt</td>
-    <td>Date de la création dans la base de donnée</td>
-    <td>{{ 'Créé le : {{ createdAt }}'}}</td>
+    <td>{{ 'config_infobar.fields.description.createdAt'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.createdAt'|trans }}</td>
   </tr>
 
   <tr>
     <td>updatedAt</td>
-    <td>Date de la dernière mise à jour</td>
-    <td>{{ 'Dernière mise à jour : {{ updatedAt }}'}}</td>
+    <td>{{ 'config_infobar.fields.description.updatedAt'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.updatedAt'|trans }}</td>
   </tr>
 
   <tr>
     <td>sourceKey</td>
-    <td>Nom de la source de cet élément (peut être vide)</td>
-    <td>{% verbatim %}
-      {% if sourceKey == "Fablab" %}Référencé par http://fablabs.io{% endif %}
-    {% endverbatim %}</td>
+    <td>{{ 'config_infobar.fields.description.sourceKey'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.sourceKey'|trans }}</td>
   </tr>
 </table>
 
 {% if otherFields|length %}
-  <h3>Tous les autres champs dans vos données sont aussi disponibles</h3>
+  <h3>{{ 'config_infobar.fields_list.other'|trans }}</h3>
 
   <table style="margin-bottom: 20px;">
     <tr>
-      <th>Nom du champ</th>
-      <th>Utilisation</th>
+      <th>{{ 'config_infobar.fields.name'|trans }}</th>
+      <th>{{ 'config_infobar.fields.usage'|trans }}</th>
     </tr>
 
     {% for field in otherFields %}

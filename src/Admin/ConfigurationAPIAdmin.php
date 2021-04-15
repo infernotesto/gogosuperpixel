@@ -30,11 +30,11 @@ class ConfigurationAPIAdmin extends ConfigurationAbstractAdmin
         }
 
         $formMapper
-            ->panel('Configuration', ['description' => "<div class='iframe-container'><iframe height='200' sandbox='allow-same-origin allow-scripts' src='https://video.colibris-outilslibres.org/videos/embed/aa05a654-a5d6-472a-bb12-108e0f6ce18e' frameborder='0' allowfullscreen></iframe></div>"])
-                ->add('api.publicApiPrivateProperties', ChoiceType::class, ['choices' => $apiPropertiesChanged, 'label' => "Liste des champs que vous ne voulez pas partager", 'required' => false, 'multiple' => true])
+            ->panel('config')
+                ->add('api.publicApiPrivateProperties', ChoiceType::class, ['choices' => $apiPropertiesChanged, 'multiple' => true])
             ->end()
-            ->panel('Liste des apis disponibles')
-                ->add('apilist', TextType::class, ['mapped' => false, 'label' => false, 'required' => false, 'attr' => ['class' => 'gogo-api-list']])
+            ->panel('apis')
+                ->add('apilist', TextType::class, ['mapped' => false, 'attr' => ['class' => 'gogo-api-list']])
             ->end()
         ;
     }

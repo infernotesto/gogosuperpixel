@@ -30,23 +30,23 @@ class ConfigurationInfoBarAdmin extends ConfigurationAbstractAdmin
         $propertiesText = implode($apiProperties, ',');
 
         $formMapper
-            ->tab('Fiche détail')
-                ->panel("infobar_content")
-                    ->add('infobar.headerTemplateUseMarkdown', CheckboxType::class, ['label' => 'Utiliser la syntaxe markdown pour le header (sinon uniquement la syntaxe Nunjucks)', 'attr' => ['class' => 'use-markdown'], 'required' => false])
-                    ->add('infobar.headerTemplate', null, ['label' => 'En tête de la fiche (header)', 'attr' => ['class' => 'gogo-code-editor', 'format' => 'twig', 'height' => '200'], 'required' => false])
-                    ->add('infobar.bodyTemplateUseMarkdown', CheckboxType::class, ['label' => 'Utiliser la syntaxe markdown pour le body (sinon uniquement la syntaxe Nunjucks)', 'attr' => ['class' => 'use-markdown'], 'required' => false])
-                    ->add('infobar.bodyTemplate', null, ['label' => 'Corps de la fiche (body)', 'attr' => ['class' => 'gogo-code-editor', 'data-id' => 'body-template', 'format' => 'twig', 'height' => '500'], 'required' => false])
+            ->tab('config_infobar._label')
+                ->panel('infobar_content')
+                    ->add('infobar.headerTemplateUseMarkdown', CheckboxType::class, ['attr' => ['class' => 'use-markdown']])
+                    ->add('infobar.headerTemplate', null, ['attr' => ['class' => 'gogo-code-editor', 'format' => 'twig', 'height' => '200']])
+                    ->add('infobar.bodyTemplateUseMarkdown', CheckboxType::class, ['attr' => ['class' => 'use-markdown']])
+                    ->add('infobar.bodyTemplate', null, ['attr' => ['class' => 'gogo-code-editor', 'data-id' => 'body-template', 'format' => 'twig', 'height' => '500']])
                 ->end()
-                ->panel('Autres Paramètres')
-                    ->add('infobar.width', IntegerType::class, ['label' => 'Largeur de la fiche détail (en pixels, par défaut : 540)', 'required' => false])
+                ->panel('infobar_param')
+                    ->add('infobar.width', IntegerType::class)
                 ->end()
             ->end()
-            ->tab('Liste des Champs disponibles (aide)')
+            ->tab('field_list')
                 ->panel('')
                     ->add('elementFormFieldsJson', HiddenType::class, ['attr' => ['class' => 'gogo-form-fields', 'dataproperties' => $propertiesText]])
                 ->end()
             ->end()
-            ->tab('Liste des filtres disponibles (aide)')
+            ->tab('filter_list')
                 ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-default', 'description' => "
                         <p><b>Les filtres permettent d'appliquer des transformations sur un variable / un champ</b></p>
                         <h3>Les filtres du language nunjucks</h3>

@@ -19,12 +19,12 @@ class ConfigurationOsmAdmin extends ConfigurationAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->panel('Serveur OpenStreetMap', ['description' => "URL du serveur OpenStreetMap sur lequel envoyer les données éditées par GoGoCarto."])
-                ->add('osm.osmHost', UrlType::class, ['label' => 'URL du serveur', 'required' => false])
+            ->panel('host')
+                ->add('osm.osmHost', UrlType::class)
                 ->end()
-            ->panel('Compte d\'instance', ['description' => "Pour permettre l'édition vers OpenStreetMap, renseignez un compte utilisateur ci-dessous. Si vous n'avez pas de compte, vous pouvez en créer un sur <a href='https://www.openstreetmap.org/user/new'>le site d'OpenStreetMap</a>."])
-                ->add('osm.osmUsername', TextType::class, ['label' => 'Nom d\'utilisateur', 'required' => false])
-                ->add('osm.osmPassword', PasswordType::class, ['label' => 'Mot de passe', 'required' => false])
+            ->panel('account')
+                ->add('osm.osmUsername', TextType::class)
+                ->add('osm.osmPassword', PasswordType::class)
             ->end()
         ;
     }

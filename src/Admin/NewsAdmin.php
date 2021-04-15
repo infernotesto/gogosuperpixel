@@ -19,13 +19,12 @@ final class NewsAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->add('title', TextType::class, ['label' => 'Titre'])
+            ->add('title')
             ->add('content', SimpleFormatterType::class, [
-                'label' => 'Contenu',
                 'format' => 'richhtml',
                 'ckeditor_context' => 'full',
             ])
-            ->add('publicationDate', DateTimeType::class, ['label' => 'Date de publication'])
+            ->add('publicationDate', DateTimeType::class)
             ->add('status', ChoiceType::class, ['choices' => [
                 'draft' => NewsStatus::DRAFT,
                 'published' => NewsStatus::PUBLISHED,
@@ -36,9 +35,9 @@ final class NewsAdmin extends GoGoAbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->addIdentifier('title', 'text', ['label' => 'Titre'])
-            ->add('publicationDate', 'datetime', ['label' => 'Date de publication', 'format' => 'd/m/Y à H:i'])
-            ->add('status', 'choice', ['label' => 'Statut', 'choices' => [
+            ->addIdentifier('title', 'text')
+            ->add('publicationDate', 'datetime', ['format' => $this->t('news.format')])
+            ->add('status', 'choice', ['choices' => [
                 NewsStatus::DRAFT => $this->t('news.fields.status_choices.draft'),
                 NewsStatus::PUBLISHED => $this->t('news.fields.status_choices.published'),
             ]])
@@ -48,10 +47,10 @@ final class NewsAdmin extends GoGoAbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('title', null, ['label' => 'Titre'])
+            ->add('title')
             ->add('status', 'doctrine_mongo_choice', ['label' => 'Statut'], ChoiceType::class, ['choices' => [
-                'Brouillon (non publiée)' => NewsStatus::DRAFT,
-                'Publiée' => NewsStatus::PUBLISHED,
+                $this->t('news.fields.status_choices.draft') => NewsStatus::DRAFT,
+                $this->t('news.fields.status_choices.published') => NewsStatus::PUBLISHED,
             ]])
         ;
     }
@@ -59,11 +58,11 @@ final class NewsAdmin extends GoGoAbstractAdmin
     protected function configureShowFields(ShowMapper $show): void
     {
         $show
-            ->add('title', 'text', ['label' => 'Titre'])
-            ->add('publicationDate', 'datetime', ['label' => 'Date de publication', 'format' => 'd/m/Y à H:i'])
-            ->add('status', 'choice', ['label' => 'Statut', 'choices' => [
-                NewsStatus::DRAFT => 'Brouillon (non publiée)',
-                NewsStatus::PUBLISHED => 'Publiée',
+            ->add('title', 'text')
+            ->add('publicationDate', 'datetime', ['format' => $this->t('news.format')])
+            ->add('status', 'choice', ['choices' => [
+                NewsStatus::DRAFT => $this->t('news.fields.status_choices.draft'),
+                NewsStatus::PUBLISHED => $this->t('news.fields.status_choices.published'),
             ]])
         ;
     }

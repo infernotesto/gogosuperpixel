@@ -1,131 +1,225 @@
-abouts:
-  _label: Popups type "A propos"
+config_infobar:
+  _label: "Fiche détail"
+  fields_list:
+    form: "Liste des champs disponibles via le formulaire"
+    system: "Champs / Variables fournies par le système"
+    other: "Tous les autres champs dans vos données sont aussi disponibles"
   fields:
-    content: Contenu
-    name: Nom
+    label: "Libellé dans le formulaire"
+    name: "Nom du champ"
+    type: "Type"
+    exemple: "Exemple de filtre à utiliser"
+    description: 
+      _label: Description
+      categories: "Liste des noms des catégories de l'élément"
+      categoriesFull: "Liste des catégories complète, inclus l id, le nom, la description et la position"
+      originalAddress: "L adresse détaillée avec le code postal, la ville etc..."
+      distance: "Si une adresse a été rentrée, distance entre le point et cette adresse"
+      status: xx
+      isPending: "Raccourci pour status == En attente (modifs ou ajout)"
+      isDeleted: "Raccourci pour status = Refusé ou Supprimé"
+      colorOptionId: "L'id de la categorie qui donne la couleur principale de cet élément"
+      images: "Tableau des urls des différentes images"
+      createdAt: "Date de la création dans la base de donnée"
+      updatedAt: "Date de la dernière mise à jour"
+      sourceKey: "Nom de la source de cet élément (peut être vide)"
+    example:
+      images: "Les images sont affichées par default dans la fiche détail et vous n'avez pas besoin d'inclure ce champ. Mais vous pouvez toujours utiliser cette variable selon vos besoins"
+      createdAt: "Créé le : '{{ createdAt '}}"
+      sourceKey: "'{% if sourceKey == \"Fablab\" '%}Référencé par http://fablabs.io'{% endif '%}"
+      updatedAt: "Dernière mise à jour : '{{ updatedAt '}}"
+      distance: "'{% if distance is defined '%} <span>'{{ distance '}}</span> '{% endif '%}"
+      colorOptionId: >-
+        <div class="gogo-color-as" option-id="'{{colorOptionId'}}">Texte de la couleur de la catégorie principale</div>
+        <div class="gogo-bg-color-as" option-id="'{{colorOptionId'}}">Arrière plan de la couleur de la catégorie principale</div>
+        <div class="gogo-border-color-as" option-id="'{{colorOptionId'}}">Bordure de la couleur de la catégorie principale</div>
+        Vous pouvez aussi utiliser les classes "gogo-soft-color-as" et "gogo-soft-bg-bolor-as"   
+    usage: Utilisation
+    infobar:
+      headerTemplateUseMarkdown: Utilisez la syntaxe markdown pour le header (sinon uniquement la syntaxe Nunjucks)
+      headerTemplate: En tête de la fiche (header)
+      bodyTemplateUseMarkdown: Utiliser la syntaxe markdown pour le body (sinon uniquement la syntaxe Nunjucks)
+      bodyTemplate: Corps de la fiche (body)
+      width: "Largeur de la fiche détail (en pixels, par défaut : 540)"
+  form:
+    groups:
+      infobar_content: "Contenu de la Fiche détail (panneau qui s'affiche lors d'un click sur un marker)"
+      infobar_content_description: >-
+        <div class="text-and-iframe-container"><div class="iframe-container-aside" style="margin-top: 0"><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/354086c4-e826-44ad-b44a-475e517c3af6" frameborder="0" allowfullscreen></iframe></div>
+        <p style="margin-top: 10px">Vous pouvez utiliser <a href="https://guides.github.com/features/mastering-markdown/#syntax">la syntaxe mardown</a> et <a href="https://mozilla.github.io/nunjucks/">la syntaxe nunjucks (pour des utilisations avancée)</a></p>
+        <p>Pour afficher la valeur d''un champ de votre formulaire (voir liste des champs ci-après) utilisez une double accolades <b>'{{ nom_de_mon_champ '}}</b>. Vous pouvez également choisir de formatter votre champ avec un filtre en utilisant le symbole <b>|</b> suivi du nom du filtre. Par example, pour afficher un champ en majuscule on pourra faire <b>'{{ nom_de_mon_champ|upper '}}</b>. Des filtres spéciaux pour gogocarto ont été créés, ils permettent d''afficher simplement certains type de champ. Par example, pour un champ de description longue, on pourra utiliser <b>'{{ nom_de_mon_champ_description_longue|gogo_textarea(truncate = 300) }}</b>. Cela coupera la description aux environs de 300 caractères et affichera un petit bouton pour afficher la description entière.<p>
+        <p>Consultez la liste des <a href="https://mozilla.github.io/nunjucks/templating.html#builtin-filters">filtres nunjucks ici</a>. La liste des filtres de gogocarto n''est pas encore documentée</p></div>
+
+        <h2 style="margin: 0 0 25px 0">
+          Contenu de la fiche détail
+          <span class="btn btn-primary" id="generate-body-template" onclick="generateBodyTemplate()">Générer automatiquement le contenu de la fiche détail</span>
+        </h2>
+      infobar_param: Autres Paramètres
+      field_list: Liste des champs disponibles (aide)
+      filter_list: Liste des filtres disponibles (aide)
+
+abouts:
+  _label: "Popups type 'A propos'"
+  fields:
+    content: "Contenu"
+    name: "Nom"
 
 wrappers:
-  _label: Bandeaux de la page d'accueil
+  _label: "Bandeaux de la page d'accueil"
   form:
-    content: Contenu du bandeau
-    rawContent: Contenu en raw html (optionel)
-    textColor: Couleur du texte
-    backgroundColor: Couleur du fond
+    content: "Contenu du bandeau"
+    rawContent: "Contenu en raw html (optionel)"
+    textColor: "Couleur du texte"
+    backgroundColor: "Couleur du fond"
 
 partners:
-  _label: Partenaires
+  _label: "Partenaires"
   form:
-    name: Nom
-    content: Contenu
-    logo: Logo
-    logo_placeholder: Sélectionnez une image déjà importée, ou ajoutez en une !
-    websiteUrl: URL du site Internet
+    name: "Nom"
+    content: "Contenu"
+    logo: "Logo"
+    logo_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
+    websiteUrl: "URL du site Internet"
 
 elements:
-  _label: Éléments
+  _label: "Éléments"
   fields:
-    name: Nom
-    status: Statut
-    updatedAt: Mise à jour le 
-    sourceKey: Source
-    optionsString: Catégories
-    moderationState: Modération
+    name: "Nom"
+    status: "Statut"
+    updatedAt: "Mise à jour le "
+    sourceKey: "Source"
+    optionsString: "Catégories"
+    moderationState: "Modération"
     # Votes ??
     # Action ??
 
   form:
     groups:
-      general: Informations générales
-      localisation: Localisation
-    optionIds: Catégories
+      general: "Informations générales"
+      localisation: "Localisation"
+    optionIds: "Catégories"
 
   address:
-    streetAddress: Rue
-    addressLocality: Ville
-    postalCode: Code Postal
-    addressCountry: Pays
-    customFormatedAddress: Address Complète
+    streetAddress: "Rue"
+    addressLocality: "Ville"
+    postalCode: "Code Postal"
+    addressCountry: "Pays"
+    customFormatedAddress: "Address Complète"
       
       
-show_contributions: Historique des contributions toto
+show_contributions: "Historique des contributions"
 
 
 imports:
-  _label: Import
+  _label: "Import"
 
 dynamic_imports:
-  _label: Import dynamique
+  _label: "Import dynamique"
 
 config_duplicates:
-  _label: Gestion des Doublons
+  _label: "Gestion des Doublons"
 
 config_style:
-  _label: Style / Couleurs / Icones
+  _label: "Style / Couleurs / Icones"
 
 config_home:
-  _label: Page d'Accueil
+  _label: "Page d'Accueil"
 
 categories:
-  _label: Catégories
+  _label: "Catégories"
 
 config_map:
-  _label: Carte / Fonctionalités
+  _label: "Carte / Fonctionalités"
 
 ConfigurationMenuAdmin:
-  _label: Menu / Filtres / Recherche
+  _label: "Menu / Filtres / Recherche"
 
 tile_layers:
-  _label: Fonds de Carte
+  _label: "Fonds de Carte"
 
 config_marker:
-  _label: Marqueur / Popup
+  _label: "Marqueur / Popup"
 
 config_form:
-  _label: Formulaire
+  _label: "Formulaire"
 
 config_contributions:
-  _label: Qui peut Contribuer ?
+  _label: "Qui peut Contribuer ?"
 
 config_mobile:
-  _label: App Mobile
+  _label: "App Mobile"
 
 config_custom_js_css:
-  _label: Custom Css / Js
+  _label: "CSS / JS personnalisé"
 
 config_emails:
-  _label: Mails / Newsletter
+  _label: "Mails / Newsletter"
 
 config_api:
-  _label: APIs
+  _label: "APIs"
+  elements: "Éléments"
+  taxonomy: "Taxonomie / Catégories"
+  config: "Configuration"
+  fields:
+    api.publicApiPrivateProperties: "Liste des champs que vous ne voulez pas partager"
+    apilist:
+    gogo_api_ui: "Interface graphique pour construire une api"
+    gogo_api_elements_from_text: "Rechercher un élement"
+    text:  "votre_texte_de_recherche"
+    gogo_api_element_get: "Un Element (remplacer ID par l'id de l'élement)"
+    gogo_api_taxonomy: "Taxonomie"
+    gogo_api_semanatic_taxonomy: "Taxonomie sémantique"
+    gogo_api_taxonomy_show: "Une Catégorie (remplacer ID par l'id de la catégorie)"
+    gogo_element_import_available_options: "Liste des options"
+    gogo_api_taxonomy_mapping: "Liste des options avec correspondance id"
+    gogo_api_gogocartojs_configuration: "Configuration GoGoCartoJs"
+    gogo_api_configuration: "Configuration GoGoCarto"
+  form:
+    groups:
+      config: "Configuration"
+      config_description: '<div class="iframe-container"><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/aa05a654-a5d6-472a-bb12-108e0f6ce18e" frameborder="0" allowfullscreen></iframe></div>'
+      apis: "Liste des APIs disponibles"
 
 config_osm:
-  _label: OpenStreetMap
+  _label: "OpenStreetMap"
+  fields.osm:
+    osmHost: "URL du serveur"
+    osmUsername: "Nom d'utilisateur"
+    osmPassword: "Mot de passe"
+  form:
+    groups:
+      host_description: "URL du serveur OpenStreetMap sur lequel envoyer les données éditées par GoGoCarto"
+      account: "Compte d'instance"
+      account_description: "Pour permettre l'édition vers OpenStreetMap, renseignez un compte utilisateur ci-dessous. Si vous n'avez pas de compte, vous pouvez en créer un sur <a href='https://www.openstreetmap.org/user/new'>le site d'OpenStreetMap</a>."
 
 stamps:
-  _label: Étiquettes
+  _label: "Étiquettes"
   fields:
-    name: Nom
-    isPublic: Publique (tout le monde peut l'assigner)
+    name: "Nom"
+    isPublic: "Publique (tout le monde peut l'assigner)"
 
 webhooks:
-  _label: Webhooks
+  _label: "Webhooks"
+  fields:
+    format: "Format"
+    url: "URL"
 
 commons:
-  btn_update_and_edit: Mettre à jour
+  btn_update_and_edit: "Mettre à jour"
   fields:
-    image_placeholder: Séléctionnez une image déjà importée, ou ajoutez en une !
+    image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
 
 config_general:
-  _label: Configuration Générale
+  _label: "Configuration Générale"
   fields:
-    aboutHeaderTitle: Titre de la section "A propos"
-    activateAbouts: Activer les popups type "A propos"
-    activateHomePage: Activer la page d'accueil
-    activatePartnersPage: Activer la page type "Partenaires"
-    appBaseline: Description du site (baseline)
-    appName: Nom du site
-    appTags: Mot clés pour le référencement (séparés par une virgule)
-    customDomain: Utiliser un nom de domaine personnalisé (exple macarte.org au lieu de macarte.gogocarto.fr)
+    aboutHeaderTitle: "Titre de la section 'A propos'"
+    activateAbouts: "Activer les popups type 'A propos'"
+    activateHomePage: "Activer la page d'accueil"
+    activatePartnersPage: 'Activer la page type "Partenaires"'
+    appBaseline: "Description du site (baseline)"
+    appName: "Nom du site"
+    appTags: "Mot clés pour le référencement (séparés par une virgule)"
+    customDomain: "Utiliser un nom de domaine personnalisé (exemple macarte.org au lieu de macarte.gogocarto.fr)"
     customDomain_help: >-
       Après avoir acheté le nom de domaine macarte.org, vous devez d'abords le rediriger sur
       l'adresse IP du serveur GoGoCarto ({ip}).  Ensuite renseignez ici le nom de votre domaine, et
@@ -133,66 +227,57 @@ config_general:
       les heures). GoGoCarto abandonne au bout de 4 tentatives.  Si au bout de plusieurs heures rien
       ne se passe, vous devrez remettre vide la configuration du sous domaine,  sauvegarder, puis la
       reremplir pour créer un nouvel essai
-    dataLicenseUrl: Url de la licence qui protège vos données
-    elementDisplayName: Nom
-    elementDisplayNameDefinite: Nom avec article défini
-    elementDisplayNameIndefinite: Nom avec article indéfini
-    elementDisplayNamePlural: Nom pluriel
-    favicon: Favicon
-    locale: Langue
-    logo: Logo
-    logoInline: Logo pour la barre de menu
-    partnerPageTitle: Titre de la page "Partenaires"
-    publishOnSaasPage: Rendre ce projet visible sur {url}
-    socialShareImage: Image à afficher lors d'un partage sur les réseaux sociaux
+    dataLicenseUrl: "Url de la licence qui protège vos données"
+    elementDisplayName: "Nom"
+    elementDisplayNameDefinite: "Nom avec article défini"
+    elementDisplayNameIndefinite: "Nom avec article indéfini"
+    elementDisplayNamePlural: "Nom pluriel"
+    favicon: "Favicon"
+    locale: "Langue"
+    logo: "Logo"
+    logoInline: "Logo pour la barre de menu"
+    partnerPageTitle: "Titre de la page 'Partenaires'"
+    publishOnSaasPage: "Rendre ce projet visible sur {url}"
+    socialShareImage: "Image à afficher lors d'un partage sur les réseaux sociaux"
   form:
     groups:
-      images: Images générales
-      main: Le Site
+      images: "Images générales"
+      main: "Le Site"
       main_description: >-
         <div class="iframe-container"><iframe height="110" sandbox="allow-same-origin allow-scripts"
         src="https://video.colibris-outilslibres.org/videos/embed/fc7d3784-7bd1-4f3a-b915-ab6daefdd52d"
         frameborder="0" allowfullscreen></iframe></div>
-      pages: Fonctions principales
-      text: Nom des entités référencées sur l'annuaire
+      pages: "Fonctions principales"
+      text: "Nom des entités référencées sur l'annuaire"
 
 option_hidden:
-  _label: Option
+  _label: "Option"
   fields:
-    name: Nom blabla
-    name_hint: Some hint
-    name_placeholder: Enter name
-    useIconForMarker: Utiliser l'icone de cette catégorie pour le marqueur
-    useIconForMarker_help: Le marqueur affichera toutes icones de chaque catégorie ayant cette option activée. Les icones seront classées par ordre de selection des catégories dans le formulaire
+    name: "Nom blabla"
+    name_hint: "Some hint"
+    name_placeholder: "Enter name"
+    useIconForMarker: "Utiliser l'icone de cette catégorie pour le marqueur"
+    useIconForMarker_help: "Le marqueur affichera toutes icones de chaque catégorie ayant cette option activée. Les icones seront classées par ordre de selection des catégories dans le formulaire"
   form:
     groups:
-      main: Principal
+      main: "Principal"
 
 news:
-  _label: Actualités (newsletter)
+  _label: "Actualités (newsletter)"
+  format: "d/m/Y à H:i" # TODO use local ?? 
   fields:
-    status: Statut
+    title: "Titre"
+    publicationDate: "Date de publication"
+    content: "Contenu"
+    status: "Statut"
     status_choices:
-      draft: Brouillon (non publiée)
-      published: Publiée
-
-config_infobar:
-  _label: Fiche Détail
+      draft: "Brouillon (non publiée)"
+      published: "Publiée"
   form:
     groups:
-      infobar_content: Contenu de la Fiche détail (panneau qui s'affiche lors d'un click sur un marker)
-      infobar_content_description: >-
-        <div class='text-and-iframe-container'><div class='iframe-container-aside' style='margin-top: 0'><iframe height='200' sandbox='allow-same-origin allow-scripts' src='https://video.colibris-outilslibres.org/videos/embed/354086c4-e826-44ad-b44a-475e517c3af6' frameborder='0' allowfullscreen></iframe></div>
-        <p style='margin-top: 10px'>Vous pouvez utiliser <a href='https://guides.github.com/features/mastering-markdown/#syntax'>la syntaxe mardown</a> et <a href='https://mozilla.github.io/nunjucks/'>la syntaxe nunjucks (pour des utilisations avancée)</a></p>
-        <p>Pour afficher la valeur d'un champ de votre formulaire (voir liste des champs ci-arpès) utilisez une double accolades <b>{{ nom_de_mon_champ }}</b>. Vous pouvez également choisir de formatter votre champ avec un filtre en utilisant le symbole <b>|</b> suivi du nom du filtre. Par example, pour afficher un champ en majuscule on pourra faire <b>{{ nom_de_mon_champ|upper }}</b>. Des filtres spéciaux pour gogocarto ont été créés, ils permettent d'afficher simplement certains type de champ. Par example, pour un champ de description longue, on pourra utiliser <b>{{ nom_de_mon_champ_description_longue|gogo_textarea(truncate = 300) }}</b>. Cela coupera la description aux environs de 300 caractères et affichera un petit bouton pour afficher la description entière.<p>
-        <p>Consultez la liste des <a href='https://mozilla.github.io/nunjucks/templating.html#builtin-filters'>filtres nunjucks ici</a>. La liste des filtres de gogocarto n'est pas encore documentée</p></div>
+      list_header: "Créez des actualités qui seront incluses dans la newsletter"
 
-        <h2 style='margin: 0 0 25px 0'>
-          Contenu de la fiche détail
-          <span class='btn btn-primary' id='generate-body-template' onclick='generateBodyTemplate()'>Générer automatiquement le contenu de la fiche détail</span>
-        </h2>
-
-        sonata:
+sonata:
   user:
     user:
       _label: Utilisateurs
@@ -235,7 +320,7 @@ config_infobar:
 
 batch:
   send: Envoyer
-  sendmails: '{count} mails ont bien été envoyés' # TODO plurals
+  sendmails: "{count} mails ont bien été envoyés" # TODO plurals
 
 config_users:
   _label: Configuration
@@ -261,5 +346,8 @@ bulk:
   update_gamification: Mettre à jour les scores (nombre de votes, de contributions, et score total par utilisateur)
 help:
   _label: Aide
-  doc: "Un problème, une question? c'est par ici : "
+  doc: "Un problème, une question ? c'est par ici : "
 
+saas:
+  list: Liste des Projets
+  config: Configuration

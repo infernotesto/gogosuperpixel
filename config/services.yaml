@@ -412,12 +412,12 @@ services:
         arguments: [~, App\Document\Project, 'App\Controller\Admin\ProjectAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: Liste des Projets }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: saas.list }
 
     admin.saas_config:
         class: App\Admin\ConfigurationSaasAdmin
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: Configuration }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: saas.config }
     
