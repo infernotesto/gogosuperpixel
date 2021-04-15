@@ -58,7 +58,7 @@ export default {
                     }
                 }
                 queryString += this.$refs.boundsPicker.overpassQuery
-                if (query != '') result += `node${queryString};way${queryString};relation${queryString};`                  
+                if (query != '') result += `nwr${queryString};`                  
             }
             return result
         },
