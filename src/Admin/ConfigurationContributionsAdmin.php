@@ -21,33 +21,31 @@ class ConfigurationContributionsAdmin extends ConfigurationAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $contributionStyle = ['class' => 'col-md-6 col-lg-4 gogo-feature'];
-        $featureFormOption = ['delete' => false, 'required' => false, 'label_attr' => ['style' => 'display:none']];
+        $featureFormOption = ['delete' => false, 'label_attr' => ['style' => 'display:none']];
         $featureFormTypeOption = ['edit' => 'inline'];
 
         $formMapper
-            ->panel('Pouvoir ajouter un élément', $contributionStyle)
+            ->panel('addFeature', $contributionStyle)
                 ->add('addFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-            ->panel('Pouvoir editer un élément', $contributionStyle)
+            ->panel('editFeature', $contributionStyle)
                 ->add('editFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-            ->panel('Pouvoir supprimer un élément', $contributionStyle)
+            ->panel('deleteFeature', $contributionStyle)
                 ->add('deleteFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-            ->panel('Modération directe', $contributionStyle)
+            ->panel('directModerationFeature', $contributionStyle)
                 ->add('directModerationFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-            ->panel('Modération collaborative (pouvoir voter)', ['class' => 'col-md-6 col-lg-4 gogo-feature collaborative-feature'])
+            ->panel('collaborativeModerationFeature', ['class' => 'col-md-6 col-lg-4 gogo-feature collaborative-feature'])
                 ->add('collaborativeModerationFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-            ->panel('Paramètres pour la modération collaborative', ['class' => 'col-md-4 collaborative-moderation-box'])
-                ->add('minVoteToChangeStatus', null, ['required' => false, 'label' => 'Nombre votes pour valider/refuser automatiquement'])
-                ->add('maxOppositeVoteTolerated', null, ['required' => false, 'label' => 'Nombres maximum de vos contradictoires tolérés'])
-                ->add('minDayBetweenContributionAndCollaborativeValidation', null, ['required' => false, 'label' => 'Nombre de jours minimum avant une validation/refus collaboratif'])
-                ->add('maxDaysLeavingAnElementPending', null, ['required' => false, 'label' => 'Nombre de jours au bout desquels un élément toujours en attente apparaîtra à modérer'])
-                ->add('minVoteToForceChangeStatus', null, ['required' => false, 'label' => 'Nombre votes pour valider/refuser automatiquement, sans attendre de jours minimum'])
+            ->panel('collaborativeModerationParameters', ['class' => 'col-md-4 collaborative-moderation-box'])
+                ->add('minVoteToChangeStatus')
+                ->add('maxOppositeVoteTolerated')
+                ->add('minDayBetweenContributionAndCollaborativeValidation')
+                ->add('maxDaysLeavingAnElementPending')
+                ->add('minVoteToForceChangeStatus')
             ->end()
-            ->panel('Textes')
+            ->panel('text')
                 ->add('collaborativeModerationExplanations', SimpleFormatterType::class, [
                         'format' => 'richhtml',
-                        'label' => 'Explications au sujet de la modération collaborative',
                         'ckeditor_context' => 'full',
-                        'required' => false,
                 ])
             ->end()
         ;

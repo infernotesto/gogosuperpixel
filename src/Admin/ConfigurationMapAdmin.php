@@ -31,12 +31,9 @@ class ConfigurationMapAdmin extends ConfigurationAbstractAdmin
         $config = $dm->get('Configuration')->findConfiguration();
 
         $formMapper
-            ->tab('Paramètres de la carte')
-                ->panel('La carte')
-                    ->add('defaultTileLayer', ModelType::class, [
-                            'class' => 'App\Document\TileLayer',
-                            'required' => true,
-                            'label' => 'Fond de carte par défaut (enregistez pour voir apparaitre le fond délectionné sur la carte ci-dessous)', ])
+            ->tab('params')
+                ->panel('map')
+                    ->add('defaultTileLayer', ModelType::class, ['class' => 'App\Document\TileLayer'])
                     ->add('defaultViewPicker', HiddenType::class, ['mapped' => false, 'attr' => [
                                                         'class' => 'gogo-viewport-picker',
                                                         'data-title-layer' => $config->getDefaultTileLayer()->getUrl(),
@@ -47,45 +44,43 @@ class ConfigurationMapAdmin extends ConfigurationAbstractAdmin
                     ->add('defaultSouthWestBoundsLat', HiddenType::class, ['attr' => ['class' => 'bounds SWLat']])
                     ->add('defaultSouthWestBoundsLng', HiddenType::class, ['attr' => ['class' => 'bounds SWLng']])
                 ->end()
-                ->panel('Cookies')
-                    ->add('saveViewportInCookies', CheckboxType::class, ['label' => 'Sauvegarder la position courante de la carte dans les cookies', 'required' => false])
-                    ->add('saveTileLayerInCookies', CheckboxType::class, ['label' => "Sauvegarder le choix du fond de carte par l'utilisateur dans les cookies", 'required' => false])
+                ->panel('cookies')
+                    ->add('saveViewportInCookies', CheckboxType::class)
+                    ->add('saveTileLayerInCookies', CheckboxType::class)
                 ->end()
             ->end()
-            ->tab('Fonctionnalités')
-                ->panel('Favoris', $featureStyle)
+            ->tab('features')
+                ->panel('favoriteFeature', $featureStyle)
                     ->add('favoriteFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Partage de l\'URL', $featureStyle)
+                ->panel('shareFeature', $featureStyle)
                     ->add('shareFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Calcul Itinéraire', $featureStyle)
+                ->panel('directionsFeature', $featureStyle)
                     ->add('directionsFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Signalement d\'une erreur', $featureStyle)
+                ->panel('reportFeature', $featureStyle)
                     ->add('reportFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Etiquetter les éléments', $featureStyle)
+                ->panel('stampFeature', $featureStyle)
                     ->add('stampFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Mode Liste', $featureStyle)
+                ->panel('listModeFeature', $featureStyle)
                     ->add('listModeFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Choix du fond de carte', $featureStyle)
+                ->panel('layersFeature', $featureStyle)
                     ->add('layersFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Revenir à la vue par défault', $featureStyle)
+                ->panel('mapDefaultViewFeature', $featureStyle)
                     ->add('mapDefaultViewFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Export Iframe', $featureStyle)
+                ->panel('exportIframeFeature', $featureStyle)
                     ->add('exportIframeFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel('Affichage des éléments en attente de validation', $featureStyle)
+                ->panel('pendingFeature', $featureStyle)
                     ->add('pendingFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
             ->end()
-            ->tab('Message personnalisé')
-                ->panel('Message personnalisé à faire apparaitre dans un coin de la carte', ['class' => 'gogo-feature'])
+            ->tab('messages')
+                ->panel('message_config', ['class' => 'gogo-feature'])
                     ->add('customPopupFeature', AdminType::class, $featureFormOption, $featureFormTypeOption)
                     ->add('customPopupText', SimpleFormatterType::class, [
                             'format' => 'richhtml',
-                            'label' => 'Texte à afficher (Exemple: "Ce site est encore en version bêta !")',
                             'label_attr' => ['style' => 'margin-top: 20px'],
                             'ckeditor_context' => 'full',
-                            'required' => false,
                     ])
-                    ->add('customPopupId', null, ['label' => 'Numéro de version du popup (à changer quand vous modifiez le texte)', 'required' => false])
-                    ->add('customPopupShowOnlyOnce', null, ['label' => "Afficher la popup une fois seulement (si l'utilisateur la ferme, il ne la reverra plus jusqu'à ce que vous changiez le numéro de version)", 'required' => false])
+                    ->add('customPopupId')
+                    ->add('customPopupShowOnlyOnce')
                 ->end()
             ->end()
         ;

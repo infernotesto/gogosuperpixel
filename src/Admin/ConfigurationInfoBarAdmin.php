@@ -47,34 +47,7 @@ class ConfigurationInfoBarAdmin extends ConfigurationAbstractAdmin
                 ->end()
             ->end()
             ->tab('filter_list')
-                ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-default', 'description' => "
-                        <p><b>Les filtres permettent d'appliquer des transformations sur un variable / un champ</b></p>
-                        <h3>Les filtres du language nunjucks</h3>
-                        <a href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>Voir la documentation en ligne</a>
-                        <h3>Les filtres spéciaux de GoGoCarto</h3>
-
-                        <h4>gogo_text</h4>
-                        Afficher du texte (avec retour à la ligne avant et après le texte)</br>
-                        Vous pouvez utiliser <b>l'option label</b> : {{ tel|gogo_text(label = 'Téléphone') }}
-
-                        <h4>gogo_date</h4>
-                        <li>Formater une date {{ event_date | date }} ou {{ event_date | gogo_date(label='Date') }}</li>
-                        <li>Ou si vous voulez utiliser un format particulier {{ event_date|date('DD/MM/YYYY') }} ou {{ event_date | gogo_date(label='Date', format='DD/MM/YYYY') }}. <a href='https://momentjs.com/docs/#/displaying/format/'>Voir les choix possibles</a></li>
-                        
-                        <h4>gogo_tags</h4>
-                        Affiche un tableau sous forme de tags {{ ['Service', 'Blanc'] | gogo_tags }}
-                        
-                        <h4>gogo_textarea</h4>
-                        Afficher des texte longs, il y a plusieurs options
-                        <ul><li><b>truncate</b>: tronquer le texte au bout de XX caractères (par défault 1000), et mettre un petit bouton \"afficher plus\"</li>
-                        <li><b>tolerance</b>: le troncage essaie de se faire à la fin d'une phrase ou moins d'un mot. La tolerance est le nombre de caractère que l'on donne comme marge à l'agorithme. i.e tronque à 1000 caractères +/- 50</li>
-                        <li><b>glossary</b>: un glossaire pour expliquer certains mots. Le mot sera légèrement surligné et au survol s'affichera l'explication</li></ul>
-                        <pre>{{ 'Mon beautiful texte supposement très très long'|gogo_textarea(truncate = 15, tolerance = 5, glossary = { 'beautiful': 'Mot anglais qui veut dire joli'}) }}</pre>
-                        
-
-                        <h3>Débugger des données</h3>
-                        Si vous utilisez des données un peu spécifiques de type object, vous pouvez utiliser le filtre 'dump' pour afficher leur contenu {{ my_specific_field|dump }}
-                    "])->end()
+                ->panel('automatic_emails', ['box_class' => 'box box-default'])->end()
             ->end()
         ;
     }

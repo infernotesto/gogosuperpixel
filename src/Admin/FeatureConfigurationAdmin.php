@@ -16,10 +16,10 @@ class FeatureConfigurationAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('active', CheckboxType::class, ['required' => false, 'label' => 'Activé'])
-            ->add('activeInIframe', CheckboxType::class, ['required' => false, 'label' => 'Activé en Iframe'])
-            ->add('allow_role_anonymous', CheckboxType::class, ['required' => false, 'label' => 'Autoriser Anonymes'])
-            ->add('allow_role_user', CheckboxType::class, ['required' => false, 'label' => 'Autoriser Utilisateurs'])
-            ->add('allow_role_admin', CheckboxType::class, ['required' => false, 'label' => 'Autoriser Modérateurs']);
+            ->add('active', CheckboxType::class)
+            ->add('activeInIframe', CheckboxType::class)
+            ->add('allow_role_anonymous', CheckboxType::class)
+            ->add('allow_role_user', CheckboxType::class)
+            ->add('allow_role_admin', CheckboxType::class);
     }
 }

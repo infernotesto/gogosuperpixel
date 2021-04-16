@@ -13,9 +13,8 @@ config_infobar:
       _label: Description
       categories: "Liste des noms des catégories de l'élément"
       categoriesFull: "Liste des catégories complète, inclus l id, le nom, la description et la position"
-      originalAddress: "L adresse détaillée avec le code postal, la ville etc..."
+      originalAddress: "L'adresse détaillée avec le code postal, la ville etc..."
       distance: "Si une adresse a été rentrée, distance entre le point et cette adresse"
-      status: xx
       isPending: "Raccourci pour status == En attente (modifs ou ajout)"
       isDeleted: "Raccourci pour status = Refusé ou Supprimé"
       colorOptionId: "L'id de la categorie qui donne la couleur principale de cet élément"
@@ -23,16 +22,44 @@ config_infobar:
       createdAt: "Date de la création dans la base de donnée"
       updatedAt: "Date de la dernière mise à jour"
       sourceKey: "Nom de la source de cet élément (peut être vide)"
+      status: >-
+        <ul>
+          <li>-6: Doublon</li>
+          <li>-4: Supprimé </li>
+          <li>-3: Refusé (votes)  </li>
+          <li>-2: Refusé (admin) </li>
+          <li>-1: En attente (modifs) </li>
+          <li> 0: En attente (ajout)</li>
+          <li> 1: Validé (admin)</li>
+          <li> 2: Validé (votes)</li>
+          <li> 3: Ajouté par admin</li>
+          <li> 4: Modifié par admin</li>
+          <li> 5: Modifié par propriétaire</li>
+          <li> 6: Modifié avec lien direct</li>
+          <li> 7: Importé</li>
+        </ul>
     example:
       images: "Les images sont affichées par default dans la fiche détail et vous n'avez pas besoin d'inclure ce champ. Mais vous pouvez toujours utiliser cette variable selon vos besoins"
       createdAt: "Créé le : '{{ createdAt '}}"
       sourceKey: "'{% if sourceKey == \"Fablab\" '%}Référencé par http://fablabs.io'{% endif '%}"
       updatedAt: "Dernière mise à jour : '{{ updatedAt '}}"
       distance: "'{% if distance is defined '%} <span>'{{ distance '}}</span> '{% endif '%}"
+      isDeleted: "'{% if isDeleted '%} ... '{% endif '%}"
+      isPending: "'{% if isPending '%} ... '{% endif '%}"
+      status: "'{% if status == 2 '%} ... '{% endif '%}"
+      categories: "'{% if \"ma catégorie\" in categories '%} ... '{% endif '%}"
+      categoriesFull: >-
+        '{% for category in categoriesFull '%}
+          <div>  Id: '{{ category.id '}}</div>
+          <div>  Nom: '{{ category.name '}}</div>
+          <div>  Description: '{{ category.description '}}</div>
+          <div>  Position: '{{ category.index '}}</div>
+        '{% endfor '%}
+      originalAddress: "'{{ originalAddress.streetAddress ~ '' - '' ~ originalAddress.addressLocality ~ '' - '' ~ originalAddress.postalCode ~ '' - '' ~ originalAddress.addressCountry }}" # Note: fields order could be change according country usage
       colorOptionId: >-
-        <div class="gogo-color-as" option-id="'{{colorOptionId'}}">Texte de la couleur de la catégorie principale</div>
-        <div class="gogo-bg-color-as" option-id="'{{colorOptionId'}}">Arrière plan de la couleur de la catégorie principale</div>
-        <div class="gogo-border-color-as" option-id="'{{colorOptionId'}}">Bordure de la couleur de la catégorie principale</div>
+        &lt;div class="gogo-color-as" option-id="'{{colorOptionId'}}">Texte de la couleur de la catégorie principale&lt;/div></br>
+        &lt;div class="gogo-bg-color-as" option-id="'{{colorOptionId'}}">Arrière plan de la couleur de la catégorie principale&lt;/div></br>
+        &lt;div class="gogo-border-color-as" option-id="'{{colorOptionId'}}">Bordure de la couleur de la catégorie principal&lt;div></br>
         Vous pouvez aussi utiliser les classes "gogo-soft-color-as" et "gogo-soft-bg-bolor-as"   
     usage: Utilisation
     infobar:
@@ -57,6 +84,36 @@ config_infobar:
       infobar_param: Autres Paramètres
       field_list: Liste des champs disponibles (aide)
       filter_list: Liste des filtres disponibles (aide)
+      automatic_emails: Informations concernant les mails automatiques
+      automatic_emails_description: >-
+        <p><b>Les filtres permettent d'appliquer des transformations sur un variable / un champ</b></p>
+        <h3>Les filtres du language nunjucks</h3>
+        <a href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>Voir la documentation en ligne</a>
+        <h3>Les filtres spéciaux de GoGoCarto</h3>
+
+        <h4>gogo_text</h4>
+        Afficher du texte (avec retour à la ligne avant et après le texte)</br>
+        Vous pouvez utiliser <b>l'option label</b> : '{{ tel|gogo_text(label = "Téléphone") '}}
+
+        <h4>gogo_date</h4>
+        <ul>
+          <li>Formater une date '{{ event_date | date '}} ou '{{ event_date | gogo_date(label="Date") '}}</li>
+          <li>Ou si vous voulez utiliser un format particulier '{{ event_date|date("DD/MM/YYYY") '}} ou '{{ event_date | gogo_date(label="Date", format="DD/MM/YYYY") '}}. <a href='https://momentjs.com/docs/#/displaying/format/'>Voir les choix possibles</a></li>
+        </ul>
+        
+        <h4>gogo_tags</h4>
+        Affiche un tableau sous forme de tags '{{ ["Service", "Blanc"] | gogo_tags '}}
+        
+        <h4>gogo_textarea</h4>
+        Afficher des texte longs, il y a plusieurs options
+        <ul><li><b>truncate</b>: tronquer le texte au bout de XX caractères (par défault 1000), et mettre un petit bouton "afficher plus"</li>
+        <li><b>tolerance</b>: le troncage essaie de se faire à la fin d'une phrase ou moins d'un mot. La tolerance est le nombre de caractère que l'on donne comme marge à l'agorithme. i.e tronque à 1000 caractères +/- 50</li>
+        <li><b>glossary</b>: un glossaire pour expliquer certains mots. Le mot sera légèrement surligné et au survol s'affichera l'explication</li></ul>
+        <pre>'{{ "Mon beautiful texte supposement très très long"|gogo_textarea(truncate = 15, tolerance = 5, glossary = { "beautiful": "Mot anglais qui veut dire joli"}) '}}</pre>
+        
+
+        <h3>Débugger des données</h3>
+        Si vous utilisez des données un peu spécifiques de type object, vous pouvez utiliser le filtre "dump" pour afficher leur contenu '{{ my_specific_field|dump '}}
 
 abouts:
   _label: "Popups type 'A propos'"
@@ -127,30 +184,164 @@ config_home:
 
 categories:
   _label: "Catégories"
+  form:
+    groups:
+  fields:
 
 config_map:
   _label: "Carte / Fonctionalités"
+  form:
+    groups:
+      params: "Paramètres de la carte"
+      features: "Fonctionnalités"
+      messages: "Message personnalisé"
+      map: "La carte"
+      cookies: "Cookies"
+      favoriteFeature: "Favoris"
+      shareFeature: "Partage de l'URL"
+      directionsFeature: "Calcul d'itinéraire"
+      reportFeature: "Signalement d'une erreur"
+      stampFeature: "Etiquetter les éléments"
+      listModeFeature: "Mode Liste"
+      layersFeature: "Choix du fond de carte"
+      mapDefaultViewFeature: "Revenir à la vue par défault"
+      exportIframeFeature: "Export Iframe"
+      pendingFeature: "Affichage des éléments en attente de validation"
+      message_config: "Message personnalisé à faire apparaitre dans un coin de la carte"
+  fields:
+    defaultTileLayer: "Fond de carte par défaut (enregistez pour voir apparaitre le fond délectionné sur la carte ci-dessous)"
+    viewport_picker: Vue par défault de la carte (dessinez un rectangle sur la carte)
+    saveViewportInCookies: "Sauvegarder la position courante de la carte dans les cookies"
+    saveTileLayerInCookies: "Sauvegarder le choix du fond de carte par l'utilisateur dans les cookies"
+    customPopupText: 'Texte à afficher (Exemple: "Ce site est encore en version bêta !")'
+    customPopupId: "Numéro de version du popup (à changer quand vous modifiez le texte)"
+    customPopupShowOnlyOnce: "Afficher la popup une fois seulement (si l'utilisateur la ferme, il ne la reverra plus jusqu'à ce que vous changiez le numéro de version)"
 
-ConfigurationMenuAdmin:
+config_menu:
   _label: "Menu / Filtres / Recherche"
+  form:
+    groups:
+      general: "Général"
+      search: "Recherche"
+      menu: "Menu (contient les filtre et la barre de recherche)"
+      custom: "Personnalisez les filtres dans le menu"
+  fields:
+    menu:
+      width: "Largeur du menu"
+      width_placeholder: "290"
+      smallWidthStyle: "Utilisez un style compressé"
+      smallWidthStyle_help: "Diminue un peu la taille de la police et les marges. Pratique lorsque le nom des catégories sont longues que l'on veut gagner en largeur"
+      showOnePanePerMainOption: "Afficher un sous menu pour chaque catégorie principale"
+      showCheckboxForMainFilterPane: "Afficher les checkbox dans la panneau principal"
+      showCheckboxForSubFilterPane: "Afficher les checkbox dans les sous panneaux"
+      showCheckboxForSubFilterPane_help: 'Valable uniquement si "afficher un sous menu pour chaque catégorie principale" est coché'
+      displayNumberOfElementForEachCategory: "Pour chaque catégorie, afficher le nombre d'élément ayant cette catégorie"
+      displayNumberOfElementRoundResults: "Arrondir les résultat (afficher 300+ au lieu de 326)"
+      displayNumberOfElementRoundResults_help: Valable uniquement si "afficher le nombre d''éléments par catégorie" est coché'
+    searchPlaceFeature: "Recherche d'un lieu"
+    searchGeolocateFeature: "Bouton geolocalisation"
+    searchElementsFeature: "Recherche d'un élément"
+    searchCategoriesFeature: "Recherche dans les catégories"
+    searchExcludingWords: "Mots à exclure de la recherche, séparés par des virgules"
+    searchExcludingWords_title: "Si vous faites un annuaire de producteurs locaux, vous voudrez peut être exclure les mots comme \"bio\", car ce genre de recherche donnerait de mauvais résultats. Par exemple si vous cherchez \"Ferme du bayou bio\", des résultat qui n'ont rien à voir tel que \"Amap bio\" sortiraient dans les résultats, juste à cause du mot \"bio\". De manière générale, excluez les mots communément utilisés dans les titres de vos fiches. Notez que la recherche est aussi utilisée dans la détection de doublons"
+    box: "Champs à utiliser pour chercher dans les élements"
+    box_description: "Pour choisir les champs de recherche, allez dans le formulaire, éditer un des champs et vous verrez apparaître l'option \"Recherche dans ce champ\".<br/> Vous pouvez aussi assigner des poids différents sur chaque champs, les poids seront utilisés pour classer les résultats par pertinence."
 
 tile_layers:
   _label: "Fonds de Carte"
+  form:
+    groups:
+  fields:
 
 config_marker:
   _label: "Marqueur / Popup"
+  form:
+    groups:
+      popup: "Popup (contenu qui s'affiche par défault lors du survol d'un marqueur)"
+      popup_description: "Pour la configuration du template, référrez vous aux instructions données dans Modèle de Donnée / Fiche détail"
+      cluster: "Clusters (grouper les marqueurs lorsqu'ils sont proches les uns des autres)"
+      cluster_description: "Sans utiliser les clusters, à partir de 1000 marqueurs affichés sur l'écran cela peut causer des ralentissements pour l'utilisateur"
+  fields:
+    marker.displayPopup: "Afficher la popup"
+    marker.popupAlwaysVisible: "Toujours afficher la popup (par défault elle ne s'affiche qu'au survol du marqueur)"
+    marker.popupTemplateUseMarkdown: "Utiliser la syntaxe markdown pour ce template (sinon uniquement la syntaxe Nunjucks)"
+    marker.popupTemplate: "Contenu de la popup"
+    marker.useClusters: "Activer les clusters"
 
 config_form:
   _label: "Formulaire"
+  form:
+    groups:
+      form: "Formulaire"
+      other: "Autres textes et options"
+      config: "Configuration du formulaire"
+      xx: >-
+        <div class='text-and-iframe-container'><div class='iframe-container-aside'><iframe height='200' sandbox='allow-same-origin allow-scripts' src='https://video.colibris-outilslibres.org/videos/embed/2dd4dad3-63fa-4bb4-b48c-e518f8e56d36' frameborder='0' allowfullscreen></iframe></div>
+        <b>Le formulaire permet d'ajouter/éditer des données depuis l'interface publique</b></br>
+        Si vous avez importé des données, vous pouvez ajouter un champ au formulaire et le lier au champ importé grâce à l'attribut \"Nom du champ\"</div>"
+  fields:
+    elementFormIntroText: "Texte d'introduction qui apparait en haut du formulaire"
+    elementFormIntroText_placeholder: "Exemple: Attention nous ne référencons pas tel et tel type d'élements"
+    elementFormValidationText: "Libellé de la checkbox de validation du formulaire (laisser vide pour désactiver)"
+    elementFormValidationText_placeholder: "Exemple: Je certifie que les informations renseignées dans ce formulaire sont exactes"
+    elementFormOwningText: "Libellé pour demander si l'utilisateur est propriétaire de la fiche (laisser vide pour désactiver)"
+    elementFormOwningText_placeholder: "Exemple: Je suis impliqué.e dans la gestion de la structure décrite"
+    elementFormGeocodingHelp: "Texte d'aide pour la géolocalisation"
 
 config_contributions:
   _label: "Qui peut Contribuer ?"
+  form:
+    groups:
+      addFeature: "Pouvoir ajouter un élément"
+      editFeature: "Pouvoir editer un élément"
+      deleteFeature: "Pouvoir supprimer un élément"
+      directModerationFeature: "Modération directe"
+      collaborativeModerationFeature: "Modération collaborative (pouvoir voter)"
+      collaborativeModerationParameters: "Paramètres pour la modération collaborative"
+      text: Textes
+  fields:
+    minVoteToChangeStatus: "Nombre votes pour valider/refuser automatiquement"
+    maxOppositeVoteTolerated: "Nombres maximum de vos contradictoires tolérés"
+    minDayBetweenContributionAndCollaborativeValidation: "Nombre de jours minimum avant une validation/refus collaboratif"
+    maxDaysLeavingAnElementPending: "Nombre de jours au bout desquels un élément toujours en attente apparaîtra à modérer"
+    minVoteToForceChangeStatus: "Nombre votes pour valider/refuser automatiquement, sans attendre de jours minimum"
+    collaborativeModerationExplanations: "Explications au sujet de la modération collaborative"
+
+feature_config_hidden:
+  fields:
+    active: "Activé"
+    activeInIframe: "Activé en Iframe"
+    allow_role_anonymous: "Autoriser Anonymes"
+    allow_role_user: "Autoriser Utilisateurs"
+    allow_role_admin: "Autoriser Modérateurs"
 
 config_mobile:
   _label: "App Mobile"
+  form:
+    groups:
+      progressive: "Application mobile simulée (Progressive Web App)"
+      progressive_description: "Gogocarto est nativement une <b>Progressive Web App</b>: lorsqu'un utilisateur visite le site depuis son téléphone portable, il aura la possibilité d'ajouter un raccourci sur son écran d'accueil. En cliquant sur ce raccourci, le site s'ouvrira en plein écran comme une application mobile standard."
+      trusted: "Vrai application mobile (Trusted Web Activity)"
+      trusted_description: "Cette fonctionalité est en cours de test, merci de patienter pour de future explications"
+  fields:
+    appNameShort: "Nom court de l'application (12 caractères max.)"
+    hideHeaderInPwa: "Masquer la barre du haut lorsque la carte est ouverte en mode PWA"
+    packageName: "Nom de domaine de l'appli (si vous la publiez en tant que TWA). Format: fr.gogocarto.macarto"
+    sha256CertFingerprints: "Empreintes du certificat SHA256 (si vous la publiez en tant que TWA). Format: 57:2B:36:..."
+
 
 config_custom_js_css:
   _label: "CSS / JS personnalisé"
+  form:
+    groups:
+      custom_style: Style personnalisé
+      custom_style_hint: Entrez du code CSS qui sera chargé sur toutes les pages publiques
+      custom_javascript: Javascript personnalisé
+      custom_javascript_hint: Entrez du code Javascript qui sera chargé sur toutes les pages publiques
+
+  fields:
+    customCSS: CSS personnalisé
+    customJavascript: Javascript personnalisé
 
 config_emails:
   _label: "Mails / Newsletter"

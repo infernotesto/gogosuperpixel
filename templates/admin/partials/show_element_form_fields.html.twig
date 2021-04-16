@@ -88,28 +88,19 @@
   <tr>
     <td>categories</td>
     <td>{{ 'config_infobar.fields.description.categories'|trans }}</td>
-    <td>{% verbatim %}{% if "ma catégorie" in categories %} ... {% endif %}{% endverbatim %}</td>
+    <td>{{ 'config_infobar.fields.example.categories'|trans }}</td>
   </tr>
 
   <tr>
     <td>categoriesFull</td>
     <td>{{ 'config_infobar.fields.description.categoriesFull'|trans }}</td>
-    <td>{% verbatim %}
-      {% for category in categoriesFull %}
-        <div>  Id: {{ category.id }}</div>
-        <div>  Nom: {{ category.name }}</div>
-        <div>  Description: {{ category.description }}</div>
-        <div>  Position: {{ category.index }}</div>
-      {% endfor %}
-    {% endverbatim %}</td>
+    <td>{{ 'config_infobar.fields.example.categoriesFull'|trans|raw }}</td>
   </tr>
 
   <tr>
     <td>originalAddress</td>
     <td>{{ 'config_infobar.fields.description.originalAddress'|trans }}</td>
-    <td>{% verbatim %}
-      {{ originalAddress.streetAddress ~ ' - ' ~ originalAddress.addressLocality ~ ' - ' ~ originalAddress.postalCode ~ ' - ' ~ originalAddress.addressCountry }}
-    {% endverbatim %}</td>
+    <td>{{ 'config_infobar.fields.example.originalAddress'|trans }}</td>
   </tr>
 
   <tr>
@@ -120,41 +111,26 @@
 
   <tr>
     <td>status</td>
-    <td><ul>
-    <li>-6: Doublon</li>
-    <li>-4: Supprimé </li>
-    <li>-3: Refusé (votes)  </li>
-    <li>-2: Refusé (admin) </li>
-    <li>-1: En attente (modifs) </li>
-    <li> 0: En attente (ajout)</li>
-    <li> 1: Validé (admin)</li>
-    <li> 2: Validé (votes)</li>
-    <li> 3: Ajouté par admin</li>
-    <li> 4: Modifié par admin</li>
-    <li> 5: Modifié par propriétaire</li>
-    <li> 6: Modifié avec lien direct</li>
-    <li> 7: Importé</li>
-  </ul>
-    </td>
-    <td>{{ '{% if status == 2 %} .... {% endif %}'}}</td>
+    <td>{{ 'config_infobar.fields.description.status'|trans|raw }}</td>
+    <td>{{ 'config_infobar.fields.example.status'|trans }}</td>
   </tr>
 
   <tr>
     <td>isPending</td>
     <td>{{ 'config_infobar.fields.description.isPending'|trans }}</td>
-    <td>{{ '{% if isPending %} ... {% endif %} '}}</td>
+    <td>{{ 'config_infobar.fields.example.isPending'|trans }}</td>
   </tr>
 
   <tr>
     <td>isDeleted</td>
     <td>{{ 'config_infobar.fields.description.isDeleted'|trans }}</td>
-    <td>{{ '{% if isDeleted %} ... {% endif %} '}}</td>
+    <td>{{ 'config_infobar.fields.example.isDeleted'|trans }}</td>
   </tr>
 
   <tr>
     <td>colorOptionId</td>
     <td>{{ 'config_infobar.fields.description.colorOptionId'|trans }}</td>
-    <td>{{ 'config_infobar.fields.example.colorOptionId'|trans }}</td>
+    <td>{{ 'config_infobar.fields.example.colorOptionId'|trans|raw }}</td>
   </tr>
 
   <tr>
