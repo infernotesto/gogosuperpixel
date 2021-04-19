@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 <li class="category-item">
 
 	<span class="category-item {{ category.options|length and not category.unexpandable ? 'expandable':'unexpandable' }}" {% if not category.displayInForm or not category.displayInMenu %}style="opacity: 0.5"{% endif %}>
@@ -5,8 +7,8 @@
     {% if not category.displayInForm or not category.displayInMenu %}<span class="fa fa-eye-slash"></span>{% endif %}
 		{% if category.options|length and not category.unexpandable %}<span class="arrow-after"></span>{% endif %}
     {% if category.isMandatory %}<span class="label label-warning">Obligatoire</span>{% endif %}
-    <span class="label label-default">{{ category.singleOption ? "Unique" : "Multiple" }}</span>
-    {% if category.enableDescription %}<span class="label label-info">Description des catégories</span>{% endif %}
+    <span class="label label-default">{{ category.singleOption ? 'categories.unique'|trans : 'categories.multiple'|trans }}</span>
+    {% if category.enableDescription %}<span class="label label-info">{{ 'categories.categoriesDescription'|trans }}</span>{% endif %}
 	</span>
 	<span class="actions">
     <a href="{{ path('admin_app_category_edit', {id: category.id}) }}" class="btn btn-sm btn-default"> <i class="fa fa-pen" aria-hidden="true"></i></a>

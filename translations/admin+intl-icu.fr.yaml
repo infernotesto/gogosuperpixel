@@ -175,18 +175,160 @@ dynamic_imports:
 
 config_duplicates:
   _label: "Gestion des Doublons"
+  fields:
+    gogo_bulk_actions_detect_duplicates: Détecter les doublons
+    gogo_duplicates_index: Gérer les doublons détectés
+    duplicates:
+      useGlobalSearch: "Utiliser la recherche générale pour chercher les doublons (recherche souple dans {fields})"
+      useGlobalSearch_help: "La recherche générale est configurée dans la personalisation du formulaire (choisissez quels champs seront recherchés, de base cela recherche uniquement dans le titre de la fiche). Elle est souple, c'est à dire qu'elle détectera des valeurs similaires (\"test\" trouvera \"Un TésT\"). Un correspondance parfaite sera détectée uniquement si les titres de fiche sont quasiment similaire : \"test\" et \"Un TésT\" ne sera pas une correspondance parfaite, alors que \"test\" et \"TésT\" le sera"
+      fieldsToBeUsedForComparaison: "Autres champs utilisés pour la détection de doublons (recherche stricte)"
+      fieldsToBeUsedForComparaison_help: "Seuls les valeurs exactement identiques seront détectés. Une correspondance d'un seul de ces champ sera interprété comme une correspondance parfaite entre les deux éléments"
+      rangeInMeters: "Distance maximale (en mètres) entre deux doublons"
+      detectAfterImport: "Détecter les doublons après chaque Import"
+      detectAfterImport_help: "Pour chaque nouvel élément ajouté lors de l'import, une recherche sera effectuée sur l'ensemble de la base de donnée pour trouver d'éventuels doublons"
+      automaticMergeIfPerfectMatch: "Fusionner automatiquement lors d'une correspondance parfaite"
+      sourcePriorityInAutomaticMerge: "Lors d'une fusion, quelle source voulez vous conserver en priorité ?"
+  form:
+    groups:
+      configuration: "Configuration"
+      fusion: "Fusion des doublons"
 
 config_style:
   _label: "Style / Couleurs / Icones"
+  fields:
+    theme: "Thème"
+    mainFont: "Police principale"
+    titleFont: "Police de titre"
+    textColor: "Couleur de texte"
+    primaryColor: "Couleur Primaire"
+    backgroundColor: "Couleur de fond de page"
+    choose_color: "Cliquez pour choisir une couleur" # templates/admin/core_custom/custom-fields/color-picker.html.twig
+    fontImport: "Lien pour le CDN des polices"
+    iconImport: "Lien pour le CDN des icônes (par défault, les icônes de FontAwesome sont chargées)"
+    secondaryColor: "Couleur Secondaire"
+    headerColor: "Couleur fond de l'entête"
+    headerTextColor: "Couleur texte de l'entête"
+    headerHoverColor: "Couleur texte survol de l'entête"
+    contentBackgroundColor: "Couleur arrière plan du contenu des pages"
+    contentBackgroundElementBodyColor: "Couleur arrière plan du contenu de la fiche détail"
+    homeBackgroundColor: "Couleur arrière plan de la page d'accueil"
+    searchBarColor: "Couleur bar de recherche"
+    interactiveSectionColor: "Couleur section pour voter dans la fiche détail"
+    textDarkColor: "Couleur text foncé"
+    textDarkSoftColor: "Couleur text foncé adoucie"
+    textLightColor: "Couleur texte clair"
+    textLightSoftColor: "Couleur text clair adoucie"
+    errorColor: "Couleur d'erreur"
+    disableColor: "Couleur désactivé"
+    pendingColor: "Couleur en attente de validation"
+  form:
+    groups:
+      theme: "Thème et polices"
+      primaryColors: "Couleurs principales"
+      fontImport: "Charger d'autres polices et icones"
+      secondaryColor: "Autres couleurs"
+      advancedColor: "Couleurs avancées"
+
 
 config_home:
   _label: "Page d'Accueil"
+  fields:
+    activateHomePage: "Activer la page d'accueil"
+    backgroundImage: "Image de fond (le nom du fichier ne doit pas contenir d'espaces ou de caractères spéciaux"
+    home:
+      displayCategoriesToPick: "Afficher les catégories principales selectionnables pour la recherche"
+      addElementHintText: "Texte au dessus du bouton \"Ajouter un élément\""
+      addElementHintText_placeholder: "Exemple: \"Aidez nous à renrichir la base de donnée en ajoutant un élément !\""
+      seeMoreButtonText: "Texte pour inviter à scroller (si des bandeaux de la page d'accueil existent)"
+      seeMoreButtonText_placeholder: "Exemple: \"Plus d'informations\""
+
+# TODO translation
+# wrong place ! Keys from src/Admin/ImageAdmin.php
+app:
+  fields:
+    file: "Fichier à importer"
+    externalImageUrl: "Lien vers une image externe"
 
 categories:
   _label: "Catégories"
+  title: "Liste des catégories"
+  addCategories: "Ajouter un Groupe de catégories"
+  addCategory: "Ajouter une Catégorie"
+  empty: >-
+    Aucune catégories. Veuillez créer un nouveau Groupe de catégorie, puis des catégories à l'intérieur de celui-ci.
+    Les catégories sont un élément essentiel dans GoGoCarto. Il se peut que votre carte ne fonctionne plus sans catégories
+  help: "Quelques explications"
+  help_description: >-
+    <div style="float: left;margin-right: 30px;"><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/4a5b7593-aedb-4983-b562-3cab03bb1691" frameborder="0" allowfullscreen></iframe></div>
+
+    <div style=""><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/6ff39dd4-0db8-435b-a3bd-e87307e7e5d1" frameborder="0" allowfullscreen></iframe></div>
+    </br>
+    Les catégories sont toujours regroupées dans des <b>Groupe de catégories</b></br>
+    Pour ajouter des catégories à un Groupe, le plus simple est d''éditer le Groupe de catégories, et vous allez vous apparaitre en bas de page la liste des catégories contenues dans ce groupe. Vous pourrez alors les éditer et en ajouter de nouvelles</br></br>
+
+    Vous pouvez avoir plusieurs Groupes de catégories en parrallèle. Pour cela créez un nouveau groupe, enregistrez, puis ajoutez lui ensuite des catégories</br></br>
+
+    Une catégorie peut elle même contenir un sous groupe avec des sous catégories à l''intérieur. Lorsque vous éditer une catégorie, en bas de la page vous pouvez y ajouter un sous groupe puis le remplir avec de nouvelles catégories.</br></br>
+    <b>(Groupe) GROUPE DE CATEGORIES 1</b>
+    <ul>
+      <li>Catégorie 1</li>
+      <li>Catégorie 2</li>
+    </ul>
+    <b>(Groupe) GROUPE DE CATEGORIES 2</b>
+    <ul>
+      <li>Catégorie 1</li>
+      <li>Catégorie 2</li>
+      <li>Catégorie 3</li>
+    </ul>
+    <ul>
+      <b>(Groupe) SOUS GROUPE 1</b>
+      <ul>
+        <li>Sous Catégorie 1</li>
+        <li>Sous Catégorie 2</li>
+      </ul>
+    </ul>
+  categoriesDescription: "Description des catégories"
+  unique: "Unique"
+  multiple: "Multiple"
+  fields:
+    #x: "Paramètres Secondaires D'affichage"
+    name: "Nom du groupe"
+    pickingOptionText: "Texte à afficher dans le formulaire : Choisissez..."
+    parent: "Catégorie parente"
+    parent_placeholder: "Racine"
+    isMandatory: "Choix obligatoire"
+    isMandatory_help: "Une catégorie de ce groupe doit être obligatoirement selectionnée"
+    singleOption: "Choix unique"
+    singleOption_help: "Une seule catégorie est selectionnable à la fois"
+    enableDescription: "Activer la description des catégories"
+    enableDescription_help: "On pourra renseigner un texte pour décrire chaque catégorie. Par example, pour un catégorie Agriculture, on pourrait ajouter comme texte \"Maraîchage, produits transformés...\""
+    nameShort: "Nom (version courte)"
+    nameShort_help: "La version courte est utilisée dans le menu, car souvent on manque de place"
+    index: "Position"
+    showExpanded: "En position intiale afficher les catégories (sinon il faudra cliquer pour les afficher)"
+    unexpandable: "Ne pas pouvoir reduire ce groupe de catégories"
+    unexpandable_help: "Dans le menu, les catégories de ce groupe seront toujours affichées"
+    displaySuboptionsInline: "Afficher les sous catégories sur une seule ligne"
+    displayInMenu: "Dans le menu"
+    displayInMenu_help: "Le nom du groupe ne sera pas affiché, mais les catégories le seront"
+    displayInInfoBar: "Dans la fiche détail"
+    displayInInfoBar_help: "Le nom du groupe ne sera pas affiché, mais les catégories le seront"
+    displayInForm: "Dans le formulaire"
+    displayInForm_help: "Ni le groupe ni les catégories ne seront affichés dans le formulaire"
+    # TODO translate : keys in translations/messages+intl-icu.fr.yaml !!! Should move to translations/admin+intl-icu.fr.yaml ??
+    option:
+      name: Nom
+      index: Position
+      color: Couleur
+      icon: Icône
+      id: "Plus de paramètres"
+
   form:
     groups:
-  fields:
+      primary: "Paramètres principaux"
+      secondary: "Paramètres secondaires d'affichage"
+      display: "Afficher ce groupe"
+      categories: "Catégories contenues dans ce groupe"
 
 config_map:
   _label: "Carte / Fonctionalités"
@@ -246,6 +388,9 @@ config_menu:
     searchExcludingWords_title: "Si vous faites un annuaire de producteurs locaux, vous voudrez peut être exclure les mots comme \"bio\", car ce genre de recherche donnerait de mauvais résultats. Par exemple si vous cherchez \"Ferme du bayou bio\", des résultat qui n'ont rien à voir tel que \"Amap bio\" sortiraient dans les résultats, juste à cause du mot \"bio\". De manière générale, excluez les mots communément utilisés dans les titres de vos fiches. Notez que la recherche est aussi utilisée dans la détection de doublons"
     box: "Champs à utiliser pour chercher dans les élements"
     box_description: "Pour choisir les champs de recherche, allez dans le formulaire, éditer un des champs et vous verrez apparaître l'option \"Recherche dans ce champ\".<br/> Vous pouvez aussi assigner des poids différents sur chaque champs, les poids seront utilisés pour classer les résultats par pertinence."
+    #filterCategories: "Filtre Catégories"
+    #filterDate: "Filtre Date"
+    #filterNumber: "Filtre Nombre"
 
 tile_layers:
   _label: "Fonds de Carte"
@@ -405,7 +550,6 @@ config_general:
   fields:
     aboutHeaderTitle: "Titre de la section 'A propos'"
     activateAbouts: "Activer les popups type 'A propos'"
-    activateHomePage: "Activer la page d'accueil"
     activatePartnersPage: 'Activer la page type "Partenaires"'
     appBaseline: "Description du site (baseline)"
     appName: "Nom du site"
@@ -444,14 +588,52 @@ config_general:
 option_hidden:
   _label: "Option"
   fields:
-    name: "Nom blabla"
-    name_hint: "Some hint"
-    name_placeholder: "Enter name"
+    name: "Nom"
+    color: Couleur
+    icon: Icône
+    parent: "Groupe de Catégorie parent"
     useIconForMarker: "Utiliser l'icone de cette catégorie pour le marqueur"
     useIconForMarker_help: "Le marqueur affichera toutes icones de chaque catégorie ayant cette option activée. Les icones seront classées par ordre de selection des catégories dans le formulaire"
+    useColorForMarker: "Utiliser la couleur de cette catégorie pour le marqueur"
+    useColorForMarker_help: "Si un élément a plusieurs catégories qui donnent la couleur, on utilise la catégorie de plus bas niveau"
+    displayInMenu: "Dans le menu"
+    displayInInfoBar: "Dans la fiche détail"
+    displayInForm: "Dans le formulaire"
+    displayChildrenInMenu: "Dans le menu"
+    displayChildrenInInfoBar: "Dans la fiche détail"
+    displayChildrenInForm: "Dans le formulaire"
+    osmTags: "Liste de tags OSM"
+    osmTags_help: "Lors d'un export OSM, chaque élément qui aura cette catégorie se verra attribué le tag OSM correspondant"
+    nameShort: "Nom (version courte)"
+    nameShort_help: "La version courte est utilisée dans le menu, car souvent on manque de place"
+    customId: "Id personnalisé"
+    customId_help: "Lors de l'import d'éléments, on va comparer le nom des catégories de l'élément importé avec le nom des catégorie de votre carte. On va aussi comparer avec les Ids personnalisés"
+    softColor: "Couleur adoucie"
+    softColor_help: "Certaines couleurs convienent bien pour le marqueur (un peu flashy), mais pas trop pour les aplat comme pour le header de la fiche détail. Dans ce cas là, la version \"adoucie\" est utilisée si ellle a été renseignée"
+    textHelper: "Message d'aide pour décrire rapidement cette catégorie"
+    textHelper_help: "Il sera affiché dans le menu et dans le formulaire"
+    url: "Url vers une page externe"
+    url_help: "Dans la fiche détail, une petite icone apâraitra à côté de la catégorie avec un lein vers cette url externe. Cela peut être pas exemple une age d'un wiki pour décrire cette catégorie"
+    index: "Position (pour classer les catégories)"
+    showExpanded: "En position intiale afficher les sous groupes de cette catégorie"
+    unexpandable: "Ne pas pouvoir reduire cette catégorie"
+    unexpandable_help: "Les sous groupes et sous catégories seront toujours affichés"
+    add_a_tag: "Ajouter un tag"
+    return_to_list: "Retourner à la liste"
+    # "Nom du groupe"
+    pickingOptionText: "Text à afficher dans le formulaire : Choisissez..."
+
   form:
     groups:
       main: "Principal"
+      primary: "Paramètres principaux"
+      secondary: "Paramètres secondaires"
+      display: "Afficher la catégorie"
+      subcategories: "Sous groupes"
+      advanced: "Configuration avancée"
+      displayChildren: "Afficher les sous groupes et les sous catégories"
+      osm: "Lien avec OpenStreetMap"
+      osm_help: "Lors d'un export OSM, chaque élément qui aura cette catégorie se verra attribué le tag OSM correspondant"
 
 news:
   _label: "Actualités (newsletter)"

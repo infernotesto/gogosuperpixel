@@ -1,4 +1,5 @@
 {% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+{% trans_default_domain 'admin' %}
 
 {% block title %}
     {% if admin.id(object) is not null %}
@@ -21,7 +22,7 @@
             <li><a href={{ path(route_name, { id: currNode.id }) }}>{{ currNode.name }}</a></li>
             {% set isRootCategory = is_category ? currNode.isRootCategory : false %}
         {% endfor %}
-        <li><a href={{ admin.generateUrl('list') }}>Liste des catégories</a></li>
+        <li><a href={{ admin.generateUrl('list') }}>Liste des catégories</a></li> {# TODO translate #}
 
     {% endif %}
 
@@ -84,7 +85,7 @@
 
             <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="Retourner à la liste">
                <i class="fa fa-list" aria-hidden="true"></i>
-                 Retourner à la liste
+                 {{ 'option_hidden.fields.return_to_list'|trans }}
             </a>
 
             {% if admin.hasroute('delete') and admin.isGranted('DELETE', object) %}
@@ -98,7 +99,7 @@
 
             <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="Retourner à la liste">
                <i class="fa fa-list" aria-hidden="true"></i>
-                 Retourner à la liste
+                 {{ 'option_hidden.fields.return_to_list'|trans }}
             </a>
 
             <button class="btn btn-success" type="submit" name="btn_create_and_create"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ 'btn_create_and_create_a_new_one'|trans({}, 'SonataAdminBundle') }}</button>

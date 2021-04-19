@@ -34,11 +34,11 @@ class ConfigurationHomeAdmin extends ConfigurationAbstractAdmin
         $featureFormOption = ['delete' => false, 'required' => false, 'label_attr' => ['style' => 'display:none']];
         $featureFormTypeOption = ['edit' => 'inline'];
         $formMapper
-            ->add('activateHomePage', null, ['label' => "Activer la page d'accueil", 'required' => false])
-            ->add('backgroundImage', ModelType::class, array_replace($imagesOptions, ['label' => 'Image de fond (le nom du fichier ne doit pas contenir d\'espaces ou de caractères spéciaux']))
-            ->add('home.displayCategoriesToPick', CheckboxType::class, ['label' => 'Afficher les catégories principales selectionnables pour la recherche', 'required' => false])
-            ->add('home.addElementHintText', null, ['label' => 'Texte au dessus du bouton "Ajouter un élément"', 'required' => false, 'attr' => ['placeholder' => 'Exemple: Aidez nous à renrichir la base de donnée en ajoutant un élément !']])
-            ->add('home.seeMoreButtonText', null, ['label' => "Texte pour inviter à scroller (si des bandeaux de la page d'accueil existent)", 'required' => false, 'attr' => ['placeholder' => "Exemple: Plus d'informations"]])
+            ->add('activateHomePage')
+            ->add('backgroundImage', ModelType::class)
+            ->add('home.displayCategoriesToPick', CheckboxType::class)
+            ->add('home.addElementHintText')
+            ->add('home.seeMoreButtonText')
         ;
     }
 }

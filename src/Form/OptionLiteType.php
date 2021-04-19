@@ -11,12 +11,19 @@ class OptionLiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['required' => true, 'label' => 'Nom'])
-            ->add('index', null, ['required' => false, 'label' => 'Position'])
-            ->add('color', null, ['required' => false, 'label' => 'Couleur', 'attr' => ['class' => 'gogo-color-picker']])
-            ->add('icon', null, ['required' => false, 'label' => 'Icone', 'attr' => ['class' => 'gogo-icon-picker']])
-            ->add('id', null, ['required' => false, 'label' => 'Plus de paramètres', 'attr' => ['class' => 'gogo-route-id', 'data-route-id' => 'admin_app_option_edit']])
-            ;
+            // ->add('name', null, ['required' => true, 'label' => 'Nom'])
+            // ->add('index', null, ['required' => false, 'label' => 'Position'])
+            // ->add('color', null, ['required' => false, 'label' => 'Couleur', 'attr' => ['class' => 'gogo-color-picker']])
+            // ->add('icon', null, ['required' => false, 'label' => 'Icone', 'attr' => ['class' => 'gogo-icon-picker']])
+            // ->add('id', null, ['required' => false, 'label' => 'Plus de paramètres', 'attr' => ['class' => 'gogo-route-id', 'data-route-id' => 'admin_app_option_edit']])
+            
+        # TODO translate : keys in translations/messages+intl-icu.fr.yaml !!! Should move to translations/admin+intl-icu.fr.yaml ??
+        ->add('name', null, ['required' => true])
+        ->add('index')
+        ->add('color', null, ['attr' => ['class' => 'gogo-color-picker']])
+        ->add('icon', null, ['attr' => ['class' => 'gogo-icon-picker']])
+        ->add('id', null, ['attr' => ['class' => 'gogo-route-id', 'data-route-id' => 'admin_app_option_edit']])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

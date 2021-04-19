@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 <div class="input-container">
     {% if form.vars.sonata_admin.admin.subject is defined %}
         {% set object = form.vars.sonata_admin.admin.subject %}
@@ -8,7 +10,7 @@
             {% endif %}
         {% endif %}
     {% endif %}
-    <input type='text' id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" placeholder="Cliquez pour choisir une couleur" value="{{ form.vars.value }}" class="form-control gogo-color-picker" />
+    <input type='text' id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" placeholder="{{ 'config_style.fields.choose_color'|trans }}" value="{{ form.vars.value }}" class="form-control gogo-color-picker" />
 </div>
 
 <script src="{{ asset('js/spectrum.min.js') }}" type="text/javascript"></script>

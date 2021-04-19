@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 <div class="osm-tags-field">
     <input type="hidden" :name="`${formName}[osmTags]`" :value="stringifiedTagsHash" class="form-control" />
     <div class="osm-tag-container" v-for="(tag, index) in tags">
@@ -9,7 +11,7 @@
     </div>
     <button type="button" class="btn btn-sm btn-default" 
             @click="tags.push({key: '', value: ''})">
-        Ajouter un tag
+        {{ 'option_hidden.fields.add_a_tag'|trans }}
     </button>
 </div>
 

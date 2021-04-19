@@ -25,7 +25,7 @@ export default {
             return `${this.condition.key}=${this.condition.value}`
         },
         title() {
-            return `Lien vers la fiche Wiki de "${this.isTag ? this.tag : this.condition.key}"` 
+            return `toto Lien vers la fiche Wiki de "${this.isTag ? this.tag : this.condition.key}"` 
         }
     }
 }
