@@ -6,12 +6,14 @@ use App\Services\ElementActionService;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ModerationActionsController extends BulkActionsAbstractController
 {
     public function deleteElementReportedAsNoMoreExistingAction(Request $request, SessionInterface $session,
                                                                DocumentManager $dm,
-                                                               ElementActionService $actionService)
+                                                               ElementActionService $actionService,
+                                                               TranslatorInterface $t)
     {
         $repo = $dm->get('Element');
         $elements = $repo->findModerationNeeded(false, 1);
@@ -34,7 +36,7 @@ class ModerationActionsController extends BulkActionsAbstractController
         $dm->flush();
         $dm->clear();
 
-        $session->getFlashBag()->add('success', $count.' éléments ont été supprimés'); // TODO translate
+        $session->getFlashBag()->add('success', $t->trans('bulk.deleteElement', ['%count%' => $count], 'admin'));
 
         return $this->redirectToIndex();
     }

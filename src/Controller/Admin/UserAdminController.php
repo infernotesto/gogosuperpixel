@@ -6,12 +6,14 @@ use App\Services\MailService;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserAdminController extends Controller
 {
-    public function __construct(MailService $mailService)
+    public function __construct(MailService $mailService, TranslatorInterface $t)
     {
         $this->mailService = $mailService;
+        $this->t = $t;
     }
 
     public function batchActionSendMail(ProxyQueryInterface $selectedModelQuery)
@@ -41,19 +43,18 @@ class UserAdminController extends Controller
         }
 
         if (!$request->get('mail-subject') || !$request->get('mail-content')) {
-            $this->addFlash('sonata_flash_error', 'Vous devez renseigner un objet et un contenu. Veuillez recommencer'); // TODO translate
+            $this->addFlash('sonata_flash_error', $this->t->trans('mailError', [], 'admin'));
         } elseif (count($mails) > 0) {
             $result = $this->mailService->sendMail(null, $request->get('mail-subject'), $request->get('mail-content'), $request->get('from'), $mails);
             if ($result['success']) {
-                $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés'); // TODO translate
-                // $this->addFlash('sonata_flash_success', $this->t('sendmails', $count=count($mails))); // $this->t not found
+                $this->addFlash('sonata_flash_success', $this->t->trans('batch.sendmails', ['%count%' => count($mails)], 'admin'));
             } else {
                 $this->addFlash('sonata_flash_error', $result['message']);
             }
         }
 
         if ($usersWithoutEmail > 0) {
-            $this->addFlash('sonata_flash_error', $usersWithoutEmail." mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée"); // TODO translate
+            $this->addFlash('sonata_flash_error', $this->t->trans('usersWithoutEmail', ['%count%' => $usersWithoutEmail], 'admin'));
         }
 
         if ($nbreModelsToProceed >= 5000) {

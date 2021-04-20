@@ -4,6 +4,7 @@ namespace App\Controller\Admin\BulkActions;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use App\Document\ElementStatus;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BulkActionsAbstractController extends Controller
 {
@@ -13,7 +14,7 @@ class BulkActionsAbstractController extends Controller
     protected $batchSize = 1000;
     protected $automaticRedirection = true;
 
-    protected function elementsBulkAction($functionToExecute, $dm, $request, $session)
+    protected function elementsBulkAction($functionToExecute, $dm, $request, $session, TranslatorInterface $t)
     {
         $isStillElementsToProceed = false;
 
@@ -47,7 +48,7 @@ class BulkActionsAbstractController extends Controller
                     $renderedViews[] = $view;
                 }
             } catch (\Exception $e) {
-                $renderedViews[] = "Erreur en traitant l'élement {$element->getId()} : {$e->getMessage()} FILE {$e->getFile()} LINE {$e->getLine()}"; // TODO translate ?
+                $renderedViews[] = $t->trans('bulk.errorElement', [$id=$element->getId(), $error=$e->getMessage(), $file=$e->getFile(), $line=$e->getLine()], 'admin');
             }
 
             if (0 == (++$i % 100)) {
@@ -65,7 +66,7 @@ class BulkActionsAbstractController extends Controller
         }
 
         if ($this->automaticRedirection) {
-            $session->getFlashBag()->add('success', 'Tous les éléments ont été traité avec succès'); // TODO translate ?
+            $session->getFlashBag()->add('success', $t->trans('bulk.batchDone'), [], 'admin');
 
             return $this->redirectToIndex();
         }

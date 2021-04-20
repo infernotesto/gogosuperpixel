@@ -690,10 +690,18 @@ sonata:
         ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
         ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
         ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
-
 batch:
-  send: Envoyer
-  sendmails: "{count} mails ont bien été envoyés" # TODO plurals
+  send: "Envoyer"
+  sendmails: "{count, plural,
+                      =1 {# mail a bien été envoyé}
+                      other {# mails ont bien été envoyés}
+              }"
+  mailError: "Vous devez renseigner un objet et un contenu. Veuillez recommencer"
+  usersWithoutEmail: "{count, plural
+                              =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
+                              other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
+                      }"
+
 
 config_users:
   _label: Configuration
@@ -707,20 +715,33 @@ config_users:
       loginWithFacebook: Activer la connexion avec Facebook
 
 sidebar:
-  gogo_homepage: Retour au site
-  toggle_dropdown: Toggle Dropdown
-  gogo_directory: La Carte
-  gogo_element_add: Formulaire
-  gogo_partners: Qui sommes nous
+  gogo_homepage: "Retour au site"
+  toggle_dropdown: "Toggle Dropdown"
+  gogo_directory: "La Carte"
+  gogo_element_add: "Formulaire"
+  gogo_partners: "Qui sommes nous"
 
 bulk:
-  _label: Actions de masse
+  _label: "Actions de masse"
   delete: "Supprimer les éléments reportés comme n'existant plus"
-  update_gamification: Mettre à jour les scores (nombre de votes, de contributions, et score total par utilisateur)
+  update_gamification: "Mettre à jour les scores (nombre de votes, de contributions, et score total par utilisateur)"
+  batchDone: "Tous les éléments ont été traité avec succès"
+  deleteElement: "{count, plural, 
+                        =0 {Aucun élément supprimé}
+                        =1 {# élément a été supprimé}
+                        other {# éléments ont été supprimés}
+                  }"
+  errorElement: "Erreur en traitant l'élement {id} : {error} FILE {file} LINE {line}"
+  updateUser: "{count, plural,
+                  =0 {Aucun utilisateur mis à jour}
+                  =1 {# utilisateur a été mis à jour}
+                  other {# utilisateurs ont été mis à jour}
+               }"
+
 help:
-  _label: Aide
+  _label: "Aide"
   doc: "Un problème, une question ? c'est par ici : "
 
 saas:
-  list: Liste des Projets
-  config: Configuration
+  list: "Liste des Projets"
+  config: "Configuration"
