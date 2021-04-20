@@ -46,7 +46,7 @@ class DuplicatesManagementController extends GoGoController
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
-                return new Response('Missing elementId param');
+                return new Response('Missing elementId param'); // TODO translate ??
             }
             $element = $dm->get('Element')->find($request->get('elementId'));
             $duplicates = array_merge([$element], $element->getPotentialDuplicates()->toArray());
@@ -71,7 +71,7 @@ class DuplicatesManagementController extends GoGoController
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
-                return new Response('Missing elementId param');
+                return new Response('Missing elementId param'); // TODO translate ??
             }
 
             $element = $dm->get('Element')->find($request->get('elementId'));

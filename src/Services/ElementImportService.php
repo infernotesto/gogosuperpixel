@@ -56,7 +56,7 @@ class ElementImportService
         $this->errorsCount = [];
 
         $import->setCurrState(ImportState::Downloading);
-        $import->setCurrMessage('Téléchargement des données en cours... Veuillez patienter...');
+        $import->setCurrMessage('Téléchargement des données en cours... Veuillez patienter...'); // TODO translate
         $this->dm->persist($import);
         $this->dm->flush();
         if ($import->getUrl()) {
@@ -155,7 +155,7 @@ class ElementImportService
             $i = 0; $size = count($data);
             foreach ($data as $row) {
                 try {
-                    $import->setCurrMessage("Importation des données $i/$size traitées");
+                    $import->setCurrMessage("Importation des données $i/$size traitées"); // TODO translate
                     $result = $this->importOneService->createElementFromArray($row, $import);
                     if (isset($result['id']))
                         $newlyImportedElementIds[] = $result['id'];
@@ -176,13 +176,13 @@ class ElementImportService
                         $this->elementIdsErrors[] = ''.$row['id'];
                         $newlyImportedElementIds[] = ''.$row['id'];
                     }
-                    $msgCode = $e->getMessage() && strlen($e->getMessage()) > 0 ? $e->getMessage() : 'error';
+                    $msgCode = $e->getMessage() && strlen($e->getMessage()) > 0 ? $e->getMessage() : 'error'; // TODO translate ?
                     if (!array_key_exists($msgCode, $this->errorsCount)) {
                         $this->errorsCount[$msgCode] = 1;
                     } else {
                         ++$this->errorsCount[$msgCode];
                     }
-                    $message = '<u>'.$e->getMessage().'</u> <b>(x'.$this->errorsCount[$msgCode].')</b></br>'.$e->getFile().' LINE '.$e->getLine().'</br>';
+                    $message = '<u>'.$e->getMessage().'</u> <b>(x'.$this->errorsCount[$msgCode].')</b></br>'.$e->getFile().' LINE '.$e->getLine().'</br>'; // TODO translate ?
                     $message .= 'CONTEXT : <pre>'.print_r($row, true).'</pre>';
                     $this->errorsMessages[$msgCode] = $message;
                 }
@@ -237,7 +237,7 @@ class ElementImportService
                 $i = 0; $size = count($importedElements);
                 foreach ($elementsLinkedFields as $linkField) {
                     foreach ($importedElements as $element) {
-                        $import->setCurrMessage("Calcul des liens pour le champ '$linkField' : $i/$size éléments traitées");
+                        $import->setCurrMessage("Calcul des liens pour le champ '$linkField' : $i/$size éléments traitées"); // TODO translate
                         $values = $element->getCustomProperty($linkField);
                         if ($values !== null) {
                             if (!is_array($values)) $values = preg_split("/[,;]/", $values);
@@ -270,7 +270,7 @@ class ElementImportService
                     ->getCursor();
                 $i = 0; $size = $elements->count();
                 foreach($elements as $element) {
-                    $import->setCurrMessage("Détection des doublons : $i/$size éléments traitées");
+                    $import->setCurrMessage("Détection des doublons : $i/$size éléments traitées"); // TODO translate
                     $result = $this->duplicateService->detectDuplicatesFor($element);
                     if ($result && $result['automaticMerge']) ++$automaticMergesCount;
                     if ($result && !$result['automaticMerge']) ++$potentialDuplicatesCount;
@@ -310,9 +310,9 @@ class ElementImportService
             ];
             $totalErrors = $elementsMissingGeoCount + $elementsMissingTaxoCount + $this->countElementErrors;
             $logLevel = $totalErrors > 0 ? ($totalErrors > ($size / 4) ? 'error' : 'warning') : 'success';
-            $message = 'Import de '.$import->getSourceName().' terminé';
+            $message = 'Import de '.$import->getSourceName().' terminé'; // TODO translate
             if ('success' != $logLevel) {
-                $message .= ', mais avec des problèmes !';
+                $message .= ', mais avec des problèmes !'; // TODO translate
             }
             $log = new GoGoLogImport($logLevel, $message, $logData);
             $this->dm->persist($log);
@@ -335,7 +335,7 @@ class ElementImportService
 
             $this->dm->flush();
         } catch (\Error $e) {
-            $message = '<u>'.$e->getMessage().'</u></br>'.$e->getFile().' LINE '.$e->getLine().'</br>';
+            $message = '<u>'.$e->getMessage().'</u></br>'.$e->getFile().' LINE '.$e->getLine().'</br>'; // TODO translate ?
             $import->setCurrMessage($message);
             $import->setCurrState(ImportState::Errors);
             $this->dm->flush();

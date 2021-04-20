@@ -48,7 +48,7 @@ final class NewsAdmin extends GoGoAbstractAdmin
     {
         $filter
             ->add('title')
-            ->add('status', 'doctrine_mongo_choice', ['label' => 'Statut'], ChoiceType::class, ['choices' => [
+            ->add('status', 'doctrine_mongo_choice', ['label' => 'Statut'], ChoiceType::class, ['choices' => [ // TODO translate
                 $this->t('news.fields.status_choices.draft') => NewsStatus::DRAFT,
                 $this->t('news.fields.status_choices.published') => NewsStatus::PUBLISHED,
             ]])

@@ -32,7 +32,7 @@ class ConfigurationMailAdmin extends ConfigurationAbstractAdmin
         $featureFormTypeOption = ['edit' => 'inline'];
         $formMapper
             ->tab('Mails auto pour les '.$config->getElementDisplayNamePlural())
-                ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-danger',
+                ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-danger', // TODO translate
                     'description' => '
                      <div class="text-and-iframe-container">
                      <div class="iframe-container-aside"><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a" frameborder="0" allowfullscreen></iframe></div>
@@ -47,16 +47,16 @@ class ConfigurationMailAdmin extends ConfigurationAbstractAdmin
                     </div>
                     Vous pouvez également utiliser ces variables dans les contenus spéciaux de l'éditeur de texte. Par example dans le champs URL de la popup
                     qui s'ouvre lorsqu'on clique sur d'ajouter un lien.</br>
-                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu", ])->end()
-                ->panel("Lors d'un ajout".$this->getEmailTestLink($router, 'add'), $mailStyle)
+                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu", ])->end() // TODO translate
+                ->panel("Lors d'un ajout".$this->getEmailTestLink($router, 'add'), $mailStyle) // TODO translate
                     ->add('addMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel("Lors d'une modification".$this->getEmailTestLink($router, 'edit'), $mailStyle)
+                ->panel("Lors d'une modification".$this->getEmailTestLink($router, 'edit'), $mailStyle) // TODO translate
                     ->add('editMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel("Lors d'une suppression".$this->getEmailTestLink($router, 'delete'), $mailStyle)
+                ->panel("Lors d'une suppression".$this->getEmailTestLink($router, 'delete'), $mailStyle) // TODO translate
                     ->add('deleteMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
             ->end()
-            ->tab('Mails auto pour les contributeurs')
-                ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-danger',
+            ->tab('Mails auto pour les contributeurs') // TODO translate
+                ->panel('Informations concernant les mails automatiques', ['box_class' => 'box box-danger', // TODO translate
                     'description' => "Ces mails sont envoyés automatiquement aux contributeurs lorsque leurs contributions sont acceptées, refusées etc...</br>
                     Il est possible d'inclure les variables suivantes dans les messages (en conservant les '{{}}' ) : </br>
                     <li>{{ element }} le nom de ".$config->getElementDisplayNameDefinite()."</li>
@@ -68,15 +68,15 @@ class ConfigurationMailAdmin extends ConfigurationAbstractAdmin
                     <li>{{ customMessage }} le message personnel qui a été rédigé par les admins (uniquement lors d'un refus')</li></br>
                     Vous pouvez également utiliser ces variables dans les contenus spéciaux de l'éditeur de texte. Par example dans le champs URL de la popup
                     qui s'ouvre lorsqu'on clique sur d'ajouter un lien.</br>
-                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu", ])->end()
-                ->panel("Lors d'une validation".$this->getEmailTestLink($router, 'validation'), $mailStyle)
+                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu", ])->end() // TODO translate
+                ->panel("Lors d'une validation".$this->getEmailTestLink($router, 'validation'), $mailStyle) // TODO translate
                     ->add('validationMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel("Lors d'un refus".$this->getEmailTestLink($router, 'refusal'), $mailStyle)
+                ->panel("Lors d'un refus".$this->getEmailTestLink($router, 'refusal'), $mailStyle) // TODO translate
                     ->add('refusalMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
-                ->panel("Lors d'un signalement pris en compte".$this->getEmailTestLink($router, 'refusal'), $mailStyle)
+                ->panel("Lors d'un signalement pris en compte".$this->getEmailTestLink($router, 'refusal'), $mailStyle) // TODO translate
                     ->add('reportResolvedMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
             ->end()
-            ->tab('Newsletter')
+            ->tab('Newsletter') // TODO translate
                 ->panel('Informations concernant la newsletter', ['box_class' => 'box box-danger',
                     'description' => "Ce mail est envoyé automatiquement aux utilisateurs y ayant souscrit. Il donne la liste des derniers éléments ajoutés dans une zone
                     géographique determinée et optionnellement des nouvelles</br></br>
@@ -90,8 +90,8 @@ class ConfigurationMailAdmin extends ConfigurationAbstractAdmin
                     <li>{{ showOnMapBtn }} un bouton pour renvoyer vers la carte centrée sur la position de l'utilisateur</li>
                     </ul>
                     </br>
-                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur le bouton <b>TESTER</b> pour visualiser le rendu", ])->end()
-                ->panel('Newsletter'.$this->getEmailTestLink($router, 'newsletter'), ['class' => 'col-md-12'])
+                    <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur le bouton <b>TESTER</b> pour visualiser le rendu", ])->end() // TODO translate
+                ->panel('Newsletter'.$this->getEmailTestLink($router, 'newsletter'), ['class' => 'col-md-12']) // TODO translate
                     ->add('newsletterMail', AdminType::class, $featureFormOption, $featureFormTypeOption)->end()
             ->end()
         ;

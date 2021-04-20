@@ -67,7 +67,7 @@ class AsyncService
         }
 
         if (!$this->filesystem->exists($consolePath)) {
-            throw new FileNotFoundException(sprintf('File %s doesn\'t exist', $consolePath));
+            throw new FileNotFoundException(sprintf('File %s doesn\'t exist', $consolePath)); // TODO translate ?
         }
 
         return $consolePath;
@@ -79,7 +79,7 @@ class AsyncService
         $phpPath = $_ENV['PHP_PATH'] ?? $finder->find();
 
         if (!$phpPath) {
-            throw new FileNotFoundException(sprintf('PHP executable doesn\'t exist'));
+            throw new FileNotFoundException(sprintf('PHP executable doesn\'t exist')); // TODO translate ?
         }
 
         return $phpPath;

@@ -34,7 +34,7 @@ class ElementAdminFilters extends ElementAdminAbstract
           ]
         )
       ->add('valide', 'doctrine_mongo_callback', [
-                'label' => 'Validés',
+                'label' => 'Validés',// TODO translate
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
                         return;
@@ -156,6 +156,6 @@ class ElementAdminFilters extends ElementAdminAbstract
                 },
             ])
       ->add('email')
-      ->add('sourceKey', null, ['label' => 'Source']);
+      ->add('sourceKey', null, ['label' => 'Source']);// TODO translate
     }
 }

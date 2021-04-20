@@ -16,13 +16,13 @@ class AutomatedMailConfigurationAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('active', null, ['required' => false, 'label' => 'Activé'])
-            ->add('subject', null, ['required' => false, 'label' => 'Objet du message'])
+            ->add('active', null, ['required' => false, 'label' => 'Activé']) // TODO translate
+            ->add('subject', null, ['required' => false, 'label' => 'Objet du message']) // TODO translate
             ->add('content', SimpleFormatterType::class, [
                 'format' => 'richhtml',
                 'ckeditor_context' => 'full',
                 'required' => false,
-                'label' => 'Contenu du message',
+                'label' => 'Contenu du message', // TODO translate
             ]);
     }
 }

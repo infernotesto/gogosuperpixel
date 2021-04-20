@@ -35,7 +35,7 @@ class UserAdminController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'ERROR : '.$e->getMessage());
+            $this->addFlash('sonata_flash_error', 'ERROR : '.$e->getMessage()); // TODO translate ?
 
             return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }

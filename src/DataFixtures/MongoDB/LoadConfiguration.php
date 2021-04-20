@@ -61,7 +61,7 @@ class LoadConfiguration implements FixtureInterface
             }
             $tileLayersToCopy = $configToCopy->tileLayers;
         } else {
-            $configuration->setAppName('GoGoCarto');
+            $configuration->setAppName('GoGoCarto'); // TODO translate ??
             $configuration->setAppSlug('gogocarto');
             $configuration->setAppBaseline('Créez des cartes à GoGo'); // TODO translate
 
@@ -180,6 +180,7 @@ class LoadConfiguration implements FixtureInterface
 
     public function loadTileLayers($dm, $tileLayersToCopy = null, $defaultTileLayerName = null)
     {
+         // TODO translate attributions ?
         $tileLayers = $tileLayersToCopy ? $tileLayersToCopy : [
          ['name' => 'cartodb',
               'url' => 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',

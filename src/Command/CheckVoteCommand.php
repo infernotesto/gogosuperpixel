@@ -27,7 +27,7 @@ class CheckVoteCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:elements:checkvote')
-        ->setDescription('Check for collaborative vote validation')
+        ->setDescription('Check for collaborative vote validation') // TODO translate ?
     ;
     }
 
@@ -38,7 +38,7 @@ class CheckVoteCommand extends GoGoAbstractCommand
 
         $elements = $dm->get('Element')->findPendings();
         if (count($elements)) {
-            $this->log('Checking Vote for '.count($elements) . ' elements');
+            $this->log('Checking Vote for '.count($elements) . ' elements'); // TODO translate ?
             $i = 0;
             foreach ($elements as $element) {
                 $this->voteService->checkVotes($element, $dm);

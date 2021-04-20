@@ -35,7 +35,7 @@ class ProjectAdminController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
         }
         $this->admin->checkAccess('delete', $object);
 

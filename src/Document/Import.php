@@ -209,7 +209,7 @@ class Import extends AbstractFile
         $codeFields = ['customCode' => $this->customCode, 'customCodeForExport' => $this->customCodeForExport];
         foreach($codeFields as $field => $value) {
             if (preg_match('/new |process|mongo|this|symfony|exec|passthru|shell_exec|system|proc_open|popen|curl_exec|curl_multi_exec|parse_ini_file|show_source|var_dump|print_r/i', $value)) {
-                $context->buildViolation("Il est interdit d'utiliser les mots suivants: new , process, mongo, this, symfony, exec, passthru, shell_exec, system, proc_open, popen, curl_exec, curl_multi_exec, parse_ini_file, show_source, var_dump, print_r... Merci de ne pas faire de betises !")
+                $context->buildViolation("Il est interdit d'utiliser les mots suivants: new , process, mongo, this, symfony, exec, passthru, shell_exec, system, proc_open, popen, curl_exec, curl_multi_exec, parse_ini_file, show_source, var_dump, print_r... Merci de ne pas faire de betises !") // TODO translate
                     ->atPath($field)
                     ->addViolation();
             }
@@ -493,8 +493,8 @@ class Import extends AbstractFile
      */
     public function getFieldToCheckElementHaveBeenUpdated()
     {
-        if ($this->getSourceType() == 'osm') return 'osm/version';
-        return $this->fieldToCheckElementHaveBeenUpdated ?? 'updateAt';
+        if ($this->getSourceType() == 'osm') return 'osm/version'; // TODO translate ?
+        return $this->fieldToCheckElementHaveBeenUpdated ?? 'updateAt'; // TODO translate ?
     }
 
     /**

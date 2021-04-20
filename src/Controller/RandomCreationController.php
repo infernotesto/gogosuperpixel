@@ -12,6 +12,6 @@ class RandomCreationController extends Controller
     {
         $lastElementCreated = $randomService->generate($nombre, $generateVote);
 
-        return new Response('Elements générés');
+        return new Response('Elements générés'); // TODO translate ?
     }
 }

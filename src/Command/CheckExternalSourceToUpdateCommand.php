@@ -28,7 +28,7 @@ class CheckExternalSourceToUpdateCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:elements:checkExternalSourceToUpdate')
-        ->setDescription('Check for updating external sources');
+        ->setDescription('Check for updating external sources'); // TODO translate ?
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
@@ -39,7 +39,7 @@ class CheckExternalSourceToUpdateCommand extends GoGoAbstractCommand
                 ->getCursor();
 
         if ($count = $dynamicImports->count() > 0) {
-            $this->log("CheckExternalSourceToUpdate : Nombre de sources à mettre à jour : $count");
+            $this->log("CheckExternalSourceToUpdate : Nombre de sources à mettre à jour : $count"); // TODO translate
 
             $command = $this->getApplication()->find('app:elements:importSource');            
 

@@ -30,7 +30,7 @@ class DataUpdateActionsController extends BulkActionsAbstractController
         $dm->flush();
         $dm->clear();
 
-        $session->getFlashBag()->add('success', count($users).' utilisateurs ont été mis à jour');
+        $session->getFlashBag()->add('success', count($users).' utilisateurs ont été mis à jour'); // TODO translate
 
         return $this->redirect($this->generateUrl('admin_app_user_list'));
     }

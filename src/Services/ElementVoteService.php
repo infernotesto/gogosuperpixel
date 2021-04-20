@@ -30,7 +30,7 @@ class ElementVoteService
         if ($element->isLastContributorEqualsTo($this->user, $userEmail)) {
             //return $t->trans('vote.user_vote_for_him'); // TODO  translate
             return 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
-                        Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! ';
+                        Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! '; // TODO translate
         }
 
         $hasAlreadyVoted = false;

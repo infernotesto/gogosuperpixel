@@ -62,7 +62,7 @@ class RecentElementsBlockService extends AbstractBlockService
     {
         $resolver->setDefaults([
             'number' => 5,
-            'title' => 'Derniers elements',
+            'title' => 'Derniers elements', // TODO translate
             'class' => '',
             'filterStatus' => 0,
             'template' => 'admin/blocks/block_recent_elements.html.twig',

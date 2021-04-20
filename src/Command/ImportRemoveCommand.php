@@ -14,7 +14,7 @@ class ImportRemoveCommand extends GoGoAbstractCommand
     {
         $this
             ->setName('app:import:remove')
-            ->addArgument('importId', InputArgument::REQUIRED, 'The name of the source')
+            ->addArgument('importId', InputArgument::REQUIRED, 'The name of the source')  // TODO translate ?
        ;
     }
 
@@ -22,7 +22,7 @@ class ImportRemoveCommand extends GoGoAbstractCommand
     {
         try {
             $importId = $input->getArgument('importId');     
-            $this->log('Removing elements from import ' . $importId);
+            $this->log('Removing elements from import ' . $importId); // TODO translate ?
             $dm->query('Element')->field('source.$id')->equals((int) $importId)->batchRemove();
         } catch (\Exception $e) {
             $this->error($e->getMessage());

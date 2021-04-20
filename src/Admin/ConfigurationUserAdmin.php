@@ -27,14 +27,14 @@ class ConfigurationUserAdmin extends ConfigurationAbstractAdmin
 
         // provide oauth id if configured
         if ('disabled' != $container->getParameter('oauth_communs_id')) {
-            $formMapper->add('user.loginWithLesCommuns', CheckboxType::class, ['label' => 'Activer la connexion avec "LesCommuns.org"', 'required' => false]);
-            $formMapper->add('user.loginWithMonPrintemps', CheckboxType::class, ['label' => 'Activer la connexion avec MonPrintemps', 'required' => false]);
+            $formMapper->add('user.loginWithLesCommuns', CheckboxType::class, ['label' => 'Activer la connexion avec "LesCommuns.org"', 'required' => false]); // TODO translate
+            $formMapper->add('user.loginWithMonPrintemps', CheckboxType::class, ['label' => 'Activer la connexion avec MonPrintemps', 'required' => false]); // TODO translate
         }
         if ('disabled' != $container->getParameter('oauth_google_id')) {
-            $formMapper->add('user.loginWithGoogle', CheckboxType::class, ['label' => 'Activer la connexion avec Google', 'required' => false]);
+            $formMapper->add('user.loginWithGoogle', CheckboxType::class, ['label' => 'Activer la connexion avec Google', 'required' => false]); // TODO translate
         }
         if ('disabled' != $container->getParameter('oauth_facebook_id')) {
-            $formMapper->add('user.loginWithFacebook', CheckboxType::class, ['label' => 'Activer la connexion avec Facebook', 'required' => false]);
+            $formMapper->add('user.loginWithFacebook', CheckboxType::class, ['label' => 'Activer la connexion avec Facebook', 'required' => false]); // TODO translate
         }
     }
 }

@@ -47,7 +47,7 @@ class BulkActionsAbstractController extends Controller
                     $renderedViews[] = $view;
                 }
             } catch (\Exception $e) {
-                $renderedViews[] = "Erreur en traitant l'élement {$element->getId()} : {$e->getMessage()} FILE {$e->getFile()} LINE {$e->getLine()}";
+                $renderedViews[] = "Erreur en traitant l'élement {$element->getId()} : {$e->getMessage()} FILE {$e->getFile()} LINE {$e->getLine()}"; // TODO translate ?
             }
 
             if (0 == (++$i % 100)) {
@@ -65,7 +65,7 @@ class BulkActionsAbstractController extends Controller
         }
 
         if ($this->automaticRedirection) {
-            $session->getFlashBag()->add('success', 'Tous les éléments ont été traité avec succès');
+            $session->getFlashBag()->add('success', 'Tous les éléments ont été traité avec succès'); // TODO translate ?
 
             return $this->redirectToIndex();
         }

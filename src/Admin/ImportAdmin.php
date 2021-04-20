@@ -41,21 +41,21 @@ class ImportAdmin extends GoGoAbstractAdmin
         $optionsList = $taxonomy->getTaxonomyJson();
 
         $isDynamic = $this->getSubject()->isDynamicImport();
-        $title = $isDynamic ? "Import Dynamique, pour afficher des données gérées par quelqu'un d'autre" : 'Importer des données en dur, depuis un fichier CSV ou une API Json';
+        $title = $isDynamic ? "Import Dynamique, pour afficher des données gérées par quelqu'un d'autre" : 'Importer des données en dur, depuis un fichier CSV ou une API Json'; // TODO translate
         $isPersisted = $this->getSubject()->getId();
         $moderateElementconfig = [
             'required' => false, 
-            'label' => 'Modérer les éléments importés',
-            'label_attr' => ['title' => 'Les éléments importés auront le status "en attente de validation" et devront être manuellement validés. Idem pour des mise à jour d\'éléments existant (modification)']];
+            'label' => 'Modérer les éléments importés', // TODO translate
+            'label_attr' => ['title' => 'Les éléments importés auront le status "en attente de validation" et devront être manuellement validés. Idem pour des mise à jour d\'éléments existant (modification)']]; // TODO translate
 
         $usersQuery = $dm->query('User');
         $usersQuery->addOr($usersQuery->expr()->field('roles')->exists(true))
                    ->addOr($usersQuery->expr()->field('groups')->exists(true));
         $formMapper
-            ->tab('Général')
+            ->tab('Général') // TODO translate
                 ->panel($title, ['class' => 'col-md-12'])
-                    ->add('sourceName', null, ['required' => true, 'label' => 'Nom de la source '])
-                    ->add('file', FileType::class, ['label' => 'Fichier CSV à importer (séparation par virgules, encodage en UTF8)', 'required' => false]);
+                    ->add('sourceName', null, ['required' => true, 'label' => 'Nom de la source ']) // TODO translate
+                    ->add('file', FileType::class, ['label' => 'Fichier CSV à importer (séparation par virgules, encodage en UTF8)', 'required' => false]); // TODO translate
         if ($isDynamic) {
             $formMapper
                     // Every attribute that will be update need to be mapped here. Following attributes are manually inserted in element-import.html.twig, but we still need them here as hidden input
@@ -65,30 +65,30 @@ class ImportAdmin extends GoGoAbstractAdmin
                             'gogo-element-import',
                             'data-title-layer' => $this->config->getDefaultTileLayer()->getUrl(),
                             'data-default-bounds' => json_encode($this->config->getDefaultBounds()),
-                        ], 'required' => true, 'label' => 'Type de la source'])
+                        ], 'required' => true, 'label' => 'Type de la source']) // TODO translate
                 ->end()
-                ->panel('Paramètres', ['class' => 'col-md-12'])
-                    ->add('refreshFrequencyInDays', null, ['required' => false, 'label' => 'Fréquence de mise à jours des données en jours (laisser vide pour ne jamais mettre à jour automatiquement'])
+                ->panel('Paramètres', ['class' => 'col-md-12']) // TODO translate
+                    ->add('refreshFrequencyInDays', null, ['required' => false, 'label' => 'Fréquence de mise à jours des données en jours (laisser vide pour ne jamais mettre à jour automatiquement']) // TODO translate
                     ->add('usersToNotify', ModelType::class, [
                         'class' => 'App\Document\User',
                         'required' => false,
                         'multiple' => true,
                         'query' => $usersQuery,
                         'btn_add' => false,
-                        'label' => "Utilisateurs à notifier en cas d'erreur, ou lorsque de nouveaux champs/catégories sont à faire correspondre", ], ['admin_code' => 'admin.option_hidden'])
+                        'label' => "Utilisateurs à notifier en cas d'erreur, ou lorsque de nouveaux champs/catégories sont à faire correspondre", ], ['admin_code' => 'admin.option_hidden']) // TODO translate
                     ->add('isSynchronized', null, [
                         'disabled' => !$this->config->getOsm()->isConfigured(),
                         'required' => false,
                         'attr' => ['class' => 'input-is-synched'],
-                        'label_attr' => ['title' => "Chaque modification sera envoyée à OpenStreetMap"],
-                        'label' => "Autoriser l'édition des données" . ($this->config->getOsm()->isConfigured() ? '' : ' (Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)')
+                        'label_attr' => ['title' => "Chaque modification sera envoyée à OpenStreetMap"], // TODO translate
+                        'label' => "Autoriser l'édition des données" . ($this->config->getOsm()->isConfigured() ? '' : ' (Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)') // TODO translate
                     ])
                     ->add('moderateElements', null, $moderateElementconfig)
                     ->add('idsToIgnore', TextType::class, ['mapped' => false, 'required' => false, 
                         'attr' => ['class' => 'gogo-display-array', 
                         'value' => $this->getSubject()->getIdsToIgnore()], 
-                        'label' => "Liste des IDs qui seront ignorées lors de l'import", 
-                        'label_attr' => ['title' => "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"]]);
+                        'label' => "Liste des IDs qui seront ignorées lors de l'import",  // TODO translate
+                        'label_attr' => ['title' => "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"]]); // TODO translate
         } else {
             $formMapper                    
                     ->add('url', UrlType::class, ['label' => 'Ou URL vers un API Json', 'required' => false])
@@ -96,14 +96,14 @@ class ImportAdmin extends GoGoAbstractAdmin
         }
         $formMapper->end();                
         if ($isPersisted) {
-            $formMapper->panel('Historique', ['class' => 'col-sm-12'])
+            $formMapper->panel('Historique', ['class' => 'col-sm-12']) // TODO translate
                         ->add('currState', null, ['attr' => ['class' => 'gogo-display-logs'], 'label_attr' => ['style' => 'display: none'], 'mapped' => false])
                     ->end();
         }
         $formMapper->end();
 
         // TAB - Custom Code
-        $formMapper->tab('Modifier les données en exécutant du code')
+        $formMapper->tab('Modifier les données en exécutant du code') // TODO translate
             ->panel('Entrez du code qui sera exécuté à la reception des données, avant leur traitement par GoGoCarto', ['description' => "La variable <b>\$data</b> représente le tableau PHP créé à partir des données Csv ou Json. </br>
 <pre>Quelques examples de transformations simple:</pre>
 Si les éléments à importer sont dans une sous propriété appelée 'elements'
@@ -120,21 +120,21 @@ Ajouter un attribut en utilisant la valeur d'un autre attribut
 Transformer un attribut
 <pre>&lt;?php</br>foreach(\$data as \$key => \$row) {
     \$data[\$key]['categories'] = array_map(function(\$cat) { return \$cat[0]; }, \$row['categories']);
-}</pre>"])
-                ->add('customCode', null, ['label' => 'Code PHP qui sera exécuté', 'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500'], 'required' => false])
+}</pre>"]) // TODO translate
+                ->add('customCode', null, ['label' => 'Code PHP qui sera exécuté', 'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500'], 'required' => false]) // TODO translate
             ->end()
         ->end();
 
         
         if ($isPersisted) {
             // TAB - Ontology Mapping
-            $title = 'Table de correspondance des champs';
+            $title = 'Table de correspondance des champs'; // TODO translate
             if ($this->getSubject()->getNewOntologyToMap()) {
-                $title .= ' <label class="label label-info">Nouveaux champs</label>';
+                $title .= ' <label class="label label-info">Nouveaux champs</label>'; // TODO translate
             }
             $formMapper
                 ->tab($title)                    
-                    ->panel('Transformer les données à importer')
+                    ->panel('Transformer les données à importer') // TODO translate
                         ->add('ontologyMapping', null, [
                             'label_attr' => ['style' => 'display:none'], 
                             'attr' => ['class' => 'gogo-mapping-ontology', 
@@ -144,53 +144,53 @@ Transformer un attribut
                 
                 if ($this->getSubject()->getSourceType() != 'osm') {
                     $formMapper
-                    ->panel('Autres Options', ['box_class' => 'box box-default'])
+                    ->panel('Autres Options', ['box_class' => 'box box-default']) // TODO translate
                         ->add('geocodeIfNecessary', null, [
                             'required' => false, 
-                            'label' => 'Géocoder les élements sans latitude ni longitude à partir de leur adresse'])
+                            'label' => 'Géocoder les élements sans latitude ni longitude à partir de leur adresse']) // TODO translate
                         ->add('fieldToCheckElementHaveBeenUpdated', null, [
                             'required' => false, 
-                            'label' => "Nom de l'attribut à comparer pour la mise à jour", 
-                            'label_attr' => ['title' => "Lorsqu'on met à jour une source, certains des éléments à importer existent déjà dans notre base de donnée. Vous pouvez renseigner ici un champs qui permettra de comparer si l'élément à été mis à jour au sein de la source depuis le dernier import. Exple de champ: updatedAt, date_maj etc... (laisser vide pour mettre à jour les éléments à chaque fois)"]])
+                            'label' => "Nom de l'attribut à comparer pour la mise à jour",  // TODO translate
+                            'label_attr' => ['title' => "Lorsqu'on met à jour une source, certains des éléments à importer existent déjà dans notre base de donnée. Vous pouvez renseigner ici un champs qui permettra de comparer si l'élément à été mis à jour au sein de la source depuis le dernier import. Exple de champ: updatedAt, date_maj etc... (laisser vide pour mettre à jour les éléments à chaque fois)"]]) // TODO translate
                     ->end();
                 }
                 $formMapper->end();
 
             // TAB - Taxonomy Mapping
             if (count($this->getSubject()->getOntologyMapping()) > 0) {     
-                $title = 'Table de correspondance des catégories';
+                $title = 'Table de correspondance des catégories'; // TODO translate
                 if ($this->getSubject()->getNewTaxonomyToMap()) {
-                    $title .= ' <label class="label label-info">Nouvelles catégories</label>';
+                    $title .= ' <label class="label label-info">Nouvelles catégories</label>'; // TODO translate
                 }
                 $formMapper->tab($title)          
-                    ->panel('Faites correspondre les catégories')
+                    ->panel('Faites correspondre les catégories') // TODO translate
                         ->add('taxonomyMapping', null, ['label_attr' => ['style' => 'display:none'], 'attr' => ['class' => 'gogo-mapping-taxonomy', 'data-options' => $optionsList]])
                     ->end()
 
-                    ->panel('Autres Options', ['box_class' => 'box box-default'])
+                    ->panel('Autres Options', ['box_class' => 'box box-default']) // TODO translate
                         ->add('optionsToAddToEachElement', ModelType::class, [
                             'class' => 'App\Document\Option',
                             'required' => false,
                             'multiple' => true,
                             'btn_add' => false,
-                            'label' => 'Catégories à ajouter à chaque élément importé', ], 
+                            'label' => 'Catégories à ajouter à chaque élément importé', ],  // TODO translate
                             ['admin_code' => 'admin.option_hidden'])
                         ->add('needToHaveOptionsOtherThanTheOnesAddedToEachElements', null, [
                             'required' => false, 
-                            'label' => 'Les éléments importés sans catégorie (en dehors de celles ajoutées manuellement ci-dessus) seront marqués comme "à modérer"', 
-                            'label_attr' => ['title' => "Sans prendre en compte les catégories ajoutés via le champs \"Catégories à ajouter à chaque élément importé\", si les éléments importés n'ont pas de catégories, ils seront marqués comme \"Modération aucune catégorie renseignée\""]])
+                            'label' => 'Les éléments importés sans catégorie (en dehors de celles ajoutées manuellement ci-dessus) seront marqués comme "à modérer"',  // TODO translate
+                            'label_attr' => ['title' => "Sans prendre en compte les catégories ajoutés via le champs \"Catégories à ajouter à chaque élément importé\", si les éléments importés n'ont pas de catégories, ils seront marqués comme \"Modération aucune catégorie renseignée\""]]) // TODO translate
                         ->add('preventImportIfNoCategories', null, [
                             'required' => false, 
-                            'label' => "Ne pas importer les éléments qui n'ont aucune catégories", 
-                            'label_attr' => ['title' => "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"]])
+                            'label' => "Ne pas importer les éléments qui n'ont aucune catégories",  // TODO translate
+                            'label_attr' => ['title' => "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"]]) // TODO translate
                     ->end()
                 ->end();
             }
 
             if ($this->getSubject()->isDynamicImport() && $this->getSubject()->getIsSynchronized()) {
                 // TAB - Custom Code For Export
-                $formMapper->tab("Convertir les données pour l'export")
-                    ->panel("Entrez du code qui sera exécuté lors de l'export, avant leur envoi pour synchronisation", 
+                $formMapper->tab("Convertir les données pour l'export") // TODO translate
+                    ->panel("Entrez du code qui sera exécuté lors de l'export, avant leur envoi pour synchronisation",  // TODO translate
                         ['description' => "La variable <b>\$element</b> représente l'élément dans GoGoCarto, la variable <b>\$osmFeature</b> représente la donnée OSM reconstruite à partir de l'élement GoGoCarto</br>
 <pre>Quelques examples de transformations simple:</pre>
 Si l'élement contient la catégorie \"Vrac\", on rajoute un tag OSM
@@ -213,9 +213,9 @@ if (\$element->getProperty('vrac') == 'oui') {
 On ajoute un tag pour tous les éléments
 <pre>&lt;?php
 \$osmFeature['tags']['bulk_purchase'] = 'yes';
-</pre>"])
+</pre>"]) // TODO translate
                         ->add('customCodeForExport', null, [
-                            'label' => 'Code PHP qui sera exécuté', 
+                            'label' => 'Code PHP qui sera exécuté',  // TODO translate
                             'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500'], 
                             'required' => false])
                     ->end()
@@ -262,16 +262,16 @@ On ajoute un tag pour tous les éléments
         $isDynamic = "App\Document\ImportDynamic" == $this->getClass();
 
         $listMapper
-            ->addIdentifier('sourceName', null, ['label' => 'Nom de la source'])
-            ->add('logs', null, ['label' => "Nombre d'éléments", 'template' => 'admin/partials/import/list_total_count.html.twig']);
+            ->addIdentifier('sourceName', null, ['label' => 'Nom de la source']) // TODO translate
+            ->add('logs', null, ['label' => "Nombre d'éléments", 'template' => 'admin/partials/import/list_total_count.html.twig']); // TODO translate
         if ($isDynamic) {
             $listMapper
-            ->add('idsToIgnore', null, ['label' => 'Infos', 'template' => 'admin/partials/import/list_non_visibles_count.html.twig', 'choices' => $deletedElementsCount])
-            ->add('refreshFrequencyInDays', null, ['label' => 'Mise à jour', 'template' => 'admin/partials/import/list_refresh_frequency.html.twig']);
+            ->add('idsToIgnore', null, ['label' => 'Infos', 'template' => 'admin/partials/import/list_non_visibles_count.html.twig', 'choices' => $deletedElementsCount]) // TODO translate
+            ->add('refreshFrequencyInDays', null, ['label' => 'Mise à jour', 'template' => 'admin/partials/import/list_refresh_frequency.html.twig']); // TODO translate
         }
 
         $listMapper
-            ->add('lastRefresh', null, ['label' => 'Dernier import', 'template' => 'admin/partials/import/list_last_refresh.html.twig'])
+            ->add('lastRefresh', null, ['label' => 'Dernier import', 'template' => 'admin/partials/import/list_last_refresh.html.twig']) // TODO translate
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],

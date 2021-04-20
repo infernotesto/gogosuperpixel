@@ -34,7 +34,7 @@ class ModerationActionsController extends BulkActionsAbstractController
         $dm->flush();
         $dm->clear();
 
-        $session->getFlashBag()->add('success', $count.' éléments ont été supprimés');
+        $session->getFlashBag()->add('success', $count.' éléments ont été supprimés'); // TODO translate
 
         return $this->redirectToIndex();
     }

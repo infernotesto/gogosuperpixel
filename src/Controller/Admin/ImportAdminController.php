@@ -21,17 +21,17 @@ class ImportAdminController extends Controller
         $showUrl = $this->admin->generateUrl('showData', ['id' => $object->getId()]);
         $anchor = '';
         if ($result === null) {
-            $msg = "Un problème semble avoir lieu pendant la lecture des données.";
-            if ($object->getSourceType() == 'csv') $msg .= "Vérifiez que les colonnes sont bien <b>séparées avec des virgules</b> (et non pas avec des point virgules ou des espaces) : <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files/fr'>Cliquez ici pour savoir comment faire</a>. Vérifiez aussi que <b>l'encodage soit en UTF-8</b>.";
-            if ($object->getSourceType() == 'json') "Vérifiez que le <b>tableau de donnée soit bien à la racine du JSON</b>. Si ce n'est pas le cas, utilisez l'onglet 'Modifier les données en exécutant du code'";
+            $msg = "Un problème semble avoir lieu pendant la lecture des données."; // TODO translate
+            if ($object->getSourceType() == 'csv') $msg .= "Vérifiez que les colonnes sont bien <b>séparées avec des virgules</b> (et non pas avec des point virgules ou des espaces) : <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files/fr'>Cliquez ici pour savoir comment faire</a>. Vérifiez aussi que <b>l'encodage soit en UTF-8</b>."; // TODO translate
+            if ($object->getSourceType() == 'json') "Vérifiez que le <b>tableau de donnée soit bien à la racine du JSON</b>. Si ce n'est pas le cas, utilisez l'onglet 'Modifier les données en exécutant du code'"; // TODO translate
             $this->addFlash('sonata_flash_error', $msg);
         } elseif (!in_array('name', $object->getMappedProperties())) {
-            $this->addFlash('sonata_flash_info', 'Merci de remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche');
+            $this->addFlash('sonata_flash_info', 'Merci de remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche'); // TODO translate
             $anchor = '#tab_3';
         } elseif ($count == 0) {
-            $this->addFlash('sonata_flash_error', 'Erreur pendant le chargement des données, le résultat est vide');
+            $this->addFlash('sonata_flash_error', 'Erreur pendant le chargement des données, le résultat est vide'); // TODO translate
         } elseif ($count > 0) {
-            $this->addFlash('sonata_flash_success', "<b>$count éléments ont été lus avec succès.</b></br>Voici le résultat obtenu pour le premier élément à importer :<pre>".print_r(reset($result), true).'</pre>'."<a href='$showUrl'>Voir toutes les données</a>");
+            $this->addFlash('sonata_flash_success', "<b>$count éléments ont été lus avec succès.</b></br>Voici le résultat obtenu pour le premier élément à importer :<pre>".print_r(reset($result), true).'</pre>'."<a href='$showUrl'>Voir toutes les données</a>"); // TODO translate
             $anchor = '#tab_3';
         }
         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]) . $anchor;
@@ -60,14 +60,14 @@ class ImportAdminController extends Controller
         $object = $this->admin->getSubject();
 
         if (!in_array('name', $object->getMappedProperties())) {
-            $this->addFlash('sonata_flash_error', "Avant d'importer les données, vous devez d'abords remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche");
+            $this->addFlash('sonata_flash_error', "Avant d'importer les données, vous devez d'abords remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche"); // TODO translate
             $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
 
             return $this->redirect($url);
         }
 
         $object->setCurrState(ImportState::Started);
-        $object->setCurrMessage('En attente...');
+        $object->setCurrMessage('En attente...'); // TODO translate
         $dm->persist($object);
         $dm->flush();
 
@@ -98,7 +98,7 @@ class ImportAdminController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
         }
         $dm = $this->container->get('doctrine_mongodb')->getManager();
         $config = $dm->get('Configuration')->findConfiguration();
@@ -136,7 +136,7 @@ class ImportAdminController extends Controller
                                && in_array($field->name, array_values($ontology))
                                && isset($field->reversedBy)
                                && in_array($field->reversedBy, array_values($ontology))) {
-                                $this->addFlash('sonata_flash_info', "Les champs $field->name et $field->reversedBy étant liées entre eux, il n'est pas possible de les importer les deux en même temps. Seul le champ $field->name est conservé pour l'import, le champ $field->reversedBy sera automatiquement ajusté à la fin de l'import");
+                                $this->addFlash('sonata_flash_info', "Les champs $field->name et $field->reversedBy étant liées entre eux, il n'est pas possible de les importer les deux en même temps. Seul le champ $field->name est conservé pour l'import, le champ $field->reversedBy sera automatiquement ajusté à la fin de l'import"); // TODO translate
                                 $key = array_search($field->reversedBy, $ontology);
                                 $ontology[$key] = '/';
                             }
@@ -168,7 +168,7 @@ class ImportAdminController extends Controller
                                         if (!$parent) {
                                             $parent = new Category();
                                             $parent->setCustomId($fieldName);
-                                            $parent->setPickingOptionText("une catégorie");
+                                            $parent->setPickingOptionText("une catégorie"); // TODO translate
                                             $parent->setName($fieldName);
                                             $createdParent[$fieldName] = $parent;
                                         }
@@ -220,7 +220,7 @@ class ImportAdminController extends Controller
                     } elseif ($request->get('clear-elements')) {
                         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
                         $dm->query('Element')->field('source')->references($object)->batchRemove();
-                        $this->addFlash('sonata_flash_success', "Les éléments liés à cet import ont été effacés");
+                        $this->addFlash('sonata_flash_success', "Les éléments liés à cet import ont été effacés"); // TODO translate
                     } elseif ($request->get('collect') || $oldUpdatedAt != $object->getMainConfigUpdatedAt()) {
                         $url = $this->admin->generateUrl('collect', ['id' => $object->getId()]);
                     } else {

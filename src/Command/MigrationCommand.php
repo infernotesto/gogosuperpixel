@@ -23,6 +23,7 @@ class MigrationCommand extends Command
     // -----------------------------------------------------------------
     public static $migrations = [
       // v2.4.6
+       // TODO translate attributions ?
       'db.TileLayer.updateMany({name:"cartodb"}, {$set: {attribution:"&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> &copy; <a href=\"http://cartodb.com/attributions\">CartoDB</a>"}})',
       'db.TileLayer.updateMany({name:"hydda"}, {$set: {attribution:"Tiles courtesy of <a href=\"http://openstreetmap.se/\" target=\"_blank\">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>"}})',
       'db.TileLayer.updateMany({name:"wikimedia"}, {$set: {attribution:"<a href=\"https://wikimediafoundation.org/wiki/Maps_Terms_of_Use\">Wikimedia</a> | Map data © <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap contributors</a>"}})',
@@ -56,27 +57,27 @@ class MigrationCommand extends Command
 
     public static $messages = [
         // v2.3.0
-        'Un champ <b>Image (url)</b> est maintenant disponible dans la confiugration du formulaire !',
-        "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup",
-        "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie",
+        'Un champ <b>Image (url)</b> est maintenant disponible dans la confiugration du formulaire !', // TODO translate
+        "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup", // TODO translate
+        "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie", // TODO translate
         // v2.3.1
-        'Vous pouvez maintenant renseigner la licence qui protège vos données dans Personnalisation -> Configuration Générale',
+        'Vous pouvez maintenant renseigner la licence qui protège vos données dans Personnalisation -> Configuration Générale', // TODO translate
         // v2.3.4
-        "Amélioration du <b>système d'import</b>: vous pouvez maintenant faire correspondre les champs et les catégories avant d'importer. Des vidéos tutoriels ont été réalisés. <u>Merci de parcourir vos imports dynamiques pour les mettre à jour avec le nouveau système</u>",
-        "<b>La gestion des permissions des utilisateurs fait peau neuve !</b> <u>Votre ancienne configuration ne sera peut être plus valide</u>. Veuillez vous rendre dans le <b>menu Utilisateurs pour mettre à jour les roles des utilisateurs et des groupes</b> d'utilisateurs.",
-        'Vous pouvez maintenant configurer des mot clés à exclure dans la recherche des éléments. Rendez-vous dans Personnalisation -> La Carte -> Onglet Recherche',
+        "Amélioration du <b>système d'import</b>: vous pouvez maintenant faire correspondre les champs et les catégories avant d'importer. Des vidéos tutoriels ont été réalisés. <u>Merci de parcourir vos imports dynamiques pour les mettre à jour avec le nouveau système</u>", // TODO translate
+        "<b>La gestion des permissions des utilisateurs fait peau neuve !</b> <u>Votre ancienne configuration ne sera peut être plus valide</u>. Veuillez vous rendre dans le <b>menu Utilisateurs pour mettre à jour les roles des utilisateurs et des groupes</b> d'utilisateurs.", // TODO translate
+        'Vous pouvez maintenant configurer des mot clés à exclure dans la recherche des éléments. Rendez-vous dans Personnalisation -> La Carte -> Onglet Recherche', // TODO translate
         // v2.5
-        "Il est maintenant possible de <b>téléverser des images et des fichiers</b> depuis le formulaire d'ajout d'un élément ! Paramétrez ces nouveaux champs dans Modèle de Données -> Formulaire",
+        "Il est maintenant possible de <b>téléverser des images et des fichiers</b> depuis le formulaire d'ajout d'un élément ! Paramétrez ces nouveaux champs dans Modèle de Données -> Formulaire", // TODO translate
         // v3.0
-        "Vous pouvez maintenant écrire des actualités qui seront incluses dans la newsletter automatique! Allez dans Mails/Newsletter -> Actualités",
-        "L'export des éléments depuis la page Données -> Elements fonctionne de nouveau et inclus cette fois correctement tous les champs personnalisés (y compris fichiers et images)",
-        "Depuis le site, la recherche par élément peut maintenant fonctionenr sur plusieurs champs. Dans Modèle de Données -> Formulaire, editez un champ pour voir apparaitre la configuration liée à la recherche. Vous pouvez aussi donner des poids différents à chaque champs, par exemple la recherche sur le titre avec un poids de 3 et la recherche dans la description avec un poids de 1",
-        "Nouveau moteur de recherche ! Sur la carte, lorsqu'on tape une recherche des suggestions apparaissent pour les éléments et les catégories (bientôt aussi pour les recherchent géographiques)",
+        "Vous pouvez maintenant écrire des actualités qui seront incluses dans la newsletter automatique! Allez dans Mails/Newsletter -> Actualités", // TODO translate
+        "L'export des éléments depuis la page Données -> Elements fonctionne de nouveau et inclus cette fois correctement tous les champs personnalisés (y compris fichiers et images)", // TODO translate
+        "Depuis le site, la recherche par élément peut maintenant fonctionenr sur plusieurs champs. Dans Modèle de Données -> Formulaire, editez un champ pour voir apparaitre la configuration liée à la recherche. Vous pouvez aussi donner des poids différents à chaque champs, par exemple la recherche sur le titre avec un poids de 3 et la recherche dans la description avec un poids de 1", // TODO translate
+        "Nouveau moteur de recherche ! Sur la carte, lorsqu'on tape une recherche des suggestions apparaissent pour les éléments et les catégories (bientôt aussi pour les recherchent géographiques)", // TODO translate
         // v3.2
-        "Vous pouvez maintenant configurer l'url de votre carte si vous possédez un nom de domaine (ou un sous domaine). Allez dans Personnalisation -> Configuration Générale et suivez les instructions !",
-        "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration",
+        "Vous pouvez maintenant configurer l'url de votre carte si vous possédez un nom de domaine (ou un sous domaine). Allez dans Personnalisation -> Configuration Générale et suivez les instructions !", // TODO translate
+        "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration", // TODO translate
         // 3.2.3
-        "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)",
+        "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)", // TODO translate
     ];
 
     public function __construct(DocumentManagerFactory $dmFactory, LoggerInterface $commandsLogger,
@@ -97,7 +98,7 @@ class MigrationCommand extends Command
     protected function configure(): void
     {
         $this->setName('db:migrate')
-             ->setDescription('Update datatabse each time after code update');
+             ->setDescription('Update datatabse each time after code update'); // TODO translate ?
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -122,13 +123,13 @@ class MigrationCommand extends Command
                 $this->current = 0;
                 foreach ($dbs as $db) {
                     foreach ($migrationsToRun as $migration) {
-                        $this->log('run migration '.$migration, $db);
+                        $this->log('run migration '.$migration, $db); // TODO translate ?
                         $this->runMongoCommand($dm, $db, $migration);
                         $this->current++;
                     }
                 }
             } else {
-                $this->log('No Migrations to perform');
+                $this->log('No Migrations to perform'); // TODO translate ?
             }
 
             // run them syncronously otherwise all the command will be run at once
@@ -139,32 +140,32 @@ class MigrationCommand extends Command
                 $this->current = 0;
                 foreach ($dbs as $db) {
                     foreach ($commandsToRun as $command) {
-                        $this->log('call command '.$command, $db);
+                        $this->log('call command '.$command, $db); // TODO translate ?
                         $this->asyncService->callCommand($command, [], $db);
                         $this->current++;
                     }
                 }
             } else {
-                $this->log('No commands to run');
+                $this->log('No commands to run'); // TODO translate ?
             }
 
             if (count(self::$messages) > $migrationState->getMessagesIndex()) {
                 $messagesToAdd = array_slice(self::$messages, $migrationState->getMessagesIndex());
                 $this->current = 0;
                 foreach ($dbs as $db) {
-                    $this->log(count($messagesToAdd).' messages to add', $db);
+                    $this->log(count($messagesToAdd).' messages to add', $db); // TODO translate ?
                     foreach ($messagesToAdd as $message) {
                         // create a GoGoLogUpdate
-                        $this->asyncService->callCommand('gogolog:add:message', ['"'.$message.'"'], $db);
+                        $this->asyncService->callCommand('gogolog:add:message', ['"'.$message.'"'], $db); // TODO translate ?
                     }
                     $this->current++;
                 }
             } else {
-                $this->log('No Messages to add to dashboard');
+                $this->log('No Messages to add to dashboard'); // TODO translate ?
             }
         } catch (\Exception $e) {
-            $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine();
-            $this->error('Error performing migrations: '.$message);
+            $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine(); // TODO translate ?
+            $this->error('Error performing migrations: '.$message); // TODO translate ?
         }
 
         $migrationState->setMigrationIndex(count(self::$migrations));
@@ -182,15 +183,15 @@ class MigrationCommand extends Command
 
     protected function log($message, $db = null)
     {
-        if ($db) $message = "DB {$db} ($this->current/$this->count) : $message";
+        if ($db) $message = "DB {$db} ($this->current/$this->count) : $message"; // TODO translate ?
         $this->logger->info($message);
         $this->output->writeln($message);
     }
 
     protected function error($message, $db = null)
     {
-        if ($db) $message = "DB {$this->db} ($this->current/$this->count) : $message";
+        if ($db) $message = "DB {$this->db} ($this->current/$this->count) : $message"; // TODO translate ?
         $this->logger->error($message);
-        $this->output->writeln('ERROR '.$message);        
+        $this->output->writeln('ERROR '.$message);  // TODO translate ?
     }
 }

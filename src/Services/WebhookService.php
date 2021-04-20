@@ -109,15 +109,15 @@ class WebhookService
     private function handlePostFailure($errorMessage, $post, $contribution, $code = 500)
     {
         $attemps = $post->incrementNumAttempts();
-        $this->logger->error("Webhook for contribution {$contribution->getId()} : $errorMessage");
+        $this->logger->error("Webhook for contribution {$contribution->getId()} : $errorMessage"); // TODO translate
         // After first try, wait 5m, 25m, 2h, 10h, 2d
         $intervalInMinutes = pow(5, $attemps);
         $elName = "\"{$contribution->getElement()->getName()}\" ({$contribution->getElement()->getId()})";
         if ($post->getWebhook()) {
-            $message = "Erreur lors de l'envoi du webhook {$post->getWebhook()->getUrl()} pour l'élement $elName";
+            $message = "Erreur lors de l'envoi du webhook {$post->getWebhook()->getUrl()} pour l'élement $elName"; // TODO translate
         } else {
-            $message = "Erreur lors de la synchronisation de l'élement $elName.";
-            if ($code == 401) $message .= " Les identifiants de votre compte OSM sont probablement incorrect.";
+            $message = "Erreur lors de la synchronisation de l'élement $elName."; // TODO translate
+            if ($code == 401) $message .= " Les identifiants de votre compte OSM sont probablement incorrect."; // TODO translate
         }
         $message .= " (Essai n°$attemps). L'erreur est : $errorMessage";
         $log = new GoGoLog(GoGoLogLevel::Error, $message);
@@ -161,18 +161,18 @@ class WebhookService
         $element = $this->getConfig()->getElementDisplayName();
         switch ($result['action']) {
             case 'add':
-                return "**AJOUT** {$element} **{$result['data']['name']}** ajouté par {$result['user']}\n[Lien vers la fiche]({$result['link']})";
+                return "**AJOUT** {$element} **{$result['data']['name']}** ajouté par {$result['user']}\n[Lien vers la fiche]({$result['link']})"; // TODO translate
             case 'edit':
-                return "**MODIFICATION** {$element} **{$result['data']['name']}** mis à jour par *{$result['user']}*\n[Lien vers la fiche]({$result['link']})";
+                return "**MODIFICATION** {$element} **{$result['data']['name']}** mis à jour par *{$result['user']}*\n[Lien vers la fiche]({$result['link']})"; // TODO translate
             case 'delete':
-                return "**SUPPRESSION** {$element} **{$result['data']['name']}** supprimé par *{$result['user']}*";
+                return "**SUPPRESSION** {$element} **{$result['data']['name']}** supprimé par *{$result['user']}*"; // TODO translate
             default:
-                throw new \InvalidArgumentException(sprintf('The webhook action "%s" is invalid.', $result['action']));
+                throw new \InvalidArgumentException(sprintf('The webhook action "%s" is invalid.', $result['action'])); // TODO translate ?
         }
     }
 
-    protected $transTitle = ['add' => 'AJOUT', 'edit' => 'MODIFICATION', 'delete' => 'SUPPRESSION'];
-    protected $transText = ['add' => 'ajoutés', 'edit' => 'mis à jour', 'delete' => 'supprimés'];
+    protected $transTitle = ['add' => 'AJOUT', 'edit' => 'MODIFICATION', 'delete' => 'SUPPRESSION']; // TODO translate
+    protected $transText = ['add' => 'ajoutés', 'edit' => 'mis à jour', 'delete' => 'supprimés']; // TODO translate
 
     private function getBatchNotificationText($result)
     {
@@ -209,7 +209,7 @@ class WebhookService
                 return ['text' => $data['text']];
 
             default:
-                throw new InvalidArgumentException(sprintf('The webhook format "%s" is invalid.', $format));
+                throw new InvalidArgumentException(sprintf('The webhook format "%s" is invalid.', $format)); // TODO translate ?
         }
     }
 }

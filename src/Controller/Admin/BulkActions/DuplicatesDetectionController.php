@@ -13,7 +13,7 @@ class DuplicatesDetectionController extends BulkActionsAbstractController
     public function detectDuplicatesAction(Request $request, SessionInterface $session, DocumentManager $dm,
                                            ElementDuplicatesService $duplicateService)
     {
-        $this->title = 'Détection des doublons';
+        $this->title = 'Détection des doublons'; // TODO translate
         $this->automaticRedirection = false;
         $this->batchSize = 1000;
         $this->duplicateService = $duplicateService;

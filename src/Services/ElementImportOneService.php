@@ -134,7 +134,7 @@ class ElementImportOneService
 
         $element->setSource($import);
         // Override sourceKey for standard import
-        if (!$import->isDynamicImport() && (strlen($row['source']) > 0 && 'Inconnu' != $row['source']))
+        if (!$import->isDynamicImport() && (strlen($row['source']) > 0 && 'Inconnu' != $row['source'])) // TODO translate ?
             $element->setSourceKey($row['source']);
 
 

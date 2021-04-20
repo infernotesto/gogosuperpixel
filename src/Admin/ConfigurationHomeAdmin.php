@@ -22,9 +22,9 @@ class ConfigurationHomeAdmin extends ConfigurationAbstractAdmin
     {
         $imagesOptions = [
             'class' => 'App\Document\ConfImage',
-            'placeholder' => 'Séléctionnez une image déjà importée, ou ajoutez en une !',
+            'placeholder' => 'Séléctionnez une image déjà importée, ou ajoutez en une !', // TODO translate
             'required' => false,
-            'label' => 'Logo',
+            'label' => 'Logo', // TODO translate
             'mapped' => true,
         ];
 

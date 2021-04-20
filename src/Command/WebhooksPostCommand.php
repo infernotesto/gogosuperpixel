@@ -24,14 +24,14 @@ class WebhooksPostCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:webhooks:post')
-        ->setDescription('Post the queued data to the given webhooks'); # TODO translate ?
+        ->setDescription('Post the queued data to the given webhooks'); // TODO translate ?
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
     {
         $numPosts = $this->webhookService->processPosts(10);
         if ($numPosts > 0)
-            $this->log('Nombre webhooks traités : '.$numPosts); # TODO translate ?
+            $this->log('Nombre webhooks traités : '.$numPosts); // TODO translate ?
     }
 
     protected function filterProjects($qb)

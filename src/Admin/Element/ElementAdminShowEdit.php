@@ -43,8 +43,8 @@ class ElementAdminShowEdit extends ElementAdminList
                 'class' => 'gogo-element-data',
                 'data-props' => json_encode($elementProperties)
               ]])
-            ->add('userOwnerEmail', EmailType::class, ['required' => false, 'label' => "Email de l'utilisateur propriétaire de cette fiche"])
-            ->add('email', EmailType::class, ['required' => false, 'label' => "Email de l'élément"])
+            ->add('userOwnerEmail', EmailType::class, ['required' => false, 'label' => "Email de l'utilisateur propriétaire de cette fiche"])// TODO translate
+            ->add('email', EmailType::class, ['required' => false, 'label' => "Email de l'élément"])// TODO translate
             ->add('images', CollectionType::class, [
               'entry_type' => ElementImageType::class,
               'allow_add' => true,
@@ -75,10 +75,10 @@ class ElementAdminShowEdit extends ElementAdminList
           ->with('Autre infos', ['class' => 'col-md-6'])
             ->add('id')
             ->add('randomHash')
-            ->add('oldId', null, ['label' => 'Id dans la base de données importée'])
-            ->add('sourceKey', null, ['label' => 'Source'])
-            ->add('createdAt', 'datetime', ['format' => 'd/m/Y à H:i'])
-            ->add('updatedAt', 'datetime', ['format' => 'd/m/Y à H:i'])
+            ->add('oldId', null, ['label' => 'Id dans la base de données importée'])// TODO translate
+            ->add('sourceKey', null, ['label' => 'Source'])// TODO translate
+            ->add('createdAt', 'datetime', ['format' => 'd/m/Y à H:i'])// TODO translate
+            ->add('updatedAt', 'datetime', ['format' => 'd/m/Y à H:i'])// TODO translate
           ->end();
 
         if ($this->subject->isPending()) {
@@ -96,11 +96,11 @@ class ElementAdminShowEdit extends ElementAdminList
             $show
               ->with('Modération', ['class' => 'col-md-6 col-sm-12'])
                 ->add('moderationState', ChoiceType::class, [
-                    'label' => 'Moderation',
+                    'label' => 'Moderation',// TODO translate
                       'choices' => $this->moderationChoices,
                       'template' => 'admin/partials/show_choice_moderation.html.twig',
                       ])
-                ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig', 'label' => 'Signalements'])
+                ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig', 'label' => 'Signalements'])// TODO translate
               ->end();
         }
 

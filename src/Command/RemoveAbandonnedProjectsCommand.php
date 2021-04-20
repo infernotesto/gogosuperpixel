@@ -32,7 +32,7 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
     {
         $this
           ->setName('app:projects:check-for-deleting')
-          ->setDescription('Check project that are abandonned (no login, no elements...) and ask owner to remove them')
+          ->setDescription('Check project that are abandonned (no login, no elements...) and ask owner to remove them') // TODO translate ?
        ;
     }
 
@@ -43,21 +43,21 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
         $projectsToWarn = $qb
             ->addAnd(
                 $qb->expr()->addOr(
-                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-8 month"))),
-                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-4 month")))->field('dataSize')->lte(5)
+                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-8 month"))), // TODO translate ?
+                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-4 month")))->field('dataSize')->lte(5) // TODO translate ?
                 ),
                 $qb->expr()->addOr(
                     $qb->expr()->field('warningToDeleteProjectSentAt')->exists(false),
                     // resend the message every month
-                    $qb->expr()->field('warningToDeleteProjectSentAt')->lte($date->setTimestamp(strtotime("-1 month")))
+                    $qb->expr()->field('warningToDeleteProjectSentAt')->lte($date->setTimestamp(strtotime("-1 month"))) // TODO translate ?
                 )
             )->getCursor();
                         
         if ($projectsToWarn->count() > 0)
-            $this->log('Nombre de projets avertis de la suppression : '. $projectsToWarn->count());
+            $this->log('Nombre de projets avertis de la suppression : '. $projectsToWarn->count()); // TODO translate
 
         foreach ($projectsToWarn as $project) {
-            $subject = "Votre carte créée sur $this->baseUrl peut elle être effacée?";
+            $subject = "Votre carte créée sur $this->baseUrl peut elle être effacée?"; // TODO translate
             $adminUrl = $this->urlService->generateUrlFor($project, 'sonata_admin_dashboard');
             $content = "Bonjour !</br></br> Vous êtes administrateur.ice de la carte {$project->getName()} sur {$this->baseUrl}. Nous avons noté qu'aucun utilisateur ne s'est logué sur cette carte depuis plusieurs mois. Votre projet est-il abandonné?</br>
                 Le nombre de carte sur $this->baseUrl ne cesse de grandir, et cela utilise pas mal de ressources sur notre serveur. </br>
@@ -65,7 +65,7 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
                 Si au contraire vous souhaitez conserver votre projet, merci de vous loguer sur votre carte.</br>
                 <b>Si votre inactivité persiste dans les prochains mois, nous nous réservons le droit de supprimer votre carte</b></br></br>
                 Bien cordialement,</br>
-                L'équipe de {$this->baseUrl}";
+                L'équipe de {$this->baseUrl}"; // TODO translate
             foreach ($project->getAdminEmailsArray() as $email) {
                 $this->mailService->sendMail($email, $subject, $content);
             }

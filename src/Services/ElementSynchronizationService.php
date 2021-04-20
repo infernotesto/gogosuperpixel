@@ -47,7 +47,7 @@ class ElementSynchronizationService
                 $osmFeature = $this->elementToOsm($element);
                 $osmFeaturesMainTags = $this->getOsmFeatureMainTags($osmFeature);
                 if (count($osmFeaturesMainTags) == 0) {
-                    return $promise->resolve(new Response(500, [], null, '1.1', "Cet élément n'a aucun des clés principales d'OpenStreetMap (amenity, shop...)"));
+                    return $promise->resolve(new Response(500, [], null, '1.1', "Cet élément n'a aucun des clés principales d'OpenStreetMap (amenity, shop...)")); // TODO translate
                 }
 
                 // Check contribution validity according to OSM criterias
@@ -102,12 +102,12 @@ class ElementSynchronizationService
                                 $toAdd = $existingFeature;
                             }
                             else {
-                                $message = 'Feature versions mismatch: '.$osmFeature['version'].' on our side, '.$existingFeature->getVersion().' on OSM';
+                                $message = 'Feature versions mismatch: '.$osmFeature['version'].' on our side, '.$existingFeature->getVersion().' on OSM'; // TODO translate
                                 return $promise->resolve(new Response(500, [], null, '1.1', $message));
                             }
                         }
                         else {
-                            $message = 'Feature does not exist on OSM';
+                            $message = 'Feature does not exist on OSM'; // TODO translate
                             return $promise->resolve(new Response(404, [], null, '1.1', $message));
                         }
                     }
@@ -159,10 +159,10 @@ class ElementSynchronizationService
                                 $this->dm->flush();
                             }
 
-                            return $promise->resolve(new Response(200, [], null, '1.1', 'Success'));
+                            return $promise->resolve(new Response(200, [], null, '1.1', 'Success')); // TODO translate ?
                         }
                         catch(\Exception $e) {
-                            $message = 'Error when sending changeset';
+                            $message = 'Error when sending changeset'; // TODO translate
                             return $promise->resolve(new Response($e->getCode(), [], null, '1.1', $message));
                         }
                     }
@@ -495,8 +495,8 @@ class ElementSynchronizationService
      * Generate comment for OSM changeset
      */
     private function getOsmComment($preparedData) {
-        $actionsLabels = ['add' => 'Ajout', 'edit' => 'Modification', 'delete' => 'Suppression'];
-        $category = isset($preparedData['data']) && isset($preparedData['data']['categories']) && count($preparedData['data']['categories']) > 0 ? $preparedData['data']['categories'][0] : 'objet';
+        $actionsLabels = ['add' => 'Ajout', 'edit' => 'Modification', 'delete' => 'Suppression']; // TODO translate
+        $category = isset($preparedData['data']) && isset($preparedData['data']['categories']) && count($preparedData['data']['categories']) > 0 ? $preparedData['data']['categories'][0] : 'objet'; // TODO translate
         $name = isset($preparedData['data']) && isset($preparedData['data']['name']) ? $preparedData['data']['name'] : null;
 
         return implode(" ", array_filter([$actionsLabels[$preparedData['action']], $category, $name], function($k) { return $k !== null; }));

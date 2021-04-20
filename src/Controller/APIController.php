@@ -52,7 +52,7 @@ class APIController extends GoGoController
 
         $status = 200;
         if (!$elementsJson) {
-            $elementsJson = '{ "error": "Element does not exists" }';
+            $elementsJson = '{ "error": "Element does not exists" }'; // TODO translate ?
             $status = 500;
         } elseif ($jsonLdRequest) {
             $elementsJson = '{
@@ -224,7 +224,7 @@ class APIController extends GoGoController
     public function getManifestAction(Request $request, DocumentManager $dm)
     {
         $config = $dm->get('Configuration')->findConfiguration();
-        if (!$config) return new Response(json_encode(['error' => "No configuration found"]));
+        if (!$config) return new Response(json_encode(['error' => "No configuration found"])); // TODO translate ?
         
         $img = $config->getFavicon() ? $config->getFavicon() : $config->getLogo();
         $imageData = null;
@@ -271,7 +271,7 @@ class APIController extends GoGoController
         ];
         $responseJson = json_encode($responseArray);
         if (!is_string($responseJson)) {
-            throw new \Exception("Cannot convert responseArray to json : " . var_dump($responseArray));
+            throw new \Exception("Cannot convert responseArray to json : " . var_dump($responseArray)); // TODO translate ?
         }
         $response = new Response($responseJson);
         $response->headers->set('Content-Type', 'application/json');

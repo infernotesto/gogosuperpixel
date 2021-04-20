@@ -278,7 +278,7 @@ class ElementAdminBulkController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'ERROR : '.$e->getMessage());
+            $this->addFlash('sonata_flash_error', 'ERROR : '.$e->getMessage()); // TODO translate
 
             return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }
@@ -290,7 +290,7 @@ class ElementAdminBulkController extends Controller
             if ($result['success']) {
                 $this->addFlash('sonata_flash_success', count($mails).' mails ont bien été envoyés'); // TODO translate
             } else {
-                $this->addFlash('sonata_flash_error', $result['message']);
+                $this->addFlash('sonata_flash_error', $result['message']); // TODO translate
             }
         }
 

@@ -36,8 +36,8 @@ class ElementRepository extends DocumentRepository
             $distance = 2 * $distance; // wider for manual check
         } else {
             $city = strtolower($element->getAddress()->getAddressLocality());
-            if (in_array($element->getAddress()->getDepartmentCode(), ['75', '92', '93', '94'])
-                || in_array($city, ['marseille', 'lyon', 'bordeaux', 'lille', 'montpellier', 'strasbourg', 'nantes', 'nice'])) {
+            if (in_array($element->getAddress()->getDepartmentCode(), ['75', '92', '93', '94']) // TODO translate ?
+                || in_array($city, ['marseille', 'lyon', 'bordeaux', 'lille', 'montpellier', 'strasbourg', 'nantes', 'nice'])) { // TODO translate ?
                 $distance = $distance / 2; // narrow down in big cities
             }
         }
