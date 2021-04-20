@@ -4,14 +4,14 @@
 {% set mapping = object.ontologyMapping %}
 
 {% if mapping|length == 0 %}
-  <div class="alert alert-info">Veuillez cliquer sur le boutton "Lire les données" afin de charger les attributs des données à importer</div>
+  <div class="alert alert-info">Veuillez cliquer sur le boutton "Lire les données" afin de charger les attributs des données à importer</div> {# TODO Translation #}
 {% else %}
   <table class="table mapping-table mapping-ontology-table">
     <thead>
       <tr>
-        <th style="width:100px">Nom d'origine</th>
+        <th style="width:100px">Nom d'origine</th> {# TODO Translation #}
         <th style="width:20px"></th>
-        <th>À transformer en <span style="font-weight: normal">(les champs vides ne seront pas importés)</span></th>
+        <th>À transformer en <span style="font-weight: normal">(les champs vides ne seront pas importés)</span></th> {# TODO Translation #}
         <th></th>
       </tr>
     </thead>
@@ -22,7 +22,7 @@
         {% set moreInfos = '' %}
         {% set rowClass = '' %}
         {% if mappedObject.collectedPercent is defined %}
-          {% set moreInfos = moreInfos ~ "Présent dans " ~ mappedObject.collectedPercent|number_format(0) ~ "% des éléments importés." %}
+          {% set moreInfos = moreInfos ~ "Présent dans " ~ mappedObject.collectedPercent|number_format(0) ~ "% des éléments importés." %} {# TODO Translation #}
           {% if mappedObject.collectedPercent < percentThreshold %}
             {% set rowClass = rowClass ~ 'low-used ' %}
             {% set displayMorePropsBtn = true %}
@@ -37,14 +37,14 @@
         {% endif %}    
         <tr class="{{ rowClass }}">          
           <td class="original" title="{{ moreInfos }}">{{originName}}</td>
-          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Utiliser le nom d'origine"></i></td>
+          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Utiliser le nom d'origine"></i></td> {# TODO Translation #}
           <td class="mapped">
             <input type="text" name="ontology[{{originName}}]" 
                   class="form-control property-selector" value={{mappedObject.mappedProperty}} />
           </td>
           <td>
             <span class="label field-info"></span>
-            <i class="clear-icon fa fa-ban" title="Ne plus importer ce champ"></i>
+            <i class="clear-icon fa fa-ban" title="Ne plus importer ce champ"></i> {# TODO Translation #}
           </td>
         </tr>
       {% endfor %}
@@ -55,7 +55,7 @@
       <center>
         <button type="button" class="btn btn-default display-all-props"
                 onclick="$('.low-used').removeClass('low-used'); $(this).remove()">
-          Voir tous les champs (les champs présents dans moins de {{ percentThreshold }}% des éléments sont cachés par défault)
+          Voir tous les champs (les champs présents dans moins de {{ percentThreshold }}% des éléments sont cachés par défault) {# TODO Translation #}
         </button>
       </center>
   {% endif %}
@@ -106,29 +106,29 @@
     var dataProperties = {{ form.vars.attr["data-props"]|raw }};
     var coreFields = ['id', 'name', 'categories', 'streetAddress', 'addressLocality', 'postalCode', 'addressCountry', 'latitude', 'longitude', 'images', 'files', 'owner', 'source', 'email', 'openhours', 'streetNumber', 'fullAddress'];
     var coreData = [], specificData = [], allProperties = [], otherData = []; var importedData = [];
-    coreData.push({id: 'id', text: "Identifiant unique (dans l'ancienne base de donnée)"});
-    coreData.push({id: 'name', text: 'Titre de la fiche'});
-    coreData.push({id: 'categories', text: 'Catégories (plusieurs champs sélectionnable)'});
-    coreData.push({id: 'latitude', text: 'Latitude'});
-    coreData.push({id: 'longitude', text: 'Longitude'});
-    coreData.push({id: 'fullAddress', text: 'Adresse complète'});
-    coreData.push({id: 'streetNumber', text: 'Adresse: numéro de rue'});
-    coreData.push({id: 'streetAddress', text: 'Adresse: rue'});
-    coreData.push({id: 'addressLocality', text: 'Adresse: ville'});
-    coreData.push({id: 'postalCode', text: 'Adresse: code postal'});
-    coreData.push({id: 'addressCountry', text: 'Adresse: pays'});    
-    specificData.push({id: 'images', text: "Image(s) sous forme d'url, en tableau, ou séparées par des virgules"});
-    specificData.push({id: 'files', text: "Fichier(s) sous forme d'url, en tableau, ou séparées par des virgules"});
-    specificData.push({id: 'email', text: "Email de l'élement"});
-    specificData.push({id: 'owner', text: "Email de l'utilisateur propriétaire de la fiche"});
+    coreData.push({id: 'id', text: "Identifiant unique (dans l'ancienne base de donnée)"}); // TODO Translation
+    coreData.push({id: 'name', text: 'Titre de la fiche'}); // TODO Translation
+    coreData.push({id: 'categories', text: 'Catégories (plusieurs champs sélectionnable)'}); // TODO Translation
+    coreData.push({id: 'latitude', text: 'Latitude'}); // TODO Translation
+    coreData.push({id: 'longitude', text: 'Longitude'}); // TODO Translation
+    coreData.push({id: 'fullAddress', text: 'Adresse complète'}); // TODO Translation
+    coreData.push({id: 'streetNumber', text: 'Adresse: numéro de rue'}); // TODO Translation
+    coreData.push({id: 'streetAddress', text: 'Adresse: rue'}); // TODO Translation
+    coreData.push({id: 'addressLocality', text: 'Adresse: ville'}); // TODO Translation
+    coreData.push({id: 'postalCode', text: 'Adresse: code postal'}); // TODO Translation
+    coreData.push({id: 'addressCountry', text: 'Adresse: pays'});     // TODO Translation
+    specificData.push({id: 'images', text: "Image(s) sous forme d'url, en tableau, ou séparées par des virgules"}); // TODO Translation
+    specificData.push({id: 'files', text: "Fichier(s) sous forme d'url, en tableau, ou séparées par des virgules"}); // TODO Translation
+    specificData.push({id: 'email', text: "Email de l'élement"}); // TODO Translation
+    specificData.push({id: 'owner', text: "Email de l'utilisateur propriétaire de la fiche"}); // TODO Translation
     if (!importIsDynamic)
-      specificData.push({id: 'source', text: "Origine de l'élément (source)"});    
-    specificData.push({id: 'openHours', text: "Horaires d'ouverture (format GoGoCarto)"});
+      specificData.push({id: 'source', text: "Origine de l'élément (source)"});    // TODO Translation 
+    specificData.push({id: 'openHours', text: "Horaires d'ouverture (format GoGoCarto)"}); // TODO Translation
     if (importType == 'osm') {
-      specificData.push({id: 'osm/source', text: "Source de la donnée OpenStreetMap"});
-      specificData.push({id: 'osm/opening_hours', text: "Horaires d'ouverture (format OSM)"});
-      specificData.push({id: 'osm/version', text: "OSM Version (mappé automatiquement)"});
-      specificData.push({id: 'osm/timestamp', text: "OSM Timestamp (mappé automatiquement)"});
+      specificData.push({id: 'osm/source', text: "Source de la donnée OpenStreetMap"}); // TODO Translation
+      specificData.push({id: 'osm/opening_hours', text: "Horaires d'ouverture (format OSM)"}); // TODO Translation
+      specificData.push({id: 'osm/version', text: "OSM Version (mappé automatiquement)"}); // TODO Translation
+      specificData.push({id: 'osm/timestamp', text: "OSM Timestamp (mappé automatiquement)"}); // TODO Translation
     }    
 
     allProperties = $.map(coreData.concat(specificData), function(el) { return el.id });
@@ -165,11 +165,11 @@
     {% endfor %}
 
     options = [{ id: "/", text: ""}]
-    options.push({ text: "Champs principaux", children: coreData});
-    options.push({ text: "Champs spécifiques", children: specificData});
-    options.push({ text: "Champs du formulaire", children: formData});
-    if (otherData.length > 0) options.push({text: "Autres champs déjà présent dans la base de donnée", children: otherData});
-    options.push({ text: "Champs originaux de l'import", children: importedData});
+    options.push({ text: "Champs principaux", children: coreData}); // TODO Translation
+    options.push({ text: "Champs spécifiques", children: specificData}); // TODO Translation
+    options.push({ text: "Champs du formulaire", children: formData}); // TODO Translation
+    if (otherData.length > 0) options.push({text: "Autres champs déjà présent dans la base de donnée", children: otherData}); // TODO Translation
+    options.push({ text: "Champs originaux de l'import", children: importedData}); // TODO Translation
 
     $(".property-selector")
       .select2({
@@ -188,13 +188,13 @@
       $row.find('.field-info').removeClass('label-primary label-info label-success')
       var text = '', type = '', title = ''
       if (coreData.map(el => el.id).concat(formProperties).indexOf(newVal) > -1) {
-        text = "Éditable"
-        type = "info"
-        title = "Ce champ sera éditable dans le formulaire public"
+        text = "Éditable" // TODO Translation
+        type = "info" // TODO Translation
+        title = "Ce champ sera éditable dans le formulaire public" // TODO Translation
       } else if (newVal != '/' && newVal != '') {
-        text = "Non éditable"
-        type = "primary"
-        title = "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous"
+        text = "Non éditable" // TODO Translation
+        type = "primary" // TODO Translation
+        title = "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous" // TODO Translation
       }
       $row.find('.field-info').addClass('label-'+type).text(text).attr('title', title)
     }).trigger('change')

@@ -2,7 +2,7 @@
 
 {% block field %}
   {% spaceless %}
-    <span style="margin-right: 8px">{{ object.lastRefresh ? object.lastRefresh|date('d/m/Y - H:i') : '' }}</span>
+    <span style="margin-right: 8px">{{ object.lastRefresh ? object.lastRefresh|date('d/m/Y - H:i') : '' }}</span> {# TODO Translation #}
     {% if object.logs|length > 0 and object.isDynamicImport %}
       {% set log = object.logs[0] %}
       {% if log.getDataProp('elementsCreatedCount') > 0 %}
@@ -12,13 +12,13 @@
         <span class="label label-danger log-label">-{{ log.getDataProp('elementsDeletedCount') }}</span>
       {% endif %}
       {% if log.getDataProp('elementsUpdatedCount') > 0 %}
-        <span class="label label-primary log-label">{{ log.getDataProp('elementsUpdatedCount') }} mis à jour</span>
+        <span class="label label-primary log-label">{{ log.getDataProp('elementsUpdatedCount') }} mis à jour</span> {# TODO Translation #}
       {% endif %}
       {% if log.getDataProp('elementsNothingToDoCount') > 0 %}
-        <span class="label label-default log-label">{{ log.getDataProp('elementsNothingToDoCount') }} inchangés</span>
+        <span class="label label-default log-label">{{ log.getDataProp('elementsNothingToDoCount') }} inchangés</span> {# TODO Translation #}
       {% endif %}
       {% if log.getDataProp('elementsErrorsCount') > 0 %}
-        <span class="label label-danger log-label">{{ log.getDataProp('elementsErrorsCount') }} erreurs</span>
+        <span class="label label-danger log-label">{{ log.getDataProp('elementsErrorsCount') }} erreurs</span> {# TODO Translation #}
       {% endif %}
 
       <style>

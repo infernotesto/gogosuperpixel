@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 
 {% if admin.isGranted('EDIT', object) %}
-    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="Afficher/Editer">
+    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="Afficher/Editer"> {# TODO Translation #}
         <i class="fa fa-eye" aria-hidden="true"></i>
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>

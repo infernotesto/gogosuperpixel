@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block title %}
-	{% if editMode %} Edition
+	{% if editMode %} Edition {# TODO Translation #}
 	{% else %}  {{ "add_element._label"|trans({feature: config.elementDisplayNameIndefinite}) }}
 	{% endif %}
 {% endblock %}

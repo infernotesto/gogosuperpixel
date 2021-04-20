@@ -1,9 +1,9 @@
 {% extends "page-layout.html.twig" %}
 
 {% set pageName = 'api' %}
-{% set navTitle = "Configurer une API" %}
+{% set navTitle = "Configurer une API" %} {# TODO Translation #}
 
-{% block title %}Configurer une API{% endblock %}
+{% block title %}Configurer une API{% endblock %} {# TODO Translation #}
 
 {% block stylesheets %}
 
@@ -17,22 +17,22 @@
 {# BODY CONTENT #}
 {% block body_content %}
   <section>
-    <h1>Accédez aux données via une API</h1>
+    <h1>Accédez aux données via une API</h1> {# TODO Translation #}
 
     {# FORMAT #}
     <p class="format-container">
-      <span class="forma-label">Format :</span>
+      <span class="forma-label">Format :</span> {# TODO Translation #}
       <input name="format" type="radio" id="format-json" data-value="json" checked class="url-update" />
       <label for="format-json">Json</label>
 
       <input name="format" type="radio" id="format-jsonld"  data-value="jsonld" class="url-update" />
-      <label for="format-jsonld">Json-LD (Sémantique)</label>
+      <label for="format-jsonld">Json-LD (Sémantique)</label> {# TODO Translation #}
     </p>
 
     {# CATEGORIES #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-categories" id="use-categories" checked class="url-update" />
-      <label id="label-use-categories" for="use-categories">Restreindre par categories</label>
+      <label id="label-use-categories" for="use-categories">Restreindre par categories</label> {# TODO Translation #}
     </div>
     <div class="select-categories-container">
       <select class="select-categories browser-default url-update" multiple>
@@ -44,20 +44,20 @@
 
     <div class="col s12 option-container">
       <input type="checkbox" name="include-external" id="include-external" checked class="url-update" />
-      <label id="label-include-external" for="include-external">Inclure les sources externes de la base de donnée</label>
+      <label id="label-include-external" for="include-external">Inclure les sources externes de la base de donnée</label> {# TODO Translation #}
     </div>
 
     {# BOUNDS #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-bounds" id="use-bounds" checked class="url-update" />
-      <label id="label-use-bounds" for="use-bounds">Restreindre sur une zone géographique (dessinez un rectangle sur la carte)</label>
+      <label id="label-use-bounds" for="use-bounds">Restreindre sur une zone géographique (dessinez un rectangle sur la carte)</label> {# TODO Translation #}
     </div>
     <div id="map-bounds-select"></div>
 
     {# LIMIT #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-limit" id="use-limit" class="url-update" checked/>
-      <label id="label-use-limit" for="use-limit">Limiter le nombre de résultat</label>
+      <label id="label-use-limit" for="use-limit">Limiter le nombre de résultat</label> {# TODO Translation #}
       <input type="number" id="limit-input" class="url-update" value="100"/>
     </div>
 
@@ -67,7 +67,7 @@
       <input type="text" id="api-url" onClick="this.setSelectionRange(0, this.value.length)"/>
     </div>
 
-    <button id="test-api" class="btn btn-primary">Tester</button>
+    <button id="test-api" class="btn btn-primary">Tester</button> {# TODO Translation #}
 
   </section>
 

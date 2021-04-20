@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 
 {% if admin.isGranted('VIEW', object) %}
-    <a href="{{ admin.generateObjectUrl('tree', object) }}" class="btn btn-sm btn-default view_link" title="Afficher/Editer">
-        <i class="fa fa-pencil" aria-hidden="true"></i> <span> Afficher/Editer</span>
+    <a href="{{ admin.generateObjectUrl('tree', object) }}" class="btn btn-sm btn-default view_link" title="Afficher/Editer"> {# TODO Translation #}
+        <i class="fa fa-pencil" aria-hidden="true"></i> <span> Afficher/Editer</span> {# TODO Translation #}
     </a>
 {% endif %}

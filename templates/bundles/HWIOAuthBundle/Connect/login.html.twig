@@ -6,7 +6,7 @@
     {% if error is defined and error %}
         <div class="row">
             <div class="col-md-12 alert alert-danger text-center">
-                <span class="error">{{ error }}</span>
+                <span class="error">{{ error }}</span> {# TODO Translation ? #}
             </div>
         </div>
     {% endif %}
@@ -14,9 +14,9 @@
     {# HWIOAuthBundle integration #}
 
     <ul class="top-social">
-       <li><a class="#" href="{{ hwi_oauth_login_url('facebook') }}">Se connecter avec Facebook</a></li>
-       <li><a class="#" href="{{ hwi_oauth_login_url('gplus') }}">Se connecter avec Google</a></li>
-       <li><a class="#" href="{{ hwi_oauth_login_url('communs') }}">Se connecter avec Les communs</a></li>
+       <li><a class="#" href="{{ hwi_oauth_login_url('facebook') }}">Se connecter avec Facebook</a></li> {# TODO Translation #}
+       <li><a class="#" href="{{ hwi_oauth_login_url('gplus') }}">Se connecter avec Google</a></li> {# TODO Translation #}
+       <li><a class="#" href="{{ hwi_oauth_login_url('communs') }}">Se connecter avec Les communs</a></li> {# TODO Translation #}
     </ul>
 
 {% endblock hwi_oauth_content %}

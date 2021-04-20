@@ -16,7 +16,7 @@
                             {% if field_name == '_delete' %}
                                 <th>{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}</th>
                             {% elseif field_name == '_link' %}
-                                <th>Plus d'options</th>
+                                <th>Plus d'options</th> {# TODO Translation #}
                             {% else %}
                                 <th {{ nested_field.vars['required']  ? 'class="required"' : '' }}>
                                     {{ nested_field.vars['sonata_admin'].admin.trans(nested_field.vars.label) }}

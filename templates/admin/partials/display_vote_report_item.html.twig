@@ -6,20 +6,20 @@
   4: 'Anonyme avec lien',
   5: 'GoGoBot'
   }
-%} 
+%}  {# TODO Translation #}
 
 
 <div {% if not loop.last and not itemContainer|default(true) %}class="item-container"{% endif %}>
 	<div style="margin-bottom:5px">
     <span class="label {{ labelClass }}">{{ itemValues[item.value] }}</span> 
-    <div style="float:right">{{ item.createdAt|date("d/m/Y à H:i")}}</div> 
+    <div style="float:right">{{ item.createdAt|date("d/m/Y à H:i")}}</div> {# TODO Translation #}
     {% if smallWidth|default(false) %}
       </br>
       <span style="display:block;padding-top: 5px;">
     {% else %}
       <span style="margin:0 5px">
     {% endif %}    
-      Par : <u>{{ item.userEmail ? item.userEmail : 'Anonyme'}}</u>
+      Par : <u>{{ item.userEmail ? item.userEmail : 'Anonyme'}}</u> {# TODO Translation #}
       <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] }}</span> 
     </span> 
     {{ item.resolvedMessage }}

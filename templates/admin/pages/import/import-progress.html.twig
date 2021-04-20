@@ -4,11 +4,11 @@
 
 {% block page_content %}
   <div class="alert alert-default text-center progress-container">
-    <div class="curr-message">En attente...</div>
+    <div class="curr-message">En attente...</div> {# TODO Translation #}
     <p class="redirect-url" style="display:none">
-      <a href="{{redirectUrl}}"><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i>Retourner à l'import</button></a>
+      <a href="{{redirectUrl}}"><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i>Retourner à l'import</button></a> {# TODO Translation #}
       {% if redirectListUrl is defined %}
-        <a href="{{redirectListUrl}}"><button class="btn btn-default"><i class="fa fa-list" aria-hidden="true"></i>Retourner à la liste</button></a>
+        <a href="{{redirectListUrl}}"><button class="btn btn-default"><i class="fa fa-list" aria-hidden="true"></i>Retourner à la liste</button></a> {# TODO Translation #}
       {% endif %}
     </p>
   </div>

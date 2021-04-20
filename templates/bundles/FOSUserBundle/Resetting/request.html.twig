@@ -3,7 +3,7 @@
 {% block fos_user_content %}
 <div class="panel">
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-        <h1>Mot de passe oublié</h1>
+        <h1>Mot de passe oublié</h1> {# TODO Translation #}
         <div>
             {% if invalid_username is defined %}
                 <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>

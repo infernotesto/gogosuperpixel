@@ -3,27 +3,27 @@
 {% block field %}
   {% spaceless %}
     {% if object.newOntologyToMap %}
-      <span class="label label-info log-label">Nouveaux champs à mapper</span>
+      <span class="label label-info log-label">Nouveaux champs à mapper</span> {# TODO Translation #}
     {% endif %}
 
     {% if object.newTaxonomyToMap %}
-      <span class="label label-info log-label">Nouvelles catégories à mapper</span>
+      <span class="label label-info log-label">Nouvelles catégories à mapper</span> {# TODO Translation #}
     {% endif %}
 
     {% set deletedCount = field_description.options.choices[object.id] is defined ? field_description.options.choices[object.id] : 0 %}
     {% if deletedCount > 0 %}
-      <span class="label label-danger log-label">{{ deletedCount }} localement supprimés</span>
+      <span class="label label-danger log-label">{{ deletedCount }} localement supprimés</span> {# TODO Translation #}
     {% endif %}
     {% if object.logs|length > 0 %}
       {% set log = object.logs[0] %}
       {% if log.getDataProp('elementsMissingGeoCount') > 0 %}
-        <span class="label label-warning log-label">{{ log.getDataProp('elementsMissingGeoCount') }} sans geoloc</span>
+        <span class="label label-warning log-label">{{ log.getDataProp('elementsMissingGeoCount') }} sans geoloc</span> {# TODO Translation #}
       {% endif %}
       {% if log.getDataProp('elementsMissingTaxoCount') > 0 %}
-        <span class="label label-warning log-label">{{ log.getDataProp('elementsMissingTaxoCount') }} sans categories</span>
+        <span class="label label-warning log-label">{{ log.getDataProp('elementsMissingTaxoCount') }} sans categories</span> {# TODO Translation #}
       {% endif %}
       {% if log.getDataProp('elementsPreventImportedNoTaxo') > 0 %}
-        <span class="label label-warning log-label">{{ log.getDataProp('elementsPreventImportedNoTaxo') }} non importés car sans catégories</span>
+        <span class="label label-warning log-label">{{ log.getDataProp('elementsPreventImportedNoTaxo') }} non importés car sans catégories</span> {# TODO Translation #}
       {% endif %}
 
       <style>

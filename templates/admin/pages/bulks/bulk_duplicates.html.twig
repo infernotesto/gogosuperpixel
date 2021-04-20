@@ -1,6 +1,6 @@
 <div class="bs-callout {{ automaticMerge ? 'bs-callout-success' : 'bs-callout-warning' }} bulk-duplicate">
 
-    <h4>{{ automaticMerge ? "Fusion automatique" : "Doublons potentiels détectés" }}</h4>
+    <h4>{{ automaticMerge ? "Fusion automatique" : "Doublons potentiels détectés" }}</h4> {# TODO Translation #}
 
     {% for duplicate in duplicates %}
         <li>
@@ -11,9 +11,9 @@
 
             {% if automaticMerge %}
               {% if loop.first %}
-                <span class="label label-success">Doublon Conservé</span>
+                <span class="label label-success">Doublon Conservé</span> {# TODO Translation #}
               {% else %}
-                <span class="label label-default">Doublon Supprimé</span>
+                <span class="label label-default">Doublon Supprimé</span> {# TODO Translation #}
               {% endif %}
             {% endif %}
 

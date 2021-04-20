@@ -7,7 +7,7 @@
         '2': "charte",
         '4': "doublon"
         }
-      %} 
+      %}  {# TODO Translation #}
       {% for report in object.getUnresolvedReports() %}
           <span class="label label-danger" style="margin-left: 5px">{{ reportValues[report.value] }}</span>
       {% endfor %}

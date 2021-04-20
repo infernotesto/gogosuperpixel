@@ -37,8 +37,8 @@ file that was distributed with this source code.
         </div>
 
         <div class="admin-config">
-            <p>Pour les utilisateurs ayant accès à l'interface administrateur, vous devez <b>configurer les permissions sur chaque object</b></br>(Note: les SUPER_ADMIN ont accès à tous les objects, pas besoin de configurer pour eux)</p>
-            <div class="btn-check-all btn btn-primary btn-sm checked">Tout cocher/décocher</div>
+            <p>Pour les utilisateurs ayant accès à l'interface administrateur, vous devez <b>configurer les permissions sur chaque object</b></br>(Note: les SUPER_ADMIN ont accès à tous les objects, pas besoin de configurer pour eux)</p> {# TODO Translation #}
+            <div class="btn-check-all btn btn-primary btn-sm checked">Tout cocher/décocher</div> {# TODO Translation #}
 
             {% for roles_group in choices|batch(5) %}
                 {% set firstRole = roles_group|first %}

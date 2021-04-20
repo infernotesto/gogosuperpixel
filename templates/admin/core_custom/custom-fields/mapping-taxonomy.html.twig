@@ -6,9 +6,9 @@
   <table class="table mapping-table mapping-taxonomy-table">
     <thead>
       <tr>
-        <th class="original">Catégories lues depuis le fichier d'origine</th>
+        <th class="original">Catégories lues depuis le fichier d'origine</th> {# TODO Translation #}
         <th style="width:20px"></th>
-        <th>Catégories du site</th>
+        <th>Catégories du site</th> {# TODO Translation #}
         <th style="width:20px"></th>
       </tr>
     </thead>
@@ -18,28 +18,28 @@
         {% if mappedObject.fieldName and mappedObject.fieldName != currentFieldName %}
           {% set currentFieldName = mappedObject.fieldName %}
           <tr>
-            <td class="category-group"><label>Groupe {{ mappedObject.fieldName }}</label></td>
+            <td class="category-group"><label>Groupe {{ mappedObject.fieldName }}</label></td> {# TODO Translation #}
             <td colspan="3"></td>
           </tr>
         {% endif %}
         <tr>
           <td class="original">{{originName}}</td>
-          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Créer une catégorie à partir du nom d'origine"></i></td>
+          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Créer une catégorie à partir du nom d'origine"></i></td> {# TODO Translation #}
           <td class="mapped">
             <input type="text" name="taxonomy[{{originName}}][]" class="form-control category-selector" value="{{mappedObject.mappedCategoryIds|join(',')}}"/>
           </td>
-          <td><i class="clear-icon fa fa-ban" title="Ne pas utiliser cette catégorie"></i></td>
+          <td><i class="clear-icon fa fa-ban" title="Ne pas utiliser cette catégorie"></i></td> {# TODO Translation #}
         </tr>
       {% endfor %}
     </tbody>
   </table>
   <center>
     <button type="button" class="btn btn-default create-missing-categories">
-      Créer toutes les catégories manquantes
+      Créer toutes les catégories manquantes {# TODO Translation #}
     </button>
   </center>
 {% else %}
-  <div class="alert alert-info">Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'</div>
+  <div class="alert alert-info">Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'</div> {# TODO Translation #}
 {% endif %}
 
 <script>
@@ -47,7 +47,7 @@
 
     var taxonomy = {{ form.vars.attr["data-options"]|raw }};
     var mappingOptionNameToId = {}
-    var formData = [{ id: "", text: "Selectionnez une catégorie existant ou entrez le nom d'une nouvelle catégorie à créer", disabled: true}]
+    var formData = [{ id: "", text: "Selectionnez une catégorie existant ou entrez le nom d'une nouvelle catégorie à créer", disabled: true}] // TODO Translation
 
     function recursivelyAddOption(category, parentOption)
     {
@@ -77,7 +77,7 @@
             if ($(data).filter(function() {
                 return this.text.localeCompare(term)===0;
             }).length===0) {
-              return {id: `@create:${term}`, text: term + ' (Sera créé au moment de sauvegarder)'};
+              return {id: `@create:${term}`, text: term + ' (Sera créé au moment de sauvegarder)'}; // TODO Translation
             }
         },
         multiple: true
@@ -96,7 +96,7 @@
       }
       else if (Object.keys(formData).filter(v => [newCategoryId, newCategoryIdIfCreated].includes(v)).length === 0) {
         newCategoryId = newCategoryIdIfCreated
-        formData.push({id: newCategoryId, text: originCategoryName + ' (Sera créé au moment de sauvegarder)'})
+        formData.push({id: newCategoryId, text: originCategoryName + ' (Sera créé au moment de sauvegarder)'}) // TODO Translation
       }        
       const input = $parent.find('.category-selector:not(.select2-container)')
       input.val(newCategoryId).trigger('change');

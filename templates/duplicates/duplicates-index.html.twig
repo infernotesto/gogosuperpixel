@@ -1,9 +1,9 @@
 {% extends "page-layout.html.twig" %}
 
 {% set pageName = 'duplicates' %}
-{% set navTitle = "Gestion des doublons" %}
+{% set navTitle = "Gestion des doublons" %} {# TODO Translation #}
 
-{% block title %}Gestion des doublons{% endblock %}
+{% block title %}Gestion des doublons{% endblock %} {# TODO Translation #}
 
 {% block stylesheets %}
 
@@ -16,15 +16,15 @@
 {% block body_content %}
   <section>
     
-    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">Retour à la gestion des doublons</button></a></center>
+    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">Retour à la gestion des doublons</button></a></center> {# TODO Translation #}
 
     {% if duplicatesNode|length == 0 %}
-      <h1>Aucun doublon à traiter !</h1>
+      <h1>Aucun doublon à traiter !</h1> {# TODO Translation #}
       {% if leftDuplicatesToProceedCount > 0 %}
-        <center><p>{{ leftDuplicatesToProceedCount }} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent</p>  </center>
+        <center><p>{{ leftDuplicatesToProceedCount }} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent</p>  </center> {# TODO Translation #}
       {% endif %}
     {% else %}
-      <h1>Fusionnez les doublons</h1>
+      <h1>Fusionnez les doublons</h1> {# TODO Translation #}
 
       {% for duplicateNode in duplicatesNode %}
         {% include 'duplicates/duplicate-node.html.twig' with { 'duplicateNode' : duplicateNode, 'config' : config } %}
@@ -32,7 +32,7 @@
 
       {% if leftDuplicatesToProceedCount > 0 %}
         <center>        
-          <button class="btn btn-primary" onclick="window.location.reload()">J'en veux encore ! (plus que {{ leftDuplicatesToProceedCount }} doublons à traiter)</button>
+          <button class="btn btn-primary" onclick="window.location.reload()">J'en veux encore ! (plus que {{ leftDuplicatesToProceedCount }} doublons à traiter)</button> {# TODO Translation #}
         </center>
       {% endif %}
     {% endif %}

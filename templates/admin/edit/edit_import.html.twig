@@ -5,11 +5,11 @@
 
 {% block sonata_form_actions %}
   {% if object.lastRefresh %}
-    <p>Dernier import : {{ object.lastRefresh|date('d/m/Y') }}</p>
+    <p>Dernier import : {{ object.lastRefresh|date('d/m/Y') }}</p> {# TODO Translation #}
   {% endif %}
 
   <button type="submit" class="btn btn-success" name="submit">
-    <i class="fa fa-save" aria-hidden="true"></i>Sauvegarder
+    <i class="fa fa-save" aria-hidden="true"></i>Sauvegarder {# TODO Translation #}
   </button>
 
   {% if object.id != "" and object.ontologyMapping|length > 0 %}
@@ -19,10 +19,10 @@
       {% endif %}>
       {% if object.lastRefresh %}
         <i class="fa fa-refresh" aria-hidden="true"></i>
-        Importer de nouveau
+        Importer de nouveau {# TODO Translation #}
       {% else %}
         <i class="fa fa-download" aria-hidden="true"></i>
-        Importer les données
+        Importer les données {# TODO Translation #}
       {% endif %}
     </button>
   {% endif %}
@@ -30,19 +30,19 @@
   {% set class = object.ontologyMapping|length > 0 ? 'btn-default' : 'btn-primary' %}
   {% if object.id != "" %}
     <button type="submit" class="btn btn-default" name="collect" value="collect" title="Met à jour les tables de correspondance sans réellement importer les données">
-      <i class="fa fa-eye" aria-hidden="true"></i>Lire les données
+      <i class="fa fa-eye" aria-hidden="true"></i>Lire les données {# TODO Translation #}
     </button>
     <button type="submit" class="btn btn-default" name="clear-elements" value="clear-elements" title="Efface toutes les données précedemment importées. Il vous suffira de relancer l'import pour les recréer">
-      <i class="fa fa-eraser" aria-hidden="true"></i>Effacer tous les éléments
+      <i class="fa fa-eraser" aria-hidden="true"></i>Effacer tous les éléments {# TODO Translation #}
     </button>
     <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn btn-danger view_link">
-      <i class="fa fa-trash" aria-hidden="true"></i>Supprimer l'import (ainsi que tous les éléments importés)
+      <i class="fa fa-trash" aria-hidden="true"></i>Supprimer l'import (ainsi que tous les éléments importés) {# TODO Translation #}
     </a>
   {% endif %}
 
   <div class="save-overlay">
     <div class="save-overlay-content">
-      <p>Sauvegarde et lecture des données en cours...</p>
+      <p>Sauvegarde et lecture des données en cours...</p> {# TODO Translation #}
       <i class="loading-icon fa fa-spinner fa-spin"></i>
     </div>
   </div>

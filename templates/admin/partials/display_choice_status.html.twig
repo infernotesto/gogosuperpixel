@@ -7,7 +7,7 @@
 {% else %}
     <span class="label label-success">
 {% endif %}
-{% set result = object.isExternal ? "Import - " : "" %}
+{% set result = object.isExternal ? "Import - " : "" %} {# TODO Translation #}
 {% set result = result ~ value %}
 {{ result }}
 </span>

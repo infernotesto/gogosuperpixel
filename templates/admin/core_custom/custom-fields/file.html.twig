@@ -8,7 +8,7 @@
     {% if extension in ['jpg', 'jpeg', 'png', 'gif', 'svg'] %}
       <img src="{{ filePath }}" class="thumbnail"/>
     {% else %}
-      Fichier actuel: <i>{{ filePath|split('/')|last }}</i>
+      Fichier actuel: <i>{{ filePath|split('/')|last }}</i> {# TODO Translation #}
     {% endif %}
   {% endif %}
 {% endif %}
