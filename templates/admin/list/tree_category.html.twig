@@ -2,17 +2,17 @@
 {% trans_default_domain 'admin' %}
 
 {% block navbar_title %}
-    {{ 'categories.title'|trans }}
+    {{ 'categories.list.title'|trans }}
 {% endblock %}
 
 {%- block actions -%}
     <li><a class="sonata-action-element" href="{{ path('admin_app_category_create') }}">
     				<i class="fa fa-plus-circle" aria-hidden="true"></i>
-            {{ 'categories.addCategories'|trans }}
+            {{ 'categories.list.addCategories'|trans }}
     </a></li>
      <li><a class="sonata-action-element" href="{{ path('admin_app_option_create') }}">
     				<i class="fa fa-plus-circle" aria-hidden="true"></i>
-            {{ 'categories.addCategory'|trans }}
+            {{ 'categories.list.addCategory'|trans }}
     </a></li>
 {%- endblock -%}
 
@@ -24,11 +24,11 @@
 
   <p><a class="btn btn-primary sonata-action-element" href="{{ path('admin_app_category_create') }}" style="margin-right: 10px;">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        {{ 'categories.addCategories'|trans }}
+        {{ 'categories.list.addCategories'|trans }}
   </a>
   <a class="btn btn-primary sonata-action-element {{ categories|length == 0 ? 'disabled' : ''}}" href="{{ path('admin_app_option_create') }}">
           <i class="fa fa-plus-circle" aria-hidden="true"></i>
-          {{ 'categories.addCategory'|trans }}
+          {{ 'categories.list.addCategory'|trans }}
   </a></p>
 
 	<div class="well" style="margin-top: 20px; font-size: 15px; line-height: 26px;">
@@ -41,13 +41,13 @@
         {% endif %}
       {% endfor %}
     {% else %}
-    	{{ 'categories.empty'|trans }}
+    	{{ 'categories.list.empty'|trans }}
     {% endif %}
 	</div>
 
   <div class="alert alert-default">
-    <h4>{{ 'categories.help'|trans }}</h4>
-    {{ 'categories.help_description'|trans|raw }}
+    <h4>{{ 'categories.list.help'|trans }}</h4>
+    {{ 'categories.list.help_description'|trans|raw }}
   </div>
 
 <script>
