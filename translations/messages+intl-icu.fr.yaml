@@ -266,15 +266,6 @@ commons:
     v1: "Existe"
     v2: "Existe et valide info"
 
-  moderationChoices:
-    c-2: "Erreur geolocalisation"
-    c-1: "Aucune catégorie renseignée"
-    c0: "Pas de modération nécessaire"
-    c1: "Erreurs signalées"
-    c2: "Votes non consensuels"
-    c3: "En attente depuis trop longtemps"
-    c4: "Doublon potentiel"
-
 errors: # TODO erreurs ajax
   e1: "Les identifiants de connexion ne sont pas corrects"
   e2: "Une erreur s'est produite lors de la tentative de connexion"

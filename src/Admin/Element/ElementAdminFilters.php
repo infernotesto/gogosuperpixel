@@ -24,7 +24,8 @@ class ElementAdminFilters extends ElementAdminAbstract
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-      $datagridMapper
+
+        $datagridMapper
       ->add('name')
       ->add('status', 'doctrine_mongo_choice', [], ChoiceType::class,
           [
@@ -74,7 +75,9 @@ class ElementAdminFilters extends ElementAdminAbstract
       ->add('moderationState', 'doctrine_mongo_choice', ['label' => 'Type de Modération'], // TODO translate
           ChoiceType::class,
           [
-             'choices' => array_flip($this->moderationChoices),
+             'choices' => array_flip(array_map(function($value) {
+                return $this->t('elements.fields.moderationState_choices.' . $value);
+             }, [-2 => -2,-1 => -1,0 => 0,1 => 1,2 => 2,3 => 3,4 => 4])),
              'expanded' => false,
              'multiple' => false,
             ]

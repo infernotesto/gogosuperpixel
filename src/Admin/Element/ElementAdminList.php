@@ -54,9 +54,8 @@ class ElementAdminList extends ElementAdminFilters
          ->add('sourceKey')
          ->add('optionsString', null, ['header_style' => 'width: 250px'])
          ->add('moderationState', ChoiceType::class, [
-               'choices' => $this->moderationChoices,
-               'template' => 'admin/partials/list_choice_moderation.html.twig',
-               ])
+            'template' => 'admin/partials/list_choice_moderation.html.twig',
+         ])
          // use fake attribute createdAt, we then access full object inside template
          ->add('createdAt', null, ['template' => 'admin/partials/list_votes.html.twig', 'label' => 'Votes']) // TODO translate ??
 

@@ -1,5 +1,7 @@
 {% if real_value != 0 %}
-    <span class="label label-danger">{{ value }}</span>
+    <span class="label label-danger">
+      {{ ('elements.fields.moderationState_choices.' ~ real_value)|trans({}, 'admin') }}
+    </span>
     {% if object.reports %}
       {% set reportValues = {
         '0': "existe plus",

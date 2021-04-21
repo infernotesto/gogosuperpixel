@@ -29,17 +29,7 @@ class ElementAdminAbstract extends GoGoAbstractAdmin
       '6' => 'Modifié avec lien direct',
       '7' => 'Importé'
     ];
-
-/*     protected $moderationChoices = [ // TODO translate
-      '-2' => 'Erreur geolocalisation',
-      '-1' => 'Aucune catégorie renseignée',
-      '0' => 'Pas de modération nécessaire',
-      '1' => 'Erreurs signalées',
-      '2' => 'Votes non consensuels',
-      '3' => 'En attente depuis trop longtemps',
-      '4' => 'Doublon potentiel',
-    ];
- */
+    
     protected $reportsValuesChoice = [ // TODO translate
       '0' => "L'élément n'existe plus",
       '1' => 'Les informations sont incorrectes',
