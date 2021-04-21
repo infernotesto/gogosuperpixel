@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 {% set userRoles = {
   0: "Anonyme",
   1: 'Anonyme avec mail',
@@ -12,7 +14,7 @@
 <div {% if not loop.last and not itemContainer|default(true) %}class="item-container"{% endif %}>
 	<div style="margin-bottom:5px">
     <span class="label {{ labelClass }}">{{ itemValues[item.value] }}</span> 
-    <div style="float:right">{{ item.createdAt|date("d/m/Y à H:i")}}</div> {# TODO Translation #}
+    <div style="float:right">{{ item.createdAt|date('commons.format'|trans)}}</div>
     {% if smallWidth|default(false) %}
       </br>
       <span style="display:block;padding-top: 5px;">

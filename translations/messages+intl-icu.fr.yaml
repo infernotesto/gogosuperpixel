@@ -134,12 +134,6 @@ votes:
   date: Date
   status: Status
   empty: Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la modération collaborative !
-  voteValues:
-    v-2: Ne respecte pas la charte'
-    v-1: N'existe pas
-    v0: Existe mais infos mauvaises
-    v1: Existe
-    v2: Existe et valide info
 
 reports:
   _label: Mes Signalements
@@ -231,64 +225,88 @@ commons:
     too_long: Oups, ce texte est un peu long !
 
   elementStatus:
-    s:    En attente
-    s-6:  Doublon
-    s-5:  modifié en attente
-    s-4:  Supprimé
-    s-3:  Refusé (votes)
-    s-2:  Refusé (admin)
-    s-1:  En attente (modifs)
-    s0:   En attente (ajout)
-    s1:   Validé (admin)
-    s2:   Validé (votes)
-    s3:   Ajouté par admin
-    s4:   Modifié par admin
-    s5:   Modifié par propriétaire
-    s6:   Modifié avec lien direct
-    s7:   Importé
+    s:    "En attente"
+    s-6:  "Doublon"
+    s-5:  "Modifié en attente"
+    s-4:  "Supprimé"
+    s-3:  "Refusé (votes)"
+    s-2:  "Refusé (admin)"
+    s-1:  "En attente (modifs)"
+    s0:   "En attente (ajout)"
+    s1:   "Validé (admin)"
+    s2:   "Validé (votes)"
+    s3:   "Ajouté par admin"
+    s4:   "Modifié par admin"
+    s5:   "Modifié par propriétaire"
+    s6:   "Modifié avec lien direct"
+    s7:   "Importé"
 
   contributionType:
-    t-1:  Suppression
-    t0:   Ajout
-    t1:   Modif
-    t2:   Vote
-    t3:   Signalement
-    t4:   Import
-    t5:   Restauration
-    t6:   Résolution modération
+    t-1:  "Suppression"
+    t0:   "Ajout"
+    t1:   "Modif"
+    t2:   "Vote"
+    t3:   "Signalement"
+    t4:   "Import"
+    t5:   "Restauration"
+    t6:   "Résolution modération"
+
+  userRoles:
+    r0: "Anonyme"
+    r1: "Anonyme avec mail"
+    r2: "Utilisateur identifié"
+    r3: "Admin"
+    r4: "Anonyme avec lien"
+    r5: "GoGoBot"
+
+  voteValues:
+    v-2: "Ne respecte pas la charte"
+    v-1: "N'existe pas"
+    v0: "Existe mais infos mauvaises"
+    v1: "Existe"
+    v2: "Existe et valide info"
+
+  moderationChoices:
+    c-2: "Erreur geolocalisation"
+    c-1: "Aucune catégorie renseignée"
+    c0: "Pas de modération nécessaire"
+    c1: "Erreurs signalées"
+    c2: "Votes non consensuels"
+    c3: "En attente depuis trop longtemps"
+    c4: "Doublon potentiel"
 
 errors: # TODO erreurs ajax
-  e1: Les identifiants de connexion ne sont pas corrects
-  e2: Une erreur s'est produite lors de la tentative de connexion
+  e1: "Les identifiants de connexion ne sont pas corrects"
+  e2: "Une erreur s'est produite lors de la tentative de connexion"
 
 # If some messages are reused over differents pages
 action:
-  search: Rechercher # just an example, can be deleted
-  submit: Enregistrer
-  geolocalize_me: Géolocaliser ma position # TODO doublon avec home.geolocalize ??
-  create: Créer
-  send: Envoyer
-  send_stay: Envoyer et rester sur le formulaire
-  cancel: Annuler
-  continue: Continuer
+  search: "Rechercher" # just an example, can be deleted
+  submit: "Enregistrer"
+  geolocalize_me: "Géolocaliser ma position" # TODO doublon avec home.geolocalize ??
+  create: "Créer"
+  send: "Envoyer"
+  send_stay: "Envoyer et rester sur le formulaire"
+  cancel: "Annuler"
+  continue: "Continuer"
   error: "Erreur : {message}"
   element: # element controller
     vote:
       unallowed: "Désolé, vous n'êtes pas autorisé à voter !"
-      uncomplete: Les paramètres du vote sont incomplets
+      uncomplete: "Les paramètres du vote sont incomplets"
     report:
       unallowed: "Désolé, vous n'êtes pas autorisé à signaler d'erreurs !"
-      done: Merci, votre signalement a bien été enregistré !
+      done: "Merci, votre signalement a bien été enregistré !"
     delete:
       unallowed: "Désolé, vous n'êtes pas autorisé à supprimer un élément !"
-      uncomplete: Les paramètres sont incomplets
+      uncomplete: "Les paramètres sont incomplets"
       done: "L'élément a bien été supprimé"
     resolveReports:
       unallowed: "Désolé, vous n'êtes pas autorisé à modérer cet élément !"
-      uncomplete: Les paramètres sont incomplets
+      uncomplete: "Les paramètres sont incomplets"
       done: "L'élément a bien été modéré"
     sendMail:
-      uncomplete: Les paramètres sont incomplets
+      uncomplete: "Les paramètres sont incomplets"
       mailSubject: 'Message reçu depuis la plateforme {instance}'
       mailContent: '<p>Bonjour <i>{element}</i>,</p>
             <p>Vous avez reçu un message de la part de <a href="mailto:{sender}">{sender}</a></br>
@@ -298,17 +316,17 @@ action:
       done: "L'email a bien été envoyé"
     stamp:
       unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
-      uncomplete: Les paramètres sont incomplets
+      uncomplete: "Les paramètres sont incomplets"
       done: "L'étiquette a bien été modifiée"
   mailtest:
     draftAutomated:
-      uncomplete: No visible elements in database, please create an element
+      uncomplete: "No visible elements in database, please create an element" # TODO translation
     sentTestAutomated:
       uncomplete: "Aucune adresse mail n'a été renseignée"
-      database_empty: No elements in database, please create an element for email testing
-      done: 'Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs'
+      database_empty: "No elements in database, please create an element for email testing" # TODO translation
+      done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
     draftTest:
-      done: 'Un customMessage de test'
+      done: "Un customMessage de test"
 
 
 directory: # just an example, can be deleted

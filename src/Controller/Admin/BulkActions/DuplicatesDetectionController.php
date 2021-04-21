@@ -7,13 +7,14 @@ use App\Services\ElementDuplicatesService;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DuplicatesDetectionController extends BulkActionsAbstractController
 {
     public function detectDuplicatesAction(Request $request, SessionInterface $session, DocumentManager $dm,
-                                           ElementDuplicatesService $duplicateService)
+                                           ElementDuplicatesService $duplicateService, TranslatorInterface $t)
     {
-        $this->title = 'Détection des doublons'; // TODO translate
+        $this->title = $t->trans('bulk.detectDuplicatesAction', [], 'admin');
         $this->automaticRedirection = false;
         $this->batchSize = 1000;
         $this->duplicateService = $duplicateService;
@@ -31,7 +32,7 @@ class DuplicatesDetectionController extends BulkActionsAbstractController
                 ->execute();
         }
 
-        return $this->elementsBulkAction('detectDuplicates', $dm, $request, $session);
+        return $this->elementsBulkAction('detectDuplicates', $dm, $request, $session, $t);
     }
 
     public function detectDuplicates($element, $dm)

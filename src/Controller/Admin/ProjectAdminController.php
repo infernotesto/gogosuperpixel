@@ -8,14 +8,16 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectAdminController extends Controller
 {
-    public function __construct(DocumentManager $dm, LoggerInterface $projectsLogger, TokenStorageInterface $securityContext)
+    public function __construct(DocumentManager $dm, LoggerInterface $projectsLogger, TokenStorageInterface $securityContext, TranslatorInterface $t)
     {
         $this->dm = $dm;
         $this->logger = $projectsLogger;
         $this->security = $securityContext;
+        $this->t = $t;
     }
 
     /**

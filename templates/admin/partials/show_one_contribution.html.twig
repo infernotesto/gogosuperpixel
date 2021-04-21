@@ -1,52 +1,56 @@
+{% trans_default_domain 'message' %}
+
 {% set contributionType = {
-	'-1': "Suppression",
-	0: "Ajout",
-	1: 'Modification',
-	2: "Vote",
-	3: "Signalement",
-	4: "Import",
-	5: "Restauration",
-	6: "Resolution modération"
+	'-1': 'commons.contributionType.t-1'|trans,
+	0:    'commons.contributionType.t0'|trans,
+	1:    'commons.contributionType.t1'|trans,
+	2:    'commons.contributionType.t2'|trans,
+	3:    'commons.contributionType.t3'|trans,
+	4:    'commons.contributionType.t4'|trans,
+	5:    'commons.contributionType.t5'|trans,
+	6:    'commons.contributionType.t6'|trans,
 	}
-%} {# TODO Translation #}
+%}
 
 {% set elementStatus = {
-	'' : 'En attente',
-	'-6': "Doublon",
-	'-5': "modified pending",
-	'-4': 'Supprimé',
-	'-3': 'Refusé (votes) ',
-	'-2': 'Refusé (admin)',
-	'-1': 'En attente (modifs)',
-	 0: 'En attente (ajout)',
-	 1: 'Validé (admin)',
-	 2: 'Validé (votes)',
-	 3: 'Ajouté par admin',
-	 4: 'Modifié par admin',
-	 5: 'Modifié par propriétaire',
-	 6: 'Modifié avec lien direct',
-	 7: 'Importé',
+	'' :  'commons.elementStatus.s'|trans,
+	'-6': 'commons.elementStatus.s-6'|trans,
+	'-5': 'commons.elementStatus.s-5'|trans,
+	'-4': 'commons.elementStatus.s-4'|trans,
+	'-3': 'commons.elementStatus.s-3'|trans,
+	'-2': 'commons.elementStatus.s-2'|trans,
+	'-1': 'commons.elementStatus.s-1'|trans,
+	0:   'commons.elementStatus.s0'|trans,
+	1:   'commons.elementStatus.s1'|trans,
+	2:   'commons.elementStatus.s2'|trans,
+	3:   'commons.elementStatus.s3'|trans,
+	4:   'commons.elementStatus.s4'|trans,
+	5:   'commons.elementStatus.s5'|trans,
+	6:   'commons.elementStatus.s6'|trans,
+	7:   'commons.elementStatus.s7'|trans,
 	}
-%} {# TODO Translation #}
-
+%}
+  
 {% set userRoles = {
-	0: "Anonyme",
-	1: 'Anonyme avec mail',
-	2: "Utilisateur loggué",
-	3: "Admin",
-	4: 'Anonyme avec lien',
-	5: 'GoGoBot'
+	0: 'commons.userRoles.r0'|trans,
+	1: 'commons.userRoles.r1'|trans,
+	2: 'commons.userRoles.r2'|trans,
+	3: 'commons.userRoles.r3'|trans,
+	4: 'commons.userRoles.r4'|trans,
+	5: 'commons.userRoles.r5'|trans,
 	}
-%} {# TODO Translation #}
+%}
 
 {% set itemValues = {
-	'-2': 'Ne respecte pas la charte',
-	'-1': "N'existe pas",
-	'0': 'Existe mais infos mauvaises',
-	'1': 'Existe',
-	'2': 'Existe et valide info'
+	'-2': 'commons.userRoles.v-2'|trans,
+	'-1': 'commons.userRoles.v-1'|trans,
+	0: 'commons.userRoles.v0'|trans,
+	1: 'commons.userRoles.v1'|trans,
+	2: 'commons.userRoles.v2'|trans,
 	}
-%} {# TODO Translation #}
+%}
+
+{% trans_default_domain 'admin' %}
 
 {% if value and (not value.isResolved or showResolved|default(false))%}
 	<div class="panel-heading {{ value.votes|length > 0 ? 'body-content' : ''}}" role="tab" id="heading{{value.id}}" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{value.id}}" aria-expanded="true" aria-controls="collapse{{value.id}}">
@@ -57,7 +61,7 @@
 					par <u>{{ value.getUserDisplayName }}</u>
 					<span class="label label-default">{{ userRoles[value.userRole] }}</span>
 					<span><i>{{ value.resolvedMessage}}</i><span>
-					<div style="float:right">{{ value.updatedAt|date("d/m/Y à H:i")}}</div> {# TODO Translation #}
+					<div style="float:right">{{ value.updatedAt|date('commons.format'|trans)}}</div>
 			</div>
 		{% else %}
 			<div class="small-margin">
@@ -67,14 +71,14 @@
 					{% if value.resolvedBy %}<span>(<u>{{value.resolvedBy }}</u>)</span>{% endif %}
 
 					{% if showResolved|default(false) %}
-						<div style="float:right">{{ value.updatedAt|date("d/m/Y à H:i")}}</div> {# TODO Translation #}
+						<div style="float:right">{{ value.updatedAt|date('commons.format'|trans)}}</div>
 					{% endif %}
 			</div>
 
 			<div class="small-margin">
-				Proposé par <u>{{ value.getUserDisplayName }}</u>
+				{{ 'xx'|trans({'%name%': value.getUserDisplayName})|raw }}
 				<span class="label label-default">{{ userRoles[value.userRole] }}</span>
-				le {{ value.createdAt|date("d/m/Y à H:i")}} {# TODO Translation #}
+				{{ 'xy'|trans({'%date%': value.createdAt|date('commons.format'|trans)}) }}
 			</div>
 		{% endif %}
 

@@ -37,28 +37,29 @@ class UserAdminController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'ERROR : '.$e->getMessage()); // TODO translate ?
+            $this->addFlash('sonata_flash_error', $this->trans('batch.error', [$e->getMessage()], 'admin'));
 
             return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }
 
         if (!$request->get('mail-subject') || !$request->get('mail-content')) {
-            $this->addFlash('sonata_flash_error', $this->t->trans('mailError', [], 'admin'));
+            $this->addFlash('sonata_flash_error', $this->trans('batch.mailError', [], 'admin'));
         } elseif (count($mails) > 0) {
             $result = $this->mailService->sendMail(null, $request->get('mail-subject'), $request->get('mail-content'), $request->get('from'), $mails);
             if ($result['success']) {
-                $this->addFlash('sonata_flash_success', $this->t->trans('batch.sendmails', ['%count%' => count($mails)], 'admin'));
+                $this->addFlash('sonata_flash_success', $this->trans('batch.sendmails', ['%count%' => count($mails)], 'admin'));
             } else {
                 $this->addFlash('sonata_flash_error', $result['message']);
             }
         }
 
         if ($usersWithoutEmail > 0) {
-            $this->addFlash('sonata_flash_error', $this->t->trans('usersWithoutEmail', ['%count%' => $usersWithoutEmail], 'admin'));
+            $this->addFlash('sonata_flash_error', $this->trans('usersWithoutEmail', ['%count%' => $usersWithoutEmail], 'admin'));
         }
 
-        if ($nbreModelsToProceed >= 5000) {
-            $this->addFlash('sonata_flash_info', "Trop d'éléments à traiter ! Seulement 5000 ont été traités"); // TODO translate
+        $limit = 5000;
+        if ($nbreModelsToProceed >= $limit) {
+            $this->addFlash('sonata_flash_info', $this->trans('batch.tooMany', ['%limit%' => $limit], 'admin'));
         }
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));

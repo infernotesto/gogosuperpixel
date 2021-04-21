@@ -147,14 +147,21 @@ elements:
     sourceKey: "Source"
     optionsString: "Catégories"
     moderationState: "Modération"
-    # Votes ??
-    # Action ??
-
+    userOwnerEmail: "Email de l'utilisateur propriétaire de cette fiche"
+    email: "Email de l'élément"
+    id: "ID"
+    randomHash: "Hâchage aléatoire"
+    oldId: "Id dans la base de données importée"
+    createdAt: "Créé le"
+    reports: "Signalements"
+    optionIds: "Catégories"
   form:
     groups:
-      general: "Informations générales"
+      #general: "Informations générales"
+      general: "Général"
       localisation: "Localisation"
-    optionIds: "Catégories"
+      otherInfos: "Autre infos"
+      moderation: "Modération"
 
   address:
     streetAddress: "Rue"
@@ -542,8 +549,12 @@ webhooks:
 
 commons:
   btn_update_and_edit: "Mettre à jour"
+  format: "d/m/Y à H:i" # TODO use local ?? 
   fields:
     image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
+
+xx: "Proposé par <u>{name}</u>"
+xy: "le {date}"
 
 config_general:
   _label: "Configuration Générale"
@@ -637,7 +648,6 @@ option_hidden:
 
 news:
   _label: "Actualités (newsletter)"
-  format: "d/m/Y à H:i" # TODO use local ?? 
   fields:
     title: "Titre"
     publicationDate: "Date de publication"
@@ -701,7 +711,8 @@ batch:
                               =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
                               other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
                       }"
-
+  tooMany: "Trop d'éléments à traiter ! Seulement {limit} ont été traités"
+  error: "ERREUR : {message}"
 
 config_users:
   _label: Configuration
@@ -737,6 +748,18 @@ bulk:
                   =1 {# utilisateur a été mis à jour}
                   other {# utilisateurs ont été mis à jour}
                }"
+  detectDuplicatesAction: "Détection des doublons"
+  analyse: "Analyse des éléments de {first} à {last}"
+  continue: "Continuer à traiter les éléments suivants (encore {count} à traiter)"
+  done: "Tous les éléments ont été traités avec succès"
+  results: "Résultats"
+  isDuplicateAction: "Détection des doublons"
+  managed: "Gérer les doublons détectés"
+  return: "Retour à la gestion des doublons"
+  automaticMerge: "Fusion automatique"
+  manualMerge: "Doublons potentiels détectés"
+  duplicateKept: "Doublon Conservé"
+  duplicateDeleted: "Doublon Supprimé"
 
 help:
   _label: "Aide"
@@ -745,3 +768,11 @@ help:
 saas:
   list: "Liste des Projets"
   config: "Configuration"
+
+  core_custom:
+    seeOnOSM: "Voir cet élément sur OpenStreetMap"
+    customFields: "Champs Personnalisés"
+    duplicateOf: "Cet élément a été fusionné avec un autre :"
+    seeDuplicate: "voir l'élément fusionné"
+    addCustomField: "Ajouter un Champ Personnalisé"
+    specialFields: "Champs Spéciaux"

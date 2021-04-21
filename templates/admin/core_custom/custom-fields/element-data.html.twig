@@ -1,18 +1,20 @@
+{% trans_default_domain 'admin' %}
+
 {% set element = form.vars.sonata_admin.admin.subject %}
 {% set config = form.vars.sonata_admin.admin.config %}
 
 {% if element.isFromOsm %}
-  	<a href={{ element.getOsmUrl(config)  }} target="_blank">Voir cet élément sur OpenStreetMap</a> {# TODO Translation #}
+  	<a href={{ element.getOsmUrl(config)  }} target="_blank">{{ 'core_custom.seeOnOSM'|trans }}</a>
 {% endif %}
 
 {% if element.duplicateOf %}
-  	Cet élément a été fusionné avec un autre :  {# TODO Translation #}
+  	{{ 'core_custom.duplicateOf'|trans }}
     <a href={{ path('admin_app_element_showEdit', {'id': element.duplicateOf})  }} target="_blank">
-      voir l'élément fusionné {# TODO Translation #}
+      {{ 'core_custom.seeDuplicate'|trans }}
     </a>
 {% endif %}
 
-<h4 style="margin-top: 25px;">Champs Personnalisés</h4> {# TODO Translation #}
+<h4 style="margin-top: 25px;">{{ 'core_custom.customFields'|trans }}</h4>
 <div class="table-responsive no-padding element-data-fields">
   <table class="table">
   <tbody>
@@ -47,10 +49,10 @@
   </tbody>
   </table>
   <button type="button" class="btn btn-add-field btn-default btn-sm" @click="addField()">
-    Ajouter un Champ Personnalisé {# TODO Translation #}
+    {{ 'core_custom.addCustomField'|trans }}
   </button>
 </div>
-<h4>Champs Spéciaux</h4> {# TODO Translation #}
+<h4>{{ 'core_custom.specialFields'|trans }}</h4>
 
 <style>
   .element-data-fields th {
@@ -71,5 +73,3 @@
 <script>
   var existingProps = {{ form.vars.attr["data-props"]|raw }};
 </script>
-
-

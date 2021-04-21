@@ -43,8 +43,8 @@ class ElementAdminShowEdit extends ElementAdminList
                 'class' => 'gogo-element-data',
                 'data-props' => json_encode($elementProperties)
               ]])
-            ->add('userOwnerEmail', EmailType::class, ['required' => false, 'label' => "Email de l'utilisateur propriétaire de cette fiche"])// TODO translate
-            ->add('email', EmailType::class, ['required' => false, 'label' => "Email de l'élément"])// TODO translate
+            ->add('userOwnerEmail', EmailType::class)
+            ->add('email', EmailType::class)
             ->add('images', CollectionType::class, [
               'entry_type' => ElementImageType::class,
               'allow_add' => true,
@@ -72,13 +72,13 @@ class ElementAdminShowEdit extends ElementAdminList
         $needModeration = 0 != $this->subject->getModerationState();
 
         $show
-          ->with('Autre infos', ['class' => 'col-md-6'])
+          ->with('otherInfos', ['class' => 'col-md-6'])
             ->add('id')
             ->add('randomHash')
-            ->add('oldId', null, ['label' => 'Id dans la base de données importée'])// TODO translate
-            ->add('sourceKey', null, ['label' => 'Source'])// TODO translate
-            ->add('createdAt', 'datetime', ['format' => 'd/m/Y à H:i'])// TODO translate
-            ->add('updatedAt', 'datetime', ['format' => 'd/m/Y à H:i'])// TODO translate
+            ->add('oldId')
+            ->add('sourceKey')
+            ->add('createdAt', 'datetime', ['format' => $this->t('commons.format')])
+            ->add('updatedAt', 'datetime', ['format' => $this->t('commons.format')])
           ->end();
 
         if ($this->subject->isPending()) {
@@ -94,13 +94,9 @@ class ElementAdminShowEdit extends ElementAdminList
 
         if ($needModeration) {
             $show
-              ->with('Modération', ['class' => 'col-md-6 col-sm-12'])
-                ->add('moderationState', ChoiceType::class, [
-                    'label' => 'Moderation',// TODO translate
-                      'choices' => $this->moderationChoices,
-                      'template' => 'admin/partials/show_choice_moderation.html.twig',
-                      ])
-                ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig', 'label' => 'Signalements'])// TODO translate
+              ->with('moderation', ['class' => 'col-md-6 col-sm-12'])
+                ->add('moderationState', ChoiceType::class, ['template' => 'admin/partials/show_choice_moderation.html.twig',])
+                ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig'])
               ->end();
         }
 

@@ -1,6 +1,8 @@
+{% trans_default_domain 'admin' %}
+
 <div class="bs-callout {{ automaticMerge ? 'bs-callout-success' : 'bs-callout-warning' }} bulk-duplicate">
 
-    <h4>{{ automaticMerge ? "Fusion automatique" : "Doublons potentiels détectés" }}</h4> {# TODO Translation #}
+    <h4>{{ automaticMerge ? 'bulk.automaticMerge'|trans : 'bulk.manualMerge'|trans }}</h4>
 
     {% for duplicate in duplicates %}
         <li>
@@ -11,9 +13,9 @@
 
             {% if automaticMerge %}
               {% if loop.first %}
-                <span class="label label-success">Doublon Conservé</span> {# TODO Translation #}
+                <span class="label label-success">{{ 'bulk.duplicateKept'|trans }}</span>
               {% else %}
-                <span class="label label-default">Doublon Supprimé</span> {# TODO Translation #}
+                <span class="label label-default">{{ 'bulk.duplicateDeleted'|trans }}</span>
               {% endif %}
             {% endif %}
 
@@ -39,8 +41,3 @@
     margin-right: 0;
   }
 </style>
-
-
-
-
-

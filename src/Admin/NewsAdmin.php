@@ -36,7 +36,7 @@ final class NewsAdmin extends GoGoAbstractAdmin
     {
         $list
             ->addIdentifier('title', 'text')
-            ->add('publicationDate', 'datetime', ['format' => $this->t('news.format')])
+            ->add('publicationDate', 'datetime', ['format' => $this->t('commons.format')])
             ->add('status', 'choice', ['choices' => [
                 NewsStatus::DRAFT => $this->t('news.fields.status_choices.draft'),
                 NewsStatus::PUBLISHED => $this->t('news.fields.status_choices.published'),
@@ -59,7 +59,7 @@ final class NewsAdmin extends GoGoAbstractAdmin
     {
         $show
             ->add('title', 'text')
-            ->add('publicationDate', 'datetime', ['format' => $this->t('news.format')])
+            ->add('publicationDate', 'datetime', ['format' => $this->t('commons.format')])
             ->add('status', 'choice', ['choices' => [
                 NewsStatus::DRAFT => $this->t('news.fields.status_choices.draft'),
                 NewsStatus::PUBLISHED => $this->t('news.fields.status_choices.published'),
