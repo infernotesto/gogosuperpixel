@@ -149,7 +149,7 @@ reports:
     v2: L'élément ne respecte pas la charte
     v3: L'élément est référencé plusieurs fois
 
-create:
+project.create:
   _label: GoGoCarto - Des cartes à GoGo
   title: Créer un projet
   project_name: Nom du projet

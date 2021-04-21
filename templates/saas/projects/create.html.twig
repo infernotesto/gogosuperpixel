@@ -1,9 +1,10 @@
 {% extends "saas/sass-layout.html.twig" %}
 
-{% block title %}{{ 'create._label'|trans }}{% endblock %}
+{% block title %}{{ 'project.create._label'|trans }}{% endblock %}
+
 
 {% block body %}
-  <h1>{{ 'create.title'|trans }}</h1>
+  <h1>{{ 'project.create.title'|trans }}</h1>
 
   <div class="top-form-message">
     {{ config.saas.newProjectInstructions|raw }}
@@ -14,14 +15,14 @@
     {{ form_start(form, {'id': 'project-form'}) }}
 
     <div class="row">
-      <h2>{{ 'create.project_name'|trans }}</h2>
+      <h2>{{ 'project.create.project_name'|trans }}</h2>
       {# NAME #}
       {{ form_errors(form.name) }}
       <div class="input-field col s12">
         <i class="material-icons gogo-icon-description prefix"></i>
         {{ form_widget(form.name, {'id': 'input-name',
                                    'attr': {'class': 'validate required', 'length':'80'}}) }}
-        <label for="input-name" class="gogo-form-label" data-error="{{ 'create.data-error'|trans }}">{{ 'create.project_name'|trans }}</label>
+        <label for="input-name" class="gogo-form-label" data-error="{{ 'project.create.data-error'|trans }}">{{ 'project.create.project_name'|trans }}</label>
       </div>
 
       {# DOMAIN #}
@@ -30,18 +31,18 @@
         <i class="material-icons gogo-icon-internet prefix"></i>
         {{ form_widget(form.domainName, {'id': 'input-domain',
                                    'attr': {'class': 'validate required', 'length':'80'}}) }}
-        <label for="input-domain" class="gogo-form-label" data-error="">{{ 'create.domaine_name'|trans }} <i>( ****.{{ base_url }} )</i></label>
+        <label for="input-domain" class="gogo-form-label" data-error="">{{ 'project.create.domaine_name'|trans }} <i>( ****.{{ base_url }} )</i></label>
       </div>
 
       <div class="col s12 contrib-config-section">
         {# CONTRIBUTION_CONFIG #}
-        <h2>{{ 'create.contrib'|trans }}</h2>
+        <h2>{{ 'project.create.contrib'|trans }}</h2>
         <p id="please-choose-contribution" class="error-label" style="display:none">{{ 'commons.choose_one_option'|trans }}</p>
         {% set contribOptions = [
-            ['open', 'create.contribOptions.open'|trans, 'create.contribHints.open'|trans],
-            ['intermediate', 'create.contribOptions.intermediate'|trans, 'create.contribHints.intermediate'|trans],
-            ['closed', 'create.contribOptions.closed'|trans, 'create.contribHints.closed'|trans],
-            ['inherit', 'create.contribOptions.inherit'|trans, 'create.contribHints.inherit'|trans('{base_url: base_url}')]
+            ['open', 'project.create.contribOptions.open'|trans, 'project.create.contribHints.open'|trans],
+            ['intermediate', 'project.create.contribOptions.intermediate'|trans, 'project.create.contribHints.intermediate'|trans],
+            ['closed', 'project.create.contribOptions.closed'|trans, 'project.create.contribHints.closed'|trans],
+            ['inherit', 'project.create.contribOptions.inherit'|trans, 'project.create.contribHints.inherit'|trans('{base_url: base_url}')]
           ]
         %}
         {% for option in contribOptions %}
@@ -55,13 +56,13 @@
       {% if config.saas.endUserLicenceAgreement %}
         <div class="col s12 cgu-config-section">
           {# CONTRIBUTION_CONFIG #}
-          <h2>{{ 'create.cgu'|trans }}</h2>
+          <h2>{{ 'project.create.cgu'|trans }}</h2>
           <div class="cgu-content">
             {{ config.saas.endUserLicenceAgreement|raw}}
           </div>
           <p class="cgu-checkbox-container">
             <input name="accept-cgu" type="checkbox" id="accept-cgu" class="required" />
-            <label for="accept-cgu">{{ 'create.accept_cgu'|trans }}</label>
+            <label for="accept-cgu">{{ 'project.create.accept_cgu'|trans }}</label>
           </p>
         </div>
       {% endif %}
@@ -71,7 +72,7 @@
 
     <div class="overlay">
       <div class="overlay-content">
-        <div class="message">{{ 'create.message'|trans }}</div>
+        <div class="message">{{ 'project.create.message'|trans }}</div>
         {% include 'directory/components/spinner-loader.html.twig' with {'id': 'create-project-loader' }%}
       </div>
     </div>
