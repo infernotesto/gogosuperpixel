@@ -4,17 +4,17 @@
 {% set config = form.vars.sonata_admin.admin.config %}
 
 {% if element.isFromOsm %}
-  	<a href={{ element.getOsmUrl(config)  }} target="_blank">{{ 'core_custom.seeOnOSM'|trans }}</a>
+  	<a href={{ element.getOsmUrl(config)  }} target="_blank">{{ 'elements.form.seeOnOSM'|trans }}</a>
 {% endif %}
 
 {% if element.duplicateOf %}
-  	{{ 'core_custom.duplicateOf'|trans }}
+  	{{ 'elements.form.duplicateOf'|trans }}
     <a href={{ path('admin_app_element_showEdit', {'id': element.duplicateOf})  }} target="_blank">
-      {{ 'core_custom.seeDuplicate'|trans }}
+      {{ 'elements.form.seeDuplicate'|trans }}
     </a>
 {% endif %}
 
-<h4 style="margin-top: 25px;">{{ 'core_custom.customFields'|trans }}</h4>
+<h4 style="margin-top: 25px;">{{ 'elements.form.customFields'|trans }}</h4>
 <div class="table-responsive no-padding element-data-fields">
   <table class="table">
   <tbody>
@@ -49,10 +49,10 @@
   </tbody>
   </table>
   <button type="button" class="btn btn-add-field btn-default btn-sm" @click="addField()">
-    {{ 'core_custom.addCustomField'|trans }}
+    {{ 'elements.form.addCustomField'|trans }}
   </button>
 </div>
-<h4>{{ 'core_custom.specialFields'|trans }}</h4>
+<h4>{{ 'elements.form.specialFields'|trans }}</h4>
 
 <style>
   .element-data-fields th {

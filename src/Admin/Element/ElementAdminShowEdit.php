@@ -72,7 +72,7 @@ class ElementAdminShowEdit extends ElementAdminList
         $needModeration = 0 != $this->subject->getModerationState();
 
         $show
-          ->with('otherInfos', ['class' => 'col-md-6'])
+          ->with('elements.form.groups.otherInfos', ['class' => 'col-md-6'])
             ->add('id')
             ->add('randomHash')
             ->add('oldId')
@@ -82,10 +82,10 @@ class ElementAdminShowEdit extends ElementAdminList
           ->end();
 
         if ($this->subject->isPending()) {
-          $show->with('En attente', ['class' => 'col-md-6'])
+          $show->with('elements.form.groups.pending', ['class' => 'col-md-6'])
             ->add('currContribution', null, ['template' => 'admin/partials/show_one_contribution.html.twig'])->end();
         } else {
-          $show->with('Status', ['class' => 'col-md-6'])
+          $show->with('elements.fields.status', ['class' => 'col-md-6'])
             ->add('status', ChoiceType::class, [
               'choices' => $this->statusChoices,
               'template' => 'admin/partials/show_choice_status.html.twig',
@@ -94,7 +94,7 @@ class ElementAdminShowEdit extends ElementAdminList
 
         if ($needModeration) {
             $show
-              ->with('moderation', ['class' => 'col-md-6'])
+              ->with('elements.form.groups.moderation', ['class' => 'col-md-6'])
                 ->add('moderationState', ChoiceType::class, ['template' => 'admin/partials/show_choice_moderation.html.twig',])
                 ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig'])
               ->end();

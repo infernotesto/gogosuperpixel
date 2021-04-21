@@ -187,12 +187,18 @@ elements:
     optionIds: "Catégories"
   form:
     groups:
-      #general: "Informations générales"
-      general: "Général"
+      general: "Informations générales"
       localisation: "Localisation"
       otherInfos: "Autre infos"
       moderation: "Modération"
       show_contributions: "Historique des contributions"
+      pending: En attente
+    seeOnOSM: "Voir cet élément sur OpenStreetMap"
+    customFields: "Champs Personnalisés"
+    duplicateOf: "Cet élément a été fusionné avec un autre :"
+    seeDuplicate: "voir l'élément fusionné"
+    addCustomField: "Ajouter un Champ Personnalisé"
+    specialFields: "Champs Spéciaux"
 
 imports:
   _label: "Import"
@@ -789,11 +795,3 @@ help:
 saas:
   list: "Liste des Projets"
   config: "Configuration"
-
-  core_custom:
-    seeOnOSM: "Voir cet élément sur OpenStreetMap"
-    customFields: "Champs Personnalisés"
-    duplicateOf: "Cet élément a été fusionné avec un autre :"
-    seeDuplicate: "voir l'élément fusionné"
-    addCustomField: "Ajouter un Champ Personnalisé"
-    specialFields: "Champs Spéciaux"
