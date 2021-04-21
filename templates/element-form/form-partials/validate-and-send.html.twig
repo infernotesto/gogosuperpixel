@@ -13,14 +13,10 @@
   </div>
 
   {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') and isAnonymousWithEmail %}
-    <!-- <div style="text-align:center">Marre des captcha ? créez un compte !</div>
-    <div id="captcha-error-message" style="color: #c22525;">Vous devez cocher la case ci-dessous</div>
-    <div id="captcha" class="col s12"></div> -->
     <div class="input-field col s12">
       <i class="material-icons gogo-icon-lock prefix"></i>
       <input type="password" id="input-password" name="input-password" class="required validate"
-             placeholder="{{ 'validate.input-password'|trans }}">
-      <!-- <label for="input-password" data-error="Mot de passe un peu court ! Veuillez utiliser au moins 5 caractères" class="gogo-form-label">Mot de passe</label> -->
+             placeholder="{{ 'element.form.create_user'|trans }}">
     </div>
   {% endif %}
 

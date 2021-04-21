@@ -102,10 +102,10 @@ class UserController extends GoGoController
             $user = $this->getUser();
             $userEmail = $user->getEmail();
             $element->setUserOwnerEmail($userEmail);
-            $session->getFlashBag()->add('success', $t->trans('add_element.success_becomeOwner', ['%name%' => $element->getName()] ));
+            $session->getFlashBag()->add('success', $t->trans('element.form.success_becomeOwner', ['%name%' => $element->getName()] ));
             $dm->flush();
         } else {
-            $session->getFlashBag()->add('error', $t->trans('add_element.success_becomeOwner'));
+            $session->getFlashBag()->add('error', $t->trans('element.form.success_becomeOwner'));
         }
 
         return $this->redirectToRoute('gogo_user_contributions');
@@ -145,17 +145,17 @@ class UserController extends GoGoController
             if ($form->isValid() /*&& !$alreadyUsedEmail */ && !$alreadyUsedUserName && !$locationSetToReceiveNewsletter && !$geocodeError) {
                 $dm->persist($user);
                 $dm->flush();
-                $session->getFlashBag()->add('info', $t->trans('add_element.info_saved'));
+                $session->getFlashBag()->add('info', $t->trans('element.form.info_saved'));
             } else {
                 // if ($alreadyUsedEmail) $form->get('email')->addError(new FormError('Cet email est déjà utilisé'));
                 if ($alreadyUsedUserName) {
-                    $form->get('username')->addError(new FormError($t->trans('add_element.error_username')));
+                    $form->get('username')->addError(new FormError($t->trans('element.form.error_username')));
                 }
                 if ($locationSetToReceiveNewsletter) {
-                    $form->get('location')->addError(new FormError($t->trans('add_element.error_missing_adress')));
+                    $form->get('location')->addError(new FormError($t->trans('element.form.error_missing_adress')));
                 }
                 if ($geocodeError) {
-                    $form->get('location')->addError(new FormError($t->trans('add_element.error_geocode')));
+                    $form->get('location')->addError(new FormError($t->trans('element.form.error_geocode')));
                 }
             }
         }

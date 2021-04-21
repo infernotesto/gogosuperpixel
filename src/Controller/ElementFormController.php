@@ -56,7 +56,7 @@ class ElementFormController extends GoGoController
         $element = $dm->get('Element')->find($id);
 
         if (!$element) {
-            $this->addFlash('error', $t->trans('add_element.controller.error_dont_exist'));
+            $this->addFlash('error', $t->trans('element.form.controller.error_dont_exist'));
 
             return $this->redirectToRoute('gogo_directory');
         } elseif ($element->getStatus() > ElementStatus::PendingAdd && $element->isEditable()
@@ -64,7 +64,7 @@ class ElementFormController extends GoGoController
             || ($element->isPending() && $element->getRandomHash() == $request->get('hash'))) {
             return $this->renderForm($element, true, $request, $session, $dm, $configService, $elementFormService, $userManager, $elementActionService, $loginManager, $t);
         } else {
-            $this->addFlash('error', $t->trans('add_element.controller.error_unauthorized'));
+            $this->addFlash('error', $t->trans('element.form.controller.error_unauthorized'));
 
             return $this->redirectToRoute('gogo_directory');
         }
@@ -75,7 +75,7 @@ class ElementFormController extends GoGoController
                                 $elementFormService, $userManager, $elementActionService, $loginManager, TranslatorInterface $t)
     {
         if (null === $element) {
-            throw new NotFoundHttpException($t->trans('add_element.controller.http_error_dont_exist'));
+            throw new NotFoundHttpException($t->trans('element.form.controller.http_error_dont_exist'));
         }
 
         $addOrEditComplete = false;
@@ -101,7 +101,7 @@ class ElementFormController extends GoGoController
             $userManager->updateUser($user, true);
             $dm->persist($user);
 
-            $text = $t->trans('add_element.controller.success', ['%url%' => $this->generateUrl('gogo_user_profile')] );
+            $text = $t->trans('element.form.controller.success', ['%url%' => $this->generateUrl('gogo_user_profile')] );
             $session->getFlashBag()->add('success', $text);
 
             $this->authenticateUser($user, $loginManager);
@@ -280,17 +280,17 @@ class ElementFormController extends GoGoController
 
             
             if ($editMode) {
-                $noticeText = $t->trans('add_element.controller.thankyou.edited');
+                $noticeText = $t->trans('element.form.controller.thankyou.edited');
             } else {
-                $noticeText = $t->trans('add_element.controller.thankyou.added', ['%name%' => ucwords($configService->getConfig()->getElementDisplayNameDefinite())]);
+                $noticeText = $t->trans('element.form.controller.thankyou.added', ['%name%' => ucwords($configService->getConfig()->getElementDisplayNameDefinite())]);
             }
 
             if ($element->isPending()) {
-                $noticeText .= "</br>".$t->trans('add_element.controller.pending');
+                $noticeText .= "</br>".$t->trans('element.form.controller.pending');
             }
 
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') || $session->has('userEmail')) {
-                $noticeText .= '</br>'.$t->trans('add_element.controller.user_contributions', ['%url%' => $this->generateUrl('gogo_user_contributions')]);
+                $noticeText .= '</br>'.$t->trans('element.form.controller.user_contributions', ['%url%' => $this->generateUrl('gogo_user_contributions')]);
             }
 
             $isAllowedPending = $configService->isUserAllowed('pending');

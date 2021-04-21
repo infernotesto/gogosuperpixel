@@ -11,8 +11,9 @@ home:
     category: une catégorie
     all: Toutes
 
-add_element:
-  _label: Ajouter {feature}
+element.form:
+  title_add: Ajouter {element}
+  title_edit: Modification des données
   need_help: Aide ?
   localize: Localiser
   success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !'
@@ -31,16 +32,20 @@ add_element:
     success: 'Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}" >votre profil</a> !'
     pending: "Votre contribution est pour l'instant en attente de validation, <a class='validation-process' onclick=\"$('#popup-collaborative-explanation').openModal()\">cliquez ici</a> pour en savoir plus sur le processus de modération collaborative !"
     user_contributions: 'Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes Contributions</a>'
-
-validate:
-  input-password: Mot de passe pour créer votre compte
-
-open_hours:
-  recopy_tooltip: Recopier les horaires précédents
-  add_tooltip: Ajouter plage horaire
-  from: De
-  to: à
-  and: Et
+  open_hours:
+    recopy_tooltip: Recopier les horaires précédents
+    add_tooltip: Ajouter plage horaire
+    from: De
+    to: à
+    and: Et
+  create_user: Mot de passe pour créer votre compte
+  admin_section:
+    _label: Validation
+    send_mail:
+      modify: "Avertir des modifications d''{element} en lui envoyant un mail"
+      add: "Avertir de l'ajout d''{element} en lui envoyant un mail"
+    recopy_info: Recopier les informations dans un nouveau formulaire
+    admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
 
 the_map:
   _label: La carte
@@ -74,10 +79,6 @@ my_contributions:
   confirmation_button: Je confirme
   confirmation_cancel: Annuler
 
-element-form:
-  title_add: Ajouter {element}
-  title_edit: Modification des données
-
 pending-contributions:
   _label: Mes contributions en attente
   form: Fiche
@@ -86,15 +87,6 @@ pending-contributions:
 login:
   _label: Connexion # voir aussi layout.login dans src/Application/Sonata/UserBundle/Resources/translations/FOSUserBundle.fr.yml
   register: Besoin d'un compte ? <a href="{url}">S'inscrire</a>
-
-admin:
-  # subform
-  _label: Validation
-  send_mail:
-    add: "Avertir des modifications d''{element} en lui envoyant un mail"
-    modify: "Avertir de l'ajout d''{element} en lui envoyant un mail"
-  recopy_info: Recopier les informations dans un nouveau formulaire
-  admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
 
 duplicates:
   label: Détection de doublons

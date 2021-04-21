@@ -1,6 +1,6 @@
 {# Admin section #}
 <div id="section_admin">
-	<h2 id="admin-title">{{ "admin._label"|trans }}</h2>
+	<h2 id="admin-title">{{ "element.form.admin_section._label"|trans }}</h2>
 	
 	{% set emailFieldPresent = false %}
 	{% for field in config.getElementFormFields %}
@@ -12,8 +12,8 @@
 			<input type="checkbox" name="send_mail" id="send_mail" checked/>
 			<label for="send_mail">
 			{{ editMode ?
-				"admin.send_mail.modify"|trans({element: config.elementDisplayNameIndefinite}) :
-				"admin.send_mail.add"|trans({element: config.elementDisplayNameIndefinite})
+				"element.form.admin_section.send_mail.modify"|trans({element: config.elementDisplayNameIndefinite}) :
+				"element.form.admin_section.send_mail.add"|trans({element: config.elementDisplayNameIndefinite})
 			}}
 			</label> 	
 		</div>
@@ -30,13 +30,13 @@
 	{% if not editMode %}
 	<div class="checkbox-container col s12">
 		<input type="checkbox" name="recopyInfo" id="recopy-info"/>
-		<label for="recopy-info">{{ "admin.recopy_info"|trans }}</label> 	
+		<label for="recopy-info">{{ "element.form.admin_section.recopy_info"|trans }}</label> 	
 	</div>
 	{% endif %}
 
 	{% if editMode %}
 		<div class="col s12">
-			<input type="text" name="admin-message" id="admin-message" placeholder="{{ 'admin.admin_message'|trans }}"/>
+			<input type="text" name="admin-message" id="admin-message" placeholder="{{ 'element.form.admin_section.admin_message'|trans }}"/>
 		</div>
 	{% endif %}
 
