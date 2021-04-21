@@ -11,25 +11,6 @@
 	6:    'commons.contributionType.t6'|trans,
 	}
 %}
-
-{% set elementStatus = {
-	'' :  'commons.elementStatus.s'|trans,
-	'-6': 'commons.elementStatus.s-6'|trans,
-	'-5': 'commons.elementStatus.s-5'|trans,
-	'-4': 'commons.elementStatus.s-4'|trans,
-	'-3': 'commons.elementStatus.s-3'|trans,
-	'-2': 'commons.elementStatus.s-2'|trans,
-	'-1': 'commons.elementStatus.s-1'|trans,
-	0:   'commons.elementStatus.s0'|trans,
-	1:   'commons.elementStatus.s1'|trans,
-	2:   'commons.elementStatus.s2'|trans,
-	3:   'commons.elementStatus.s3'|trans,
-	4:   'commons.elementStatus.s4'|trans,
-	5:   'commons.elementStatus.s5'|trans,
-	6:   'commons.elementStatus.s6'|trans,
-	7:   'commons.elementStatus.s7'|trans,
-	}
-%}
   
 {% set userRoles = {
 	0: 'commons.userRoles.r0'|trans,
@@ -56,7 +37,7 @@
 	<div class="panel-heading {{ value.votes|length > 0 ? 'body-content' : ''}}" role="tab" id="heading{{value.id}}" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{value.id}}" aria-expanded="true" aria-controls="collapse{{value.id}}">
 		{% if value.isAdminContribution %}
 			<div class="small-margin">
-					{% set title = (value.type == 4) ? contributionType[value.type] : elementStatus[value.status] %}
+					{% set title = (value.type == 4) ? contributionType[value.type] : ('elements.fields.status_choices.' ~ value.status)|trans({}, 'admin') %}
 					<b>{{ title | upper }}</b>
 					par <u>{{ value.getUserDisplayName }}</u>
 					<span class="label label-default">{{ userRoles[value.userRole] }}</span>
@@ -66,7 +47,7 @@
 		{% else %}
 			<div class="small-margin">
 					<b>{{ contributionType[value.type] | upper }}</b>
-					<span class="label {{ value.status > 0 ? 'label-success' : value.status == 0 ? 'label-warning' : 'label-danger' }}">{{ elementStatus[value.status] }}</span>
+					<span class="label {{ value.status > 0 ? 'label-success' : value.status == 0 ? 'label-warning' : 'label-danger' }}">{{ ('elements.fields.status_choices.' ~ value.status)|trans({}, 'admin') }}</span>
 					{% if value.resolvedMessage %}<span style="padding:0 10px"><i> {{ value.resolvedMessage}} </i></span>{% endif %}
 					{% if value.resolvedBy %}<span>(<u>{{value.resolvedBy }}</u>)</span>{% endif %}
 

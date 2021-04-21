@@ -34,7 +34,7 @@
               <td>{{ report.createdAt|date("d/m/Y")}}</td>
               <td>
                 {% if report.isResolved %}
-                  <span>{{ elementStatus[report.element.status] }}</span>
+                  <span>{{ ('elements.fields.status_choices.' ~ report.element.status)|trans({}, 'admin') }}</span>
                   {% if report.resolvedMessage %}
                     <span> - </span>
                     <i>{{ report.resolvedMessage }}</i>

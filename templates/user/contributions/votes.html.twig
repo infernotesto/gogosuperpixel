@@ -33,7 +33,7 @@
               </td>
               <td>{{ voteValues[vote.value] }}</td>
               <td>{{ vote.createdAt|date("d/m/Y")}}</td>
-              <td>{{ elementStatus[vote.element.status] }}</td>
+              <td>{{ ('elements.fields.status_choices.' ~ vote.element.status)|trans({}, 'admin') }}</td>
             </tr>
         {% endfor %}
       </tbody>

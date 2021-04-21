@@ -18,7 +18,7 @@
           </td>
           <td>{{ contributionType[contribution.type]}}</td>
           <td>{{ contribution.createdAt|date("d/m/Y")}}</td>
-          <td>{{ elementStatus[contribution.status] }}</td>
+          <td>{{ ('elements.fields.status_choices.' ~ contribution.status)|trans({}, 'admin') }}</td>
         </tr>
       {% endfor %}
     </tbody>

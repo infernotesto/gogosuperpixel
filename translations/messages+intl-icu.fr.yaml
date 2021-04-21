@@ -224,23 +224,6 @@ commons:
     bad_number: Ceci n'est pas un nombre !
     too_long: Oups, ce texte est un peu long !
 
-  elementStatus:
-    s:    "En attente"
-    s-6:  "Doublon"
-    s-5:  "Modifié en attente"
-    s-4:  "Supprimé"
-    s-3:  "Refusé (votes)"
-    s-2:  "Refusé (admin)"
-    s-1:  "En attente (modifs)"
-    s0:   "En attente (ajout)"
-    s1:   "Validé (admin)"
-    s2:   "Validé (votes)"
-    s3:   "Ajouté par admin"
-    s4:   "Modifié par admin"
-    s5:   "Modifié par propriétaire"
-    s6:   "Modifié avec lien direct"
-    s7:   "Importé"
-
   contributionType:
     t-1:  "Suppression"
     t0:   "Ajout"
