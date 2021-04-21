@@ -123,7 +123,7 @@ abouts:
 
 wrappers:
   _label: "Bandeaux de la page d'accueil"
-  form:
+  fields:
     content: "Contenu du bandeau"
     rawContent: "Contenu en raw html (optionel)"
     textColor: "Couleur du texte"
@@ -142,6 +142,12 @@ elements:
   _label: "Éléments"
   fields:
     name: "Nom"
+    address:
+      streetAddress: "Rue"
+      addressLocality: "Ville"
+      postalCode: "Code Postal"
+      addressCountry: "Pays"
+      customFormatedAddress: "Address Complète"
     status: "Statut"
     status_choices:
       '':  "En attente"
@@ -186,17 +192,7 @@ elements:
       localisation: "Localisation"
       otherInfos: "Autre infos"
       moderation: "Modération"
-
-  address:
-    streetAddress: "Rue"
-    addressLocality: "Ville"
-    postalCode: "Code Postal"
-    addressCountry: "Pays"
-    customFormatedAddress: "Address Complète"
-      
-      
-show_contributions: "Historique des contributions"
-
+      show_contributions: "Historique des contributions"
 
 imports:
   _label: "Import"

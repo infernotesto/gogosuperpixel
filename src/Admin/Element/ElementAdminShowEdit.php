@@ -94,19 +94,19 @@ class ElementAdminShowEdit extends ElementAdminList
 
         if ($needModeration) {
             $show
-              ->with('moderation', ['class' => 'col-md-6 col-sm-12'])
+              ->with('moderation', ['class' => 'col-md-6'])
                 ->add('moderationState', ChoiceType::class, ['template' => 'admin/partials/show_choice_moderation.html.twig',])
                 ->add('reports', null, ['template' => 'admin/partials/show_pending_reports.html.twig'])
               ->end();
         }
 
         $show
-          ->with('show_contributions', ['class' => 'col-sm-12'])
+          ->with('elements.form.groups.show_contributions')
             ->add('contributions', null, ['template' => 'admin/partials/show_contributions.html.twig'])
           ->end();
 
         $show
-          ->with('JSON', ['class' => 'col-md-12', 'box_class' => 'box box-default'])
+          ->with('JSON', ['box_class' => 'box box-default'])
             ->add('compactJson')
             ->add('baseJson')
             ->add('adminJson')
