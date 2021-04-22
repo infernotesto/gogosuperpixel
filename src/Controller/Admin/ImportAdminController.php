@@ -161,7 +161,7 @@ class ImportAdminController extends Controller
                                         $mappedCategories[$key] = $categoriesCreated[$categoryId];
                                     } else {
                                         $fieldName = $currentTaxonomyMapping[$originName]['fieldName'];
-                                        if (startsWith($fieldName, 'category_')) $fieldName = ltrim($fieldName, 'category_');
+                                        if (startsWith($fieldName, 'category_')) $fieldName = str_replace('category_', '', $fieldName);
                                         if (array_key_exists($fieldName, $createdParent))
                                             $parent = $createdParent[$fieldName];
                                         else
