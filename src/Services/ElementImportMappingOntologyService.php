@@ -112,6 +112,9 @@ class ElementImportMappingOntologyService
             if (!$mappedProp && array_key_exists($slugProp, $this->mappedCoreFields)) {
                 $mappedProp = $this->mappedCoreFields[$slugProp];
             }
+            if (!$mappedProp && startsWith($slugProp, 'category')) {
+                $mappedProp = 'categories';
+            }
             // Asign mapping
             $this->ontologyMapping[$fullProp] = [
                 'mappedProperty' => $mappedProp,
