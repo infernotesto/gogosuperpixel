@@ -41,21 +41,17 @@ class ImportAdmin extends GoGoAbstractAdmin
         $optionsList = $taxonomy->getTaxonomyJson();
 
         $isDynamic = $this->getSubject()->isDynamicImport();
-        $title = $isDynamic ? "Import Dynamique, pour afficher des données gérées par quelqu'un d'autre" : 'Importer des données en dur, depuis un fichier CSV ou une API Json'; // TODO translate
+        $title = $this->trans($isDynamic ? 'imports.dynamic' : 'imports.static');
         $isPersisted = $this->getSubject()->getId();
-        $moderateElementconfig = [
-            'required' => false, 
-            'label' => 'Modérer les éléments importés', // TODO translate
-            'label_attr' => ['title' => 'Les éléments importés auront le status "en attente de validation" et devront être manuellement validés. Idem pour des mise à jour d\'éléments existant (modification)']]; // TODO translate
 
         $usersQuery = $dm->query('User');
         $usersQuery->addOr($usersQuery->expr()->field('roles')->exists(true))
                    ->addOr($usersQuery->expr()->field('groups')->exists(true));
         $formMapper
-            ->tab('Général') // TODO translate
+            ->tab('general')
                 ->panel($title, ['class' => 'col-md-12'])
-                    ->add('sourceName', null, ['required' => true, 'label' => 'Nom de la source ']) // TODO translate
-                    ->add('file', FileType::class, ['label' => 'Fichier CSV à importer (séparation par virgules, encodage en UTF8)', 'required' => false]); // TODO translate
+                    ->add('sourceName', null, ['required' => true])
+                    ->add('file', FileType::class);
         if ($isDynamic) {
             $formMapper
                     // Every attribute that will be update need to be mapped here. Following attributes are manually inserted in element-import.html.twig, but we still need them here as hidden input
@@ -65,9 +61,9 @@ class ImportAdmin extends GoGoAbstractAdmin
                             'gogo-element-import',
                             'data-title-layer' => $this->config->getDefaultTileLayer()->getUrl(),
                             'data-default-bounds' => json_encode($this->config->getDefaultBounds()),
-                        ], 'required' => true, 'label' => 'Type de la source']) // TODO translate
+                        ], 'required' => true])
                 ->end()
-                ->panel('Paramètres', ['class' => 'col-md-12']) // TODO translate
+                ->panel('parameters')
                     ->add('refreshFrequencyInDays', null, ['required' => false, 'label' => 'Fréquence de mise à jours des données en jours (laisser vide pour ne jamais mettre à jour automatiquement']) // TODO translate
                     ->add('usersToNotify', ModelType::class, [
                         'class' => 'App\Document\User',
@@ -83,7 +79,7 @@ class ImportAdmin extends GoGoAbstractAdmin
                         'label_attr' => ['title' => "Chaque modification sera envoyée à OpenStreetMap"], // TODO translate
                         'label' => "Autoriser l'édition des données" . ($this->config->getOsm()->isConfigured() ? '' : ' (Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)') // TODO translate
                     ])
-                    ->add('moderateElements', null, $moderateElementconfig)
+                    ->add('moderateElements')
                     ->add('idsToIgnore', TextType::class, ['mapped' => false, 'required' => false, 
                         'attr' => ['class' => 'gogo-display-array', 
                         'value' => $this->getSubject()->getIdsToIgnore()], 
@@ -91,12 +87,12 @@ class ImportAdmin extends GoGoAbstractAdmin
                         'label_attr' => ['title' => "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"]]); // TODO translate
         } else {
             $formMapper                    
-                    ->add('url', UrlType::class, ['label' => 'Ou URL vers un API Json', 'required' => false])
-                    ->add('moderateElements', null, $moderateElementconfig);
+                    ->add('url', UrlType::class)
+                    ->add('moderateElements');
         }
         $formMapper->end();                
         if ($isPersisted) {
-            $formMapper->panel('Historique', ['class' => 'col-sm-12']) // TODO translate
+            $formMapper->panel('historic')
                         ->add('currState', null, ['attr' => ['class' => 'gogo-display-logs'], 'label_attr' => ['style' => 'display: none'], 'mapped' => false])
                     ->end();
         }
