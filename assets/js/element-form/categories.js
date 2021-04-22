@@ -7,6 +7,11 @@
 var index = 1;
 jQuery(document).ready(function()
 {	
+	// display parent if children is checked
+	$('.option-field.selected').each(function() {
+		$(this).parents('.option-field').addClass('selected')
+	})
+	
 	$(".category-select").change(function()
 	{ 
 		if (!$(this).val()) return;
