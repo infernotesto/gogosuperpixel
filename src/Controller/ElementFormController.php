@@ -336,6 +336,7 @@ class ElementFormController extends GoGoController
                         'config' => $configService->getConfig(),
                         'imagesMaxFilesize' => $this->detectMaxUploadFileSize('images'),
                         'filesMaxFilesize' => $this->detectMaxUploadFileSize('files'),
+                        'isOwner' => $isUserOwnerOfValidElement
                     ]);
     }
 
