@@ -43,9 +43,9 @@
   			{% endif %}
   		{% endfor %}
 
-  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline ? 'inline' : ''}}" id="option-field-{{option.id}}"
-            {% if not displayOption %} style="display:none"{% endif %}
-  					data-id="{{option.id}}" data-index={{curr_index}}>
+  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline ? 'inline' : ''}} {{ displayOption ? 'selected' : '' }}" 
+		     id="option-field-{{option.id}}"
+  			 data-id="{{option.id}}" data-index={{curr_index}}>
 
   			<div class="option-field-value {{ category.enableDescription ? "with-description" : "" }}">
 

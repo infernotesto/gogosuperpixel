@@ -16,10 +16,11 @@ jQuery(document).ready(function()
 		// if only single option, removing all others options laready selected
 		if ($(this).data('single-option'))
 		{
-			$(this).closest('.category-field').find('> .option-field:visible').each(function() { removeOptionField($(this)); });
+			$(this).closest('.category-field').find('> .option-field.selected').each(function() { removeOptionField($(this)); });
 		}
 		
 		var optionField = $('#option-field-' + $(this).val());
+		optionField.addClass('selected')
 		optionField.stop(true,false).slideDown({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
 		optionField.attr('data-index', index);
 		optionField.css('-webkit-box-ordinal-group', index);
@@ -27,6 +28,7 @@ jQuery(document).ready(function()
 		optionField.css('-ms-flex-order', index);
 		optionField.css('-webkit-order', index);
 		optionField.css('order', index);
+		
 
 		checkForSelectLabel(optionField, 1);
 		index++;
@@ -47,7 +49,7 @@ jQuery(document).ready(function()
 			optionFieldToRemove.hide();
 		else
 			optionFieldToRemove.stop(true,false).slideUp({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
-
+		optionFieldToRemove.removeClass('selected')
 		checkForSelectLabel(optionFieldToRemove, 0);
 	}
 
@@ -56,7 +58,7 @@ jQuery(document).ready(function()
 		var categorySelect = optionField.siblings('.category-field-select');
 		var select = categorySelect.find('input.select-dropdown');
 
-		if (optionField.siblings('.option-field:visible').length + increment === 0)
+		if (optionField.siblings('.option-field.selected').length + increment === 0)
 			select.val("Choisissez " + categorySelect.attr('data-picking-text'));
 		else
 			select.val("Ajoutez " + categorySelect.attr('data-picking-text'));
@@ -67,7 +69,7 @@ function encodeOptionValuesIntoHiddenInput()
 {
 	var optionValues = [];
 
-	$('.option-field:visible').each(function() 
+	$('.option-field.selected').each(function() 
 	{
 		var option = {};
 		option.id = $(this).attr('data-id');
