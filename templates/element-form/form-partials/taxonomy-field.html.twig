@@ -60,7 +60,7 @@
 
   				{% if category.enableDescription %}
     				<div class="input-field option-field-description">
-  				  	<input placeholder="Précisez si nécessaire" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
+  				  	<input placeholder="{{ category.descriptionLabel|default('Précisez si nécessaire') }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
     				</div>
   				{% endif %}
 

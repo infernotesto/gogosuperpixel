@@ -63,6 +63,7 @@ class CategoryAdmin extends AbstractAdmin
             ->add('isMandatory', null, ['required' => false, 'label' => 'Choix obligatoire', 'label_attr' => ['title' => 'Une catégorie de ce groupe doit être obligatoirement selectionnée']])
             ->add('singleOption', null, ['required' => false, 'label' => 'Choix unique', 'label_attr' => ['title' => 'Une seule catégorie est selectionnable à la fois']])
             ->add('enableDescription', null, ['required' => false, 'label' => 'Activer la description des catégories', 'label_attr' => ['title' => 'On pourra renseigner un texte pour décrire chaque catégorie. Par example, pour un catégorie Agriculture, on pourrait ajouter comme texte "Maraîchage, produits transformés..."']])
+            ->add('descriptionLabel', null, ['required' => false, 'label' => 'Label pour le champ de description'])
             ->end()
             ->with('Paramètres secondaires d\'affichage', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
              ->add('nameShort', null, ['required' => false, 'label' => 'Nom (version courte)', 'label_attr' => ['title' => 'La version courte est utilisée dans le menu, car souvent on manque de place']])
