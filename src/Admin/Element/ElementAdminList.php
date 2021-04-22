@@ -46,7 +46,6 @@ class ElementAdminList extends ElementAdminFilters
         $listMapper
          ->add('name', null, ['editable' => false, 'template' => 'admin/partials/list_name.html.twig'])
          ->add('status', ChoiceType::class, [
-               'choices' => $this->statusChoices,
                'editable' => true,
                'template' => 'admin/partials/list_choice_status.html.twig',
                ])
@@ -57,7 +56,7 @@ class ElementAdminList extends ElementAdminFilters
             'template' => 'admin/partials/list_choice_moderation.html.twig',
          ])
          // use fake attribute createdAt, we then access full object inside template
-         ->add('createdAt', null, ['template' => 'admin/partials/list_votes.html.twig', 'label' => 'Votes']) // TODO translate ??
+         ->add('createdAt', null, ['template' => 'admin/partials/list_votes.html.twig']) // 'label' => 'Votes'
 
          ->add('_action', 'actions', [
              'actions' => [

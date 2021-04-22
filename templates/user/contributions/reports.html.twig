@@ -1,17 +1,10 @@
 {% extends "user/contributions-layout.html.twig" %}
+{% trans_default_domain 'admin' %}
 
 {% set navTitle = 'reports._label'|trans %}
 {% block title %}{{ 'reports._label'|trans }}{% endblock %}
 
 {% block contribution_page %}
-
-  {% set reportValues = {
-    0: 'reports.reportValues.v0'|trans,
-    1: 'reports.reportValues.v1'|trans,
-    2: 'reports.reportValues.v2'|trans,
-    4: 'reports.reportValues.v4'|trans,
-    }
-  %}
 
   <h1 style="margin-bottom: 3rem;">{{ 'reports._label'|trans }}</h1>
   {% if reports|length > 0 %}
@@ -30,7 +23,7 @@
               <td>
                 <a href="{{ path('gogo_directory_showElement', {'id': report.element.id, 'name': report.element.name}) | replace({"%23":'#'}) }}">{{ report.element.name }}</a>
               </td>
-              <td>{{ reportValues[report.value] }}</td>
+              <td>{{ ('elements.fields.reportValues_choices.' ~ report.value)|trans({}, 'admin') }}</td>
               <td>{{ report.createdAt|date("d/m/Y")}}</td>
               <td>
                 {% if report.isResolved %}

@@ -87,7 +87,6 @@ class ElementAdminShowEdit extends ElementAdminList
         } else {
           $show->with('elements.fields.status', ['class' => 'col-md-6'])
             ->add('status', ChoiceType::class, [
-              'choices' => $this->statusChoices,
               'template' => 'admin/partials/show_choice_status.html.twig',
             ])->end();
         }

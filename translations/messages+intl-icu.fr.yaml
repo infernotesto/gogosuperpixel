@@ -216,31 +216,6 @@ commons:
     bad_number: Ceci n'est pas un nombre !
     too_long: Oups, ce texte est un peu long !
 
-  contributionType:
-    t-1:  "Suppression"
-    t0:   "Ajout"
-    t1:   "Modif"
-    t2:   "Vote"
-    t3:   "Signalement"
-    t4:   "Import"
-    t5:   "Restauration"
-    t6:   "Résolution modération"
-
-  userRoles:
-    r0: "Anonyme"
-    r1: "Anonyme avec mail"
-    r2: "Utilisateur identifié"
-    r3: "Admin"
-    r4: "Anonyme avec lien"
-    r5: "GoGoBot"
-
-  voteValues:
-    v-2: "Ne respecte pas la charte"
-    v-1: "N'existe pas"
-    v0: "Existe mais infos mauvaises"
-    v1: "Existe"
-    v2: "Existe et valide info"
-
 errors: # TODO erreurs ajax
   e1: "Les identifiants de connexion ne sont pas corrects"
   e2: "Une erreur s'est produite lors de la tentative de connexion"

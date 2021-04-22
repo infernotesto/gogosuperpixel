@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 {% if real_value <= -4 %}
     <span class="label label-default">
 {% elseif real_value <= -2 %}
@@ -8,6 +10,6 @@
     <span class="label label-success">
 {% endif %}
 {% set result = object.isExternal ? "Import - " : "" %} {# TODO Translation #}
-{% set result = result ~ value %}
+{% set result = result ~ ('elements.fields.status_choices.' ~ value)|trans({}, 'admin') %}
 {{ result }}
 </span>

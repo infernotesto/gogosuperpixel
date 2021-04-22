@@ -1,16 +1,5 @@
 {% trans_default_domain 'admin' %}
 
-{% set userRoles = {
-  0: "Anonyme",
-  1: 'Anonyme avec mail',
-  2: "Utilisateur loggué",
-  3: "Admin",
-  4: 'Anonyme avec lien',
-  5: 'GoGoBot'
-  }
-%}  {# TODO Translation #}
-
-
 <div {% if not loop.last and not itemContainer|default(true) %}class="item-container"{% endif %}>
 	<div style="margin-bottom:5px">
     <span class="label {{ labelClass }}">{{ itemValues[item.value] }}</span> 
@@ -22,7 +11,7 @@
       <span style="margin:0 5px">
     {% endif %}    
       Par : <u>{{ item.userEmail ? item.userEmail : 'Anonyme'}}</u> {# TODO Translation #}
-      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] }}</span> 
+      <span class="label label-default" style="margin-left:5px">{{ ('elements.fields.userRoles_choices.' ~ item.userRole)|trans({}, 'admin') }}</span> 
     </span> 
     {{ item.resolvedMessage }}
   </div>   	

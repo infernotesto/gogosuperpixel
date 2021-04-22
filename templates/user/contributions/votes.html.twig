@@ -1,18 +1,10 @@
 {% extends "user/contributions-layout.html.twig" %}
+{% trans_default_domain 'admin' %}
 
 {% set navTitle = 'votes._label'|trans %}
 {% block title %}{{ 'votes._label'|trans }}{% endblock %}
 
 {% block contribution_page %}
-
-  {% set voteValues = {
-    '-2': 'votes.voteValues.v-2'|trans,
-    '-1': 'votes.voteValues.v-1'|trans,
-    '0': 'votes.voteValues.v0'|trans,
-    '1': 'votes.voteValues.v1'|trans,
-    '2': 'votes.voteValues.v2'|trans
-    }
-  %}
 
   <h1 style="margin-bottom: 3rem;">{{ 'votes._label'|trans }}</h1>
   {% if votes|length > 0 %}
@@ -31,7 +23,7 @@
               <td>
                 <a href="{{ path('gogo_directory_showElement', {'id': vote.element.id, 'name': vote.element.name}) | replace({"%23":'#'}) }}">{{ vote.element.name }}</a>
               </td>
-              <td>{{ voteValues[vote.value] }}</td>
+              <td>{{ ('elements.fields.voteValues_choices.' ~ vote.value)|trans({}, 'admin') }}</td>
               <td>{{ vote.createdAt|date("d/m/Y")}}</td>
               <td>{{ ('elements.fields.status_choices.' ~ vote.element.status)|trans({}, 'admin') }}</td>
             </tr>

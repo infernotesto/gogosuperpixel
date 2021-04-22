@@ -140,8 +140,11 @@ partners:
 
 elements:
   _label: "Éléments"
-  fields:
+  proposedBy: "Proposé par <u>{name}</u>"
+  proposedAt: "le {date}"
+fields:
     name: "Nom"
+    newsletterFrequency: "Réception newsletter"
     address:
       streetAddress: "Rue"
       addressLocality: "Ville"
@@ -177,6 +180,42 @@ elements:
       2: "Votes non consensuels"
       3: "En attente depuis trop longtemps"
       4: "Doublon potentiel"
+    contributionType_choices:
+      -1:  "Suppression"
+      0:   "Ajout"
+      1:   "Modif"
+      2:   "Vote"
+      3:   "Signalement"
+      4:   "Import"
+      5:   "Restauration"
+      6:   "Résolution modération"
+    userRoles_choices:
+      0: "Anonyme"
+      1: "Anonyme avec mail"
+      2: "Utilisateur identifié"
+      3: "Admin"
+      4: "Anonyme avec lien"
+      5: "GoGoBot"
+    voteValues_choices:
+      -2: "Ne respecte pas la charte"
+      -1: "N'existe pas"
+      0: "Existe mais infos mauvaises"
+      1: "Existe"
+      2: "Existe et valide info"
+    reportValues_choices:
+      0: "N'existe plus"
+      1: "Info incorrecte"
+      2: "Charte"
+      4: "Doublon"
+      # 0: "L'élément n'existe plus"
+      # 1: "Les informations sont incorrectes"
+      # 2: "L'élément ne respecte pas la charte"
+      # 4: "L'élément est référencé plusieurs fois"
+    itemValues_choices:
+      0: "L'élément n'existe plus"
+      1: "Les informations sont incorrectes"
+      2: "L'élément ne respecte pas la charte"
+      4: "L'élément est référencé plusieurs fois"
     userOwnerEmail: "Email de l'utilisateur propriétaire de cette fiche"
     email: "Email de l'élément"
     id: "ID"
@@ -185,14 +224,14 @@ elements:
     createdAt: "Créé le"
     reports: "Signalements"
     optionIds: "Catégories"
-  form:
-    groups:
-      general: "Informations générales"
-      localisation: "Localisation"
-      otherInfos: "Autre infos"
-      moderation: "Modération"
-      show_contributions: "Historique des contributions"
-      pending: En attente
+form:
+  groups:
+    general: "Informations générales"
+    localisation: "Localisation"
+    otherInfos: "Autre infos"
+    moderation: "Modération"
+    show_contributions: "Historique des contributions"
+    pending: En attente
     seeOnOSM: "Voir cet élément sur OpenStreetMap"
     customFields: "Champs Personnalisés"
     duplicateOf: "Cet élément a été fusionné avec un autre :"
@@ -580,9 +619,6 @@ commons:
   fields:
     image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
 
-xx: "Proposé par <u>{name}</u>"
-xy: "le {date}"
-
 config_general:
   _label: "Configuration Générale"
   fields:
@@ -709,7 +745,7 @@ sonata:
         plainPassword: Mot de passe
         allowedStamps: Étiquettes autorisées # TODO check translation
         locked: Verrouillée
-        expired: Expérée
+        expired: Expirée
         enabled: Activée
         credentialsExpired: # TODO translate
         watchModeration: Être notifié par email lorsque des éléments sont à modérer
@@ -717,10 +753,13 @@ sonata:
         watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
         watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
         watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
-        main-roles: Roles Principaux
+        main-roles: Rôles Principaux
         groups:
           user: Utilisateur
           security: Sécurité
+          general: Général
+          status: Statut
+          roles: Rôles
       role:
         ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
         ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"

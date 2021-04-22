@@ -29,7 +29,10 @@ class ElementAdminFilters extends ElementAdminAbstract
       ->add('name')
       ->add('status', 'doctrine_mongo_choice', [], ChoiceType::class,
           [
-            'choices' => array_flip($this->statusChoices),
+            'choices' => array_flip(array_map(function($value) {
+                return $this->t('elements.fields.status_choices.' . $value);
+             }, ['' => '',-6 => -6,-5 => -5,-4 => -4,-3 => -3,-2 => -2,-1 => -1,0 => 0,1 => 1,2 => 2,3 => 3,4 => 4,5 => 5,6 => 6,7 => 7])), // TODO
+
             'expanded' => false,
             'multiple' => false,
           ]

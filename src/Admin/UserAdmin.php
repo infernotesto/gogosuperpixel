@@ -112,7 +112,6 @@ class UserAdmin extends GoGoAbstractAdmin
             ->add('id')
             ->add('username')
             ->add('newsletterFrequency', 'doctrine_mongo_callback', [
-                'label' => 'Reception newsletter',
                 'field_type' => CheckboxType::class,
                 'callback' => function ($queryBuilder, $alias, $field, $value) {
                     if (!$value || !$value['value']) {
