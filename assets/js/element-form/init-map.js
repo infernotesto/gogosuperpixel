@@ -42,12 +42,11 @@ function createMarker(position)
 	marker = new L.Marker(position, { draggable: true } ).addTo(map);
 	marker.on('dragend', function()
 	{
-	  $('#input-latitude').attr('value',marker.getLatLng().lat);
+	  	$('#input-latitude').attr('value',marker.getLatLng().lat);
 		$('#input-longitude').attr('value',marker.getLatLng().lng);
-  });
+  	});
 
-  // TODO translate message
-  marker.bindPopup("<center>Déplacez moi pour préciser la position</br>(au centre du bâtiment)</center>").openPopup();
+  	marker.bindPopup(`<center>${t('element-form.geocoded-marker-text')}</center>`).openPopup();
 }
 
 function fitBounds(rawbounds)
