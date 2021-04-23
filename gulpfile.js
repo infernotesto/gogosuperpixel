@@ -111,10 +111,10 @@ exports.watch = () => {
   gulp.watch(['assets/js/**/*.js', '!assets/js/element-form/**/*.js'],
               gulp.series(scriptsExternalPages, serviceWorker));
 
-  gulp.watch(['node_modules/gogocarto-js/dist/**/*'],
+  gulp.watch(['node_modules/gogocarto-js/dist/**/*', 'custom/**/*.css'],
               gulp.series(gogocarto_assets, serviceWorker));
 
-  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js','assets/js/i18n.js', 'translations/javascripts-translations.yaml'],
+  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/javascripts-translations.yaml'],
               gulp.series(scriptsLibs, serviceWorker));
 
   gulp.watch(['assets/js/home.js'], gulp.series(scriptsHome, serviceWorker));

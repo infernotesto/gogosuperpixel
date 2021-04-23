@@ -43,9 +43,9 @@
   			{% endif %}
   		{% endfor %}
 
-  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline ? 'inline' : ''}}" id="option-field-{{option.id}}"
-            {% if not displayOption %} style="display:none"{% endif %}
-  					data-id="{{option.id}}" data-index={{curr_index}}>
+  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline ? 'inline' : ''}} {{ displayOption ? 'selected' : '' }}" 
+		     id="option-field-{{option.id}}"
+  			 data-id="{{option.id}}" data-index={{curr_index}}>
 
   			<div class="option-field-value {{ category.enableDescription ? "with-description" : "" }}">
 
@@ -60,7 +60,7 @@
 
   				{% if category.enableDescription %}
     				<div class="input-field option-field-description">
-  				  	<input placeholder="{{ 'commons.category_placeholder'|trans }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
+  				  		<input placeholder="{{ category.descriptionLabel|default('commons.category_placeholder'|trans) }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
     				</div>
   				{% endif %}
 

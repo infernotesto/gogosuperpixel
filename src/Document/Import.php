@@ -230,6 +230,11 @@ class Import extends AbstractFile
         if ($this->file) return 'csv';
     }
 
+    public function isHandlingCategories()
+    {
+        return count($this->taxonomyMapping) > 0 || count($this->optionsToAddToEachElement) > 0;
+    }
+
     /**
      * Get id.
      *
@@ -493,8 +498,8 @@ class Import extends AbstractFile
      */
     public function getFieldToCheckElementHaveBeenUpdated()
     {
-        if ($this->getSourceType() == 'osm') return 'osm/version'; // TODO translate ?
-        return $this->fieldToCheckElementHaveBeenUpdated ?? 'updateAt'; // TODO translate ?
+        if ($this->getSourceType() == 'osm') return 'osm_version';
+        return $this->fieldToCheckElementHaveBeenUpdated ?? 'updateAt';
     }
 
     /**

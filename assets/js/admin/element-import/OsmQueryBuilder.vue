@@ -58,13 +58,13 @@ export default {
                     }
                 }
                 queryString += this.$refs.boundsPicker.overpassQuery
-                if (query != '') result += `node${queryString};way${queryString};relation${queryString};`                  
+                if (query != '') result += `nwr${queryString};`                  
             }
             return result
         },
         overpassApiUrl() {
             // out meta provide extra data, out center provide center of way or relation
-            return `https://overpass-api.de/api/interpreter?data=[out:json][timeout:200];(${this.overpassQuery});out%20meta%20center;`
+            return `https://overpass-api.de/api/interpreter?data=[out:json][timeout:1000];(${this.overpassQuery});out%20meta%20center;`
         }
     },
     watch: {

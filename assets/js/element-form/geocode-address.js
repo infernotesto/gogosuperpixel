@@ -2,6 +2,7 @@ var geocoderJS;
 var geocodingProcessing = false;
 var firstGeocodeDone = false;
 var geocodedFormatedAddress = '';
+var geocodeResult = null;
 
 function getInputAddress() { return $('#input-address').val(); }
 
@@ -46,10 +47,12 @@ function geocodeAddress(address) {
 		if (results !== null && results.length > 0)
 		{
 			firstGeocodeDone = true;
+			geocodeResult = results[0];
 			map.setView(results[0].getCoordinates(), 18);
 			createMarker(results[0].getCoordinates());
 
 			console.log("Geocode result :", results[0]);
+			$(window).trigger('geocoded', results[0]);
 
 			// Detect street address when geocoder fails to retrieve it (OSM case)
 			var patt = new RegExp(/^\d+/g);

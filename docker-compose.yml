@@ -9,13 +9,11 @@ services:
       - mongo
     container_name: gogocarto
     volumes:      
-      - .:/var/www:cached
+      - .:/var/www
       - /var/www/var/cache
       - /var/www/var/log
       - /var/www/var/sessions
       - /var/www/web/uploads
-      - ./vendor:/var/www/html/vendor:delegated
-      - ./node_modules:/var/www/html/node_modules:delegated
     ports:
       - "3008:80"
     links:
