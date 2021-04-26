@@ -25,11 +25,13 @@ const scriptsElementForm = () =>
     .pipe(concat('element-form.js'))
     .pipe(gulp.dest('web/js'));
 
-const scriptsLibs = () => {
-  const translations = gulp.src('translations/javascripts-translations.yaml')
+const buildTranslations = () => 
+  gulp.src('translations/javascripts-translations.yaml')
     .pipe(yaml({schema: 'DEFAULT_SAFE_SCHEMA', ext: '.js'}))
     .pipe(header("var gogoI18n = "))
     .pipe(gulp.dest('web/js'))
+
+const scriptsLibs = () => {
   const gogocarto = gulp.src([
       'node_modules/gogocarto-js/dist/gogocarto.js', 
       'assets/js/init-sw.js', 
@@ -40,7 +42,7 @@ const scriptsLibs = () => {
     .pipe(gulp.dest('web/js'));
   const sw = gulp.src(['assets/js/vendor/**/*'])
     .pipe(gulp.dest('web/js'));
-  return merge(translations, gogocarto, sw);
+  return merge(gogocarto, sw);
 };
 
 const serviceWorker = async () => {
@@ -115,7 +117,7 @@ exports.watch = () => {
               gulp.series(gogocarto_assets, serviceWorker));
 
   gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/javascripts-translations.yaml'],
-              gulp.series(scriptsLibs, serviceWorker));
+              gulp.series(buildTranslations, scriptsLibs, serviceWorker));
 
   gulp.watch(['assets/js/home.js'], gulp.series(scriptsHome, serviceWorker));
 };
@@ -126,7 +128,7 @@ const cleanCss = () =>
 const cleanJs = () =>
   del(['web/js']);
 
-exports.build = gulp.series(cleanJs, cleanCss, gulp.parallel(stylesBuild, scriptsLibs, scriptsHome, scriptsExternalPages, scriptsElementForm, gogocarto_assets), serviceWorker);
+exports.build = gulp.series(cleanJs, cleanCss, buildTranslations, gulp.parallel(stylesBuild, scriptsLibs, scriptsHome, scriptsExternalPages, scriptsElementForm, gogocarto_assets), serviceWorker);
 
 exports.production = gulp.parallel(gulp.series(prod_styles, gzip_styles), gulp.series(prod_js, gzip_js));
 
