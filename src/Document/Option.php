@@ -186,6 +186,20 @@ class Option
     */
     private $osmTags = [];
 
+    /**
+     * @var bool
+     * @Exclude(if="object.getEnableDescription() == false")
+     * @MongoDB\Field(type="boolean")
+     */
+    private $enableDescription = false;
+
+    /**
+     * @var string
+     * @Exclude(if="object.getEnableDescription() == false")
+     * @MongoDB\Field(type="string")
+     */
+    private $descriptionLabel = '';
+
     public function __construct()
     {
         $this->subcategories = new \Doctrine\Common\Collections\ArrayCollection();
@@ -956,5 +970,53 @@ class Option
             $result .= "[$key=$value]";
         }
         return $result;
+    }
+
+    /**
+     * Get the value of enableDescription
+     *
+     * @return  bool
+     */ 
+    public function getEnableDescription()
+    {
+        return $this->enableDescription;
+    }
+
+    /**
+     * Set the value of enableDescription
+     *
+     * @param  bool  $enableDescription
+     *
+     * @return  self
+     */ 
+    public function setEnableDescription(bool $enableDescription)
+    {
+        $this->enableDescription = $enableDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of descriptionLabel
+     *
+     * @return  string
+     */ 
+    public function getDescriptionLabel()
+    {
+        return $this->descriptionLabel;
+    }
+
+    /**
+     * Set the value of descriptionLabel
+     *
+     * @param  string  $descriptionLabel
+     *
+     * @return  self
+     */ 
+    public function setDescriptionLabel($descriptionLabel)
+    {
+        $this->descriptionLabel = $descriptionLabel;
+
+        return $this;
     }
 }

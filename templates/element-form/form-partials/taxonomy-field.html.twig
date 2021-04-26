@@ -1,6 +1,9 @@
 {% set displayInline = not category.enableDescription and not category.singleOption %}
 {% if displayInline %}
 	{% for option in category.options %}
+	{#{% if option.enableDescription %}
+		{% set displayInline = false %}
+	{% endif %}#}
     {% if option.displayChildrenInForm %}
       {% for subcategory in option.subcategories %}
         {% if subcategory.displayInForm %} {% set displayInline = false %} {% endif %}
@@ -43,24 +46,24 @@
   			{% endif %}
   		{% endfor %}
 
-  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline ? 'inline' : ''}} {{ displayOption ? 'selected' : '' }}" 
+  		<div class="option-field depth-{{ categoryDepth }} {{ displayInline and not option.enableDescription ? 'inline' : ''}} {{ displayOption ? 'selected' : '' }}" 
 		     id="option-field-{{option.id}}"
   			 data-id="{{option.id}}" data-index={{curr_index}}>
 
-  			<div class="option-field-value {{ category.enableDescription ? "with-description" : "" }}">
+  			<div class="option-field-value {{ (option.enableDescription or category.enableDescription) ? "with-description" : "" }}">
 
   				<span class="option-field-name">
-						{% set iconClass = (option.icon is defined and option.icon) ?  option.icon : 'icon-angle-right' %}
-						{% set iconColorId = '' %}
-						{% if iconClass %}
-							<span class="icon {{ iconClass }} colorAs depth-{{ categoryDepth }}" option-id='{{ iconColorId }}' ></span>
-						{% endif %}
-						{{ option.name }}
+					{% set iconClass = (option.icon is defined and option.icon) ?  option.icon : 'icon-angle-right' %}
+					{% set iconColorId = '' %}
+					{% if iconClass %}
+						<span class="icon {{ iconClass }} colorAs depth-{{ categoryDepth }}" option-id='{{ iconColorId }}' ></span>
+					{% endif %}
+					{{ option.name }}
   				</span>
 
-  				{% if category.enableDescription %}
+  				{% if category.enableDescription or option.enableDescription %}
     				<div class="input-field option-field-description">
-  				  		<input placeholder="{{ category.descriptionLabel|default('commons.category_placeholder'|trans) }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
+  				  		<input placeholder="{{ option.descriptionLabel|default(category.descriptionLabel|default('commons.category_placeholder'|trans)) }}" id="option-fields-description-{{ option.id }}" class="option-field-description-input" data-id="{{option.id}}" type="text" length="80" value="{{curr_description}}">
     				</div>
   				{% endif %}
 

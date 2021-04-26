@@ -108,6 +108,10 @@
 			}
 		}
 
+		&:not(.inline) {
+			width: 100%;
+		}
+
 		.icon
 		{
 			font-size: 19px;

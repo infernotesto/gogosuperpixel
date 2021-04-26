@@ -820,9 +820,10 @@ option_hidden:
     unexpandable_help: "Les sous groupes et sous catégories seront toujours affichés"
     add_a_tag: "Ajouter un tag"
     return_to_list: "Retourner à la liste"
-    # "Nom du groupe"
     pickingOptionText: "Text à afficher dans le formulaire : Choisissez..."
-
+    enableDescription: "Ajoutez un champ texte à cette catégorie"
+    enableDescription_help: On pourra renseigner un texte pour décrire cette catégorie. Par example, pour un catégorie "Autre" on pourra préciser la valeur. Si vous voulez activer ce champ pour toutes les catégorie, activez le paramètre "description des catégories" dans le Groupe de catégorie
+    descriptionLabel: Label pour le champ additionel
   form:
     groups:
       main: "Principal"
@@ -832,6 +833,7 @@ option_hidden:
       subcategories: "Sous groupes"
       advanced: "Configuration avancée"
       displayChildren: "Afficher les sous groupes et les sous catégories"
+      description: Champs texte adjacent à la catégorie
       osm: "Lien avec OpenStreetMap"
       osm_help: "Lors d'un export OSM, chaque élément qui aura cette catégorie se verra attribué le tag OSM correspondant"
 
