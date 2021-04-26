@@ -1,17 +1,19 @@
+{% trans_default_domain 'admin' %}
+
 <input type="hidden" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}"/>
 
 {% set object = form.vars.sonata_admin.admin.subject %}
 {% set mapping = object.ontologyMapping %}
 
 {% if mapping|length == 0 %}
-  <div class="alert alert-info">Veuillez cliquer sur le boutton "Lire les données" afin de charger les attributs des données à importer</div> {# TODO Translation #}
+  <div class="alert alert-info">{{ 'mapping-taxonomy.alert'|trans }}</div>
 {% else %}
   <table class="table mapping-table mapping-ontology-table">
     <thead>
       <tr>
-        <th style="width:100px">Nom d'origine</th> {# TODO Translation #}
+        <th style="width:100px">{{ 'mapping-taxonomy.original'|trans }}</th>
         <th style="width:20px"></th>
-        <th>À transformer en <span style="font-weight: normal">(les champs vides ne seront pas importés)</span></th> {# TODO Translation #}
+        <th>{{ 'mapping-taxonomy.mapped'|trans }}</th>
         <th></th>
       </tr>
     </thead>
@@ -22,14 +24,14 @@
         {% set moreInfos = '' %}
         {% set rowClass = '' %}
         {% if mappedObject.collectedPercent is defined %}
-          {% set moreInfos = moreInfos ~ "Présent dans " ~ mappedObject.collectedPercent|number_format(0) ~ "% des éléments importés." %} {# TODO Translation #}
+          {% set moreInfos = moreInfos ~ 'mapping-taxonomy.collectedPercent'|trans({'%percent%': mappedObject.collectedPercent|number_format(0)}) %}
           {% if mappedObject.collectedPercent < percentThreshold %}
             {% set rowClass = rowClass ~ 'low-used ' %}
             {% set displayMorePropsBtn = true %}
           {% endif %}
         {% endif %}
         {% if mappedObject.collectedValues|length > 0 %}
-          {% set moreInfos = moreInfos ~ " Valeurs : \n\r" ~ mappedObject.collectedValues|join(', ') %}
+          {% set moreInfos = moreInfos ~ 'mapping-taxonomy.moreInfos'|trans({'%values%': mappedObject.collectedValues|join(', ')}) %}
         {% endif %}  
         {# For OSM import we only edit the tags, others attributes are automatically mapped #} 
         {% if object.sourceType == 'osm' and not (originName starts with 'tags/') %}   
@@ -37,14 +39,14 @@
         {% endif %}    
         <tr class="{{ rowClass }}">          
           <td class="original" title="{{ moreInfos }}">{{originName}}</td>
-          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Utiliser le nom d'origine"></i></td> {# TODO Translation #}
+          <td><i class="arrow-icon fa fa-arrow-circle-right" title="{{ 'mapping-taxonomy.arrowTitle'|trans }}"></i></td>
           <td class="mapped">
             <input type="text" name="ontology[{{originName}}]" 
                   class="form-control property-selector" value={{mappedObject.mappedProperty}} />
           </td>
           <td>
             <span class="label field-info"></span>
-            <i class="clear-icon fa fa-ban" title="Ne plus importer ce champ"></i> {# TODO Translation #}
+            <i class="clear-icon fa fa-ban" title="{{ 'mapping-taxonomy.clearTitle'|trans }}"></i>
           </td>
         </tr>
       {% endfor %}
@@ -55,7 +57,7 @@
       <center>
         <button type="button" class="btn btn-default display-all-props"
                 onclick="$('.low-used').removeClass('low-used'); $(this).remove()">
-          Voir tous les champs (les champs présents dans moins de {{ percentThreshold }}% des éléments sont cachés par défault) {# TODO Translation #}
+                {{ 'mapping-taxonomy.displayMore'|trans({'%percent%': percentThreshold}) }}
         </button>
       </center>
   {% endif %}
@@ -189,11 +191,11 @@
       var text = '', type = '', title = ''
       if (coreData.map(el => el.id).concat(formProperties).indexOf(newVal) > -1) {
         text = "Éditable" // TODO Translation
-        type = "info" // TODO Translation
+        type = "info"
         title = "Ce champ sera éditable dans le formulaire public" // TODO Translation
       } else if (newVal != '/' && newVal != '') {
         text = "Non éditable" // TODO Translation
-        type = "primary" // TODO Translation
+        type = "primary"
         title = "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous" // TODO Translation
       }
       $row.find('.field-info').addClass('label-'+type).text(text).attr('title', title)

@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 <input type="hidden" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}"/>
 
 {% set object = form.vars.sonata_admin.admin.subject %}
@@ -6,9 +8,9 @@
   <table class="table mapping-table mapping-taxonomy-table">
     <thead>
       <tr>
-        <th class="original">Catégories lues depuis le fichier d'origine</th> {# TODO Translation #}
+        <th class="original">{{ 'mapping-taxonomy.original'|trans }}</th>
         <th style="width:20px"></th>
-        <th>Catégories du site</th> {# TODO Translation #}
+        <th>{{ 'mapping-taxonomy.mapped'|trans }}</th>
         <th style="width:20px"></th>
       </tr>
     </thead>
@@ -18,28 +20,28 @@
         {% if mappedObject.fieldName and mappedObject.fieldName != currentFieldName %}
           {% set currentFieldName = mappedObject.fieldName %}
           <tr>
-            <td class="category-group"><label>Groupe {{ mappedObject.fieldName }}</label></td> {# TODO Translation #}
+            <td class="category-group"><label>{{ 'mapping-taxonomy.category-group'|trans({'%name%': mappedObject.fieldName}) }}</label></td>
             <td colspan="3"></td>
           </tr>
         {% endif %}
         <tr>
           <td class="original">{{originName}}</td>
-          <td><i class="arrow-icon fa fa-arrow-circle-right" title="Créer une catégorie à partir du nom d'origine"></i></td> {# TODO Translation #}
+          <td><i class="arrow-icon fa fa-arrow-circle-right" title="{{ 'mapping-taxonomy.arrowTitle'|trans }}"></i></td>
           <td class="mapped">
             <input type="text" name="taxonomy[{{originName}}][]" class="form-control category-selector" value="{{mappedObject.mappedCategoryIds|join(',')}}"/>
           </td>
-          <td><i class="clear-icon fa fa-ban" title="Ne pas utiliser cette catégorie"></i></td> {# TODO Translation #}
+          <td><i class="clear-icon fa fa-ban" title="{{ 'mapping-taxonomy.clearTitle'|trans }}"></i></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
   <center>
     <button type="button" class="btn btn-default create-missing-categories">
-      Créer toutes les catégories manquantes {# TODO Translation #}
+      {{ 'mapping-taxonomy.create-missing-categories'|trans }}
     </button>
   </center>
 {% else %}
-  <div class="alert alert-info">Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'</div> {# TODO Translation #}
+  <div class="alert alert-info">{{ 'mapping-taxonomy.alert'|trans }}</div>
 {% endif %}
 
 <script>

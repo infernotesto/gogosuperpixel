@@ -310,9 +310,9 @@ class ElementImportService
             ];
             $totalErrors = $elementsMissingGeoCount + $elementsMissingTaxoCount + $this->countElementErrors;
             $logLevel = $totalErrors > 0 ? ($totalErrors > ($size / 4) ? 'error' : 'warning') : 'success';
-            $message = 'Import de '.$import->getSourceName().' terminé'; // TODO translate
+            $message = $this->trans('importService.logMessage', ['%name%' => $import->getSourceName()]);
             if ('success' != $logLevel) {
-                $message .= ', mais avec des problèmes !'; // TODO translate
+                $message .= $this->trans('importService.logError');
             }
             $log = new GoGoLogImport($logLevel, $message, $logData);
             $this->dm->persist($log);

@@ -108,13 +108,13 @@ class ImportAdmin extends GoGoAbstractAdmin
         
         if ($isPersisted) {
             // TAB - Ontology Mapping
-            $title = 'Table de correspondance des champs'; // TODO translate
+            $title = $this->trans('imports.form.groups.ontologyMappingTab');
             if ($this->getSubject()->getNewOntologyToMap()) {
-                $title .= ' <label class="label label-info">Nouveaux champs</label>'; // TODO translate
+                $title .= ' <label class="label label-info">'.$this->trans('imports.form.groups.newFields').'</label>';
             }
             $formMapper
                 ->tab($title)                    
-                    ->panel('Transformer les données à importer') // TODO translate
+                    ->panel('ontologyMappingPanel')
                         ->add('ontologyMapping', null, [
                             'label_attr' => ['style' => 'display:none'], 
                             'attr' => ['class' => 'gogo-mapping-ontology', 
@@ -124,80 +124,42 @@ class ImportAdmin extends GoGoAbstractAdmin
                 
                 if ($this->getSubject()->getSourceType() != 'osm') {
                     $formMapper
-                    ->panel('Autres Options', ['box_class' => 'box box-default']) // TODO translate
-                        ->add('geocodeIfNecessary', null, [
-                            'required' => false, 
-                            'label' => 'Géocoder les élements sans latitude ni longitude à partir de leur adresse']) // TODO translate
-                        ->add('fieldToCheckElementHaveBeenUpdated', null, [
-                            'required' => false, 
-                            'label' => "Nom de l'attribut à comparer pour la mise à jour",  // TODO translate
-                            'label_attr' => ['title' => "Lorsqu'on met à jour une source, certains des éléments à importer existent déjà dans notre base de donnée. Vous pouvez renseigner ici un champs qui permettra de comparer si l'élément à été mis à jour au sein de la source depuis le dernier import. Exple de champ: updatedAt, date_maj etc... (laisser vide pour mettre à jour les éléments à chaque fois)"]]) // TODO translate
+                    ->panel('otherOptions', ['box_class' => 'box box-default'])
+                        ->add('geocodeIfNecessary')
+                        ->add('fieldToCheckElementHaveBeenUpdated')
                     ->end();
                 }
                 $formMapper->end();
 
             // TAB - Taxonomy Mapping
             if (count($this->getSubject()->getOntologyMapping()) > 0) {     
-                $title = 'Table de correspondance des catégories'; // TODO translate
+                $title = $this->trans('imports.form.groups.taxonomyMapping');
                 if ($this->getSubject()->getNewTaxonomyToMap()) {
-                    $title .= ' <label class="label label-info">Nouvelles catégories</label>'; // TODO translate
+                    $title .= ' <label class="label label-info">'.$this->trans('imports.form.groups.newCategories').'</label>';
                 }
                 $formMapper->tab($title)          
-                    ->panel('Faites correspondre les catégories') // TODO translate
+                    ->panel('taxonomyMapping2')
                         ->add('taxonomyMapping', null, ['label_attr' => ['style' => 'display:none'], 'attr' => ['class' => 'gogo-mapping-taxonomy', 'data-options' => $optionsList]])
                     ->end()
 
-                    ->panel('Autres Options', ['box_class' => 'box box-default']) // TODO translate
+                    ->panel('otherOptions', ['box_class' => 'box box-default'])
                         ->add('optionsToAddToEachElement', ModelType::class, [
                             'class' => 'App\Document\Option',
-                            'required' => false,
                             'multiple' => true,
-                            'btn_add' => false,
-                            'label' => 'Catégories à ajouter à chaque élément importé', ],  // TODO translate
+                            'btn_add' => false],
                             ['admin_code' => 'admin.option_hidden'])
-                        ->add('needToHaveOptionsOtherThanTheOnesAddedToEachElements', null, [
-                            'required' => false, 
-                            'label' => 'Les éléments importés sans catégorie (en dehors de celles ajoutées manuellement ci-dessus) seront marqués comme "à modérer"',  // TODO translate
-                            'label_attr' => ['title' => "Sans prendre en compte les catégories ajoutés via le champs \"Catégories à ajouter à chaque élément importé\", si les éléments importés n'ont pas de catégories, ils seront marqués comme \"Modération aucune catégorie renseignée\""]]) // TODO translate
-                        ->add('preventImportIfNoCategories', null, [
-                            'required' => false, 
-                            'label' => "Ne pas importer les éléments qui n'ont aucune catégories",  // TODO translate
-                            'label_attr' => ['title' => "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"]]) // TODO translate
+                        ->add('needToHaveOptionsOtherThanTheOnesAddedToEachElements')
+                        ->add('preventImportIfNoCategories')
                     ->end()
                 ->end();
             }
 
             if ($this->getSubject()->isDynamicImport() && $this->getSubject()->getIsSynchronized()) {
                 // TAB - Custom Code For Export
-                $formMapper->tab("Convertir les données pour l'export") // TODO translate
-                    ->panel("Entrez du code qui sera exécuté lors de l'export, avant leur envoi pour synchronisation",  // TODO translate
-                        ['description' => "La variable <b>\$element</b> représente l'élément dans GoGoCarto, la variable <b>\$osmFeature</b> représente la donnée OSM reconstruite à partir de l'élement GoGoCarto</br>
-<pre>Quelques examples de transformations simple:</pre>
-Si l'élement contient la catégorie \"Vrac\", on rajoute un tag OSM
-<pre>&lt;?php
-if (in_array('Vrac', \$element->getCategoriesNames())) {
-    \$osmFeature['tags']['bulk_purchase'] = 'yes';
-}</pre>
-Si l'élement contient la catégorie numéro 12, on rajoute un tag OSM
-Cette méthode est à préférer car si on change le nom de la catégorie le code fonctionnera toujours
-L'ID d'une catégorie est noté entre parenthèse après son nom dans Personnalisation / Catégories
-<pre>&lt;?php
-if (in_array(12, \$element->getCategoriesIds())) {
-    \$osmFeature['tags']['bulk_purchase'] = 'yes';
-}</pre>
-Si l'élement a une valeur spécifique pour un champ définit dans le formulaire
-<pre>&lt;?php
-if (\$element->getProperty('vrac') == 'oui') {
-    \$osmFeature['tags']['bulk_purchase'] = 'yes';
-}</pre>
-On ajoute un tag pour tous les éléments
-<pre>&lt;?php
-\$osmFeature['tags']['bulk_purchase'] = 'yes';
-</pre>"]) // TODO translate
+                $formMapper->tab('customCodeForExportTab')
+                    ->panel('customCodeForExportPanel')
                         ->add('customCodeForExport', null, [
-                            'label' => 'Code PHP qui sera exécuté',  // TODO translate
-                            'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500'], 
-                            'required' => false])
+                            'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500']])
                     ->end()
                 ->end();
             }

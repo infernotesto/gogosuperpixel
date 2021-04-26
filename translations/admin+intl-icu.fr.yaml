@@ -243,7 +243,17 @@ imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"
   dynamic: "Import Dynamique, pour afficher des données gérées par quelqu'un d'autre"
-  form:
+  edit: # templates/admin/edit/edit_import.html.twig
+    lastRefresh: "Dernier import :"
+    submit: "Sauvegarder"
+    confirm: "Attention ! La détection des doublons aura lieu pendant l'import, et des fusions automatiques sont susceptibles d'arriver. Vérifier bien vos paramètres de détection des doublons (Dans Données -> Gestion des doublons) avant de continuer"
+    import: "Importer les données"
+    reimport: "Importer de nouveau"
+    collect: "Lire les données"
+    clear-elements: "Effacer tous les éléments"
+    delete: "Supprimer l'import (ainsi que tous les éléments importés)"
+    saving: "Sauvegarde et lecture des données en cours..."
+  form: &imports_form
     groups:
       general: "Général"
       Historic: "Historique"
@@ -253,23 +263,55 @@ imports:
         La variable <b>$data</b> représente le tableau PHP créé à partir des données CSV ou JSON. </br>
         <pre>Quelques examples de transformations simple :</pre>
         Si les éléments à importer sont dans une sous propriété appelée ''elements''
-        <pre>&lt;?php</br>\$data = $data[''elements''];</pre>
-        Ajouter un attribute ''source'' à tous les éléments, avec comme valeur ''MySource''
-
-      # TODO translation : fixme !
-      # <pre>&lt;?php</br>foreach($data as $key => $row) {
-      #     $data[$key][''source''] = ''MySource'';
-      # }</pre>
-      # Ajouter un attribut en utilisant la valeur d''un autre attribut
-      # <pre>&lt;?php</br>foreach($data as $key => $row) {
-      #     $data[$key][''latitude'']  = $row[''geo''][''latitude'']);
-      #     $data[$key][''longitude''] = $row[''geo''][''longitude'']);
-      # }</pre>
-      # Transformer un attribut
-      # <pre>&lt;?php</br>foreach($data as $key => $row) {
-      #     $data[$key][''categories''] = array_map(function($cat) { return $cat[0]; }, $row[''categories'']);
-      # }</pre>
-  fields:
+        <pre>&lt;?php</br>$data = $data[''elements''];</pre>
+        Ajouter un attribut ''source'' à tous les éléments, avec comme valeur ''MySource''
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+           $data[$key][''source''] = ''MySource'';
+        '}</pre>
+        Ajouter un attribut en utilisant la valeur d''un autre attribut
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''latitude'']  = $row[''geo''][''latitude'']);
+            $data[$key][''longitude''] = $row[''geo''][''longitude'']);
+        '}</pre>
+        Transformer un attribut
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''categories''] = array_map(function($cat) { return $cat[0]; }, $row[''categories'']);
+        '}</pre>
+      ontologyMappingTab: "Transformer les données à importer"
+      otherOptions: "Autres options"
+      ontologyMappingPanel: "Table de correspondance des champs"
+      newFields: "Nouveaux champs"
+      taxonomyMapping: "Table de correspondance des catégories"
+      newCategories: "Nouvelles catégories"
+      taxonomyMapping2: "Faites correspondre les catégories"
+      customCodeForExportTab: "Convertir les données pour l'export"
+      customCodeForExportPanel: "Entrez du code qui sera exécuté lors de l'export, avant leur envoi pour synchronisation"
+      customCodeForExportPanel_description: >-
+        La variable <b>$element</b> représente l'élément dans GoGoCarto, la variable <b>$osmFeature</b> représente la donnée OSM reconstruite à partir de l''élement GoGoCarto</br>
+        <pre>Quelques examples de transformations simple:</pre>
+        Si l''élement contient la catégorie "Vrac", on rajoute un tag OSM
+        <pre>&lt;?php
+        if (in_array(''Vrac'', $element->getCategoriesNames())) '{
+            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre>
+        Si l''élement contient la catégorie numéro 12, on rajoute un tag OSM<br/>
+        Cette méthode est à préférer car si on change le nom de la catégorie le code fonctionnera toujours<br/>
+        L''ID d''une catégorie est noté entre parenthèse après son nom dans Personnalisation / Catégories
+        <pre>&lt;?php
+        if (in_array(12, $element->getCategoriesIds())) '{
+            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre>
+        Si l''élement a une valeur spécifique pour un champ définit dans le formulaire
+        <pre>&lt;?php
+        if ($element->getProperty(''vrac'') == ''oui'') '{
+            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre>
+        On ajoute un tag pour tous les éléments
+        <pre>&lt;?php
+        $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+        </pre>
+      historic: "Historique"
+  fields: &imports_fields
     sourceName: "Nom de la source"
     file: "Fichier CSV à importer (séparation par virgules, encodage en UTF8)"
     sourceType: "Type de la source"
@@ -278,9 +320,54 @@ imports:
     moderateElements_help: "Les éléments importés auront le status \"en attente de validation\" et devront être manuellement validés. Idem pour des mise à jour d'éléments existant (modification)"
     url: "Ou URL vers une API JSON"
     customCode: "Code PHP qui sera exécuté"
+    geocodeIfNecessary: "Géocoder les élements sans latitude ni longitude à partir de leur adresse"
+    fieldToCheckElementHaveBeenUpdated: "Nom de l'attribut à comparer pour la mise à jour"
+    fieldToCheckElementHaveBeenUpdated_help: "Lorsqu'on met à jour une source, certains des éléments à importer existent déjà dans notre base de donnée. Vous pouvez renseigner ici un champs qui permettra de comparer si l'élément à été mis à jour au sein de la source depuis le dernier import. Exple de champ: updatedAt, date_maj etc... (laisser vide pour mettre à jour les éléments à chaque fois)"
+    optionsToAddToEachElement: "Catégories à ajouter à chaque élément importé"
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements: "Les éléments importés sans catégorie (en dehors de celles ajoutées manuellement ci-dessus) seront marqués comme \"à modérer\""
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: "Sans prendre en compte les catégories ajoutés via le champs \"Catégories à ajouter à chaque élément importé\", si les éléments importés n'ont pas de catégories, ils seront marqués comme \"Modération aucune catégorie renseignée\""
+    preventImportIfNoCategories: "Ne pas importer les éléments qui n'ont aucune catégories"
+    preventImportIfNoCategories_help: "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"
+    customCodeForExport: "Code PHP qui sera exécuté"
+
+importService:
+  logMessage: "Import de {name} terminé"
+  logError: ", mais avec des problèmes !"
+  total: "Total : {count}"
+  elementsCreatedCount: "- {count} importé.s"  # TODO plurals
+  elementsUpdatedCount: "- {count} mis à jour"
+  elementsNothingToDoCount: "- {count} laissé.s tel.s quel.s (rien à mettre à jour)" # TODO plurals
+  elementsMissingGeoCount: "- {count} sans géoloc"
+  elementsMissingTaxoCount: "- {count} sans catégories"
+  elementsPreventImportedNoTaxo: "- {count} non importé.s car sans catégories" # TODO plurals
+  elementsDeletedCount: "- {count} supprimé.s" # TODO plurals
+  elementsErrorsCount: "- {count} erreur.s pendant l'import" # TODO plurals
+  automaticMergesCount: "- {count} fusionné.s avec un élément déjà existant" # TODO plurals
+  potentialDuplicatesCount: "- {count} doublon.s potentiel.s détecté.s" # TODO plurals
+
+mapping-taxonomy:
+  original: "Catégories lues depuis le fichier d'origine"
+  mapped: "Catégories du site"
+  category-group: "Groupe {name}"
+  collectedPercent: "Présent dans {percent}% des éléments importés."
+  arrowTitle: "Créer une catégorie à partir du nom d'origine"
+  clearTitle: "Ne pas utiliser cette catégorie"
+  create-missing-categories: "Créer toutes les catégories manquantes"
+  moreInfos: " Valeurs : \n\r {values}"
+  alert: "Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'"
+
+mapping-ontology:
+  alert: "Veuillez cliquer sur le boutton \"Lire les données\" afin de charger les attributs des données à importer"
+  original: "Nom d'origine"
+  mapped: "À transformer en <span style='font-weight: normal'>(les champs vides ne seront pas importés)</span>"
+  arrowTitle: "Utiliser le nom d'origine"
+  clearTitle: "Ne plus importer ce champ"
+  displayMore: "Voir tous les champs (les champs présents dans moins de {percent}% des éléments sont cachés par défault)"
 
 dynamic_imports:
   _label: "Import dynamique"
+  fields: *imports_fields
+  form: *imports_form
 
 config_duplicates:
   _label: "Gestion des Doublons"
@@ -357,6 +444,7 @@ app:
   fields:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
+    actualFile: "Fichier actuel :"
 
 categories:
   _label: "Catégories"
