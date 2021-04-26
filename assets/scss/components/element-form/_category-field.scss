@@ -88,6 +88,8 @@
 		@include flex(initial);
 		margin-bottom: 1rem;
 
+		&:not(.selected) { display: none !important; }
+
 		&.inline 
 		{ 
 			display: inline-block;

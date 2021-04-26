@@ -33,7 +33,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.1",
-    "gogocarto-js": "^1.7.2",
+    "gogocarto-js": "^1.7.3",
+    "gulp-header": "^2.0.9",
+    "gulp-yaml": "^2.0.4",
     "leaflet": "^1.7.1",
     "leaflet-shades": "^0.1.4",
     "natives": "^1.1.6",

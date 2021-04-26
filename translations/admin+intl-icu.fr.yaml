@@ -500,6 +500,7 @@ categories:
     singleOption_help: "Une seule catégorie est selectionnable à la fois"
     enableDescription: "Activer la description des catégories"
     enableDescription_help: "On pourra renseigner un texte pour décrire chaque catégorie. Par example, pour un catégorie Agriculture, on pourrait ajouter comme texte \"Maraîchage, produits transformés...\""
+    descriptionLabel: Label pour le champ de description
     nameShort: "Nom (version courte)"
     nameShort_help: "La version courte est utilisée dans le menu, car souvent on manque de place"
     index: "Position"

@@ -6,6 +6,8 @@ const gulp = require('gulp'),
     concat = require('gulp-concat'),
     gzip = require('gulp-gzip'),
     del = require('del'),
+    yaml = require('gulp-yaml'),
+    header = require('gulp-header'),
     workboxBuild = require('workbox-build');
 
 const scriptsHome = () =>
@@ -24,12 +26,21 @@ const scriptsElementForm = () =>
     .pipe(gulp.dest('web/js'));
 
 const scriptsLibs = () => {
-  const gogocarto = gulp.src(['node_modules/gogocarto-js/dist/gogocarto.js', 'assets/js/init-sw.js', 'custom/**/*.js'])
+  const translations = gulp.src('translations/javascripts-translations.yaml')
+    .pipe(yaml({schema: 'DEFAULT_SAFE_SCHEMA', ext: '.js'}))
+    .pipe(header("var gogoI18n = "))
+    .pipe(gulp.dest('web/js'))
+  const gogocarto = gulp.src([
+      'node_modules/gogocarto-js/dist/gogocarto.js', 
+      'assets/js/init-sw.js', 
+      'custom/**/*.js',
+      'assets/js/i18n.js',
+      'web/js/javascripts-translations.js'])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('web/js'));
   const sw = gulp.src(['assets/js/vendor/**/*'])
     .pipe(gulp.dest('web/js'));
-  return merge(gogocarto, sw);
+  return merge(translations, gogocarto, sw);
 };
 
 const serviceWorker = async () => {
@@ -100,10 +111,10 @@ exports.watch = () => {
   gulp.watch(['assets/js/**/*.js', '!assets/js/element-form/**/*.js'],
               gulp.series(scriptsExternalPages, serviceWorker));
 
-  gulp.watch(['node_modules/gogocarto-js/dist/**/*'],
+  gulp.watch(['node_modules/gogocarto-js/dist/**/*', 'custom/**/*.css'],
               gulp.series(gogocarto_assets, serviceWorker));
 
-  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js'],
+  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/javascripts-translations.yaml'],
               gulp.series(scriptsLibs, serviceWorker));
 
   gulp.watch(['assets/js/home.js'], gulp.series(scriptsHome, serviceWorker));
@@ -118,3 +129,5 @@ const cleanJs = () =>
 exports.build = gulp.series(cleanJs, cleanCss, gulp.parallel(stylesBuild, scriptsLibs, scriptsHome, scriptsExternalPages, scriptsElementForm, gogocarto_assets), serviceWorker);
 
 exports.production = gulp.parallel(gulp.series(prod_styles, gzip_styles), gulp.series(prod_js, gzip_js));
+
+exports.libs = gulp.series(scriptsLibs)

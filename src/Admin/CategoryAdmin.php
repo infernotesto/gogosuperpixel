@@ -50,7 +50,7 @@ class CategoryAdmin extends GoGoAbstractAdmin
         }
 
         $formMapper
-          ->panel('primary', ['class' => 'col-xs-12 col-md-6'])
+          ->halfPanel('primary')
             ->add('name', null, ['required' => true])
             ->add('pickingOptionText', null, ['required' => true])
             ->add('parent', ModelType::class, [
@@ -60,28 +60,29 @@ class CategoryAdmin extends GoGoAbstractAdmin
             ->add('isMandatory')
             ->add('singleOption')
             ->add('enableDescription')
-            ->end()
-            ->panel('secondary', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
+            ->add('descriptionLabel')
+          ->end()
+          ->halfPanel('secondary')
              ->add('nameShort')
              ->add('index')
              ->add('showExpanded')
                    ->add('unexpandable')
              ->add('displaySuboptionsInline')
-        ->end()
-      ->panel('display', ['class' => 'col-md-6', 'box_class' => 'box'])
-         ->add('displayInMenu')
-         ->add('displayInInfoBar')
-         ->add('displayInForm')
-      ->end()
-        ->panel('categories', array('class' => 'col-xs-12 sub-options-container'))
-        	->add('isFixture', HiddenType::class, ['attr' => ['class' => 'gogo-sort-options'], 'label_attr' => ['style' => 'display:none']])
-      ->add('options', CollectionType::class, array(
-          'by_reference' => false,
-          'entry_type' => OptionLiteType::class,
-          'allow_add' => true,
-          'label_attr'=> ['style'=> 'display:none']))
-        ->end()
-    ;
+          ->end()
+          ->halfPanel('display', ['class' => 'col-md-6', 'box_class' => 'box'])
+            ->add('displayInMenu')
+            ->add('displayInInfoBar')
+            ->add('displayInForm')
+          ->end()
+          ->panel('categories', array('class' => 'col-xs-12 sub-options-container'))
+            ->add('isFixture', HiddenType::class, ['attr' => ['class' => 'gogo-sort-options'], 'label_attr' => ['style' => 'display:none']])
+            ->add('options', CollectionType::class, array(
+            'by_reference' => false,
+            'entry_type' => OptionLiteType::class,
+            'allow_add' => true,
+            'label_attr'=> ['style'=> 'display:none']))
+          ->end()
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)

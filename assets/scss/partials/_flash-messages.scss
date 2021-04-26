@@ -36,7 +36,7 @@
         display: none;
     }
 
-    &.notice { background-color: #444444; a:hover { color: $primary-color; } }
+    &.notice { background-color: transparent; a:hover { color: $primary-color; } }
     &.error { background-color: #b90303; a:hover { color: white; } }
     &.success { background-color: #4caf50; a:hover { color: #444444; } }
 }

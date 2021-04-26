@@ -82,6 +82,13 @@ class Category
     private $enableDescription = false;
 
     /**
+     * @var string
+     * @Exclude(if="object.getEnableDescription() == false")
+     * @MongoDB\Field(type="string")
+     */
+    private $descriptionLabel = '';
+
+    /**
      * @var bool
      * @Exclude(if="object.getDisplayInMenu() == true")
      * @MongoDB\Field(type="boolean")
@@ -725,5 +732,29 @@ class Category
     public function getCustomId()
     {
         return $this->customId;
+    }
+
+    /**
+     * Get the value of descriptionLabel
+     *
+     * @return  string
+     */ 
+    public function getDescriptionLabel()
+    {
+        return $this->descriptionLabel;
+    }
+
+    /**
+     * Set the value of descriptionLabel
+     *
+     * @param  string  $descriptionLabel
+     *
+     * @return  self
+     */ 
+    public function setDescriptionLabel($descriptionLabel)
+    {
+        $this->descriptionLabel = $descriptionLabel;
+
+        return $this;
     }
 }
