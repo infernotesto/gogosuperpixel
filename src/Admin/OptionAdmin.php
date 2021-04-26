@@ -66,7 +66,7 @@ class OptionAdmin extends GoGoAbstractAdmin
             ->add('useIconForMarker')
             ->add('useColorForMarker')
          ->end()
-         ->panel('display', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
+         ->halfPanelDefault('display')
             ->add('displayInMenu')
             ->add('displayInInfoBar')
             ->add('displayInForm')
@@ -80,7 +80,7 @@ class OptionAdmin extends GoGoAbstractAdmin
          ->end()
         ->end()
       ->tab('advanced')
-         ->panel('secondary', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
+        ->halfPanelDefault('secondary')
             ->add('nameShort')
             ->add('customId')
             ->add('softColor', null, ['attr' => ['class' => 'gogo-color-picker']])
@@ -89,17 +89,23 @@ class OptionAdmin extends GoGoAbstractAdmin
             ->add('index')
             ->add('showExpanded')
             ->add('unexpandable')
-         ->end()
+        ->end()
 
-         ->panel('displayChildren', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
+        ->halfPanelDefault('displayChildren')
             ->add('displayChildrenInMenu')
             ->add('displayChildrenInInfoBar')
             ->add('displayChildrenInForm')
-         ->end()
+        ->end()
 
-         ->panel('osm', ['class' => 'col-xs-12 col-md-6', 'box_class' => 'box'])
+        ->halfPanelDefault('osm')
             ->add('osmTags', TextType::class, ['attr' => ['class' => 'gogo-osm-tags']])
-         ->end()
+        ->end()
+        
+        ->halfPanelDefault('description')
+            ->add('enableDescription')
+            ->add('descriptionLabel')
+        ->end()
+
       ->end()
       ;
     }

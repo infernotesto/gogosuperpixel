@@ -1,9 +1,3 @@
-/*
-* @Author: Sebastian Castro
-* @Date:   2017-03-27 16:26:49
-* @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-07-08 17:24:00
-*/
 var index = 1;
 jQuery(document).ready(function()
 {	
@@ -23,16 +17,20 @@ jQuery(document).ready(function()
 		{
 			$(this).closest('.category-field').find('> .option-field.selected').each(function() { removeOptionField($(this)); });
 		}
-		
+
 		var optionField = $('#option-field-' + $(this).val());
+		var order = index
+		if (optionField.find('> .option-field-value').hasClass('with-description')
+		    && optionField.closest('.category-field').hasClass('inline'))
+			order = order + 1000; // when there is a mix betwwen category with description and with not, it put the description at the end so other one can be inlined
 		optionField.addClass('selected')
 		optionField.stop(true,false).slideDown({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
-		optionField.attr('data-index', index);
-		optionField.css('-webkit-box-ordinal-group', index);
-		optionField.css('-moz-box-ordinal-group', index);
-		optionField.css('-ms-flex-order', index);
-		optionField.css('-webkit-order', index);
-		optionField.css('order', index);
+		optionField.attr('data-index', order);
+		optionField.css('-webkit-box-ordinal-group', order);
+		optionField.css('-moz-box-ordinal-group', order);
+		optionField.css('-ms-flex-order', order);
+		optionField.css('-webkit-order', order);
+		optionField.css('order', order);
 		
 
 		checkForSelectLabel(optionField, 1);
