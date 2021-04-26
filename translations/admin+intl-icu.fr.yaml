@@ -334,16 +334,16 @@ importService:
   logMessage: "Import de {name} terminé"
   logError: ", mais avec des problèmes !"
   total: "Total : {count}"
-  elementsCreatedCount: "- {count} importé.s"  # TODO plurals
-  elementsUpdatedCount: "- {count} mis à jour"
-  elementsNothingToDoCount: "- {count} laissé.s tel.s quel.s (rien à mettre à jour)" # TODO plurals
-  elementsMissingGeoCount: "- {count} sans géoloc"
-  elementsMissingTaxoCount: "- {count} sans catégories"
-  elementsPreventImportedNoTaxo: "- {count} non importé.s car sans catégories" # TODO plurals
-  elementsDeletedCount: "- {count} supprimé.s" # TODO plurals
-  elementsErrorsCount: "- {count} erreur.s pendant l'import" # TODO plurals
-  automaticMergesCount: "- {count} fusionné.s avec un élément déjà existant" # TODO plurals
-  potentialDuplicatesCount: "- {count} doublon.s potentiel.s détecté.s" # TODO plurals
+  elementsCreatedCount: "{count} importé.s"  # TODO plurals
+  elementsUpdatedCount: "{count} mis à jour"
+  elementsNothingToDoCount: "{count} laissé.s tel.s quel.s (rien à mettre à jour)" # TODO plurals
+  elementsMissingGeoCount: "{count} sans géoloc"
+  elementsMissingTaxoCount: "{count} sans catégories"
+  elementsPreventImportedNoTaxo: "{count} non importé.s car sans catégories" # TODO plurals
+  elementsDeletedCount: "{count} supprimé.s" # TODO plurals
+  elementsErrorsCount: "{count} erreur.s pendant l'import" # TODO plurals
+  automaticMergesCount: "{count} fusionné.s avec un élément déjà existant" # TODO plurals
+  potentialDuplicatesCount: "{count} doublon.s potentiel.s détecté.s" # TODO plurals
 
 mapping-taxonomy:
   original: "Catégories lues depuis le fichier d'origine"

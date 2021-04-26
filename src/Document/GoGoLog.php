@@ -4,6 +4,7 @@ namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class GoGoLogLevel
 {
@@ -80,7 +81,7 @@ class GoGoLog
         return true;
     }
 
-    public function displayMessage()
+    public function displayMessage(TranslatorInterface $t = null)
     {
         return $this->getMessage();
     }

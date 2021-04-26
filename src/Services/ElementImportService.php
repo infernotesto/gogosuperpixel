@@ -9,6 +9,7 @@ use App\Document\ModerationState;
 use App\EventListener\TaxonomyJsonGenerator;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use App\Services\Utf8Encoder;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElementImportService
 {
@@ -33,7 +34,8 @@ class ElementImportService
                               ElementImportMappingService $mappingService,
                               TaxonomyJsonGenerator $taxonomyJsonGenerator,
                               UserNotificationService $notifService,
-                              ElementDuplicatesService $duplicateService)
+                              ElementDuplicatesService $duplicateService,
+                              TranslatorInterface $t)
     {
         $this->dm = $dm;
         $this->importOneService = $importOneService;
@@ -41,6 +43,12 @@ class ElementImportService
         $this->taxonomyJsonGenerator = $taxonomyJsonGenerator;
         $this->notifService = $notifService;
         $this->duplicateService = $duplicateService;
+        $this->t = $t;
+    }
+
+    private function trans($key, $params = [])
+    {
+        return $this->t->trans($key, $params, 'admin');
     }
 
     public function startImport($import, $manuallyStarted = true)
@@ -319,7 +327,7 @@ class ElementImportService
             $this->dm->flush(); // flush the log before the import, because some time the log save fails but not the import which leads in broken relation
             $import->addLog($log);
             $import->setCurrState($totalErrors > 0 ? ($totalErrors == $size ? ImportState::Failed : ImportState::Errors) : ImportState::Completed);
-            $import->setCurrMessage($log->displayMessage());
+            $import->setCurrMessage($log->displayMessage($this->t));
             
             // ------------
             // Notify Users
