@@ -141,6 +141,9 @@ class ElementImportOneService
         if (array_key_exists('owner', $row)) {
             $element->setUserOwnerEmail($row['owner']);
         }
+        if (array_key_exists('email', $row)) {
+            $element->setEmail($row['email']);
+        }
 
         $lat = $row['latitude'];
         $lng = $row['longitude'];
