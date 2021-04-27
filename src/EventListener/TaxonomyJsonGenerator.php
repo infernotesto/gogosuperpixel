@@ -98,7 +98,9 @@ class TaxonomyJsonGenerator
             // Create flatten option list
             $optionsSerialized = [];
             foreach ($options as $key => $option) {
-                $optionsSerialized[] = $this->serializer->serialize($option, 'json', SerializationContext::create()->setGroups(['semantic']));
+                try {
+                    $optionsSerialized[] = $this->serializer->serialize($option, 'json', SerializationContext::create()->setGroups(['semantic']));
+                } catch (\Exception $e) {}
             }
             $optionsJson = '['.implode(', ', $optionsSerialized).']';
         }

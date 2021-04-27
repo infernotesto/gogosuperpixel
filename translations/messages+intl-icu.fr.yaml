@@ -256,13 +256,18 @@ action:
       done: "L'élément a bien été modéré"
     sendMail:
       uncomplete: "Les paramètres sont incomplets"
-      mailSubject: 'Message reçu depuis la plateforme {instance}'
-      mailContent: '<p>Bonjour <i>{element}</i>,</p>
+      emailSubject: 'Message reçu depuis la plateforme {instance}'
+      emailContent: '<p>Bonjour <i>{element}</i>,</p>
             <p>Vous avez reçu un message de la part de <a href="mailto:{sender}">{sender}</a></br>
             </p>
             <p><b>Titre du message</b></p><p> {subject}</p>
             <p><b>Contenu</b></p><p>{content}</p>'
       done: "L'email a bien été envoyé"
+    sendEditLink:
+      emailContent: >-
+        <p>Bonjour <i>'{{ element '}}</i>,</p>
+        <p><a href="'{{ directEditElementUniqueUrl '}}">Cliquez ici</a> pour modifier votre fiche</p>
+      done: Un lien d'édition a bien été envoyé à {email}       
     stamp:
       unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
       uncomplete: "Les paramètres sont incomplets"

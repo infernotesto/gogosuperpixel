@@ -137,14 +137,27 @@ class ElementInteractionController extends Controller
         $senderMail = $request->get('userEmail');
 
         // TODO make it configurable
-        $mailSubject = $t->trans('action.element.sendMail.mailSubject', ['%instance%' => $this->getParameter('instance_name')]);
-        $mailContent = $t->trans('action.element.sendMail.mailContent', ['%element%' => $element->getName(),
+        $emailSubject = $t->trans('action.element.sendMail.emailSubject', ['%instance%' => $this->getParameter('instance_name')]);
+        $emailContent = $t->trans('action.element.sendMail.emailContent', ['%element%' => $element->getName(),
                                                                              '%sender%' => $senderMail,
                                                                              '%subject%' => $request->get('subject'),
                                                                              '%content%' => $request->get('content') ]);
-        $mailService->sendMail($element->getEmail(), $mailSubject, $mailContent);
+        $mailService->sendMail($element->getEmail(), $emailSubject, $emailContent);
 
         return $this->returnResponse(true, $t->trans('action.element.sendMail.done'));
+    }
+
+    public function sendEditLinkAction($elementId, DocumentManager $dm, MailService $mailService, TranslatorInterface $t)
+    {
+        $element = $dm->get('Element')->find($elementId);
+        $emailSubject = $t->trans('action.element.sendMail.emailSubject', ['%instance%' => $this->getParameter('instance_name')]);
+        $emailContent = $t->trans('action.element.sendEditLink.emailContent');
+        $emailContent = $mailService->replaceMailsVariables($emailContent, $element, '', 'edit-link', null);
+
+        $mailService->sendMail($element->getEmail(), $emailSubject, $emailContent);
+
+        $this->addFlash('success', $t->trans('action.element.sendEditLink.done', ['%email%' => $element->getEmail()]));
+        return $this->redirectToRoute('gogo_homepage');
     }
 
     public function stampAction(Request $request, DocumentManager $dm, TranslatorInterface $t)
