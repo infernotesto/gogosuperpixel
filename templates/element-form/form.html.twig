@@ -1,6 +1,7 @@
 {{ form_start(form, {'id': 'formElement'}) }}
 
-<div id="element-form-content" class="{{ editMode ? 'edit' : 'new' }} {{ isOwner ? 'by-owner' : ''}} {{ isAllowedDirectModeration ? 'by-admin' : '' }}">
+<div id="element-form-content" class="{{ editMode ? 'edit' : 'new' }} {{ isOwner ? 'by-owner' : ''}} {{ isAllowedDirectModeration ? 'by-admin' : '' }}"
+     data-element-id="{{ element.id }}">
 	<section>
 		{% include "element-form/form-renderer.html.twig" %}
 	</section>

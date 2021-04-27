@@ -87,6 +87,12 @@ gogo_element_send_mail:
     requirements:
         methods: POST
 
+gogo_element_send_edit_link:
+    path:     /interact/sendEditLink/{elementId}
+    defaults: { _controller: App\Controller\ElementInteractionController::sendEditLinkAction }
+    requirements:
+        methods: GET
+
 gogo_element_stamp:
     path:     /interact/stamp
     defaults: { _controller: App\Controller\ElementInteractionController::stampAction }

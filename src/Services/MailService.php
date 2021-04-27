@@ -161,7 +161,7 @@ class MailService
         return $mailConfig;
     }
 
-    private function replaceMailsVariables($string, $element = null, $customMessage, $mailType, $option)
+    public function replaceMailsVariables($string, $element = null, $customMessage, $mailType, $option)
     {
         if (null !== $element && $element) {
             if ($element instanceof Element) {
