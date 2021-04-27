@@ -73,6 +73,7 @@ class GoGoAbstractCommand extends Command
             $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine();
             $this->error('Error executing command: '.$message);  // TODO translate ?
         }
+        return 1;
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
