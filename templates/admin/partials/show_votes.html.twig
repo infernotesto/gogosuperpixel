@@ -1,14 +1,5 @@
 {% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
 
-{% set itemValues = {
-	'-2': 'Ne respecte pas la charte',
-	'-1': "N'existe pas",
-	'0': 'Existe mais infos mauvaises',
-	'1': 'Existe',
-	'2': 'Existe et valide info'
-	}
-%} {# TODO Translation #}
-
 {% block field %}
 {% spaceless %}
 

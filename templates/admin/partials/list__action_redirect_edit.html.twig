@@ -1,3 +1,5 @@
- <a href="{{ admin.generateObjectUrl('redirectEdit', object) }}" class="btn btn-sm btn-default edit_link" target="_blank" title="Editer sur le site"> {# TODO Translation #}
+{% trans_default_domain 'admin' %}
+
+<a href="{{ admin.generateObjectUrl('redirectEdit', object) }}" class="btn btn-sm btn-default edit_link" target="_blank" title="{{ 'elements.editOnSite'|trans }}">
     <i class="fa fa-external-link" aria-hidden="true"></i><i class="fa fa-pencil" aria-hidden="true"></i>
 </a>

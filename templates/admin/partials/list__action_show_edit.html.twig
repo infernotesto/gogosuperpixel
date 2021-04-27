@@ -8,9 +8,10 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
+{% trans_default_domain 'admin' %}
 
 {% if admin.isGranted('EDIT', object) %}
-    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="Afficher/Editer"> {# TODO Translation #}
+    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="{{ 'elements.showEdit'|trans }}">
         <i class="fa fa-eye" aria-hidden="true"></i>
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>

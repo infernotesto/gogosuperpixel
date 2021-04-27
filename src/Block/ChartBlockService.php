@@ -14,6 +14,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ChartBlockService extends AbstractBlockService
 {
@@ -23,20 +24,6 @@ class ChartBlockService extends AbstractBlockService
     protected $dateStart;
     protected $dateEnd;
     protected $configService;
-
-    protected $statusChoices = [
-        '-6' => 'Doublon',
-        '-4' => 'Supprimé',
-        '-3' => 'Refusé (votes) ',
-        '-2' => 'Refusé (admin)',
-        '1' => 'Validé (admin)',
-        '2' => 'Validé (votes)',
-        '3' => 'Ajouté par admin',
-        '4' => 'Modifié par admin',
-        '5' => 'Modifié par propriétaire',
-        '6' => 'Modifié avec lien direct',
-        '7' => 'Importé',
-    ]; // TODO translate
 
     protected $statusColors = [
         '-6' => '#434348',
@@ -52,11 +39,17 @@ class ChartBlockService extends AbstractBlockService
         '7' => '#7cb5ec',
     ];
 
-    public function __construct(Environment $twig, DocumentManager $dm, ConfigurationService $configService)
+    public function __construct(Environment $twig, DocumentManager $dm, ConfigurationService $configService, TranslatorInterface $t)
     {
         $this->dm = $dm;
         $this->configService = $configService;
         parent::__construct($twig);
+        $this->t = $t;
+    }
+
+    private function trans($key, $params = [])
+    {
+        return $this->t->trans($key, $params, 'admin');
     }
 
     public function getName()
@@ -82,27 +75,31 @@ class ChartBlockService extends AbstractBlockService
         $timestampEnd = time();
         $timestampStart = $timestampEnd - (60 * 60 * 24 * 60);
 
-        $this->mongoDateEnd = new \MongoDate($timestampEnd);    // Round to the day
-        $this->mongoDateStart = new \MongoDate($timestampStart);        // Add one day to that
+        $this->mongoDateEnd = new \MongoDate($timestampEnd);        // Round to the day
+        $this->mongoDateStart = new \MongoDate($timestampStart);    // Add one day to that
 
-        $this->dateEnd = date('m/d/Y', $timestampEnd); // TODO translate
-        $this->dateStart = date('m/d/Y', $timestampStart); // TODO translate
+        $this->dateEnd = date('m/d/Y', $timestampEnd); // TODO translate ?
+        $this->dateStart = date('m/d/Y', $timestampStart); // TODO translate ?
+
+        // TODO translate
+        // "chart context menu" not set
+        // date/time must use locale
 
         // ----------------------
         // USER INTERACTION CHART
         // ----------------------
         $userInteractData = [
-          ['type' => 'spline', 'name' => 'Ajouts', 'color' => '#7a6ba7', 'data' => $this->getDataContributionFromType(0)], // TODO translate
-          ['type' => 'spline', 'name' => 'Modifications', 'color' => '#7cb5ec', 'data' => $this->getDataContributionFromType(1)], // TODO translate
-          ['type' => 'spline', 'dashStyle' => 'shortDash', 'name' => 'Votes', 'color' => '#8bc34a', 'data' => $this->getDataVote()], // TODO translate
-          ['type' => 'spline', 'dashStyle' => 'shortDash', 'name' => 'Signalements', 'color' => '#dd4b39', 'data' => $this->getDataReports()], // TODO translate
+          ['type' => 'spline', 'name' => $this->trans('charts.userInteract.added'), 'color' => '#7a6ba7', 'data' => $this->getDataContributionFromType(0)],
+          ['type' => 'spline', 'name' => $this->trans('charts.userInteract.modified'), 'color' => '#7cb5ec', 'data' => $this->getDataContributionFromType(1)],
+          ['type' => 'spline', 'dashStyle' => 'shortDash', 'name' => $this->trans('charts.userInteract.voted'), 'color' => '#8bc34a', 'data' => $this->getDataVote()],
+          ['type' => 'spline', 'dashStyle' => 'shortDash', 'name' => $this->trans('charts.userInteract.reported'), 'color' => '#dd4b39', 'data' => $this->getDataReports()],
         ];
 
         $userInteractChart = new Highchart();
         $userInteractChart->chart->renderTo('userInteractChart');  // The #id of the div where to render the chart
         $userInteractChart->chart->zoomType('x');
-        $userInteractChart->title->text('Statistiques des interactions utilisateur'); // TODO translate
-        $userInteractChart->subtitle->text('Click & drag pour zoomer sur une période'); // TODO translate
+        $userInteractChart->title->text($this->trans('charts.userInteract.title'));
+        $userInteractChart->subtitle->text($this->trans('charts.userInteract.subtitle'));
         $userInteractChart->xAxis->type('datetime');
         $userInteractChart->yAxis->title(['text' => '']);
         $userInteractChart->tooltip->shared(true);
@@ -118,15 +115,15 @@ class ChartBlockService extends AbstractBlockService
         // COLLABORATIVE RESOLVED
         // ----------------------
         $collabResolveData = [
-            ['type' => 'column', 'name' => 'Validations Collaborative', 'color' => '#90ed7d', 'data' => $this->getDataCollaborativeResolve(ElementStatus::CollaborativeValidate)], // TODO translate
-           ['type' => 'column', 'name' => 'Refus collaboratifs', 'color' => '#f7a35c', 'data' => $this->getDataCollaborativeResolve(ElementStatus::CollaborativeRefused)], // TODO translate
+            ['type' => 'column', 'name' => $this->trans('charts.collabResolve.validate'), 'color' => '#90ed7d', 'data' => $this->getDataCollaborativeResolve(ElementStatus::CollaborativeValidate)],
+            ['type' => 'column', 'name' => $this->trans('charts.collabResolve.refused'), 'color' => '#f7a35c', 'data' => $this->getDataCollaborativeResolve(ElementStatus::CollaborativeRefused)],
         ];
 
         $collabResolveChart = new Highchart();
         $collabResolveChart->chart->renderTo('collabResolveChart');
         $collabResolveChart->xAxis->type('datetime');
         $collabResolveChart->yAxis->title(['text' => '']);
-        $collabResolveChart->title->text('Validations/Refus collaboratifs'); // TODO translate
+        $collabResolveChart->title->text($this->trans('charts.collabResolve.title'));
         $userInteractChart->tooltip->shared(true);
         $userInteractChart->tooltip->crosshairs(true);
         $collabResolveChart->series($collabResolveData);
@@ -134,8 +131,8 @@ class ChartBlockService extends AbstractBlockService
         // ----------------------
         // CONTRIBUTIONS RESOLVED
         // ----------------------
-        $contribsAddResolvedPie = $this->createChartFormContribution([InteractionType::Add], 'Ajouts résolus', 'contribsAddResolvedPie'); // TODO translate
-        $contribsEditResolvedPie = $this->createChartFormContribution([InteractionType::Edit], 'Modifications résolues', 'contribsEditResolvedPie'); // TODO translate
+        $contribsAddResolvedPie = $this->createChartFormContribution([InteractionType::Add], $this->trans('charts.contribsResolved.added'), 'contribsAddResolvedPie');
+        $contribsEditResolvedPie = $this->createChartFormContribution([InteractionType::Edit], $this->trans('charts.contribsResolved.edited'), 'contribsEditResolvedPie');
 
         return $this->renderResponse('admin/blocks/block_charts.html.twig', [
             'block' => $blockContext->getBlock(),
@@ -152,7 +149,7 @@ class ChartBlockService extends AbstractBlockService
     {
         $data = $this->getDataHowContributionAreResolved($types);
         $contribResolvedData = [
-            ['type' => 'pie', 'name' => 'Résolution des contributions', 'data' => $data], // TODO translate
+            ['type' => 'pie', 'name' => $this->trans('charts.contribsResolved.resolved'), 'data' => $data],
         ];
         $totalContribs = 0;
         foreach ($data as $k => $val) {
@@ -295,7 +292,7 @@ class ChartBlockService extends AbstractBlockService
 
         $results = array_map(function ($x) {
             return [
-                'name' => $this->statusChoices[$x['_id']],
+                'name' => $this->trans('elements.fields.status_choices.' . $x['_id']),
                 'color' => $this->statusColors[$x['_id']],
                 'y' => $x['count'],
             ];

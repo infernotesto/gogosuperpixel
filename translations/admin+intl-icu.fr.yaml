@@ -142,6 +142,9 @@ elements:
   _label: "Éléments"
   proposedBy: "Proposé par <u>{name}</u>"
   proposedAt: "le {date}"
+  showOnSite: "Voir sur le site"
+  showEdit: "Afficher/Editer"
+  editOnSite: "Éditer sur le site"
   fields:
       name: "Nom"
       newsletterFrequency: "Réception newsletter"
@@ -238,6 +241,25 @@ elements:
       seeDuplicate: "voir l'élément fusionné"
       addCustomField: "Ajouter un Champ Personnalisé"
       specialFields: "Champs Spéciaux"
+  filter:
+    name: "Nom"
+    valide: "Validés"
+    pending: "En attente"
+    moderationNeeded: "Modération nécessaire"
+    moderationState: "Type de modération"
+    optionValuesAll: "Catégories (contient toutes)"
+    optionValuesIn: "Catégories (contient une parmis)"
+    optionValuesNotIn: "Catégories (ne contient pas)"
+    postalCode: "Code Postal"
+    departementCode: "Numéro de département"
+  action:
+    edit:
+      send_mail: "Prévenir l'acteur de la modification"
+      isPending: "Message particulier si refus"
+      havePendingReports: "Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques"
+      submit_accept: "Valider"
+      submit_refuse: "Refuser"
+      submit_restore: "Restaurer"
 
 imports:
   _label: "Import"
@@ -253,6 +275,12 @@ imports:
     clear-elements: "Effacer tous les éléments"
     delete: "Supprimer l'import (ainsi que tous les éléments importés)"
     saving: "Sauvegarde et lecture des données en cours..."
+  last: # templates/admin/partials/import/list_last_refresh.html.twig
+  progress: # templates/admin/pages/import/import-progress.html.twig
+    title: "Importation de {name}"
+    inProgress: "En attente..."
+    return_to_import: "Retourner à l'import"
+    return_to_list: "Retourner à la liste"
   form: &imports_form
     groups:
       general: "Général"
@@ -277,11 +305,11 @@ imports:
         <pre>&lt;?php</br>foreach($data as $key => $row) '{
             $data[$key][''categories''] = array_map(function($cat) { return $cat[0]; }, $row[''categories'']);
         '}</pre>
-      ontologyMappingTab: "Transformer les données à importer"
+      ontologyMappingTab: "Transformer les données à importer {suffix}"
       otherOptions: "Autres options"
       ontologyMappingPanel: "Table de correspondance des champs"
       newFields: "Nouveaux champs"
-      taxonomyMapping: "Table de correspondance des catégories"
+      taxonomyMapping: "Table de correspondance des catégories {suffix}"
       newCategories: "Nouvelles catégories"
       taxonomyMapping2: "Faites correspondre les catégories"
       customCodeForExportTab: "Convertir les données pour l'export"
@@ -331,20 +359,45 @@ imports:
     customCodeForExport: "Code PHP qui sera exécuté"
 
 importService:
+  inProgress: "Téléchargement des données en cours... Veuillez patienter..."
+  processing: "Importation des données {i}/{size} traitées"
   logMessage: "Import de {name} terminé"
   logError: ", mais avec des problèmes !"
+  dismissLog: "Ne plus afficher" # templates/admin/core_custom/custom-fields/display-logs.html.twig
+  close: "Fermer"
+  x: "Calcul des liens pour le champ '{linkField}' : {i}/{size} éléments traitées"
   total: "Total : {count}"
-  elementsCreatedCount: "{count} importé.s"  # TODO plurals
+  elementsCreatedCount: "{count, plural,
+    =1 {# importé}
+    other {# importés}
+    }"
   elementsUpdatedCount: "{count} mis à jour"
-  elementsNothingToDoCount: "{count} laissé.s tel.s quel.s (rien à mettre à jour)" # TODO plurals
+  elementsNothingToDoCount: "{count, plural,
+    =1 {# laissé tel quel}
+    other {# laissés tels quels}
+    } (rien à mettre à jour)"
   elementsMissingGeoCount: "{count} sans géoloc"
   elementsMissingTaxoCount: "{count} sans catégories"
-  elementsPreventImportedNoTaxo: "{count} non importé.s car sans catégories" # TODO plurals
-  elementsDeletedCount: "{count} supprimé.s" # TODO plurals
-  elementsErrorsCount: "{count} erreur.s pendant l'import" # TODO plurals
-  automaticMergesCount: "{count} fusionné.s avec un élément déjà existant" # TODO plurals
-  potentialDuplicatesCount: "{count} doublon.s potentiel.s détecté.s" # TODO plurals
-
+  elementsPreventImportedNoTaxo: "non {count, plural,
+    =1 {# importé}
+    other {# importés}
+    } car sans catégories"
+  elementsDeletedCount: "{count, plural,
+    =1 {# supprimé}
+    other {# supprimés}
+    }"
+  elementsErrorsCount: "{count, plural,
+    =1 {# erreur}
+    other {# erreurs}
+    } pendant l'import"
+  automaticMergesCount: "{count, plural,
+    =1 {# fusionné}
+    other {# fusionnés}
+    } avec un élément déjà existant"
+  potentialDuplicatesCount: "{count, plural,
+    =1 {# doublon potentiel détecté}
+    other {# doublons potentiels détectés}
+    }"
 mapping-taxonomy:
   original: "Catégories lues depuis le fichier d'origine"
   mapped: "Catégories du site"
@@ -425,7 +478,6 @@ config_style:
       secondaryColor: "Autres couleurs"
       advancedColor: "Couleurs avancées"
 
-
 config_home:
   _label: "Page d'Accueil"
   fields:
@@ -438,6 +490,29 @@ config_home:
       seeMoreButtonText: "Texte pour inviter à scroller (si des bandeaux de la page d'accueil existent)"
       seeMoreButtonText_placeholder: "Exemple: \"Plus d'informations\""
 
+charts: # src/Block/ChartBlockService.php
+  userInteract:
+    title: "Statistiques des interactions utilisateur"
+    subtitle: "Click & drag pour zoomer sur une période"
+    added: "Ajouts"
+    modified: "Modifications"
+    voted: "Votes"
+    reported: "Signalements"
+  collabResolve:
+    title: "Validations/Refus collaboratifs"
+    axisTitle: "Validations/Refus collaboratifs"
+    validate: "Validations Collaborative"
+    refused: "Refus collaboratifs"
+  contribsResolved:
+    added: "Ajouts résolus"
+    edited: "Modifications résolues"
+    resolved: "Résolution des contributions"
+  collabValidated: "Dernières validation collaboratives"
+  collabRefused: "Derniers refus collaboratifs"
+  # templates/admin/blocks/block_recent_elements.html.twig
+  empty: "Aucun élement trouvé"
+  showAll: "Afficher tous"
+
 # TODO translation
 # wrong place ! Keys from src/Admin/ImageAdmin.php
 app:
@@ -445,6 +520,22 @@ app:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
     actualFile: "Fichier actuel :"
+
+# templates/admin/blocks/block_monitoring.html.twig
+monitoring:
+  title: "Du nouveau sur GoGoCarto !"
+  delete: "Supprimer tous les messages"
+  error: "Des erreurs ont eu lieu récemment"
+  all_elements: "Tous les éléments visibles"
+  display_all: "Tout afficher"
+  moderationNeeded: "Éléments à modérer"
+  duplicates: "Doublons Potentiels"
+  manageDuplicates: "Gérer les doublons"
+  detectDuplicates: "Détecter les doublons"
+  pending: "En attente de validation"
+  display: "Afficher"
+  users: "Utilisateurs"
+  activeUsersNewsletter: "Abonnés à la newsletter"
 
 categories:
   _label: "Catégories"
@@ -542,7 +633,7 @@ config_map:
       shareFeature: "Partage de l'URL"
       directionsFeature: "Calcul d'itinéraire"
       reportFeature: "Signalement d'une erreur"
-      stampFeature: "Etiquetter les éléments"
+      stampFeature: "Étiquetter les éléments"
       listModeFeature: "Mode Liste"
       layersFeature: "Choix du fond de carte"
       mapDefaultViewFeature: "Revenir à la vue par défault"
@@ -741,7 +832,8 @@ webhooks:
 
 commons:
   btn_update_and_edit: "Mettre à jour"
-  format: "d/m/Y à H:i" # TODO use local ?? 
+  format: "d/m/Y à H:i" # TODO use local ??
+  anonymous: "Anonyme"
   fields:
     image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
 

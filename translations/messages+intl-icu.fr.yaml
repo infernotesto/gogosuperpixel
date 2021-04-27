@@ -1,3 +1,11 @@
+# TODO translation issue in src/Services/ElementImportService.php
+
+importService:
+  inProgress: "Téléchargement des données en cours... Veuillez patienter..."
+  processing: "Importation des données {i}/{size} traitées"
+  logMessage: "Import de {name} terminé"
+  logError: ", mais avec des problèmes !"
+
 home:
   pick_category: "Choisissez une catégorie (par défaut : toutes)"
   geolocalize: Géolocalisez votre position

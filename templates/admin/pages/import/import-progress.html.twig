@@ -1,14 +1,15 @@
 {% extends 'admin/pages/page_layout.html.twig' %}
+{% trans_default_domain 'admin' %}
 
-{% block page_title %}Importation de {{ import.sourceName }}{% endblock %}
+{% block page_title %}{{ 'imports.progress.title'|trans({'name': import.sourceName }) }}{% endblock %}
 
 {% block page_content %}
   <div class="alert alert-default text-center progress-container">
-    <div class="curr-message">En attente...</div> {# TODO Translation #}
+    <div class="curr-message">{{ 'imports.progress.inProgress'|trans }}</div>
     <p class="redirect-url" style="display:none">
-      <a href="{{redirectUrl}}"><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i>Retourner à l'import</button></a> {# TODO Translation #}
+      <a href="{{redirectUrl}}"><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i>{{ 'imports.progress.return_to_import'|trans }}</button></a>
       {% if redirectListUrl is defined %}
-        <a href="{{redirectListUrl}}"><button class="btn btn-default"><i class="fa fa-list" aria-hidden="true"></i>Retourner à la liste</button></a> {# TODO Translation #}
+        <a href="{{redirectListUrl}}"><button class="btn btn-default"><i class="fa fa-list" aria-hidden="true"></i>{{ 'imports.progress.return_to_list'|trans }}</button></a>
       {% endif %}
     </p>
   </div>

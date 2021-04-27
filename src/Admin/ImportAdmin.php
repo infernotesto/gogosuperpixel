@@ -41,7 +41,7 @@ class ImportAdmin extends GoGoAbstractAdmin
         $optionsList = $taxonomy->getTaxonomyJson();
 
         $isDynamic = $this->getSubject()->isDynamicImport();
-        $title = $this->trans($isDynamic ? 'imports.dynamic' : 'imports.static');
+        $title = $isDynamic ? 'imports.dynamic' : 'imports.static';
         $isPersisted = $this->getSubject()->getId();
 
         $usersQuery = $dm->query('User');
@@ -108,12 +108,10 @@ class ImportAdmin extends GoGoAbstractAdmin
         
         if ($isPersisted) {
             // TAB - Ontology Mapping
-            $title = $this->trans('imports.form.groups.ontologyMappingTab');
-            if ($this->getSubject()->getNewOntologyToMap()) {
-                $title .= ' <label class="label label-info">'.$this->trans('imports.form.groups.newFields').'</label>';
-            }
+            $suffix = $this->getSubject()->getNewOntologyToMap() ? '<label class="label label-info">'.$this->trans('imports.form.groups.newFields').'</label>' : '';
+
             $formMapper
-                ->tab($title)                    
+                ->tab('imports.form.groups.ontologyMappingTab', ['label_trans_params' => ['%suffix%' => $suffix ]])
                     ->panel('ontologyMappingPanel')
                         ->add('ontologyMapping', null, [
                             'label_attr' => ['style' => 'display:none'], 
@@ -133,11 +131,9 @@ class ImportAdmin extends GoGoAbstractAdmin
 
             // TAB - Taxonomy Mapping
             if (count($this->getSubject()->getOntologyMapping()) > 0) {     
-                $title = $this->trans('imports.form.groups.taxonomyMapping');
-                if ($this->getSubject()->getNewTaxonomyToMap()) {
-                    $title .= ' <label class="label label-info">'.$this->trans('imports.form.groups.newCategories').'</label>';
-                }
-                $formMapper->tab($title)          
+                $suffix = $this->getSubject()->getNewTaxonomyToMap() ? '<label class="label label-info">'.$this->trans('imports.form.groups.newCategories').'</label>' : '';
+                
+                $formMapper->tab('imports.form.groups.taxonomyMapping', ['label_trans_params' => ['%suffix%' => $suffix ]])
                     ->panel('taxonomyMapping2')
                         ->add('taxonomyMapping', null, ['label_attr' => ['style' => 'display:none'], 'attr' => ['class' => 'gogo-mapping-taxonomy', 'data-options' => $optionsList]])
                     ->end()

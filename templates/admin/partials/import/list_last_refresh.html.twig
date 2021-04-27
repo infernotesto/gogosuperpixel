@@ -1,4 +1,5 @@
 {% extends admin.getTemplate('base_list_field') %}
+{% trans_default_domain 'admin' %}
 
 {% block field %}
   {% spaceless %}
@@ -18,7 +19,7 @@
         <span class="label label-default log-label">{{ log.getDataProp('elementsNothingToDoCount') }} inchangés</span> {# TODO Translation #}
       {% endif %}
       {% if log.getDataProp('elementsErrorsCount') > 0 %}
-        <span class="label label-danger log-label">{{ log.getDataProp('elementsErrorsCount') }} erreurs</span> {# TODO Translation #}
+        <span class="label label-danger log-label">{{ log.getDataProp('elementsErrorsCount') }} erreurs toto</span> {# TODO Translation #}
       {% endif %}
 
       <style>

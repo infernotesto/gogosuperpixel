@@ -1,3 +1,5 @@
+{% trans_default_domain 'admin' %}
+
 <div class="sonata-ba-form-actions well well-small form-actions fixed" style="line-height: 4rem;">
     {% block sonata_form_actions %}                    
            
@@ -7,11 +9,11 @@
                     {% if not object.isPending %}
                         <span style="width:30%; margin-right: 15px;">
                             <input type="checkbox" name="send_mail" id="send_mail" checked/>
-                            <label for="send_mail">Prévenir l'acteur de la modification</label> {# TODO Translation #}
+                            <label for="send_mail">{{ 'elements.action.edit.send_mail'|trans }}</label>
                         </span>
                     {% endif %}
-                    {% set placeholder = object.isPending() ? "Message particulier si refus" : 
-                                         object.havePendingReports ? "Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques" %} {# TODO Translation #}
+                    {% set placeholder = object.isPending() ? 'elements.action.edit.isPending'|trans : 
+                                         object.havePendingReports ? 'elements.action.edit.havePendingReports'|trans %}
                     <input type="text" name="custom_message" id="custom_message" class="form-control" 
                            style="display:inline-block;width:55%"
                            placeholder="{{placeholder}}"/>                       
@@ -19,14 +21,14 @@
 
                 {% if object.isPending %}
                     <button type="submit" class="btn btn-success" name="submit_accept" value="submit_accept"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                     Valider</button> {# TODO Translation #}
+                     {{ 'elements.action.edit.submit_accept'|trans }}</button>
 
                     <button type="submit" class="btn btn-danger" name="submit_refuse" value="submit_refuse"><i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                     Refuser</button> {# TODO Translation #}
+                     {{ 'elements.action.edit.submit_refuse'|trans }}</button>
                 {% elseif not object.isVisible %}
 
                     <button type="submit" class="btn btn-success" name="submit_restore" value="submit_restore"><i class="fa fa-save" aria-hidden="true"></i>
-                     Restaurer</button> {# TODO Translation #}
+                     {{ 'elements.action.edit.submit_restore'|trans }}</button>
 
                 {% else %}
                     <button type="submit" class="btn btn-success" name="submit"><i class="fa fa-save" aria-hidden="true"></i>

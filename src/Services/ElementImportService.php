@@ -48,7 +48,8 @@ class ElementImportService
 
     private function trans($key, $params = [])
     {
-        return $this->t->trans($key, $params, 'admin');
+        // return $this->t->trans($key, $params, 'admin'); // TODO translation issue !!
+        return $this->t->trans($key, $params); 
     }
 
     public function startImport($import, $manuallyStarted = true)
@@ -64,7 +65,7 @@ class ElementImportService
         $this->errorsCount = [];
 
         $import->setCurrState(ImportState::Downloading);
-        $import->setCurrMessage('Téléchargement des données en cours... Veuillez patienter...'); // TODO translate
+        $import->setCurrMessage($this->trans('importService.inProgress'));
         $this->dm->persist($import);
         $this->dm->flush();
         if ($import->getUrl()) {
@@ -163,7 +164,7 @@ class ElementImportService
             $i = 0; $size = count($data);
             foreach ($data as $row) {
                 try {
-                    $import->setCurrMessage("Importation des données $i/$size traitées"); // TODO translate
+                    $import->setCurrMessage($this->trans('importService.processing', ['%i%'=>$i, '%size%'=>$size]));
                     $result = $this->importOneService->createElementFromArray($row, $import);
                     if (isset($result['id']))
                         $newlyImportedElementIds[] = $result['id'];
