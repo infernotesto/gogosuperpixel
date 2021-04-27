@@ -10,13 +10,15 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MailTestController extends Controller
 {
-    public function __construct(DocumentManager $dm, MailService $mailService)
+    public function __construct(DocumentManager $dm, MailService $mailService, TranslatorInterface $t)
     {
         $this->dm = $dm;
         $this->mailService = $mailService;
+        $this->t = $t;
     }
 
     public function draftAutomatedAction($mailType)
@@ -88,7 +90,7 @@ class MailTestController extends Controller
             return null;
         }
 
-        $draftResponse = $this->mailService->draftEmail($mailType, $element, $t->trans('action.mailtest.draftTest.done'), $options); 
+        $draftResponse = $this->mailService->draftEmail($mailType, $element, $this->t->trans('action.mailtest.draftTest.done'), $options); 
 
         return $draftResponse;
     }
