@@ -1,9 +1,11 @@
 {% extends "page-layout.html.twig" %}
+{% trans_default_domain 'admin' %}
 
 {% set pageName = 'duplicates' %}
-{% set navTitle = "Gestion des doublons" %} {# TODO Translation #}
+{% set navTitle = 'duplicates-index.title'|trans %}
 
-{% block title %}Gestion des doublons{% endblock %} {# TODO Translation #}
+{% trans_default_domain 'admin' %}
+{% block title %}{{ 'duplicates-index.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
 
@@ -16,15 +18,15 @@
 {% block body_content %}
   <section>
     
-    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">Retour à la gestion des doublons</button></a></center> {# TODO Translation #}
+    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">{{ 'duplicates-index.return'|trans }}</button></a></center>
 
     {% if duplicatesNode|length == 0 %}
-      <h1>Aucun doublon à traiter !</h1> {# TODO Translation #}
+      <h1>{{ 'duplicates-index.none'|trans }}</h1>
       {% if leftDuplicatesToProceedCount > 0 %}
-        <center><p>{{ leftDuplicatesToProceedCount }} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent</p>  </center> {# TODO Translation #}
+        <center><p>{{ 'duplicates-index.leftDuplicatesToProceedCount'|trans({'%count%': leftDuplicatesToProceedCount}) }}</p>  </center>
       {% endif %}
     {% else %}
-      <h1>Fusionnez les doublons</h1> {# TODO Translation #}
+      <h1>{{ 'duplicates-index.merge'|trans }}</h1>
 
       {% for duplicateNode in duplicatesNode %}
         {% include 'duplicates/duplicate-node.html.twig' with { 'duplicateNode' : duplicateNode, 'config' : config } %}
@@ -32,7 +34,7 @@
 
       {% if leftDuplicatesToProceedCount > 0 %}
         <center>        
-          <button class="btn btn-primary" onclick="window.location.reload()">J'en veux encore ! (plus que {{ leftDuplicatesToProceedCount }} doublons à traiter)</button> {# TODO Translation #}
+          <button class="btn btn-primary" onclick="window.location.reload()">{{ 'duplicates-index.wantMore'|trans({'%count%': leftDuplicatesToProceedCount}) }}</button>
         </center>
       {% endif %}
     {% endif %}
@@ -48,6 +50,3 @@
     var apiMarkAsNonDuplicate = "{{ path('gogo_mark_as_non_duplicate') }}";
   </script>
 {% endblock %}
-
-
-

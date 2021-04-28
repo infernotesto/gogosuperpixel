@@ -142,9 +142,6 @@ elements:
   _label: "Éléments"
   proposedBy: "Proposé par <u>{name}</u>"
   proposedAt: "le {date}"
-  showOnSite: "Voir sur le site"
-  showEdit: "Afficher/Editer"
-  editOnSite: "Éditer sur le site"
   fields:
       name: "Nom"
       newsletterFrequency: "Réception newsletter"
@@ -239,7 +236,7 @@ elements:
       customFields: "Champs Personnalisés"
       duplicateOf: "Cet élément a été fusionné avec un autre :"
       seeDuplicate: "voir l'élément fusionné"
-      addCustomField: "Ajouter un Champ Personnalisé"
+      addCustomField: "Ajouter un champ personnalisé"
       specialFields: "Champs Spéciaux"
   filter:
     name: "Nom"
@@ -260,6 +257,15 @@ elements:
       submit_accept: "Valider"
       submit_refuse: "Refuser"
       submit_restore: "Restaurer"
+      submit: "Sauvegarder"
+      submit_resolve: "Sauvegarder et résoudre les signalements"
+      submit_redirect: "Sauvegarder et fermer"
+      submit_delete: "Supprimer"
+      showOnSite: "Voir sur le site"
+      showEdit: "Afficher/Editer"
+      editOnSite: "Éditer sur le site"
+      returnToList: "Retourner à la liste"
+      updateJSON: "Mettre à jour le JSON"
 imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"
@@ -275,6 +281,7 @@ imports:
     delete: "Supprimer l'import (ainsi que tous les éléments importés)"
     saving: "Sauvegarde et lecture des données en cours..."
   last: # templates/admin/partials/import/list_last_refresh.html.twig
+  import: "Import - "
   progress: # templates/admin/pages/import/import-progress.html.twig
     title: "Importation de {name}"
     inProgress: "En attente..."
@@ -338,8 +345,8 @@ imports:
         $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
         </pre>
       historic: "Historique"
-      list: "Liste des imports dynamiques (les données importées seront en lecture seule car elles sont gérées par un autre site)"
-
+      dynamicList: "Liste des imports dynamiques (les données importées seront en lecture seule car elles sont gérées par un autre site)"
+      staticList: "Liste des imports \"en dur\" (les données importées seront gérées par ce site)"
   fields: &imports_fields
     sourceName: "Nom de la source"
     file: "Fichier CSV à importer (séparation par virgules, encodage en UTF8)"
@@ -358,6 +365,55 @@ imports:
     preventImportIfNoCategories: "Ne pas importer les éléments qui n'ont aucune catégories"
     preventImportIfNoCategories_help: "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"
     customCodeForExport: "Code PHP qui sera exécuté"
+    logs: "Nombre d'éléments"
+    idsToIgnore: "Liste des IDs qui seront ignorées lors de l'import"
+    idsToIgnore_help: "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"
+    refreshFrequencyInDays: "Fréquence de mise à jours des données en jours"
+    refreshFrequencyInDays_help: "(laisser vide pour ne jamais mettre à jour automatiquement" # TODO string too long
+    lastRefresh: "Dernier import"
+    usersToNotify: "Utilisateurs à notifier en cas d'erreur, ou lorsque de nouveaux champs/catégories sont à faire correspondre"
+    isSynchronized: "Autoriser l'édition des données {submessage}"
+    submessage: "(Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)"
+    isSynchronized_help: "Chaque modification sera envoyée à OpenStreetMap"
+
+    # templates/admin/partials/import/list_non_visibles_count.html.twig
+    newOntologyToMap: "Nouveaux champs à mapper"
+    newTaxonomyToMap: "Nouvelles catégories à mapper"
+    deletedCount: "{count} localement supprimés"
+    elementsMissingGeoCount: "{count} sans géoloc"
+    elementsMissingTaxoCount: "{count} sans categories"
+    elementsPreventImportedNoTaxo: "{count} non importés car sans catégories"
+
+    # templates/admin/partials/import/list_refresh_frequency.html.twig
+    refreshFrequency: "{days, plural,
+      =1 {Quotidienne}
+      =7 {Hebdomadaire}
+      other {Tous les # jours}
+      }"
+    manualRefresh: "Manuelle"
+
+    # templates/admin/partials/import/list_last_refresh.html.twig
+    elementsCreatedCount: "+{count}"
+    elementsDeletedCount: "-{count}"
+    elementsUpdatedCount: "{count} mis à jour"
+    elementsNothingToDoCount: "{count, plural,
+      =1 {# inchangé}
+      other {# inchangés}
+      } "
+    elementsErrorsCount: "{count, plural,
+      =1 {# erreur}
+      other {# erreurs}
+      } "
+
+  list: &imports_list
+    refreshFrequencyInDays: "Mise à jour"
+    idsToIgnore: "Infos"
+
+dynamic_imports:
+  _label: "Import dynamique"
+  fields: *imports_fields
+  form: *imports_form
+  list: *imports_list
 
 importService:
   inProgress: "Téléchargement des données en cours... Veuillez patienter..."
@@ -417,11 +473,6 @@ mapping-ontology:
   arrowTitle: "Utiliser le nom d'origine"
   clearTitle: "Ne plus importer ce champ"
   displayMore: "Voir tous les champs (les champs présents dans moins de {percent}% des éléments sont cachés par défault)"
-
-dynamic_imports:
-  _label: "Import dynamique"
-  fields: *imports_fields
-  form: *imports_form
 
 config_duplicates:
   _label: "Gestion des Doublons"
@@ -541,6 +592,25 @@ monitoring:
   display: "Afficher"
   users: "Utilisateurs"
   activeUsersNewsletter: "Abonnés à la newsletter"
+
+# templates/duplicates/duplicate-node.html.twig
+duplicate-node:
+  merge: "Fusionner"
+  merge_title: "Les éléments vont être fusionnés. Seul le premier élément sera conservé, et les attributs du second seront fusionnés"
+  non-duplicates: "Pas doublons"
+  non-duplicates_title: "Rien ne se passe, GoGoCarto se souviendra que ces deux éléments ne sont pas des doublons et ils ne seront plus détectés comme tel"
+  deleted: "Cet élément a été supprimé. L'élément fusionné restera en status supprimé"
+  address: "Adresse"
+
+# templates/duplicates/duplicates-index.html.twig
+duplicates-index:
+  title: "Gestion des doublons"
+  return: "Retour à la gestion des doublons"
+  none: "Aucun doublon à traiter !"
+  leftDuplicatesToProceedCount:  "{count} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent"
+  merge: "Fusionnez les doublons"
+  wantMore: "J'en veux encore ! (Plus que {count} doublons à traiter)"
+
 
 categories:
   _label: "Catégories"
@@ -837,7 +907,7 @@ webhooks:
 
 commons:
   btn_update_and_edit: "Mettre à jour"
-  format: "d/m/Y à H:i" # TODO use local ??
+  format: "d/m/Y à H:i" #  TODO Translation use local
   anonymous: "Anonyme"
   fields:
     image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"

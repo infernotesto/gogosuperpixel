@@ -11,7 +11,7 @@ file that was distributed with this source code.
 {% trans_default_domain 'admin' %}
 
 {% if admin.isGranted('EDIT', object) %}
-    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="{{ 'elements.showEdit'|trans }}">
+    <a href="{{ admin.generateObjectUrl('showEdit', object) }}" class="btn btn-sm btn-default view_link" title="{{ 'elements.action.edit.showEdit'|trans }}">
         <i class="fa fa-eye" aria-hidden="true"></i>
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>

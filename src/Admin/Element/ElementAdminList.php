@@ -49,7 +49,7 @@ class ElementAdminList extends ElementAdminFilters
                'editable' => true,
                'template' => 'admin/partials/list_choice_status.html.twig',
                ])
-         ->add('updatedAt', 'date', ['format' => 'd/m/Y'])
+         ->add('updatedAt', 'date', ['format' => 'd/m/Y']) // TODO translation : use local ?
          ->add('sourceKey')
          ->add('optionsString', null, ['header_style' => 'width: 250px'])
          ->add('moderationState', ChoiceType::class, [
