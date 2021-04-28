@@ -1,4 +1,11 @@
-$('.to-html:not(.initialized)').each(function() { $(this).html($(this).text()).addClass('initialized'); });
+initializeToHtml()
+
+function initializeToHtml() {
+  $('.to-html:not(.initialized)').each(function() { 
+    if ($(this).text().includes('&lt;')) $(this).html($(this).text()); 
+    $(this).addClass('initialized');
+  });
+}
 
 jQuery(document).ready(function()
 {
@@ -32,7 +39,7 @@ jQuery(document).ready(function()
   $('.select2-search__field').blur(function() { $(this).closest('.input-field').find('.material-icons').removeClass('active') })
   $('input.select-dropdown').blur(function() { if (!$(this).val()) $(this).closest('.input-field').find('.material-icons').removeClass('active') })
 
-  $('.to-html:not(.initialized)').each(function() { $(this).html($(this).text()).addClass('initialized'); });
+  initializeToHtml()
 
   // TIMEPICKERS
   $('.timepicker').each(function(e) {
