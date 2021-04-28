@@ -260,7 +260,6 @@ elements:
       submit_accept: "Valider"
       submit_refuse: "Refuser"
       submit_restore: "Restaurer"
-x: "Restreindre la détection manuelle (optionel)"
 imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"
@@ -339,6 +338,8 @@ imports:
         $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
         </pre>
       historic: "Historique"
+      list: "Liste des imports dynamiques (les données importées seront en lecture seule car elles sont gérées par un autre site)"
+
   fields: &imports_fields
     sourceName: "Nom de la source"
     file: "Fichier CSV à importer (séparation par virgules, encodage en UTF8)"
@@ -424,6 +425,7 @@ dynamic_imports:
 
 config_duplicates:
   _label: "Gestion des Doublons"
+  thisMap: "Cette carte"
   fields:
     gogo_bulk_actions_detect_duplicates: Détecter les doublons
     gogo_duplicates_index: Gérer les doublons détectés
@@ -437,10 +439,13 @@ config_duplicates:
       detectAfterImport_help: "Pour chaque nouvel élément ajouté lors de l'import, une recherche sera effectuée sur l'ensemble de la base de donnée pour trouver d'éventuels doublons"
       automaticMergeIfPerfectMatch: "Fusionner automatiquement lors d'une correspondance parfaite"
       sourcePriorityInAutomaticMerge: "Lors d'une fusion, quelle source voulez vous conserver en priorité ?"
+      sourcesToDetectFrom: "Chercher les doublons entre les sources (laisser vide pour chercher dans toute la base de donnée)"
+      sourcesToDetectWith: "Et les sources (laisser vide pour chercher dans toute la base de donnée)"
   form:
     groups:
       configuration: "Configuration"
       fusion: "Fusion des doublons"
+      manualDetection: "Restreindre la détection manuelle (optionel)"
 
 config_style:
   _label: "Style / Couleurs / Icones"

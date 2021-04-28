@@ -67,23 +67,21 @@ class ConfigurationDuplicatesAdmin extends ConfigurationAbstractAdmin
                         'data-source-list' => $sourceList]])
             ->end()
 
-            ->with('Restreindre la détection manuelle (optionel)', ['box_class' => 'box box-default'])
+            ->with('manualDetection', ['box_class' => 'box box-default'])
                 ->add('duplicates.sourcesToDetectFrom', ChoiceType::class, [
-                    'label' => "Chercher les doublons entre les sources (laisser vide pour chercher dans toute la base de donnée)",
                     'choice_label' => function ($choice, $key, $value) {
-                        if ('' === $choice) return 'Cette carte';  
+                        if ('' === $choice) return $this->trans('config_duplicates.thisMap');  
                         return $choice;
                     },
                     'choices' => $sourceList,
-                    'multiple' => true, 'required' => false])
+                    'multiple' => true])
                 ->add('duplicates.sourcesToDetectWith', ChoiceType::class, [
-                    'label' => "Et les sources (laisser vide pour chercher dans toute la base de donnée)",
                     'choices' => $sourceList,
                     'choice_label' => function ($choice, $key, $value) {
-                        if ('' === $choice) return 'Cette carte';              
+                        if ('' === $choice) return $this->trans('config_duplicates.thisMap');              
                         return $choice;
                     },
-                    'multiple' => true, 'required' => false])
+                    'multiple' => true])
             ->end()
         ;
     }

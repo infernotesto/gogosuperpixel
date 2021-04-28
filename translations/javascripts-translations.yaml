@@ -1,3 +1,6 @@
 fr:
   element-form:
     geocoded-marker-text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+en:
+  element-form:
+    geocoded-marker-text: Move me to specify the location</br>(in the middle of the building)
