@@ -260,7 +260,7 @@ elements:
       submit_accept: "Valider"
       submit_refuse: "Refuser"
       submit_restore: "Restaurer"
-
+x: "Restreindre la détection manuelle (optionel)"
 imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"
