@@ -35,6 +35,8 @@ import OsmCondition from "./OsmQueryBuilderCondition"
 import OsmTagSearch from "./OsmQueryBuilderTagSearch"
 import BoundsPicker from "./BoundsPicker"
 
+// TODO translate .vue file
+
 export default {
     props: [ 'osmQueryObject', 'tileLayer', 'defaultBounds' ],
     components: { OsmCondition, OsmTagSearch, BoundsPicker },

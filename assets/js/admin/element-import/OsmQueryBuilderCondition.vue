@@ -23,6 +23,8 @@
 <script>
 import OsmWikiLink from "./OsmqueryBuilderWikiLink"
 
+// TODO translate .vue file
+
 export default {
     props: ['condition'],
     components: { OsmWikiLink },

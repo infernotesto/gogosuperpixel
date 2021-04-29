@@ -10,7 +10,7 @@
         <span class="label label-success log-label">{{ 'imports.fields.elementsCreatedCount'|trans({'%count%': log.getDataProp('elementsCreatedCount')}) }}</span>
       {% endif %}
       {% if log.getDataProp('elementsDeletedCount') > 0 %}
-        <span class="label label-danger log-label">-{{ 'imports.fields.elementsDeletedCount'|trans({'%count%': log.getDataProp('elementsDeletedCount')}) }}</span>
+        <span class="label label-danger log-label">{{ 'imports.fields.elementsDeletedCount'|trans({'%count%': log.getDataProp('elementsDeletedCount')}) }}</span>
       {% endif %}
       {% if log.getDataProp('elementsUpdatedCount') > 0 %}
         <span class="label label-primary log-label">{{ 'imports.fields.elementsUpdatedCount'|trans({'%count%': log.getDataProp('elementsUpdatedCount')}) }}</span>

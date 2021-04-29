@@ -30,6 +30,8 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-shades'
 import 'leaflet-shades/src/css/leaflet-shades.css'
 
+// TODO translate .vue file
+
 export default {
     props: [ 'osmQueryObject', 'tileLayer', 'defaultBounds' ],
     data() {

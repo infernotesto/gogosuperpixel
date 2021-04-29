@@ -6,6 +6,9 @@
 </template>
 
 <script>
+
+// TODO translate .vue file
+
 export default {
     mounted() {
         $('.tag-search').select2({
