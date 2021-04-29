@@ -1,6 +1,6 @@
 <template>
      <div class="osm-query-builder">
-        <label>Liste des requêtes dans la base OpenStreetMap</label>
+        <label>{{ t('osm_query_builder.title') }}</label>
         
         <osm-tag-search></osm-tag-search>
 

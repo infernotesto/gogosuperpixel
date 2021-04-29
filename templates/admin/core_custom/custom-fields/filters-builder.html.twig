@@ -18,14 +18,9 @@
     formBuilderInitialized = true;
     jQuery(function($) {
       var fields = [
-        { label: 'Filtre Catégories', name: "taxonomy", attrs: { type: 'taxonomy' }, icon: '*' }, // TODO translate
-        { label: 'Filtre Date', name: "gogo_date", attrs: { type: 'gogo_date' }, icon: ' ' }, // TODO translate
-        { label: 'Filtre Nombre', name: "gogo_number", attrs: { type: 'gogo_number' }, icon: ' ' }, // TODO translate
-/*
-        { label: t('filters.taxonomy'), name: "taxonomy", attrs: { type: 'taxonomy' }, icon: '*' },
-        { label: t('filters.gogo_date'), name: "gogo_date", attrs: { type: 'gogo_date' }, icon: ' ' },
-        { label: t('filters.gogo_number'), name: "gogo_number", attrs: { type: 'gogo_number' }, icon: ' ' },
-*/
+        { label: t('filters_builder.taxonomy'), name: "taxonomy", attrs: { type: 'taxonomy' }, icon: '*' },
+        { label: t('filters_builder.gogo_date'), name: "gogo_date", attrs: { type: 'gogo_date' }, icon: ' ' },
+        { label: t('filters_builder.gogo_number'), name: "gogo_number", attrs: { type: 'gogo_number' }, icon: ' ' },
 ];
 
       var displayFilter = function(fieldData) {

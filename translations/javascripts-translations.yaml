@@ -1,14 +1,12 @@
 fr:
-  element-form:
-    geocoded-marker-text: 'Déplacez moi pour préciser la position</br>(au centre du bâtiment)'
-  import-form:
-    geolocateError: 'Erreur lors de la geolocalisation de "{address}"'
-  filters:
-    taxonomy: "Filtre Catégories"
-    gogo_date: "Filtre Date"
-    gogo_number: "Filtre Nombre"
-en:
-  element-form:
-    geocoded-marker-text: 'Move me to specify the location</br>(in the middle of the building)'
-  import-form:
-    geolocateError: 'Error when geolocating "{address}"'
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+    geocode_error: Erreur lors de la geolocalisation de "{address}"
+
+  filters_builder:
+    taxonomy: Filtre Catégories
+    gogo_date: Filtre Date
+    gogo_number: Filtre Nombre
+
+  osm_query_builder:
+    title: Liste des requêtes dans la base OpenStreetMap
