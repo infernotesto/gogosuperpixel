@@ -1,4 +1,3 @@
-var gogoLocale = 'fr'; // overwritten in layout templates using config.locale
 var gogoFallbackLocale = 'en';
 
 // Use this function anywhere
