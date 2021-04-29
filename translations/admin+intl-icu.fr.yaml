@@ -224,6 +224,11 @@ elements:
       createdAt: "Créé le"
       reports: "Signalements"
       optionIds: "Catégories"
+      sourceTypeJSON : "URL de l'API JSON"
+      sourceType_choices:
+        csv: "Fichier CSV"
+        json: "API JSON"
+        osm: "OpenStreetMap"
   form:
     groups:
       general: "Informations générales"
@@ -266,6 +271,7 @@ elements:
       editOnSite: "Éditer sur le site"
       returnToList: "Retourner à la liste"
       updateJSON: "Mettre à jour le JSON"
+      geocode: "Géocoder l'adresse"
 imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"

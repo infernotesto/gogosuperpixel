@@ -104,7 +104,8 @@ function geocodeAddress(address) {
 
 			console.log("geocoding error", status);
 		} else {
-			$('#geocode-error').text(t('import-form.geolocateError', {address: address})).show() // TODO translate
+			$('#geocode-error').text('Erreur lors de la geolocalisation de "' + address + '"').show() // TODO translate
+			//$('#geocode-error').text(t('import-form.geolocateError', {address: address})).show()
 		}
 
 		$('#geocode-spinner-loader').hide();
