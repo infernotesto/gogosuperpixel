@@ -59,12 +59,12 @@ class MailService
 
             $this->mailer->send($message);
         } catch (\Swift_RfcComplianceException $e) {
-            $error = 'Une erreur est survenue : '.$e->getMessage(); // TODO translate
+            $error = 'Error : '.$e->getMessage(); // TODO translate ?
 
             return ['success' => false, 'message' => $error];
         }
 
-        return ['success' => true, 'message' => 'The message has been send']; // TODO translate
+        return ['success' => true, 'message' => 'The message has been send']; // TODO translate ?
     }
 
     public function sendAutomatedMail($mailType, $element, $customMessage = null, $option = null)
@@ -74,14 +74,14 @@ class MailService
         } // do not send email to dynamically imported elements
 
         if (!$customMessage) {
-            $customMessage = 'Pas de message particulier'; // TODO translate
+            $customMessage = 'No specific message'; // TODO translate ?
         }
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
         if (!$mailConfig) {
-            return ['success' => false, 'message' => $mailType.' configuration does not exist']; // TODO translate
+            return ['success' => false, 'message' => $mailType.' configuration does not exist']; // TODO translate ?
         }
         if (!$mailConfig->getActive()) {
-            return ['success' => false, 'message' => $mailType.' automated mail disabled']; // TODO translate
+            return ['success' => false, 'message' => $mailType.' automated mail disabled']; // TODO translate ?
         }
 
         $draftResponse = $this->draftEmail($mailType, $element, $customMessage, $option);
@@ -98,7 +98,7 @@ class MailService
             if ($mailTo && 'no email' != $mailTo) {
                 return $this->sendMail($mailTo, $draftResponse['subject'], $draftResponse['content']);
             } else {
-                return ['success' => false, 'message' => 'No email address to deliver to']; // TODO translate
+                return ['success' => false, 'message' => 'No email address to deliver to']; // TODO translate ?
             }
         } else {
             return $draftResponse;
@@ -110,14 +110,14 @@ class MailService
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
 
         if (null == $mailConfig) {
-            return ['success' => false, 'message' => $mailType.' automated mail does not exist']; // TODO translate
+            return ['success' => false, 'message' => $mailType.' automated mail does not exist']; // TODO translate ?
         }
 
         $subject = $mailConfig->getSubject();
         $content = $mailConfig->getContent();
 
         if (!$mailConfig->getSubject() || !$mailConfig->getContent()) {
-            return ['success' => false, 'message' => $mailType.' automated mail missing subject or content']; // TODO translate
+            return ['success' => false, 'message' => $mailType.' automated mail missing subject or content']; // TODO translate ?
         }
 
         if ('newsletter' == $mailType) {
@@ -174,7 +174,7 @@ class MailService
                 if ('report' == $mailType && $option && $option instanceof UserInteractionReport) {
                     $user = $option->getUserDisplayName();
                 } else {
-                    $user = $contribution ? $contribution->getUserDisplayName() : 'Inconnu'; // TODO translate
+                    $user = $contribution ? $contribution->getUserDisplayName() : 'Unknown'; // TODO translate ?
                 }
 
                 $string = preg_replace('/({{((?:\s)+)?element((?:\s)+)?}})/i', $elementName, $string);
