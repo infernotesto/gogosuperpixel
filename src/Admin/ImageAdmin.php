@@ -13,7 +13,7 @@ class ImageAdmin extends GoGoAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('file', FileType::class) # TODO translation : where are the translated keys ??
+            ->add('file', FileType::class)
             ->add('externalImageUrl')
         ;
     }

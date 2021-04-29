@@ -48,16 +48,12 @@ class ElementAdminShowEdit extends ElementAdminList
             ->add('images', CollectionType::class, [
               'entry_type' => ElementImageType::class,
               'allow_add' => true,
-              'label' => 'Images',
-              'allow_delete' => true,
-              'required' => false
+              'allow_delete' => true
             ])
             ->add('files', CollectionType::class, [
               'entry_type' => ElementFileType::class,
               'allow_add' => true,
-              'allow_delete' => true,
-              'label' => 'Fichiers',
-              'required' => false
+              'allow_delete' => true
             ])
             // ->add('openHours', OpenHoursType::class, ['required' => false])
           ->end()

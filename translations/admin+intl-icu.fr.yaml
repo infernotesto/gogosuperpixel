@@ -479,7 +479,7 @@ mapping-taxonomy:
   alert: "Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'"
 
 mapping-ontology:
-  alert: "Veuillez cliquer sur le boutton \"Lire les données\" afin de charger les attributs des données à importer"
+  alert: "Veuillez cliquer sur le bouton \"Lire les données\" afin de charger les attributs des données à importer"
   original: "Nom d'origine"
   mapped: "À transformer en <span style='font-weight: normal'>(les champs vides ne seront pas importés)</span>"
   arrowTitle: "Utiliser le nom d'origine"
@@ -582,13 +582,19 @@ charts: # src/Block/ChartBlockService.php
   empty: "Aucun élement trouvé"
   showAll: "Afficher tous"
 
-# TODO translation
-# wrong place ! Keys from src/Admin/ImageAdmin.php
-app:
+# src/Admin/ImageAdmin.php
+image_hidden: &image
+  _label: "Téléchargez une image xxx"
   fields:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
     actualFile: "Fichier actuel :"
+    files: "Fichiers"
+    images: "Images"
+conf_image_hidden: *image
+parter_image_hidden: *image
+element_image_hidden: *image
+#feature_config_hidden: *image
 
 # templates/admin/blocks/block_monitoring.html.twig
 monitoring:
@@ -987,6 +993,7 @@ commons:
 
 config_general:
   _label: "Configuration Générale"
+  downloadImage: "Téléchargez une image"
   fields:
     aboutHeaderTitle: "Titre de la section 'A propos'"
     activateAbouts: "Activer les popups type 'A propos'"
@@ -1199,6 +1206,11 @@ help:
   _label: "Aide"
   doc: "Un problème, une question ? c'est par ici : "
 
-saas:
+saas_config:
   list: "Liste des Projets"
   config: "Configuration"
+  fields:
+    saas: 
+      donationUrl: "Url pour faire un don (un bouton sera ajouté sur la page d'accueil)"
+      endUserLicenceAgreement: "Conditions Générales d'Utilisation"
+      newProjectInstructions: "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet"

@@ -21,20 +21,13 @@ class ConfigurationSaasAdmin extends ConfigurationAbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->panel('Configuration') // TODO translate
-                ->add('saas.donationUrl', UrlType::class, [
-                    'label' => "Url pour faire un don (un boutton sera ajouté sur la page d'accueil)", // TODO translate
-                    'required' => false
-                ])
+            ->panel('configuration')
+                ->add('saas.donationUrl', UrlType::class)
                 ->add('saas.endUserLicenceAgreement', SimpleFormatterType::class, [
-                    'format' => 'richhtml', 'ckeditor_context' => 'full',
-                    'label' => "Conditions Générales d'Utilisation", // TODO translate
-                    'required' => false
+                    'format' => 'richhtml', 'ckeditor_context' => 'full'
                 ])
                 ->add('saas.newProjectInstructions', SimpleFormatterType::class, [
-                    'format' => 'richhtml', 'ckeditor_context' => 'full',
-                    'label' => "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet", // TODO translate
-                    'required' => false
+                    'format' => 'richhtml', 'ckeditor_context' => 'full'
                 ])
             ->end()
         ;

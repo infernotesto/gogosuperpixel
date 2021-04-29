@@ -1,7 +1,7 @@
 fr:
   element_form:
     geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
-    geocode_error: Erreur lors de la geolocalisation de "{address}"
+    geocode_error: Erreur lors de la géolocalisation de "{address}"
 
   filters_builder:
     taxonomy: Filtre Catégories
@@ -10,3 +10,15 @@ fr:
 
   osm_query_builder:
     title: Liste des requêtes dans la base OpenStreetMap
+en:
+  element_form:
+    geocoded_marker_text: EN> Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+    geocode_error: EN> Erreur lors de la géolocalisation de "{address}"
+
+  filters_builder:
+    taxonomy: ENtoto> Filtre Catégories
+    gogo_date: EN> Filtre Date
+    gogo_number: EN> Filtre Nombre
+
+  osm_query_builder:
+    title: EN> Liste des requêtes dans la base OpenStreetMap    
