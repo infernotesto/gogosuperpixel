@@ -1,5 +1,5 @@
 import OsmQueryBuilder from './OsmQueryBuilder.vue'
-import Vue from 'vue/dist/vue.esm'
+import Vue from '../../vendor/vue-custom'
 
 document.addEventListener('DOMContentLoaded', function() {
     if ($('#element-import').length > 0) {

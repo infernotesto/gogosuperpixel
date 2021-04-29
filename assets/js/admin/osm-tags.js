@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm'
+import Vue from '../vendor/vue-custom'
 import OsmCondition from './element-import/OsmQueryBuilderCondition.vue'
 
 document.addEventListener('DOMContentLoaded', function() {

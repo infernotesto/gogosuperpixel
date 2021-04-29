@@ -3,7 +3,7 @@ var gogoFallbackLocale = 'en';
 
 // Use this function anywhere
 // handle interpolation : t('helo.world', {user: "Seby"})
-function t(key, params) {
+window.t = function(key, params) {
     var result = gogoTrans(gogoLocale + '.' + key, params)
     if (!result) result = gogoTrans(gogoFallbackLocale + '.' + key, params)
     if (!result) result = key

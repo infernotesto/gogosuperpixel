@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm'
+import Vue from '../vendor/vue-custom'
 
 document.addEventListener('DOMContentLoaded', function() {
     if ($('.element-data-fields').length > 0) {
