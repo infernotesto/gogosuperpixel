@@ -75,7 +75,7 @@ class LoadConfiguration implements FixtureInterface
             $configuration->setActivateHomePage(true);
             $confHome = new ConfigurationHome();
             $confHome->setDisplayCategoriesToPick(false);
-            $confHome->setAddElementHintText($t->trans('load_configuration.AddElementHintText')); // TODO check translation
+            $confHome->setAddElementHintText('Contribuez à enrichir la base de donnée !'); // TODO check translation
             $confHome->setSeeMoreButtonText('En savoir plus'); // TODO translate
             $configuration->setHome($confHome);
 
