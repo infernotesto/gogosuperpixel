@@ -58,6 +58,7 @@ my_parameters:
 
 my_contributions:
   _label: Mes contributions
+  name: "Nom"
   history: Historique de mes contributions
   my_elements: Mes Fiches
   my_votes: Mes votes
@@ -220,17 +221,19 @@ errors: # TODO erreurs ajax
   e1: "Les identifiants de connexion ne sont pas corrects"
   e2: "Une erreur s'est produite lors de la tentative de connexion"
 
-# If some messages are reused over differents pages
+
 action:
-  search: "Rechercher" # just an example, can be deleted
+  search: "Rechercher"
   submit: "Enregistrer"
-  geolocalize_me: "Géolocaliser ma position" # TODO doublon avec home.geolocalize ??
+  geolocalize_me: "Géolocaliser ma position"
   create: "Créer"
   send: "Envoyer"
   send_stay: "Envoyer et rester sur le formulaire"
   cancel: "Annuler"
   continue: "Continuer"
   error: "Erreur : {message}"
+  
+  # TODO translation : move to admin+intl-icu.fr.yaml ??
   element: # element controller
     vote:
       unallowed: "Désolé, vous n'êtes pas autorisé à voter !"
@@ -264,19 +267,3 @@ action:
       unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
       uncomplete: "Les paramètres sont incomplets"
       done: "L'étiquette a bien été modifiée"
-  mailtest:
-    draftAutomated:
-      uncomplete: "No visible elements in database, please create an element" # TODO translation
-    sentTestAutomated:
-      uncomplete: "Aucune adresse mail n'a été renseignée"
-      database_empty: "No elements in database, please create an element for email testing" # TODO translation
-      done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
-    draftTest:
-      done: "Un customMessage de test"
-
-
-directory: # just an example, can be deleted
-
-partners: # just an example, can be deleted
-    
-

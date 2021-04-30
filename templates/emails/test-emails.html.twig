@@ -1,20 +1,21 @@
 {% extends 'bundles/SonataAdminBundle/layout.html.twig' %}
 {% block sonata_admin_content %}
+{% trans_default_domain 'admin' %}
 
   {% block notice %}
       {% include '@SonataCore/FlashMessage/render.html.twig' %}
   {% endblock notice %}
 
-  <h2 style="text-align:center; font-weight:bold;">Test du rendu du mail {{ mailType | upper }}</h2> {# TODO Translation #}
+  <h2 style="text-align:center; font-weight:bold;">{{ 'test_emails._label'|trans({'%name%': mailType | upper}) }}</h2>
 
   <form method="post" action="{{ path('gogo_mail_send_test_automated', { 'mailType' : mailType }) }}" style="text-align:center; margin-bottom:40px;">
-    <input type="email" name="email" class="form-control" placeholder="Entrez une adresse mail"
+    <input type="email" name="email" class="form-control" placeholder="{{ 'test_emails.email'|trans }}"
             style="display: inline-block;
             width: auto;
             margin-right: 20px;
             vertical-align: middle;"/>
-    <button type="submit" class="btn btn-primary">Envoyer un test à cette adresse</button> {# TODO Translation #}
+    <button type="submit" class="btn btn-primary">{{ 'test_emails.submit'|trans }}</button>
   </form>
-  <center><h3>Objet du mail : <em>{{ subject }}</em></h5></center> {# TODO Translation #}
+  <center><h3>{{ 'test_emails.subject'|trans({'%subject%': subject})|raw }}</h5></center>
   <div style="max-width: 800px;background-color:white;margin:0 auto;margin-top:2rem;padding:2rem;border: 1px solid grey">{{ content | raw }}</div>
 {% endblock %}

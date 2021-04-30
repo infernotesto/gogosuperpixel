@@ -18,7 +18,7 @@ class AddMessageCommand extends GoGoAbstractCommand
     {
         $this->setName('gogolog:add:message')
              ->addArgument('message', InputArgument::REQUIRED, 'Message to add') // TODO translate ?
-             ->setDescription('Update datatabse each time after code update'); // TODO translate ?
+             ->setDescription('Update database each time after code update'); // TODO translate ?
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void

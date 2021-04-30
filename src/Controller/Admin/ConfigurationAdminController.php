@@ -26,7 +26,7 @@ class ConfigurationAdminController extends Controller
     public function deleteAction($id)
     {
         // do nothing
-        $this->addFlash('sonata_flash_error', 'Impossible de supprimer la configuration, cette action est interdite car est elle casserait toute votre carte'); // TODO translate
+        $this->addFlash('sonata_flash_error', $this->trans('action.configurationAdminController.error'));
 
         return $this->redirect($this->admin->generateUrl('edit', ['id' => $id]));
     }

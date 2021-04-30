@@ -170,7 +170,7 @@ class ChartBlockService extends AbstractBlockService
         return $contribsResolvedPie;
     }
 
-    private function dateRange($first, $last, $step = '+1 day', $format = 'm/d/Y') // TODO translate
+    private function dateRange($first, $last, $step = '+1 day', $format = 'm/d/Y') // TODO translate use local ?
     {
         $dates = [];
         $current = strtotime($first);
@@ -230,7 +230,7 @@ class ChartBlockService extends AbstractBlockService
             ->expression(
                 $builder->expr()
                     ->field('day')
-                    ->dateToString('%m/%d/%Y', '$'.$groupField) // TODO translate ?
+                    ->dateToString('%m/%d/%Y', '$'.$groupField) // TODO translate use locale ?
                 )
             ->field('count')
                 ->sum(1)

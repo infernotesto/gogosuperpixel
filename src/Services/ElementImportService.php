@@ -48,8 +48,7 @@ class ElementImportService
 
     private function trans($key, $params = [])
     {
-        return $this->t->trans($key, $params, 'admin'); // TODO translation issue !!
-        //return $this->t->trans($key, $params); 
+        return $this->t->trans($key, $params, 'admin');
     }
 
     public function startImport($import, $manuallyStarted = true)

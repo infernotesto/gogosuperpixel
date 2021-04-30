@@ -154,6 +154,6 @@ class ElementAdminFilters extends ElementAdminAbstract
                 },
             ])
       ->add('email')
-      ->add('sourceKey', null, ['label' => 'Source']);// TODO translate
+      ->add('sourceKey');
     }
 }

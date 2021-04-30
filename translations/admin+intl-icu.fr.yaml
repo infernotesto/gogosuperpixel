@@ -254,11 +254,12 @@ elements:
     optionValuesNotIn: "Catégories (ne contient pas)"
     postalCode: "Code Postal"
     departementCode: "Numéro de département"
+    sourceKey: "Source"
   action:
     edit:
       send_mail: "Prévenir l'acteur de la modification"
       isPending: "Message particulier si refus"
-      havePendingReports: "Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques"
+      havePendingReports: "Détail de la modification, raison de la suppression... ce texte remplacera '{{ customMessage '}} dans les mails automatiques"
       submit_accept: "Valider"
       submit_refuse: "Refuser"
       submit_restore: "Restaurer"
@@ -272,6 +273,26 @@ elements:
       returnToList: "Retourner à la liste"
       updateJSON: "Mettre à jour le JSON"
       geocode: "Géocoder l'adresse"
+    batch:
+      validation: "Valider"
+      refusal: "Refuser"
+      softDelete: "Supprimer (changement de status)"
+      restore: "Restaurer"
+      resolveReports: "Résoudre la modération"
+      sendMail: "Envoyer un mail"
+      editOptions: "Modifier les catégories"
+      delete: "Supprimer définitivement"
+      params:
+        from: "Votre adresse mail"
+        mail_subject: "Objet"
+        mail_content: "Contenu"
+        send_to_element: "Envoyer l'email aux éléments"
+        send_to_last_contributor: "Envoyer l'email aux derniers contributeurs"
+        optionsToRemove: "Catégories à supprimer"
+        optionsToAdd: "Catégories à ajouter"
+        comment: "Détail de la modification, raison de la suppression... ce texte remplacera '{{ customMessage '}} dans les mails automatiques"
+        dont_send_mail: "Ne pas envoyer de mail"
+
 imports:
   _label: "Import"
   static: "Importer des données en dur, depuis un fichier CSV ou une API JSON"
@@ -584,7 +605,7 @@ charts: # src/Block/ChartBlockService.php
 
 # src/Admin/ImageAdmin.php
 image_hidden: &image
-  _label: "Téléchargez une image xxx"
+  _label: "Téléchargez une image"
   fields:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
@@ -810,7 +831,7 @@ config_form:
         Si vous avez importé des données, vous pouvez ajouter un champ au formulaire et le lier au champ importé grâce à l'attribut \"Nom du champ\"</div>"
   fields:
     elementFormIntroText: "Texte d'introduction qui apparait en haut du formulaire"
-    elementFormIntroText_placeholder: "Exemple: Attention nous ne référencons pas tel et tel type d'élements"
+    elementFormIntroText_placeholder: "Exemple: Attention nous ne référençons pas tel et tel type d'élements"
     elementFormValidationText: "Libellé de la checkbox de validation du formulaire (laisser vide pour désactiver)"
     elementFormValidationText_placeholder: "Exemple: Je certifie que les informations renseignées dans ce formulaire sont exactes"
     elementFormOwningText: "Libellé pour demander si l'utilisateur est propriétaire de la fiche (laisser vide pour désactiver)"
@@ -1206,6 +1227,13 @@ help:
   _label: "Aide"
   doc: "Un problème, une question ? c'est par ici : "
 
+# templates/emails/test-emails.html.twig
+test_emails:
+  _label: "Test du rendu du mail {name}"
+  email: "Entrez une adresse mail"
+  submit: "Envoyer un test à cette adresse"
+  subject: "Objet du mail : <em>{subject}</em>"
+
 saas_config:
   list: "Liste des Projets"
   config: "Configuration"
@@ -1214,3 +1242,39 @@ saas_config:
       donationUrl: "Url pour faire un don (un bouton sera ajouté sur la page d'accueil)"
       endUserLicenceAgreement: "Conditions Générales d'Utilisation"
       newProjectInstructions: "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet"
+
+# templates/saas/projects/initialize.html.twig
+saas_initialize:
+  _label: "Créer un compte administrateur"
+  username: "Nom d'utilisateur"
+  email: "Adresse e-mail"
+  plainPassword-1: "Mot de passe"
+  plainPassword-2: "Retapez votre mot de passe"
+
+action:
+  mailtest:
+    draftAutomated:
+      uncomplete: "No visible elements in database, please create an element" # TODO translation
+    sentTestAutomated:
+      uncomplete: "Aucune adresse mail n'a été renseignée"
+      database_empty: "No elements in database, please create an element for email testing" # TODO translation
+      done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
+    draftTest:
+      done: "Un customMessage de test"
+  mailService:
+    success: "Le message a été envoyé"
+    error: "Erreur :"
+    no_specific_message: "Pas de message spécifique"
+    unknown_config: "La configuration {config} n'existe pas"
+    inactive_config: "La configuration {config} est désactivée"
+    no_email: "Pas de destinataire"
+    no_automatic_mail: "Le mail automatique {config} n'existe pas"
+    no_subject_or_content: "Pas de sujet ou de contenu pour le mail automatique {config}"
+    unknown: "Inconnu"
+  configurationAdminController:
+    error: "Impossible de supprimer la configuration, cette action est interdite car est elle casserait toute votre carte"
+  initialize:
+    welcome: >-
+      <b>Bienvenue dans votre espace Administrateur !</b></br>
+      L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
+      <a target="_blank" href="https://doc.gogocarto.fr/">Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions...
