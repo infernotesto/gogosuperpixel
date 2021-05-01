@@ -23,7 +23,7 @@ class CustomRoleSecurityHandler implements SecurityHandlerInterface
 
         $adminCode = $admin->getCode();
         // use same permission for all option/categories objects
-        if (in_array($adminCode, ['admin.option_hidden', 'admin.option.lite_hidden', 'admin.categories.lite_hidden'])) {
+        if (in_array($adminCode, ['admin.options', 'admin.option.lite_hidden', 'admin.categories.lite_hidden'])) {
             $adminCode = 'admin.categories';
         }
 

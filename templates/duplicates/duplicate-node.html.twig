@@ -5,12 +5,12 @@
 <div class="duplicate-node">
   <div class="group-actions">
     <button class="btn-merge btn btn-success waves-effect waves-light" data-id="{{ duplicateNode.id }}"
-            title="{{ 'duplicate-node.merge_title'|trans }}">
-        {{ 'duplicate-node.merge'|trans }}
+            title="{{ 'duplicates.node.merge_title'|trans }}">
+        {{ 'duplicates.node.merge'|trans }}
       </button>
       <button class="btn-non-duplicates btn btn-default waves-effect waves-light" data-id="{{ duplicateNode.id }}"
-              title="{{ 'duplicate-node.non-duplicates_title'|trans }}">
-        {{ 'duplicate-node.non-duplicates'|trans }}
+              title="{{ 'duplicates.node.non-duplicates_title'|trans }}">
+        {{ 'duplicates.node.non-duplicates'|trans }}
       </button>
   </div>
   <div class="duplicates">
@@ -24,7 +24,7 @@
             <span class="updated-at"> - Maj {{ duplicate.updatedAt|date("d/m/Y") }}</span> {# TODO Translation use local #}
             {% if duplicate.isDeleted %}
               <span style="color: #9c3f3a;margin-left: 5px;">
-                {{ 'duplicate-node.deleted'|trans }}
+                {{ 'duplicates.node.deleted'|trans }}
               </span>
             {% endif %}
           </span>
@@ -45,7 +45,7 @@
           {# Address #}
           {% if duplicate.address.getFormatedAddress %}
             <div class="key-value">
-              <span class="key">{{ 'duplicate-node.address'|trans }}</span>
+              <span class="key">{{ 'duplicates.node.address'|trans }}</span>
               <span class="value">{{ duplicate.address.getFormatedAddress }}</span>
             </div>
           {% endif %}

@@ -36,7 +36,7 @@ class ElementAdminShowEdit extends ElementAdminList
             ->add('name', null, ['required' => true])
             ->add('optionIds', ChoiceType::class, [
               'multiple' => true,
-              'choices' => $categoriesChoices], ['admin_code' => 'admin.option_hidden'])
+              'choices' => $categoriesChoices], ['admin_code' => 'admin.options'])
             ->add('data', null, [
               'label_attr' => ['style' => 'display:none;'],
               'attr' => [

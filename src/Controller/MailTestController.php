@@ -31,7 +31,7 @@ class MailTestController extends Controller
         $draftResponse = $this->draftTest($mailType);
 
         if (null == $draftResponse) {
-            return new Response($this->trans('action.mailtest.draftAutomated.uncomplete'));
+            return new Response($this->trans('emails.test.uncomplete'));
         }
 
         if ($draftResponse['success']) {
@@ -50,13 +50,13 @@ class MailTestController extends Controller
         $mail = $request->get('email');
 
         if (!$mail) {
-            return new Response($this->trans('action.mailtest.sentTestAutomated.uncomplete'));
+            return new Response($this->trans('emails.test.missing_email'));
         }
 
         $draftResponse = $this->draftTest($mailType);
 
         if (null == $draftResponse) {
-            $this->addFlash('error', $this->trans('action.mailtest.sentTestAutomated.database_empty'));
+            $this->addFlash('error', $this->trans('emails.test.missing_element'));
 
             return $this->redirectToRoute('admin_app_configuration_list');
         }
@@ -64,7 +64,7 @@ class MailTestController extends Controller
         if ($draftResponse['success']) {
             $result = $this->mailService->sendMail($mail, $draftResponse['subject'], $draftResponse['content']);
             if ($result['success']) {
-                $this->addFlash('success', $this->trans('action.mailtest.sentTestAutomated.done', ['%mail%' => $mail]));
+                $this->addFlash('success', $this->trans('emails.test.done', ['%mail%' => $mail]));
             } else {
                 $this->addFlash('error', $result['message']);
             }
@@ -95,7 +95,7 @@ class MailTestController extends Controller
             return null;
         }
 
-        $draftResponse = $this->mailService->draftEmail($mailType, $element, $this->trans('action.mailtest.draftTest.done'), $options); 
+        $draftResponse = $this->mailService->draftEmail($mailType, $element, $this->trans('emails.test.custom_message_example'), $options); 
 
         return $draftResponse;
     }

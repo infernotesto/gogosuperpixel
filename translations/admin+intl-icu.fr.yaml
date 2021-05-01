@@ -436,12 +436,6 @@ imports:
     refreshFrequencyInDays: "Mise à jour"
     idsToIgnore: "Infos"
 
-automated_mail_config_hidden:
-  fields:
-    active: "Activé"
-    subject: "Objet du message"
-    content: "Contenu du message"
-
 dynamic_imports:
   _label: "Import dynamique"
   fields: *imports_fields
@@ -604,18 +598,15 @@ charts: # src/Block/ChartBlockService.php
   showAll: "Afficher tous"
 
 # src/Admin/ImageAdmin.php
-image_hidden: &image
+images: &images
   _label: "Téléchargez une image"
+  placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
   fields:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
-    actualFile: "Fichier actuel :"
-    files: "Fichiers"
-    images: "Images"
-conf_image_hidden: *image
-parter_image_hidden: *image
-element_image_hidden: *image
-#feature_config_hidden: *image
+images_conf: *images
+images_partner: *images
+images_element: *images
 
 # templates/admin/blocks/block_monitoring.html.twig
 monitoring:
@@ -633,24 +624,21 @@ monitoring:
   users: "Utilisateurs"
   activeUsersNewsletter: "Abonnés à la newsletter"
 
-# templates/duplicates/duplicate-node.html.twig
-duplicate-node:
-  merge: "Fusionner"
-  merge_title: "Les éléments vont être fusionnés. Seul le premier élément sera conservé, et les attributs du second seront fusionnés"
-  non-duplicates: "Pas doublons"
-  non-duplicates_title: "Rien ne se passe, GoGoCarto se souviendra que ces deux éléments ne sont pas des doublons et ils ne seront plus détectés comme tel"
-  deleted: "Cet élément a été supprimé. L'élément fusionné restera en status supprimé"
-  address: "Adresse"
-
-# templates/duplicates/duplicates-index.html.twig
-duplicates-index:
-  title: "Gestion des doublons"
-  return: "Retour à la gestion des doublons"
-  none: "Aucun doublon à traiter !"
-  leftDuplicatesToProceedCount:  "{count} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent"
-  merge: "Fusionnez les doublons"
-  wantMore: "J'en veux encore ! (Plus que {count} doublons à traiter)"
-
+duplicates:
+  node: # templates/duplicates/duplicate-node.html.twig
+    merge: "Fusionner"
+    merge_title: "Les éléments vont être fusionnés. Seul le premier élément sera conservé, et les attributs du second seront fusionnés"
+    non-duplicates: "Pas doublons"
+    non-duplicates_title: "Rien ne se passe, GoGoCarto se souviendra que ces deux éléments ne sont pas des doublons et ils ne seront plus détectés comme tel"
+    deleted: "Cet élément a été supprimé. L'élément fusionné restera en status supprimé"
+    address: "Adresse"
+  index: # templates/duplicates/duplicates-index.html.twig
+    title: "Gestion des doublons"
+    return: "Retour à la gestion des doublons"
+    none: "Aucun doublon à traiter !"
+    leftDuplicatesToProceedCount:  "{count} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent"
+    merge: "Fusionnez les doublons"
+    wantMore: "J'en veux encore ! (Plus que {count} doublons à traiter)"
 
 categories:
   _label: "Catégories"
@@ -857,7 +845,7 @@ config_contributions:
     minVoteToForceChangeStatus: "Nombre votes pour valider/refuser automatiquement, sans attendre de jours minimum"
     collaborativeModerationExplanations: "Explications au sujet de la modération collaborative"
 
-feature_config_hidden:
+config_features:
   fields:
     active: "Activé"
     activeInIframe: "Activé en Iframe"
@@ -1006,15 +994,16 @@ webhooks:
     url: "URL"
 
 commons:
+  send: "Envoyer"
   btn_update_and_edit: "Mettre à jour"
   format: "d/m/Y à H:i" #  TODO Translation use local
   anonymous: "Anonyme"
-  fields:
-    image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
+  actual_file: "Fichier actuel :"
 
 config_general:
   _label: "Configuration Générale"
   downloadImage: "Téléchargez une image"
+  cannot_delete: "Impossible de supprimer la configuration, cette action est interdite car est elle casserait toute votre carte"
   fields:
     aboutHeaderTitle: "Titre de la section 'A propos'"
     activateAbouts: "Activer les popups type 'A propos'"
@@ -1053,7 +1042,7 @@ config_general:
       pages: "Fonctions principales"
       text: "Nom des entités référencées sur l'annuaire"
 
-option_hidden:
+options:
   _label: "Option"
   fields:
     name: "Nom"
@@ -1119,66 +1108,62 @@ news:
     groups:
       list_header: "Créez des actualités qui seront incluses dans la newsletter"
 
-sonata:
-  user:
-    user:
-      _label: Utilisateurs
-      fields:
-        contributionsCount: Contributions
-        votesCount: Votes
-        reportsCount: Signalements
-        gamification: Interactions #Interaction Score
-        createdAt: Créé le
-        impersonating: # TODO translate
-        username: Nom
-        groups: Groupes
-        sendMail: Envoyer un mail
-        email: Mail # Destinataire ou De ?
-        object: Titre
-        content: Message
-        
-      form:
-        plainPassword: Mot de passe
-        allowedStamps: Étiquettes autorisées # TODO check translation
-        locked: Verrouillée
-        expired: Expirée
-        enabled: Activée
-        credentialsExpired: # TODO translate
-        watchModeration: Être notifié par email lorsque des éléments sont à modérer
-        watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories suivante
-        watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
-        watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
-        watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
-        main-roles: Rôles Principaux
-        groups:
-          user: Utilisateur
-          security: Sécurité
-          general: Général
-          status: Statut
-          roles: Rôles
-      role:
-        ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
-        ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"
-        ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
-        ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
-        ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
-batch:
-  send: "Envoyer"
-  sendmails: "{count, plural,
-                      =1 {# mail a bien été envoyé}
-                      other {# mails ont bien été envoyés}
-              }"
-  mailError: "Vous devez renseigner un objet et un contenu. Veuillez recommencer"
-  usersWithoutEmail: "{count, plural
-                              =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
-                              other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
-                      }"
-  tooMany: "Trop d'éléments à traiter ! Seulement {limit} ont été traités"
-  error: "ERREUR : {message}"
+sonata.user.user:
+  _label: Utilisateurs
+  fields:
+    contributionsCount: Contributions
+    votesCount: Votes
+    reportsCount: Signalements
+    gamification: Interactions #Interaction Score
+    createdAt: Créé le
+    impersonating: # TODO translate
+    username: Nom
+    groups: Groupes
+    sendMail: Envoyer un mail
+    email: Mail # Destinataire ou De ?
+    object: Titre
+    content: Message    
+  form:
+    plainPassword: Mot de passe
+    allowedStamps: Étiquettes autorisées # TODO check translation
+    locked: Verrouillée
+    expired: Expirée
+    enabled: Activée
+    credentialsExpired: # TODO translate
+    watchModeration: Être notifié par email lorsque des éléments sont à modérer
+    watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories suivante
+    watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
+    watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
+    watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
+    main-roles: Rôles Principaux
+    groups:
+      user: Utilisateur
+      security: Sécurité
+      general: Général
+      status: Statut
+      roles: Rôles
+  role:
+    ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
+    ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"
+    ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
+    ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
+    ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
+  batch:
+    sendmails: "{count, plural,
+                        =1 {# mail a bien été envoyé}
+                        other {# mails ont bien été envoyés}
+                }"
+    mailError: "Vous devez renseigner un objet et un contenu. Veuillez recommencer"
+    usersWithoutEmail: "{count, plural
+                                =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
+                                other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
+                        }"
+    tooMany: "Trop d'éléments à traiter ! Seulement {limit} ont été traités"
+    error: "ERREUR : {message}"
 
 config_users:
   _label: Configuration
-  form:
+  fields:
     user:
       enableRegistration: Autoriser la création de compte
       sendConfirmationEmail: Valider la création avec un email de confirmation
@@ -1187,11 +1172,16 @@ config_users:
       loginWithGoogle: Activer la connexion avec Google
       loginWithFacebook: Activer la connexion avec Facebook
 
-sidebar:
-  gogo_homepage: "Retour au site"
-  gogo_directory: "La Carte"
-  gogo_element_add: "Formulaire"
-  gogo_partners: "Qui sommes nous"
+dashboard:
+  welcome: >-
+      <b>Bienvenue dans votre espace Administrateur !</b></br>
+      L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
+      <a target="_blank" href="https://doc.gogocarto.fr/">Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions...
+  sidebar:
+    gogo_homepage: "Retour au site"
+    gogo_directory: "La Carte"
+    gogo_element_add: "Formulaire"
+    gogo_partners: "Qui sommes nous"
 
 bulk:
   _label: "Actions de masse"
@@ -1226,41 +1216,39 @@ help:
   _label: "Aide"
   doc: "Un problème, une question ? c'est par ici : "
 
-# templates/emails/test-emails.html.twig
-test_emails:
-  _label: "Test du rendu du mail {name}"
-  email: "Entrez une adresse mail"
-  submit: "Envoyer un test à cette adresse"
-  subject: "Objet du mail : <em>{subject}</em>"
+projects:
+  _label: Liste des Projets
+  initialize: # templates/saas/projects/initialize.html.twig
+    _label: "Créer un compte administrateur"
+    username: "Nom d'utilisateur"
+    email: "Adresse e-mail"
+    plainPassword-1: "Mot de passe"
+    plainPassword-2: "Retapez votre mot de passe"
 
-saas_config:
-  list: "Liste des Projets"
-  config: "Configuration"
+config_saas:
+  _label: "Configuration"
   fields:
     saas: 
       donationUrl: "Url pour faire un don (un bouton sera ajouté sur la page d'accueil)"
       endUserLicenceAgreement: "Conditions Générales d'Utilisation"
       newProjectInstructions: "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet"
 
-# templates/saas/projects/initialize.html.twig
-saas_initialize:
-  _label: "Créer un compte administrateur"
-  username: "Nom d'utilisateur"
-  email: "Adresse e-mail"
-  plainPassword-1: "Mot de passe"
-  plainPassword-2: "Retapez votre mot de passe"
-
-action:
-  mailtest:
-    draftAutomated:
-      uncomplete: "No visible elements in database, please create an element" # TODO translation
-    sentTestAutomated:
-      uncomplete: "Aucune adresse mail n'a été renseignée"
-      database_empty: "No elements in database, please create an element for email testing" # TODO translation
-      done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
-    draftTest:
-      done: "Un customMessage de test"
-  mailService:
+emails:
+  template:
+    fields:
+      active: "Activé"
+      subject: "Objet du message"
+      content: "Contenu du message"
+  test:
+    _label: "Test du rendu du mail {name}"
+    email: "Entrez une adresse mail"
+    submit: "Envoyer un test à cette adresse"
+    subject: "Objet du mail : <em>{subject}</em>"
+    missing_element: "Vous devez créer un élement dans la base de donnée pour tester l'email"
+    missing_email: "Aucune adresse mail n'a été renseignée"
+    done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
+    custom_message_example: "Un customMessage de test"
+  service:
     success: "Le message a été envoyé"
     error: "Erreur :"
     no_specific_message: "Pas de message spécifique"
@@ -1270,10 +1258,4 @@ action:
     no_automatic_mail: "Le mail automatique {config} n'existe pas"
     no_subject_or_content: "Pas de sujet ou de contenu pour le mail automatique {config}"
     unknown: "Inconnu"
-  configurationAdminController:
-    error: "Impossible de supprimer la configuration, cette action est interdite car est elle casserait toute votre carte"
-  initialize:
-    welcome: >-
-      <b>Bienvenue dans votre espace Administrateur !</b></br>
-      L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
-      <a target="_blank" href="https://doc.gogocarto.fr/">Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions...
+    

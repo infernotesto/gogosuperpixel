@@ -2,10 +2,10 @@
 {% trans_default_domain 'admin' %}
 
 {% set pageName = 'duplicates' %}
-{% set navTitle = 'duplicates-index.title'|trans %}
+{% set navTitle = 'duplicates.index.title'|trans %}
 
 {% trans_default_domain 'admin' %}
-{% block title %}{{ 'duplicates-index.title'|trans }}{% endblock %}
+{% block title %}{{ 'duplicates.index.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
 
@@ -18,15 +18,15 @@
 {% block body_content %}
   <section>
     
-    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">{{ 'duplicates-index.return'|trans }}</button></a></center>
+    <center style="margin-bottom: 2rem"><a href="{{ path('gogo_core_bundle_config_duplicates_admin_classname_list')}}"><button class="btn btn-secondary">{{ 'duplicates.index.return'|trans }}</button></a></center>
 
     {% if duplicatesNode|length == 0 %}
-      <h1>{{ 'duplicates-index.none'|trans }}</h1>
+      <h1>{{ 'duplicates.index.none'|trans }}</h1>
       {% if leftDuplicatesToProceedCount > 0 %}
-        <center><p>{{ 'duplicates-index.leftDuplicatesToProceedCount'|trans({'%count%': leftDuplicatesToProceedCount}) }}</p>  </center>
+        <center><p>{{ 'duplicates.index.leftDuplicatesToProceedCount'|trans({'%count%': leftDuplicatesToProceedCount}) }}</p>  </center>
       {% endif %}
     {% else %}
-      <h1>{{ 'duplicates-index.merge'|trans }}</h1>
+      <h1>{{ 'duplicates.index.merge'|trans }}</h1>
 
       {% for duplicateNode in duplicatesNode %}
         {% include 'duplicates/duplicate-node.html.twig' with { 'duplicateNode' : duplicateNode, 'config' : config } %}
@@ -34,7 +34,7 @@
 
       {% if leftDuplicatesToProceedCount > 0 %}
         <center>        
-          <button class="btn btn-primary" onclick="window.location.reload()">{{ 'duplicates-index.wantMore'|trans({'%count%': leftDuplicatesToProceedCount}) }}</button>
+          <button class="btn btn-primary" onclick="window.location.reload()">{{ 'duplicates.index.wantMore'|trans({'%count%': leftDuplicatesToProceedCount}) }}</button>
         </center>
       {% endif %}
     {% endif %}

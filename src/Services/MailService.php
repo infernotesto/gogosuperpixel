@@ -66,12 +66,12 @@ class MailService
 
             $this->mailer->send($message);
         } catch (\Swift_RfcComplianceException $e) {
-            $error = $this->trans('action.mailService.error').$e->getMessage();
+            $error = $this->trans('emails.service.error').$e->getMessage();
 
             return ['success' => false, 'message' => $error];
         }
-
-        return ['success' => true, 'message' => $this->trans('action.mailService.success')];
+        
+        return ['success' => true, 'message' => $this->trans('emails.service.success')];
     }
 
     public function sendAutomatedMail($mailType, $element, $customMessage = null, $option = null)
@@ -81,14 +81,14 @@ class MailService
         } // do not send email to dynamically imported elements
 
         if (!$customMessage) {
-            $customMessage = $this->trans('action.mailService.no_specific_message');
+            $customMessage = $this->trans('emails.service.no_specific_message');
         }
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
         if (!$mailConfig) {
-            return [ 'success' => false, 'message' => $this->trans('action.mailService.unknown_config', ['%config%' => $mailType]) ];
+            return [ 'success' => false, 'message' => $this->trans('emails.service.unknown_config', ['%config%' => $mailType]) ];
         }
         if (!$mailConfig->getActive()) {
-            return [ 'success' => false, 'message' => $this->trans('action.mailService.inactive_config', ['%config%' => $mailType]) ];
+            return [ 'success' => false, 'message' => $this->trans('emails.service.inactive_config', ['%config%' => $mailType]) ];
         }
 
         $draftResponse = $this->draftEmail($mailType, $element, $customMessage, $option);
@@ -105,7 +105,7 @@ class MailService
             if ($mailTo && 'no email' != $mailTo) {
                 return $this->sendMail($mailTo, $draftResponse['subject'], $draftResponse['content']);
             } else {
-                return ['success' => false, 'message' => $this->trans('action.mailService.no_email')];
+                return ['success' => false, 'message' => $this->trans('emails.service.no_email')];
             }
         } else {
             return $draftResponse;
@@ -117,14 +117,14 @@ class MailService
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
 
         if (null == $mailConfig) {
-            return [ 'success' => false, 'message' => $this->trans('action.mailService.no_automatic_mail', ['%config%' => $mailType]) ];
+            return [ 'success' => false, 'message' => $this->trans('emails.service.no_automatic_mail', ['%config%' => $mailType]) ];
         }
 
         $subject = $mailConfig->getSubject();
         $content = $mailConfig->getContent();
 
         if (!$mailConfig->getSubject() || !$mailConfig->getContent()) {
-            return [ 'success' => false, 'message' => $this->trans('action.mailService.no_subject_or_content', ['%config%' => $mailType]) ];
+            return [ 'success' => false, 'message' => $this->trans('emails.service.no_subject_or_content', ['%config%' => $mailType]) ];
         }
 
         if ('newsletter' == $mailType) {
@@ -181,7 +181,7 @@ class MailService
                 if ('report' == $mailType && $option && $option instanceof UserInteractionReport) {
                     $user = $option->getUserDisplayName();
                 } else {
-                    $user = $contribution ? $contribution->getUserDisplayName() : $this->trans('action.mailService.unknown');
+                    $user = $contribution ? $contribution->getUserDisplayName() : $this->trans('emails.service.unknown');
                 }
 
                 $string = preg_replace('/({{((?:\s)+)?element((?:\s)+)?}})/i', $elementName, $string);

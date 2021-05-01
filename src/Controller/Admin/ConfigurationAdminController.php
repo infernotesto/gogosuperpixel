@@ -26,7 +26,7 @@ class ConfigurationAdminController extends Controller
     public function deleteAction($id)
     {
         // do nothing
-        $this->addFlash('sonata_flash_error', $this->trans('action.configurationAdminController.error'));
+        $this->addFlash('sonata_flash_error', $this->trans('config_general.cannot_delete'));
 
         return $this->redirect($this->admin->generateUrl('edit', ['id' => $id]));
     }

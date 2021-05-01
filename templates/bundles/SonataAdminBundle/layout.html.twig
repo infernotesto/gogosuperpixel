@@ -82,14 +82,14 @@
 
 {% block sonata_sidebar_search %}
     <div class="btn-group side-bar-links">
-      <a type="button" href={{ path('gogo_homepage') }} target='_blank' class="btn btn-primary">{{ 'sidebar.gogo_homepage'|trans }}</a>
+      <a type="button" href={{ path('gogo_homepage') }} target='_blank' class="btn btn-primary">{{ 'dashboard.sidebar.gogo_homepage'|trans }}</a>
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href={{ path('gogo_directory') }} target='_blank'>{{ 'sidebar.gogo_directory'|trans }}</a></li>
-        <li><a href={{ path('gogo_element_add') }} target='_blank'>{{ 'sidebar.gogo_element_add'|trans }}</a></li>
-        <li><a href={{ path('gogo_partners') }} target='_blank'>{{ 'sidebar.gogo_partners'|trans }}</a></li>
+        <li><a href={{ path('gogo_directory') }} target='_blank'>{{ 'dashboard.sidebar.gogo_directory'|trans }}</a></li>
+        <li><a href={{ path('gogo_element_add') }} target='_blank'>{{ 'dashboard.sidebar.gogo_element_add'|trans }}</a></li>
+        <li><a href={{ path('gogo_partners') }} target='_blank'>{{ 'dashboard.sidebar.gogo_partners'|trans }}</a></li>
       </ul>
     </div>
 {% endblock %}

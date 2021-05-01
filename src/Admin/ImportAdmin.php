@@ -70,7 +70,7 @@ class ImportAdmin extends GoGoAbstractAdmin
                         'multiple' => true,
                         'query' => $usersQuery,
                         'btn_add' => false,
-                        ], ['admin_code' => 'admin.option_hidden'])
+                        ], ['admin_code' => 'admin.options'])
                     ->add('isSynchronized', null, [
                         'disabled' => !$this->config->getOsm()->isConfigured(),
                         'required' => false,
@@ -140,7 +140,7 @@ class ImportAdmin extends GoGoAbstractAdmin
                             'class' => 'App\Document\Option',
                             'multiple' => true,
                             'btn_add' => false],
-                            ['admin_code' => 'admin.option_hidden'])
+                            ['admin_code' => 'admin.options'])
                         ->add('needToHaveOptionsOtherThanTheOnesAddedToEachElements')
                         ->add('preventImportIfNoCategories')
                     ->end()
