@@ -22,11 +22,9 @@ element.form:
   error_username: Ce nom d'utilisateur est déjà pris !
   error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
   error_geocode: Impossible de localiser cette adresse
-  error_missing_category: Veuillez sélectionner au moins une catégorie
   controller:
     error_dont_exist: L'élément demandé n'existe pas...
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
-    http_error_dont_exist: Cet élément n'existe pas.
     thankyou:
       edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
       added: Merci de votre aide ! {name} a bien été ajouté
@@ -48,7 +46,7 @@ element.form:
     recopy_info: Recopier les informations dans un nouveau formulaire
     admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
 
-the_map:
+directory:
   _label: La carte
 
 my_parameters:
@@ -98,9 +96,9 @@ duplicates:
   duplicated_element: C'est lui !
   new_element: Non, c'est un nouvel élément, je continue !
   controller:
-      merged: Cet élément a été fusionné avec un doublon potentiel
-      marked: Marqué comme non doublon
-      marked_long: Les éléments ont bien été marqués comme non doublons
+    merged: Cet élément a été fusionné avec un doublon potentiel
+    marked: Marqué comme non doublon
+    marked_long: Les éléments ont bien été marqués comme non doublons
 
 vote:
   user_vote_for_him: 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
@@ -206,7 +204,6 @@ commons:
   username: Nom d'utilisateur
   menu: Menu
   choose_one_option: Veuillez choisir au moins une option
-  choose_option: Veuillez choisir une option= 
   choose_category: Choisissez {cat}
   optional: (optionnel)
   category_placeholder: Précisez si nécessaire
@@ -221,7 +218,6 @@ commons:
 errors: # TODO erreurs ajax
   e1: "Les identifiants de connexion ne sont pas corrects"
   e2: "Une erreur s'est produite lors de la tentative de connexion"
-
 
 action:
   search: "Rechercher"

@@ -75,7 +75,7 @@ class ElementFormController extends GoGoController
                                 $elementFormService, $userManager, $elementActionService, $loginManager, TranslatorInterface $t)
     {
         if (null === $element) {
-            throw new NotFoundHttpException($t->trans('element.form.controller.http_error_dont_exist'));
+            throw new NotFoundHttpException($t->trans('element.form.controller.error_dont_exist'));
         }
 
         $addOrEditComplete = false;

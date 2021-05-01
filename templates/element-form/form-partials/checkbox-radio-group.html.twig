@@ -3,7 +3,7 @@
   {% set optionClass = field.style is defined and field.style == "filled" ? "filled-in" : "" %}
   {% set elementValue = elementValue ? elementValue : [] %}
   
-  {% set errorMsg = fields.errorMsg|default('commons.choose_option'|trans) %}
+  {% set errorMsg = fields.errorMsg|default('commons.choose_one_option'|trans) %}
   <div class="label-container">
     {% if field.label %}<label class="checkbox-radio-group-label to"><span class="to-html">{{ field.label|raw }}</span>{% if field.required|default(false) %}<span class="mandatory-asterisk"></span>{% endif %}<span class="error">{{ errorMsg }}</span></label>{% endif %}    
   </div>

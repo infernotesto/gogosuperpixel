@@ -18,7 +18,7 @@
     {% endfor %}
   </select>
 
-  {% set errorMsg = fields.errorMsg|default('commons.choose_option'|trans) %}
+  {% set errorMsg = fields.errorMsg|default('commons.choose_one_option'|trans) %}
 
   {% if field.label is defined and field.label != "undefined" %}
     <label><span class="to-html">{{ field.label|raw }}</span>{% if field.required|default(false) %}<span class="mandatory-asterisk"></span>{% endif %}<span class="error">{{ errorMsg }}</span></label>
