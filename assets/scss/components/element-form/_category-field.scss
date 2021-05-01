@@ -19,10 +19,9 @@
 		&:before
 		{
 			width: 100%;
-			content: "Veuillez sélectionner au moins une option";	/* TODO translate */		
+			content: attr(data-error-msg);		
 		}
-	}
-	
+	}	
 
 	&.inline 
 	{

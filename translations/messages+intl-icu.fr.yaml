@@ -22,6 +22,7 @@ element.form:
   error_username: Ce nom d'utilisateur est déjà pris !
   error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
   error_geocode: Impossible de localiser cette adresse
+  error_missing_category: Veuillez sélectionner au moins une catégorie
   controller:
     error_dont_exist: L'élément demandé n'existe pas...
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
@@ -233,7 +234,6 @@ action:
   continue: "Continuer"
   error: "Erreur : {message}"
   
-  # TODO translation : move to admin+intl-icu.fr.yaml ??
   element: # element controller
     vote:
       unallowed: "Désolé, vous n'êtes pas autorisé à voter !"

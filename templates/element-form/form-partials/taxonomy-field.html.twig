@@ -14,7 +14,7 @@
 
 {% if category.displayInForm %}
   {% set categoryDepth = parentDepth is defined ? parentDepth + 1 : 0 %}
-  <div class="category-field {{ displayInline ? 'inline' : ''}} {{ category.isMandatory ? 'mandatory' : '' }}">
+  <div class="category-field {{ displayInline ? 'inline' : ''}} {{ category.isMandatory ? 'mandatory' : '' }}" data-error-msg="{{ 'element.form.error_missing_category'|trans }}">
 
   	<span class="category-field-select input-field" data-picking-text='{{ category.pickingOptionText }}'>
       <select id="category-field-{{category.id}}" class="category-select keep-title-option depth-{{ categoryDepth }}"
