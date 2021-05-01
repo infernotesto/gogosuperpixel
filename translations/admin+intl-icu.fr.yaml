@@ -1189,7 +1189,6 @@ config_users:
 
 sidebar:
   gogo_homepage: "Retour au site"
-  toggle_dropdown: "Toggle Dropdown"
   gogo_directory: "La Carte"
   gogo_element_add: "Formulaire"
   gogo_partners: "Qui sommes nous"
