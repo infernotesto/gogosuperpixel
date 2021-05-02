@@ -28,6 +28,10 @@ You can configure your server to work as a multi instance creator. See example a
 Every new project will live in a dedicate subdomain like my-map.gogocarto.fr
 
 
+Internationalization
+--------------------
+We use `Weblate` plateform, please help us translating the project here : https://hosted.weblate.org/projects/gogocarto/
+
 GoGoCarto & GoGoCartoJs
 ------------------
 
