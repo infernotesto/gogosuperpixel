@@ -183,7 +183,7 @@ load_configuration:
 
 contributor-login:
   _label: Identification
-  error: Erreur
+  error:
     #inactive_feature: "Désolé, cette fonctionnalité n'est pas activée pour le moment" # TODO translation pb avec ces chaines ?????
     #inactive_iframe: "Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe"
     admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
