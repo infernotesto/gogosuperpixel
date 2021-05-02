@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
           this.value = this.list.join(',');
         },
         textFrom(item) {
-          return item ? item : t('thisMap');
+          return item ? item : t('js.import.source_this_map');
         }
       }
     })

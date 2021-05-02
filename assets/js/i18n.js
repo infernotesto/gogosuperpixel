@@ -1,8 +1,9 @@
 var gogoFallbackLocale = 'en';
 
 // Use this function anywhere
-// handle interpolation : t('helo.world', {user: "Seby"})
+// handle interpolation :t('js.helo.world', {user: "Seby"})
 window.t = function(key, params) {
+    key = key.replace(/^js\./, '')
     var result = gogoTrans(gogoLocale + '.' + key, params)
     if (!result) result = gogoTrans(gogoFallbackLocale + '.' + key, params)
     if (!result) result = key

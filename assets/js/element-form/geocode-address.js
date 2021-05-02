@@ -104,7 +104,7 @@ function geocodeAddress(address) {
 
 			console.log("geocoding error", status);
 		} else {
-			$('#geocode-error').text(t('element_form.geocode_error', {address: address})).show()
+			$('#geocode-error').textt('js.element_form.geocode_error', {address: address})).show()
 		}
 
 		$('#geocode-spinner-loader').hide();

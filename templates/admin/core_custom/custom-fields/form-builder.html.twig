@@ -15,47 +15,47 @@
       var fbEditor = document.getElementById('form-builder-container');
 
       var fields = [
-        { label: t('form_builder.fields.title'), name: "title", attrs: { type: 'title' }, icon: '*' },
-        { label: t('form_builder.fields.taxonomy'), name: "taxonomy", attrs: { type: 'taxonomy' }, icon: '*' },
-        { label: t('form_builder.fields.address'), name: "address", attrs: { type: 'address' }, icon: '*' },
-        { label: t('form_builder.fields.openhours'), name: "openhours", attrs: { type: 'openhours' }, icon: '⌚' },
-        { label: t('form_builder.fields.separator'), name: "separator", attrs: { type: 'separator' }, icon: '⚊' },
-        { label: t('form_builder.fields.checkbox'), name: "checkbox", attrs: { type: 'checkbox' }, icon: '☑' },
-        { label: t('form_builder.fields.email'), name: "email", attrs: { type: 'email' }, icon: '@' },
-        { label: t('form_builder.fields.images'), name: "images", attrs: { type: 'images' }, icon: '⇫' },
-        { label: t('form_builder.fields.files'), name: "files", attrs: { type: 'files' }, icon: '⇫' },
-        { label: t('form_builder.fields.elements'), name: "elements", attrs: { type: 'elements' }, icon: '*' }
+        { label:t('js.form_builder.fields.title'), name: "title", attrs: { type: 'title' }, icon: '*' },
+        { label:t('js.form_builder.fields.taxonomy'), name: "taxonomy", attrs: { type: 'taxonomy' }, icon: '*' },
+        { label:t('js.form_builder.fields.address'), name: "address", attrs: { type: 'address' }, icon: '*' },
+        { label:t('js.form_builder.fields.openhours'), name: "openhours", attrs: { type: 'openhours' }, icon: '⌚' },
+        { label:t('js.form_builder.fields.separator'), name: "separator", attrs: { type: 'separator' }, icon: '⚊' },
+        { label:t('js.form_builder.fields.checkbox'), name: "checkbox", attrs: { type: 'checkbox' }, icon: '☑' },
+        { label:t('js.form_builder.fields.email'), name: "email", attrs: { type: 'email' }, icon: '@' },
+        { label:t('js.form_builder.fields.images'), name: "images", attrs: { type: 'images' }, icon: '⇫' },
+        { label:t('js.form_builder.fields.files'), name: "files", attrs: { type: 'files' }, icon: '⇫' },
+        { label:t('js.form_builder.fields.elements'), name: "elements", attrs: { type: 'elements' }, icon: '*' }
       ];
       var templates = {
-        title: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' + t('form_builder.fields.title_help') + '</span>' }; },
-        address: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' + t('form_builder.fields.address_help') + '</span>' }; },
-        taxonomy: function(fieldData) { return { field: '<select id="' + fieldData.name + '"><option>Choisissez une catégorie principale</option></select><span class="mandatory">' + t('form_builder.fields.taxonomy_help') + '</span>' }; },
-        openhours: function(fieldData) { return { field: t('form_builder.fields.openhours_help') }; },
+        title: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' +t('js.form_builder.fields.title_help') + '</span>' }; },
+        address: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' +t('js.form_builder.fields.address_help') + '</span>' }; },
+        taxonomy: function(fieldData) { return { field: '<select id="' + fieldData.name + '"><option>Choisissez une catégorie principale</option></select><span class="mandatory">' +t('js.form_builder.fields.taxonomy_help') + '</span>' }; },
+        openhours: function(fieldData) { return { field:t('js.form_builder.fields.openhours_help') }; },
         separator: function(fieldData) { return { field: '<hr>' }; },
         checkbox: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + (fieldData.defaultvalue == "yes" ? 'checked="checked"' : '') + ' type="checkbox"/>' }; },
-        email: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + ' type="email"/><span class="mandatory">' + t('form_builder.fields.email_help') + '</span>' }; },
+        email: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + ' type="email"/><span class="mandatory">' +t('js.form_builder.fields.email_help') + '</span>' }; },
         images: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + ' type="file" accept="images/*"/>' }; },
         files: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + ' type="file" accept="'+fieldData.accept+'"/>' }; },
         image: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + ' type="text"/>' }; },
         elements: function(fieldData) { return { field: '<select id="' + fieldData.name + '"><option>'+ fieldData.label+'</option></select>' }; },
       };
 
-      var iconAttr = { label: t('form_builder.icon'), placeholder: t('form_builder.icon_placeholder') }
-      var labelAttr = { label: t('form_builder.label') }
-      var errorMsgAttrs = { label: t('form_builder.errorMsg'), placeholder: t('form_builder.errorMsg_placeholder') }
-      var searchAttrs = { label: t('form_builder.search'), type: 'checkbox' };
-      var searchWeightAttrs = { label: t('form_builder.searchWeigh'), type: 'number', value: "1" };
-      var patternAttrs = { label: t('form_builder.pattern'), placeholder: t('form_builder.pattern_placeholder') };
+      var iconAttr = { label:t('js.form_builder.icon'), placeholder:t('js.form_builder.icon_placeholder') }
+      var labelAttr = { label:t('js.form_builder.label') }
+      var errorMsgAttrs = { label:t('js.form_builder.errorMsg'), placeholder:t('js.form_builder.errorMsg_placeholder') }
+      var searchAttrs = { label:t('js.form_builder.search'), type: 'checkbox' };
+      var searchWeightAttrs = { label:t('js.form_builder.searchWeigh'), type: 'number', value: "1" };
+      var patternAttrs = { label:t('js.form_builder.pattern'), placeholder:t('js.form_builder.pattern_placeholder') };
       var typeUserAttrs = {
         text: {
           icon: iconAttr,
           label: labelAttr,
           separator: { label: '' }, // separate important attrs from others
           subtype: { label: 'Type', options: {
-              'text': t('form_builder.subtype.text'),
-              'tel': t('form_builder.subtype.tel'),
-              'email': t('form_builder.subtype.email'),
-              'url': t('form_builder.subtype.url')
+              'text':t('js.form_builder.subtype.text'),
+              'tel':t('js.form_builder.subtype.tel'),
+              'email':t('js.form_builder.subtype.email'),
+              'url':t('js.form_builder.subtype.url')
             },
           },
           search: searchAttrs,
@@ -67,8 +67,8 @@
           icon: iconAttr,
           label: labelAttr,
           subtype: { label: 'Type', options: {
-              'textarea': t('form_builder.subtype.textarea'),
-              'wysiwyg': t('form_builder.subtype.wysiwyg')
+              'textarea':t('js.form_builder.subtype.textarea'),
+              'wysiwyg':t('js.form_builder.subtype.wysiwyg')
             },
           },
           search: searchAttrs,
@@ -78,7 +78,7 @@
         },
         paragraph: { 
           label: {
-            label: t('form_builder.content'),
+            label:t('js.form_builder.content'),
             type: "textarea"
           }
         },
@@ -87,7 +87,7 @@
         number: { icon: iconAttr, label: labelAttr, errorMsg: errorMsgAttrs },
         title: {
           label: labelAttr,
-          maxlength: { label: t('form_builder.maxlength')},
+          maxlength: { label:t('js.form_builder.maxlength')},
           icon: iconAttr,
           search: searchAttrs,
           searchWeight: searchWeightAttrs,
@@ -97,8 +97,8 @@
         address: { icon: iconAttr, label: labelAttr },
         'checkbox-group': {
           style: { 
-            label: t('form_builder.style'),
-            options: { 'normal': t('form_builder.options.normal'), 'filled': t('form_builder.options.filled') }
+            label:t('js.form_builder.style'),
+            options: { 'normal':t('js.form_builder.options.normal'), 'filled':t('js.form_builder.options.filled') }
           }, 
           errorMsg: errorMsgAttrs, 
           label: labelAttr
@@ -106,8 +106,8 @@
         checkbox: {
           label: labelAttr,
           defaultvalue: { 
-            label: t('form_builder.defaultvalue'),
-            options: { 'no': t('form_builder.options.no'), 'yes': t('form_builder.options.yes') }
+            label:t('js.form_builder.defaultvalue'),
+            options: { 'no':t('js.form_builder.options.no'), 'yes':t('js.form_builder.options.yes') }
           },
           errorMsg: errorMsgAttrs
         },
@@ -131,20 +131,20 @@
         files: {
           icon: iconAttr,
           label: labelAttr,
-          accept: { label: t('form_builder.accept'), placeholder: t('form_builder.accept_placeholder')},
+          accept: { label:t('js.form_builder.accept'), placeholder:t('js.form_builder.accept_placeholder')},
           separator: { label: '' }, // separate important attrs from others
         },
         date: {
           icon: iconAttr,
           label: labelAttr,
-          timepicker: { label: t('form_builder.timepicker'), type: 'checkbox'},
-          range: { label: t('form_builder.range'), type: 'checkbox' },
+          timepicker: { label:t('js.form_builder.timepicker'), type: 'checkbox'},
+          range: { label:t('js.form_builder.range'), type: 'checkbox' },
         },
         elements: {
           label: labelAttr,
           icon: iconAttr,
-          reversedBy: { label: t('form_builder.reversedBy'), placeholder: t('form_builder.reversedBy_placeholder') },
-          multiple: { label: t('form_builder.multiple'), type: 'checkbox' },
+          reversedBy: { label:t('js.form_builder.reversedBy'), placeholder:t('js.form_builder.reversedBy_placeholder') },
+          multiple: { label:t('js.form_builder.multiple'), type: 'checkbox' },
           separator: { label: '' }, // separate important attrs from others
         }
       };
@@ -162,7 +162,7 @@
         controlOrder: ['text', 'email', 'images', 'textarea', 'checkbox', 'checkbox-group', 'radio-group', 'select', 'date', 'number', 'files', 'elements'],
         disabledAttrs: ['className', 'inline', 'toggle', 'description', 'other', 'multiple'],
         formData: {{ formData|json_encode|raw }},
-        roles: { 1: t('form_builder.roles.1') },
+        roles: { 1:t('js.form_builder.roles.1') },
         typeUserAttrs: typeUserAttrs
       });
 
@@ -213,7 +213,7 @@
           })
         }
         propNameOptions = propNameOptions.sort((a,b) => a.disabled ? 1 : -1)
-        propNameOptions.unshift({id: '', text: t('form_builder.propNameOptions'), disabled: true})
+        propNameOptions.unshift({id: '', text:t('js.form_builder.propNameOptions'), disabled: true})
         $(".fld-name:visible:not(.initialized)").select2({
           createSearchChoice:function(term, data) {
               if ($(data).filter(function() {
@@ -234,9 +234,9 @@
         $('#{{ form.vars.id }}').val(JSON.stringify(formBuilder.actions.getData()));
 
         // Changes icons and icones helpers
-        $('a[type=remove].icon-cancel').attr('title', t('form_builder.remove_icon')).removeClass('icon-cancel').addClass('fa fa-trash-alt');
-        $('a[type=copy].icon-copy').attr('title', t('form_builder.copy_icon'));
-        $('a[type=edit].icon-pencil').attr('title', t('form_builder.edit_icon'));
+        $('a[type=remove].icon-cancel').attr('title',t('js.form_builder.remove_icon')).removeClass('icon-cancel').addClass('fa fa-trash-alt');
+        $('a[type=copy].icon-copy').attr('title',t('js.form_builder.copy_icon'));
+        $('a[type=edit].icon-pencil').attr('title',t('js.form_builder.edit_icon'));
 
         $('.email-field input[name=name]').val('email');
         $('.images-field input[name=name]').val('images');

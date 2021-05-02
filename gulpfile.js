@@ -28,18 +28,35 @@ const scriptsElementForm = () =>
     .pipe(concat('element-form.js'))
     .pipe(gulp.dest('web/js'));
 
-const buildTranslations = () => 
-  gulp.src('translations/javascripts-translations.*.yaml')
+const buildTranslations = () => {
+  const admin = gulp.src('translations/admin+intl-icu.*.yaml')
     .pipe(yaml({schema: 'DEFAULT_SAFE_SCHEMA', ext: '.js'}))    
     .pipe(tap(function(file, t) {
       var locale = file.basename.split('.')[1]
-      file.contents = Buffer.from('"' + locale + '": ' + file.contents.toString() + ', ')
+      var transTable = JSON.parse(file.contents.toString())['js']
+      file.contents = Buffer.from('"' + locale + '": ' + JSON.stringify(transTable) + ', ')
+      // log(file.contents.toString())
+    }))
+    .pipe(concat('javascripts-translations-admin.js'))
+    .pipe(header("var gogoI18n = {"))
+    .pipe(footer("}"))
+    .pipe(gulp.dest('web/js'))
+
+  const public = gulp.src('translations/messages+intl-icu.*.yaml')
+    .pipe(yaml({schema: 'DEFAULT_SAFE_SCHEMA', ext: '.js'}))    
+    .pipe(tap(function(file, t) {
+      var locale = file.basename.split('.')[1]
+      var transTable = JSON.parse(file.contents.toString())['js']
+      file.contents = Buffer.from('"' + locale + '": ' + JSON.stringify(transTable) + ', ')
       // log(file.contents.toString())
     }))
     .pipe(concat('javascripts-translations.js'))
     .pipe(header("var gogoI18n = {"))
     .pipe(footer("}"))
     .pipe(gulp.dest('web/js'))
+  
+  return merge(admin, public)
+}
 
 const scriptsLibs = () => {
   const gogocarto = gulp.src([
@@ -126,7 +143,7 @@ exports.watch = () => {
   gulp.watch(['node_modules/gogocarto-js/dist/**/*', 'custom/**/*.css'],
               gulp.series(gogocarto_assets, serviceWorker));
 
-  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/javascripts-translations.yaml'],
+  gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/*.yaml'],
               gulp.series(buildTranslations, scriptsLibs, serviceWorker));
 
   gulp.watch(['assets/js/home.js'], gulp.series(scriptsHome, serviceWorker));

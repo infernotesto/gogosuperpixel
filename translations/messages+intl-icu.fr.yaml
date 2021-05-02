@@ -263,3 +263,7 @@ action:
       unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
       uncomplete: "Les paramètres sont incomplets"
       done: "L'étiquette a bien été modifiée"
+
+js: # Below keys are available to javascript  
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)

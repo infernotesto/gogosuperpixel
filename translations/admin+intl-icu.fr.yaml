@@ -503,7 +503,6 @@ mapping-ontology:
 
 config_duplicates:
   _label: "Gestion des Doublons"
-  thisMap: "Cette carte"
   fields:
     gogo_bulk_actions_detect_duplicates: Détecter les doublons
     gogo_duplicates_index: Gérer les doublons détectés
@@ -1267,4 +1266,74 @@ emails:
     no_automatic_mail: "Le mail automatique {config} n'existe pas"
     no_subject_or_content: "Pas de sujet ou de contenu pour le mail automatique {config}"
     unknown: "Inconnu"
+
+js: # Below keys are available to javascript  
+  import:
+    source_this_map: Cette Carte
     
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+    geocode_error: Erreur lors de la géolocalisation de "{address}"
+
+  form_builder: #templates/admin/core_custom/custom-fields/form-builder.html.twig
+    icon: 'Icône'
+    icon_placeholder: "Choisissez une icône"
+    remove_icon: "Supprimer"
+    copy_icon: "Dupliquer"
+    edit_icon: "Editer/Masquer"
+    label: "Libellé"
+    errorMsg: "Msg. Erreur"
+    errorMsg_placeholder: "Oups ce texte est un peu long ! // Veuillez renseigner une adresse email valide // ..."
+    search: "Recherche dans ce champ"
+    searchWeigh: "Poids de la recherche"
+    pattern: "Pattern de validation"
+    pattern_placeholder: "Expression régulière pour la validation de ce champ"
+    maxlength: "Longueur Max."
+    content: "Contenu"
+    style: "Style des cases"
+    defaultvalue: "Valeur initiale"
+    accept: "Fichier acceptés"
+    accept_placeholder: ".pdf audio/* .mp3 (séparés par des espaces)"
+    timepicker: "Timepicker"
+    range: "Intervale de dates"
+    reversedBy: "Inversée par"
+    reversedBy_placeholder: "Le nom d'un autre champ de type \"lien vers un autre élément\""
+    multiple: "Plusieurs choix"
+    propNameOptions: "Choisissez un champ existant ou entrez un nouveau champ"
+    roles:
+      1: "Administrateur"
+    subtype:
+      text: "Texte"
+      tel: "Téléphone"
+      email: "Courriel"
+      url: "URL"
+      textarea: "Editeur simple"
+      wysiwyg: "Editeur enrichi"
+    options:
+      normal: "Normal"
+      filled: "Plein"
+      no: "Non cochée"
+      yes: "Cochée"
+    fields: 
+      title: "Titre de la fiche (obligatoire)"
+      title_help: "Ce champ est indispensable"
+      taxonomy: "Catégories (obligatoire)"
+      address: "Adresse (obligatoire)"
+      address_help: "Ce champ est indispensable"
+      openhours: "Horaires d'ouvertures"
+      openhours_help: "Bloc contenant un selecteur d'horaires"
+      separator: "Séparateur de section"
+      checkbox: "Case à cocher"
+      email: "Email principal"
+      email_help: "Ce champ est conseillé (permet d'envoyer des emails)"
+      images: "Images (upload)"
+      files: "Fichiers (upload)"
+      elements: "Lien vers un autre élément"
+
+  filters_builder:
+    taxonomy: Filtre Catégories
+    gogo_date: Filtre Date
+    gogo_number: Filtre Nombre
+
+  osm_query_builder:
+    title: Liste des requêtes dans la base OpenStreetMap

@@ -46,7 +46,7 @@ function createMarker(position)
 		$('#input-longitude').attr('value',marker.getLatLng().lng);
   	});
 
-  	marker.bindPopup(`<center>${t('element_form.geocoded_marker_text')}</center>`).openPopup();
+  	marker.bindPopup(`<center>$t('js.element_form.geocoded_marker_text')}</center>`).openPopup();
 }
 
 function fitBounds(rawbounds)

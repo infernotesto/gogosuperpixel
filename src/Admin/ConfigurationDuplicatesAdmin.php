@@ -70,7 +70,7 @@ class ConfigurationDuplicatesAdmin extends ConfigurationAbstractAdmin
             ->with('manualDetection', ['box_class' => 'box box-default'])
                 ->add('duplicates.sourcesToDetectFrom', ChoiceType::class, [
                     'choice_label' => function ($choice, $key, $value) {
-                        if ('' === $choice) return $this->trans('config_duplicates.thisMap');  
+                        if ('' === $choice) return $this->trans('js.import.source_this_map');  
                         return $choice;
                     },
                     'choices' => $sourceList,
@@ -78,7 +78,7 @@ class ConfigurationDuplicatesAdmin extends ConfigurationAbstractAdmin
                 ->add('duplicates.sourcesToDetectWith', ChoiceType::class, [
                     'choices' => $sourceList,
                     'choice_label' => function ($choice, $key, $value) {
-                        if ('' === $choice) return $this->trans('config_duplicates.thisMap');              
+                        if ('' === $choice) return $this->trans('js.import.source_this_map');              
                         return $choice;
                     },
                     'multiple' => true])
