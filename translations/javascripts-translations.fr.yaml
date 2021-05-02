@@ -2,7 +2,7 @@ element_form:
   geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
   geocode_error: Erreur lors de la géolocalisation de "{address}"
 
-config_form: #templates/admin/core_custom/custom-fields/form-builder.html.twig
+form_builder: #templates/admin/core_custom/custom-fields/form-builder.html.twig
   icon: 'Icône'
   icon_placeholder: "Choisissez une icône"
   remove_icon: "Supprimer"
@@ -41,7 +41,7 @@ config_form: #templates/admin/core_custom/custom-fields/form-builder.html.twig
     filled: "Plein"
     no: "Non cochée"
     yes: "Cochée"
-  custom_fields: 
+  fields: 
     title: "Titre de la fiche (obligatoire)"
     title_help: "Ce champ est indispensable"
     taxonomy: "Catégories (obligatoire)"
