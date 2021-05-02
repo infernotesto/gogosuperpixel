@@ -7,3 +7,5 @@ import './js/admin/element-import/element-import'
 import './js/admin/osm-tags'
 import './js/admin/element-edit'
 import './js/admin/source-priority'
+
+import './js/i18n'

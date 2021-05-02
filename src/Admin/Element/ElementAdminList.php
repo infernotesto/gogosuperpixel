@@ -49,7 +49,7 @@ class ElementAdminList extends ElementAdminFilters
                'editable' => true,
                'template' => 'admin/partials/list_choice_status.html.twig',
                ])
-         ->add('updatedAt', 'date', ['format' => 'd/m/Y'])
+         ->add('updatedAt', 'date', ['format' => 'd/m/Y']) // TODO translation : use local ?
          ->add('sourceKey')
          ->add('optionsString', null, ['header_style' => 'width: 250px'])
          ->add('moderationState', ChoiceType::class, [
@@ -72,44 +72,44 @@ class ElementAdminList extends ElementAdminFilters
     public function configureBatchActions($actions)
     {
         $actions = [];
-        $actions['validation'] = $this->createBatchConfig('Valider', 'validation'); // TODO translate
-        $actions['refusal'] = $this->createBatchConfig('Refuser', 'refusal'); // TODO translate
-        $actions['softDelete'] = $this->createBatchConfig('Supprimer (changement de status)', 'softDelete'); // TODO translate
-        $actions['restore'] = $this->createBatchConfig('Restaurer', 'restore'); // TODO translate
-        $actions['resolveReports'] = $this->createBatchConfig('Résoudre la modération', 'resolveReports'); // TODO translate
+        $actions['validation'] = $this->createBatchConfig('validation');
+        $actions['refusal'] = $this->createBatchConfig('refusal');
+        $actions['softDelete'] = $this->createBatchConfig('softDelete');
+        $actions['restore'] = $this->createBatchConfig('restore');
+        $actions['resolveReports'] = $this->createBatchConfig('resolveReports');
 
         $actions['sendMail'] = [
-            'label' => 'Envoyer un mail', // TODO translate
+            'label' => $this->trans('elements.action.batch.sendMail'),
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'text',      'label' => 'Votre adresse mail',  'id' => 'from'], // TODO translate
-                ['type' => 'text',      'label' => 'Object',  'id' => 'mail-subject'], // TODO translate
-                ['type' => 'textarea',  'label' => 'Contenu', 'id' => 'mail-content'], // TODO translate
-                ['type' => 'checkbox',      'label' => "Envoyer l'email aux éléments",  'id' => 'send-to-element', 'checked' => 'true'], // TODO translate
-                ['type' => 'checkbox',      'label' => "Envoyer l'email aux derniers contributeurs",  'id' => 'send-to-last-contributor', 'checked' => 'false'], // TODO translate
+                ['type' => 'text',      'label' => $this->trans('elements.action.batch.params.from'),  'id' => 'from'],
+                ['type' => 'text',      'label' => $this->trans('elements.action.batch.params.mail_subject'),  'id' => 'mail-subject'],
+                ['type' => 'textarea',  'label' => $this->trans('elements.action.batch.params.mail_content'), 'id' => 'mail-content'],
+                ['type' => 'checkbox',  'label' => $this->trans('elements.action.batch.params.send_to_element'),  'id' => 'send-to-element', 'checked' => 'true'],
+                ['type' => 'checkbox',  'label' => $this->trans('elements.action.batch.params.send_to_last_contributor'),  'id' => 'send-to-last-contributor', 'checked' => 'false'],
             ],
         ];
         $actions['editOptions'] = [
-            'label' => 'Modifier les catégories', // TODO translate
+            'label' => $this->trans('elements.action.batch.editOptions'),
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToRemove', 'label' => 'Catégories à supprimer'], // TODO translate
-                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToAdd', 'label' => 'Catégories à ajouter'], // TODO translate
+                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToRemove', 'label' => $this->trans('elements.action.batch.params.optionsToRemove')],
+                ['type' => 'choice',  'choices' => $this->getOptionsChoices(), 'id' => 'optionsToAdd', 'label' => $this->trans('elements.action.batch.params.optionsToAdd')],
             ],
         ];
-        $actions['delete'] = ['label' => 'Supprimer définitivement']; // TODO translate
+        $actions['delete'] = ['label' => $this->trans('elements.action.batch.delete')];
 
         return $actions;
     }
 
-    protected function createBatchConfig($name, $id)
+    protected function createBatchConfig($id)
     {
         return [
-            'label' => $name,
+            'label' => $this->trans('elements.action.batch.'.$id),
             'ask_confirmation' => false,
             'modal' => [
-                ['type' => 'text',  'label' => 'Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques', 'id' => 'comment-'.$id], // TODO translate
-                ['type' => 'checkbox',  'checked' => true, 'label' => 'Ne pas envoyer de mail',  'id' => 'dont-send-mail-'.$id], // TODO translate
+                ['type' => 'text',  'label' => $this->trans('elements.action.batch.params.comment'), 'id' => 'comment-'.$id],
+                ['type' => 'checkbox',  'checked' => true, 'label' => $this->trans('elements.action.batch.params.dont_send_mail'),  'id' => 'dont-send-mail-'.$id],
             ],
         ];
     }

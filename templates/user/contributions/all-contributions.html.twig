@@ -5,7 +5,7 @@
   <table class="bordered">
     <thead>
       <tr>
-          <th>Name</th> {# TODO translation #}
+          <th>{{ 'my_contributions.name'|trans }}</th>
           <th class="type">{{ 'my_contributions.type'|trans }}</th>
           <th class="date">{{ 'my_contributions.date'|trans }}</th>
           <th class="small-status">{{ 'my_contributions.status'|trans }}</th>
@@ -19,7 +19,7 @@
             <a href="{{ path('gogo_directory_showElement', {'id': element.id, 'name': element.name}) | replace({"%23":'#'}) }}">{{ element.name }}</a>
           </td>
           <td>{{ ('elements.fields.contributionType_choices.' ~ contribution.type)|trans({}, 'admin') }}</td>
-          <td>{{ contribution.createdAt|date("d/m/Y")}}</td>
+          <td>{{ contribution.createdAt|date("d/m/Y")}}</td> {# TODO Translation use local #}
           <td>{{ ('elements.fields.status_choices.' ~ contribution.status)|trans({}, 'admin') }}</td>
         </tr>
       {% endfor %}

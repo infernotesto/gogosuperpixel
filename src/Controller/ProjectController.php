@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
@@ -147,7 +148,8 @@ class ProjectController extends Controller
     public function initializeAction(Request $request, DocumentManager $dm,
                                      UserManagerInterface $userManager,
                                      LoginManagerInterface $loginManager,
-                                     ConfigurationListener $confService)
+                                     ConfigurationListener $confService,
+                                     TranslatorInterface $t)
     {
         // Return if already existing users
         $users = $dm->get('User')->findAll();
@@ -172,9 +174,7 @@ class ProjectController extends Controller
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             $userManager->updateUser($user, true);
 
-            $this->addFlash('success', "<b>Bienvenue dans votre espace Administrateur !</b></br>
-                L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
-                <a target='_blank' href='https://doc.gogocarto.fr/'>Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions..."); // TODO translate
+            $this->addFlash('success', $t->trans('dashboard.welcome')); 
             $response = $this->redirectToRoute('sonata_admin_dashboard');
 
             $this->authenticateUser($user, $response, $loginManager);

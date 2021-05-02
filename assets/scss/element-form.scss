@@ -165,7 +165,7 @@
 
     &:after
     {
-      content: "Impossible de localiser cette adresse"; /* TODO translate */
+      content: attr(data-error-msg);
       position: absolute;
       width: 600px;
       top: 3.5rem;

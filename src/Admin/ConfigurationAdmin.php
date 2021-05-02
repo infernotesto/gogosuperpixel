@@ -13,7 +13,7 @@ class ConfigurationAdmin extends ConfigurationAbstractAdmin
     {
         $imagesOptions = [
             'class' => 'App\Document\ConfImage',
-            'placeholder' => 'commons.fields.image_placeholder',
+            'placeholder' => $this->trans('images.placeholder'),
             'mapped' => true,
         ];
 

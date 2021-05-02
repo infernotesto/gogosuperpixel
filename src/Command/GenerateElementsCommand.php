@@ -38,6 +38,6 @@ class GenerateElementsCommand extends GoGoAbstractCommand
 
         $randomService->generate($input->getArgument('number'), $input->getArgument('generateVotes'));
 
-        $this->log('Element générés !'); // TODO translate ?
+        $this->log('Element generated !'); // TODO translate ?
     }
 }

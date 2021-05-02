@@ -83,9 +83,9 @@
         {% if admin.id(object) is not null %}
             <button type="submit" class="btn btn-success" name="btn_update_and_edit"><i class="fa fa-save" aria-hidden="true"></i> {{ 'btn_update_and_edit_again'|trans({}, 'SonataAdminBundle') }}</button>
 
-            <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="{{ 'option_hidden.fields.return_to_list'|trans }}">
+            <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="{{ 'options.fields.return_to_list'|trans }}">
                <i class="fa fa-list" aria-hidden="true"></i>
-                 {{ 'option_hidden.fields.return_to_list'|trans }}
+                 {{ 'options.fields.return_to_list'|trans }}
             </a>
 
             {% if admin.hasroute('delete') and admin.isGranted('DELETE', object) %}
@@ -97,9 +97,9 @@
                 <button class="btn btn-success" type="submit" name="btn_create_and_edit"><i class="fa fa-save" aria-hidden="true"></i> {{ 'btn_create_and_edit_again'|trans({}, 'SonataAdminBundle') }}</button>
             {% endif %}
 
-            <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="{{ 'option_hidden.fields.return_to_list'|trans }}">
+            <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="{{ 'options.fields.return_to_list'|trans }}">
                <i class="fa fa-list" aria-hidden="true"></i>
-                 {{ 'option_hidden.fields.return_to_list'|trans }}
+                 {{ 'options.fields.return_to_list'|trans }}
             </a>
 
             <button class="btn btn-success" type="submit" name="btn_create_and_create"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ 'btn_create_and_create_a_new_one'|trans({}, 'SonataAdminBundle') }}</button>

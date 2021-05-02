@@ -421,7 +421,8 @@ class ElementRepository extends DocumentRepository
         $queryResult = $builder->execute();
         $result = [];
         foreach ($queryResult as $key => $value) {
-            $result[$value['_id']['$id']] = $value['count'];
+            if (!empty($id))
+                $result[$value['_id']['$id']] = $value['count'];
         }
 
         return $result;

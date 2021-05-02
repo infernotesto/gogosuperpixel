@@ -37,8 +37,8 @@ class LoadTaxonomy implements FixtureInterface
 
         // main
         $mainCategory = new Category();
-        $mainCategory->setName('Catégories Principales');
-        $mainCategory->setPickingOptionText('Une catégorie principale');
+        $mainCategory->setName('Catégories Principales'); // TODO translate
+        $mainCategory->setPickingOptionText('Une catégorie principale'); // TODO translate
         $mainCategory->setIndex(1);
         $mainCategory->setSingleOption(false);
         $mainCategory->setEnableDescription(false);

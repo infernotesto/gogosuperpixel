@@ -1,11 +1,3 @@
-# TODO translation issue in src/Services/ElementImportService.php
-
-importService:
-  inProgress: "Téléchargement des données en cours... Veuillez patienter..."
-  processing: "Importation des données {i}/{size} traitées"
-  logMessage: "Import de {name} terminé"
-  logError: ", mais avec des problèmes !"
-
 home:
   pick_category: "Choisissez une catégorie (par défaut : toutes)"
   geolocalize: Géolocalisez votre position
@@ -33,7 +25,6 @@ element.form:
   controller:
     error_dont_exist: L'élément demandé n'existe pas...
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
-    http_error_dont_exist: Cet élément n'existe pas.
     thankyou:
       edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
       added: Merci de votre aide ! {name} a bien été ajouté
@@ -55,7 +46,7 @@ element.form:
     recopy_info: Recopier les informations dans un nouveau formulaire
     admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
 
-the_map:
+directory:
   _label: La carte
 
 my_parameters:
@@ -66,6 +57,7 @@ my_parameters:
 
 my_contributions:
   _label: Mes contributions
+  name: "Nom"
   history: Historique de mes contributions
   my_elements: Mes Fiches
   my_votes: Mes votes
@@ -104,9 +96,9 @@ duplicates:
   duplicated_element: C'est lui !
   new_element: Non, c'est un nouvel élément, je continue !
   controller:
-      merged: Cet élément a été fusionné avec un doublon potentiel
-      marked: Marqué comme non doublon
-      marked_long: Les éléments ont bien été marqués comme non doublons
+    merged: Cet élément a été fusionné avec un doublon potentiel
+    marked: Marqué comme non doublon
+    marked_long: Les éléments ont bien été marqués comme non doublons
 
 vote:
   user_vote_for_him: 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
@@ -191,7 +183,7 @@ load_configuration:
 
 contributor-login:
   _label: Identification
-  error: Erreur
+  error:
     #inactive_feature: "Désolé, cette fonctionnalité n'est pas activée pour le moment" # TODO translation pb avec ces chaines ?????
     #inactive_iframe: "Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe"
     admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
@@ -212,7 +204,6 @@ commons:
   username: Nom d'utilisateur
   menu: Menu
   choose_one_option: Veuillez choisir au moins une option
-  choose_option: Veuillez choisir une option= 
   choose_category: Choisissez {cat}
   optional: (optionnel)
   category_placeholder: Précisez si nécessaire
@@ -228,17 +219,17 @@ errors: # TODO erreurs ajax
   e1: "Les identifiants de connexion ne sont pas corrects"
   e2: "Une erreur s'est produite lors de la tentative de connexion"
 
-# If some messages are reused over differents pages
 action:
-  search: "Rechercher" # just an example, can be deleted
+  search: "Rechercher"
   submit: "Enregistrer"
-  geolocalize_me: "Géolocaliser ma position" # TODO doublon avec home.geolocalize ??
+  geolocalize_me: "Géolocaliser ma position"
   create: "Créer"
   send: "Envoyer"
   send_stay: "Envoyer et rester sur le formulaire"
   cancel: "Annuler"
   continue: "Continuer"
   error: "Erreur : {message}"
+  
   element: # element controller
     vote:
       unallowed: "Désolé, vous n'êtes pas autorisé à voter !"
@@ -272,19 +263,7 @@ action:
       unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
       uncomplete: "Les paramètres sont incomplets"
       done: "L'étiquette a bien été modifiée"
-  mailtest:
-    draftAutomated:
-      uncomplete: "No visible elements in database, please create an element" # TODO translation
-    sentTestAutomated:
-      uncomplete: "Aucune adresse mail n'a été renseignée"
-      database_empty: "No elements in database, please create an element for email testing" # TODO translation
-      done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
-    draftTest:
-      done: "Un customMessage de test"
 
-
-directory: # just an example, can be deleted
-
-partners: # just an example, can be deleted
-    
-
+js: # Below keys are available to javascript  
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)

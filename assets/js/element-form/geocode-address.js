@@ -102,9 +102,9 @@ function geocodeAddress(address) {
 			$('#input-addressCountry').val('');
 			$('#input-streetAddress').val('');
 
-			console.log("erreur geocoding", status);
+			console.log("geocoding error", status);
 		} else {
-			$('#geocode-error').text('Erreur lors de la geolocalisation de "' + address + '"').show()
+			$('#geocode-error').textt('js.element_form.geocode_error', {address: address})).show()
 		}
 
 		$('#geocode-spinner-loader').hide();

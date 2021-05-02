@@ -32,33 +32,34 @@
 
                 {% else %}
                     <button type="submit" class="btn btn-success" name="submit"><i class="fa fa-save" aria-hidden="true"></i>
-                     Sauvegarder {% if object.havePendingReports %} et résoudre les signalements{% endif %}</button> {# TODO Translation #}
+                     {{ (object.havePendingReports ? 'elements.action.edit.submit' : 'elements.action.edit.submit_resolve')|trans }}</button>
 
                     {% if not object.havePendingReports %} 
-                    <button type="submit" class="btn btn-success" name="submit_redirect" value="submit_redirect"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i> Sauvegarder et fermer</button> {# TODO Translation #}
+                    <button type="submit" class="btn btn-success" name="submit_redirect" value="submit_redirect"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i>
+                     {{ 'elements.action.edit.submit_redirect'|trans }}</button>
                     {% endif %}
 
                     <button type="submit" class="btn btn-danger" name="submit_delete" value="submit_delete"><i class="fa fa-trash"></i>
-                     Supprimer</button> {# TODO Translation #}
+                     {{ 'elements.action.edit.submit_delete'|trans }}</button>
                 {% endif %}                
 
-                <a href="{{ admin.generateObjectUrl('redirectShow', object) }}" class="btn btn-warning" target="_blank" title="Voir sur le site">
+                <a href="{{ admin.generateObjectUrl('redirectShow', object) }}" class="btn btn-warning" target="_blank" title="{{ 'elements.showOnSite'|trans }}">
                     <i class="fa fa-external-link" aria-hidden="true"></i><i class="fa fa-eye" aria-hidden="true"></i>
-                    Voir sur le site {# TODO Translation #}
+                    {{ 'elements.action.edit.showOnSite'|trans }}
                 </a>
 
-                <a href="{{ admin.generateObjectUrl('redirectEdit', object) }}" class="btn btn-warning" target="_blank" title="Editer sur le site">
+                <a href="{{ admin.generateObjectUrl('redirectEdit', object) }}" class="btn btn-warning" target="_blank" title="{{ 'elements.editOnSite'|trans }}">
                    <i class="fa fa-external-link" aria-hidden="true"></i><i class="fa fa-pencil" aria-hidden="true"></i>
-                     Editer sur le site {# TODO Translation #}
+                     {{ 'elements.action.edit.editOnSite'|trans }}
                 </a>
 
-                <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="Retourner à la liste">
+                <a href="{{ admin.generateUrl('list') }}" class="btn btn-primary" title="{{ 'elements.action.edit.returnToList'|trans }}">
                    <i class="fa fa-list" aria-hidden="true"></i>
-                     Retourner à la liste {# TODO Translation #}
+                     {{ 'elements.action.edit.returnToList'|trans }}
                 </a>
 
                 <button type="submit" class="btn btn-default" name="submit_update_json" value="submit_update_json"><i class="fa fa-refresh" aria-hidden="true"></i>
-                     Update Json</button> {# TODO Translation #}
+                     {{ 'elements.action.edit.updateJSON'|trans }}</button>
                
             {% else %}
                 {% if admin.hasroute('edit') and admin.isGranted('EDIT') %}

@@ -56,7 +56,7 @@ class CategoryAdmin extends GoGoAbstractAdmin
             ->add('parent', ModelType::class, [
                 'class' => 'App\Document\Option',
                 'required' => false,
-                'query' => $parentQuery], ['admin_code' => 'admin.option_hidden'])
+                'query' => $parentQuery], ['admin_code' => 'admin.options'])
             ->add('isMandatory')
             ->add('singleOption')
             ->add('enableDescription')

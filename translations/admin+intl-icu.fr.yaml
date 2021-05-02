@@ -142,9 +142,6 @@ elements:
   _label: "Éléments"
   proposedBy: "Proposé par <u>{name}</u>"
   proposedAt: "le {date}"
-  showOnSite: "Voir sur le site"
-  showEdit: "Afficher/Editer"
-  editOnSite: "Éditer sur le site"
   fields:
       name: "Nom"
       newsletterFrequency: "Réception newsletter"
@@ -227,6 +224,11 @@ elements:
       createdAt: "Créé le"
       reports: "Signalements"
       optionIds: "Catégories"
+      sourceTypeJSON : "URL de l'API JSON"
+      sourceType_choices:
+        csv: "Fichier CSV"
+        json: "API JSON"
+        osm: "OpenStreetMap"
   form:
     groups:
       general: "Informations générales"
@@ -239,7 +241,7 @@ elements:
       customFields: "Champs Personnalisés"
       duplicateOf: "Cet élément a été fusionné avec un autre :"
       seeDuplicate: "voir l'élément fusionné"
-      addCustomField: "Ajouter un Champ Personnalisé"
+      addCustomField: "Ajouter un champ personnalisé"
       specialFields: "Champs Spéciaux"
   filter:
     name: "Nom"
@@ -252,14 +254,44 @@ elements:
     optionValuesNotIn: "Catégories (ne contient pas)"
     postalCode: "Code Postal"
     departementCode: "Numéro de département"
+    sourceKey: "Source"
   action:
     edit:
       send_mail: "Prévenir l'acteur de la modification"
       isPending: "Message particulier si refus"
-      havePendingReports: "Détail de la modification, raison de la suppression... ce texte remplacera {{ customMessage }} dans les mails automatiques"
+      havePendingReports: "Détail de la modification, raison de la suppression... ce texte remplacera '{{ customMessage '}} dans les mails automatiques"
       submit_accept: "Valider"
       submit_refuse: "Refuser"
       submit_restore: "Restaurer"
+      submit: "Sauvegarder"
+      submit_resolve: "Sauvegarder et résoudre les signalements"
+      submit_redirect: "Sauvegarder et fermer"
+      submit_delete: "Supprimer"
+      showOnSite: "Voir sur le site"
+      showEdit: "Afficher/Editer"
+      editOnSite: "Éditer sur le site"
+      returnToList: "Retourner à la liste"
+      updateJSON: "Mettre à jour le JSON"
+      geocode: "Géocoder l'adresse"
+    batch:
+      validation: "Valider"
+      refusal: "Refuser"
+      softDelete: "Supprimer (changement de status)"
+      restore: "Restaurer"
+      resolveReports: "Résoudre la modération"
+      sendMail: "Envoyer un mail"
+      editOptions: "Modifier les catégories"
+      delete: "Supprimer définitivement"
+      params:
+        from: "Votre adresse mail"
+        mail_subject: "Objet"
+        mail_content: "Contenu"
+        send_to_element: "Envoyer l'email aux éléments"
+        send_to_last_contributor: "Envoyer l'email aux derniers contributeurs"
+        optionsToRemove: "Catégories à supprimer"
+        optionsToAdd: "Catégories à ajouter"
+        comment: "Détail de la modification, raison de la suppression... ce texte remplacera '{{ customMessage '}} dans les mails automatiques"
+        dont_send_mail: "Ne pas envoyer de mail"
 
 imports:
   _label: "Import"
@@ -276,6 +308,7 @@ imports:
     delete: "Supprimer l'import (ainsi que tous les éléments importés)"
     saving: "Sauvegarde et lecture des données en cours..."
   last: # templates/admin/partials/import/list_last_refresh.html.twig
+  import: "Import - "
   progress: # templates/admin/pages/import/import-progress.html.twig
     title: "Importation de {name}"
     inProgress: "En attente..."
@@ -339,6 +372,8 @@ imports:
         $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
         </pre>
       historic: "Historique"
+      dynamicList: "Liste des imports dynamiques (les données importées seront en lecture seule car elles sont gérées par un autre site)"
+      staticList: "Liste des imports \"en dur\" (les données importées seront gérées par ce site)"
   fields: &imports_fields
     sourceName: "Nom de la source"
     file: "Fichier CSV à importer (séparation par virgules, encodage en UTF8)"
@@ -357,6 +392,55 @@ imports:
     preventImportIfNoCategories: "Ne pas importer les éléments qui n'ont aucune catégories"
     preventImportIfNoCategories_help: "Lorsqu'on veut importer seulement une partie des éléments d'une base de donnée, il peut être pratique de mapper uniquement les catégories que l'on veut importer. Mais tous les autres élément seront aussi importés mais sans catégories. En cochant cette option, uniquement les éléments avec une catégorie mappée seront importés"
     customCodeForExport: "Code PHP qui sera exécuté"
+    logs: "Nombre d'éléments"
+    idsToIgnore: "Liste des IDs qui seront ignorées lors de l'import"
+    idsToIgnore_help: "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"
+    refreshFrequencyInDays: "Fréquence de mise à jours des données en jours"
+    refreshFrequencyInDays_help: "(laisser vide pour ne jamais mettre à jour automatiquement" # TODO string too long
+    lastRefresh: "Dernier import"
+    usersToNotify: "Utilisateurs à notifier en cas d'erreur, ou lorsque de nouveaux champs/catégories sont à faire correspondre"
+    isSynchronized: "Autoriser l'édition des données {submessage}"
+    submessage: "(Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)"
+    isSynchronized_help: "Chaque modification sera envoyée à OpenStreetMap"
+
+    # templates/admin/partials/import/list_non_visibles_count.html.twig
+    newOntologyToMap: "Nouveaux champs à mapper"
+    newTaxonomyToMap: "Nouvelles catégories à mapper"
+    deletedCount: "{count} localement supprimés"
+    elementsMissingGeoCount: "{count} sans géoloc"
+    elementsMissingTaxoCount: "{count} sans categories"
+    elementsPreventImportedNoTaxo: "{count} non importés car sans catégories"
+
+    # templates/admin/partials/import/list_refresh_frequency.html.twig
+    refreshFrequency: "{days, plural,
+      =1 {Quotidienne}
+      =7 {Hebdomadaire}
+      other {Tous les # jours}
+      }"
+    manualRefresh: "Manuelle"
+
+    # templates/admin/partials/import/list_last_refresh.html.twig
+    elementsCreatedCount: "+{count}"
+    elementsDeletedCount: "-{count}"
+    elementsUpdatedCount: "{count} mis à jour"
+    elementsNothingToDoCount: "{count, plural,
+      =1 {# inchangé}
+      other {# inchangés}
+      } "
+    elementsErrorsCount: "{count, plural,
+      =1 {# erreur}
+      other {# erreurs}
+      } "
+
+  list: &imports_list
+    refreshFrequencyInDays: "Mise à jour"
+    idsToIgnore: "Infos"
+
+dynamic_imports:
+  _label: "Import dynamique"
+  fields: *imports_fields
+  form: *imports_form
+  list: *imports_list
 
 importService:
   inProgress: "Téléchargement des données en cours... Veuillez patienter..."
@@ -410,17 +494,12 @@ mapping-taxonomy:
   alert: "Veuillez d'abords sélectionner le champs correspondant aux catégories dans l'onglet 'Table de correspondance des champs' puis cliquer sur 'Lire les données'"
 
 mapping-ontology:
-  alert: "Veuillez cliquer sur le boutton \"Lire les données\" afin de charger les attributs des données à importer"
+  alert: "Veuillez cliquer sur le bouton \"Lire les données\" afin de charger les attributs des données à importer"
   original: "Nom d'origine"
   mapped: "À transformer en <span style='font-weight: normal'>(les champs vides ne seront pas importés)</span>"
   arrowTitle: "Utiliser le nom d'origine"
   clearTitle: "Ne plus importer ce champ"
   displayMore: "Voir tous les champs (les champs présents dans moins de {percent}% des éléments sont cachés par défault)"
-
-dynamic_imports:
-  _label: "Import dynamique"
-  fields: *imports_fields
-  form: *imports_form
 
 config_duplicates:
   _label: "Gestion des Doublons"
@@ -437,10 +516,13 @@ config_duplicates:
       detectAfterImport_help: "Pour chaque nouvel élément ajouté lors de l'import, une recherche sera effectuée sur l'ensemble de la base de donnée pour trouver d'éventuels doublons"
       automaticMergeIfPerfectMatch: "Fusionner automatiquement lors d'une correspondance parfaite"
       sourcePriorityInAutomaticMerge: "Lors d'une fusion, quelle source voulez vous conserver en priorité ?"
+      sourcesToDetectFrom: "Chercher les doublons entre les sources (laisser vide pour chercher dans toute la base de donnée)"
+      sourcesToDetectWith: "Et les sources (laisser vide pour chercher dans toute la base de donnée)"
   form:
     groups:
       configuration: "Configuration"
       fusion: "Fusion des doublons"
+      manualDetection: "Restreindre la détection manuelle (optionel)"
 
 config_style:
   _label: "Style / Couleurs / Icones"
@@ -482,7 +564,8 @@ config_home:
   _label: "Page d'Accueil"
   fields:
     activateHomePage: "Activer la page d'accueil"
-    backgroundImage: "Image de fond (le nom du fichier ne doit pas contenir d'espaces ou de caractères spéciaux"
+    backgroundImage: "Image de fond (le nom du fichier ne doit pas contenir d'espaces ou de caractères spéciaux)"
+    backgroundImage_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
     home:
       displayCategoriesToPick: "Afficher les catégories principales selectionnables pour la recherche"
       addElementHintText: "Texte au dessus du bouton \"Ajouter un élément\""
@@ -513,13 +596,16 @@ charts: # src/Block/ChartBlockService.php
   empty: "Aucun élement trouvé"
   showAll: "Afficher tous"
 
-# TODO translation
-# wrong place ! Keys from src/Admin/ImageAdmin.php
-app:
+# src/Admin/ImageAdmin.php
+images: &images
+  _label: "Téléchargez une image"
+  placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
   fields:
     file: "Fichier à importer"
     externalImageUrl: "Lien vers une image externe"
-    actualFile: "Fichier actuel :"
+images_conf: *images
+images_partner: *images
+images_element: *images
 
 # templates/admin/blocks/block_monitoring.html.twig
 monitoring:
@@ -536,6 +622,22 @@ monitoring:
   display: "Afficher"
   users: "Utilisateurs"
   activeUsersNewsletter: "Abonnés à la newsletter"
+
+duplicates:
+  node: # templates/duplicates/duplicate-node.html.twig
+    merge: "Fusionner"
+    merge_title: "Les éléments vont être fusionnés. Seul le premier élément sera conservé, et les attributs du second seront fusionnés"
+    non-duplicates: "Pas doublons"
+    non-duplicates_title: "Rien ne se passe, GoGoCarto se souviendra que ces deux éléments ne sont pas des doublons et ils ne seront plus détectés comme tel"
+    deleted: "Cet élément a été supprimé. L'élément fusionné restera en status supprimé"
+    address: "Adresse"
+  index: # templates/duplicates/duplicates-index.html.twig
+    title: "Gestion des doublons"
+    return: "Retour à la gestion des doublons"
+    none: "Aucun doublon à traiter !"
+    leftDuplicatesToProceedCount:  "{count} doublons sont en fait encore à traiter, mais ont été bloqués par un autre utilisateur. Attendez 10 minutes pour qu'ils se débloquent"
+    merge: "Fusionnez les doublons"
+    wantMore: "J'en veux encore ! (Plus que {count} doublons à traiter)"
 
 categories:
   _label: "Catégories"
@@ -716,7 +818,7 @@ config_form:
         Si vous avez importé des données, vous pouvez ajouter un champ au formulaire et le lier au champ importé grâce à l'attribut \"Nom du champ\"</div>"
   fields:
     elementFormIntroText: "Texte d'introduction qui apparait en haut du formulaire"
-    elementFormIntroText_placeholder: "Exemple: Attention nous ne référencons pas tel et tel type d'élements"
+    elementFormIntroText_placeholder: "Exemple: Attention nous ne référençons pas tel et tel type d'élements"
     elementFormValidationText: "Libellé de la checkbox de validation du formulaire (laisser vide pour désactiver)"
     elementFormValidationText_placeholder: "Exemple: Je certifie que les informations renseignées dans ce formulaire sont exactes"
     elementFormOwningText: "Libellé pour demander si l'utilisateur est propriétaire de la fiche (laisser vide pour désactiver)"
@@ -742,7 +844,7 @@ config_contributions:
     minVoteToForceChangeStatus: "Nombre votes pour valider/refuser automatiquement, sans attendre de jours minimum"
     collaborativeModerationExplanations: "Explications au sujet de la modération collaborative"
 
-feature_config_hidden:
+config_features:
   fields:
     active: "Activé"
     activeInIframe: "Activé en Iframe"
@@ -780,6 +882,66 @@ config_custom_js_css:
 
 config_emails:
   _label: "Mails / Newsletter"
+  form:
+    groups:
+      mailForElements: "Mails auto pour les {element}"
+      infosElements: &info "Informations concernant les mails automatiques"
+      infosElements_description: >-
+        <div class="text-and-iframe-container">
+        <div class="iframe-container-aside"><iframe height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a" frameborder="0" allowfullscreen></iframe></div>
+        Ces mails sont envoyés automatiquement aux {elements} lorsque leur fiche est ajoutée, modifiée ou supprimée.</br>
+        Il est possible d''inclure les variables suivantes dans les messages (en conservant les '''{{'}}'' ) : </br>
+        <li>'{{ element '}} le nom de {element}</li>
+        <li>'{{ showUrl '}} l''adresse qui renvoie à la visualisation de la fiche</li>
+        <li>'{{ editUrl '}} l''adresse qui renvoie à la modification de la fiche</li>
+        <li>'{{ homeUrl '}} l''adresse de la page d''accueil du site</li>
+        <li>'{{ directEditElementUniqueUrl '}} l''adresse unique pour éditer directement l''élément sans être admin</li>
+        <li>'{{ customMessage '}} le message personnel qui a été rédigé par les admins (uniquement lors de la suppression)</li></br>
+        </div>
+        Vous pouvez également utiliser ces variables dans les contenus spéciaux de l''éditeur de texte. Par example dans le champs URL de la popup
+        qui s''ouvre lorsqu''on clique sur d''ajouter un lien.</br>
+        <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu
+      add: "Lors d'un ajout - <a href=''{url}'' target='_blank'>TESTER</a>"
+      edit: "Lors d'une modification - <a href=''{url}'' target='_blank'>TESTER</a>"
+      delete: "Lors d'une suppression - <a href=''{url}'' target='_blank'>TESTER</a>"
+
+      mailForContributors: "Mails auto pour les contributeurs"
+      infosContributors: *info
+      infosContributors_description: >-
+        Ces mails sont envoyés automatiquement aux contributeurs lorsque leurs contributions sont acceptées, refusées etc...</br>
+        Il est possible d''inclure les variables suivantes dans les messages (en conservant les '''{{'}}'' ) : </br>
+        <li>'{{ element '}} le nom de {element}</li>
+        <li>'{{ user '}} le nom ou l''adresse mail du contributeur</li>
+        <li>'{{ showUrl '}} l''adresse qui renvoie à la visualisation de la fiche</li>
+        <li>'{{ editUrl '}} l''adresse qui renvoie à la modification de la fiche</li>
+        <li>'{{ homeUrl '}} l''adresse de la page d'accueil du site</li>
+        <li>'{{ userContributionsUrl '}} l''adresse de la page "Mes contributions"</li>
+        <li>'{{ customMessage '}} le message personnel qui a été rédigé par les admins (uniquement lors d''un refus)</li></br>
+        Vous pouvez également utiliser ces variables dans les contenus spéciaux de l'éditeur de texte. Par example dans le champs URL de la popup
+        qui s'ouvre lorsqu''on clique sur d''ajouter un lien.</br>
+        <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu
+      validation: "Lors d'une validation - <a href=''{url}'' target='_blank'>TESTER</a>"
+      refusal: "Lors d'un refus - <a href=''{url}'' target='_blank'>TESTER</a>"
+      report: "Lors d'un signalement pris en compte - <a href=''{url}'' target='_blank'>TESTER</a>"
+
+      newsletters: "Newsletter"
+      infosNewletter: "Informations concernant la newsletter"
+      infosNewletter_description: >-
+        Ce mail est envoyé automatiquement aux utilisateurs y ayant souscrit. Il donne la liste des derniers éléments ajoutés dans une zone
+        géographique determinée et optionnellement des nouvelles</br></br>
+        <b>Il est nécessaire d''inclure la variable <u>'{{ newElements '}}</u> et/ou <u>'{{ pendingElements '}}</u></b> qui seront respectivement
+        remplacées par la liste des nouveaux élements et des nouveaux élements en attente de validation</br></br>
+        Il est possible d''inclure les variables suivantes dans les messages (en conservant les '''{{'}}'' ) : </br>
+        <ul>
+        <li>'{{ news '}} la dernière nouvelle publiée</li>
+        <li>'{{ user '}} le nom ou l''adresse mail du contributeur</li>
+        <li>'{{ homeUrl '}} l''adresse de la page d''accueil du site</li>
+        <li>'{{ userProfileUrl '}} l''adresse de la page "Mes paramètres" dans l''espace utilisateur</li>
+        <li>'{{ showOnMapBtn '}} un bouton pour renvoyer vers la carte centrée sur la position de l''utilisateur</li>
+        </ul>
+        </br>
+        <b>Une fois le mail sauvegardé</b>, vous pouvez cliquer sur le bouton <b>TESTER</b> pour visualiser le rendu
+      newsletter: "Newsletter - <a href=''{url}'' target='_blank'>TESTER</a>"
 
 config_api:
   _label: "APIs"
@@ -831,14 +993,16 @@ webhooks:
     url: "URL"
 
 commons:
+  send: "Envoyer"
   btn_update_and_edit: "Mettre à jour"
-  format: "d/m/Y à H:i" # TODO use local ??
+  format: "d/m/Y à H:i" #  TODO Translation use local
   anonymous: "Anonyme"
-  fields:
-    image_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
+  actual_file: "Fichier actuel :"
 
 config_general:
   _label: "Configuration Générale"
+  downloadImage: "Téléchargez une image"
+  cannot_delete: "Impossible de supprimer la configuration, cette action est interdite car est elle casserait toute votre carte"
   fields:
     aboutHeaderTitle: "Titre de la section 'A propos'"
     activateAbouts: "Activer les popups type 'A propos'"
@@ -877,7 +1041,7 @@ config_general:
       pages: "Fonctions principales"
       text: "Nom des entités référencées sur l'annuaire"
 
-option_hidden:
+options:
   _label: "Option"
   fields:
     name: "Nom"
@@ -943,66 +1107,62 @@ news:
     groups:
       list_header: "Créez des actualités qui seront incluses dans la newsletter"
 
-sonata:
-  user:
-    user:
-      _label: Utilisateurs
-      fields:
-        contributionsCount: Contributions
-        votesCount: Votes
-        reportsCount: Signalements
-        gamification: Interactions #Interaction Score
-        createdAt: Créé le
-        impersonating: # TODO translate
-        username: Nom
-        groups: Groupes
-        sendMail: Envoyer un mail
-        email: Mail # Destinataire ou De ?
-        object: Titre
-        content: Message
-        
-      form:
-        plainPassword: Mot de passe
-        allowedStamps: Étiquettes autorisées # TODO check translation
-        locked: Verrouillée
-        expired: Expirée
-        enabled: Activée
-        credentialsExpired: # TODO translate
-        watchModeration: Être notifié par email lorsque des éléments sont à modérer
-        watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories suivante
-        watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
-        watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
-        watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
-        main-roles: Rôles Principaux
-        groups:
-          user: Utilisateur
-          security: Sécurité
-          general: Général
-          status: Statut
-          roles: Rôles
-      role:
-        ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
-        ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"
-        ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
-        ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
-        ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
-batch:
-  send: "Envoyer"
-  sendmails: "{count, plural,
-                      =1 {# mail a bien été envoyé}
-                      other {# mails ont bien été envoyés}
-              }"
-  mailError: "Vous devez renseigner un objet et un contenu. Veuillez recommencer"
-  usersWithoutEmail: "{count, plural
-                              =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
-                              other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
-                      }"
-  tooMany: "Trop d'éléments à traiter ! Seulement {limit} ont été traités"
-  error: "ERREUR : {message}"
+sonata.user.user:
+  _label: Utilisateurs
+  fields:
+    contributionsCount: Contributions
+    votesCount: Votes
+    reportsCount: Signalements
+    gamification: Interactions #Interaction Score
+    createdAt: Créé le
+    impersonating: # TODO translate
+    username: Nom
+    groups: Groupes
+    sendMail: Envoyer un mail
+    email: Mail # Destinataire ou De ?
+    object: Titre
+    content: Message    
+  form:
+    plainPassword: Mot de passe
+    allowedStamps: Étiquettes autorisées # TODO check translation
+    locked: Verrouillée
+    expired: Expirée
+    enabled: Activée
+    credentialsExpired: # TODO translate
+    watchModeration: Être notifié par email lorsque des éléments sont à modérer
+    watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories suivante
+    watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
+    watchModerationOnlyWithPostCodes_help: "Séparés par des virgules. On peut utiliser le symbole * pour choisir tout un département, par example : 40*, 47*, 48500"
+    watchModerationOnlyWithPostCodes_placeholder: "40*, 47*, 48500"
+    main-roles: Rôles Principaux
+    groups:
+      user: Utilisateur
+      security: Sécurité
+      general: Général
+      status: Statut
+      roles: Rôles
+  role:
+    ROLE_SUPER_ADMIN: SUPER ADMIN (tous les pouvoirs)
+    ROLE_ADMIN: "MODERATEUR (Accès aux fonctions de modérations, à détailler dans ModèleDeDonnées/QuiPeutContribuer)"
+    ROLE_DIRECTMODERATION_ADD: "CONTRIBUTEUR + (peut ajouter des éléments comme un Admin depuis le site)"
+    ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: "CONTRIBUTEUR + (peut éditer les éléments auquel il a contribué, même sans être propriétaire)"
+    ROLE_SONATA_ADMIN: "INTERFACE ADMINISTRATEUR"
+  batch:
+    sendmails: "{count, plural,
+                        =1 {# mail a bien été envoyé}
+                        other {# mails ont bien été envoyés}
+                }"
+    mailError: "Vous devez renseigner un objet et un contenu. Veuillez recommencer"
+    usersWithoutEmail: "{count, plural
+                                =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était renseignée}
+                                other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
+                        }"
+    tooMany: "Trop d'éléments à traiter ! Seulement {limit} ont été traités"
+    error: "ERREUR : {message}"
 
 config_users:
   _label: Configuration
-  form:
+  fields:
     user:
       enableRegistration: Autoriser la création de compte
       sendConfirmationEmail: Valider la création avec un email de confirmation
@@ -1011,12 +1171,25 @@ config_users:
       loginWithGoogle: Activer la connexion avec Google
       loginWithFacebook: Activer la connexion avec Facebook
 
-sidebar:
-  gogo_homepage: "Retour au site"
-  toggle_dropdown: "Toggle Dropdown"
-  gogo_directory: "La Carte"
-  gogo_element_add: "Formulaire"
-  gogo_partners: "Qui sommes nous"
+dashboard:
+  welcome: >-
+      <b>Bienvenue dans votre espace Administrateur !</b></br>
+      L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
+      <a target="_blank" href="https://doc.gogocarto.fr/">Consulter la documentation</a> pour vous aider à démarrer ! Tutoriels vidéos, foire aux questions...
+  sidebar:
+    gogo_homepage: "Retour au site"
+    gogo_directory: "La Carte"
+    gogo_element_add: "Formulaire"
+    gogo_partners: "Qui sommes nous"
+  menu:
+    contents: Contenus
+    custom: Personnalisation
+    data: Données / Import
+    emailing: Mails / Newsletter
+    other_config: Autre Configuration
+    saas: Ferme de Carto 
+    users: Utilisateurs
+
 
 bulk:
   _label: "Actions de masse"
@@ -1051,6 +1224,116 @@ help:
   _label: "Aide"
   doc: "Un problème, une question ? c'est par ici : "
 
-saas:
-  list: "Liste des Projets"
-  config: "Configuration"
+projects:
+  _label: Liste des Projets
+  initialize: # templates/saas/projects/initialize.html.twig
+    _label: "Créer un compte administrateur"
+    username: "Nom d'utilisateur"
+    email: "Adresse e-mail"
+    plainPassword-1: "Mot de passe"
+    plainPassword-2: "Retapez votre mot de passe"
+
+config_saas:
+  _label: "Configuration"
+  fields:
+    saas: 
+      donationUrl: "Url pour faire un don (un bouton sera ajouté sur la page d'accueil)"
+      endUserLicenceAgreement: "Conditions Générales d'Utilisation"
+      newProjectInstructions: "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet"
+
+emails:
+  template:
+    fields:
+      active: "Activé"
+      subject: "Objet du message"
+      content: "Contenu du message"
+  test:
+    _label: "Test du rendu du mail {name}"
+    email: "Entrez une adresse mail"
+    submit: "Envoyer un test à cette adresse"
+    subject: "Objet du mail : <em>{subject}</em>"
+    missing_element: "Vous devez créer un élement dans la base de donnée pour tester l'email"
+    missing_email: "Aucune adresse mail n'a été renseignée"
+    done: "Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez dans vos SPAMs"
+    custom_message_example: "Un customMessage de test"
+  service:
+    success: "Le message a été envoyé"
+    error: "Erreur :"
+    no_specific_message: "Pas de message spécifique"
+    unknown_config: "La configuration {config} n'existe pas"
+    inactive_config: "La configuration {config} est désactivée"
+    no_email: "Pas de destinataire"
+    no_automatic_mail: "Le mail automatique {config} n'existe pas"
+    no_subject_or_content: "Pas de sujet ou de contenu pour le mail automatique {config}"
+    unknown: "Inconnu"
+
+js: # Below keys are available to javascript  
+  import:
+    source_this_map: Cette Carte
+    
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+    geocode_error: Erreur lors de la géolocalisation de "{address}"
+
+  form_builder: #templates/admin/core_custom/custom-fields/form-builder.html.twig
+    icon: 'Icône'
+    icon_placeholder: "Choisissez une icône"
+    remove_icon: "Supprimer"
+    copy_icon: "Dupliquer"
+    edit_icon: "Editer/Masquer"
+    label: "Libellé"
+    errorMsg: "Msg. Erreur"
+    errorMsg_placeholder: "Oups ce texte est un peu long ! // Veuillez renseigner une adresse email valide // ..."
+    search: "Recherche dans ce champ"
+    searchWeigh: "Poids de la recherche"
+    pattern: "Pattern de validation"
+    pattern_placeholder: "Expression régulière pour la validation de ce champ"
+    maxlength: "Longueur Max."
+    content: "Contenu"
+    style: "Style des cases"
+    defaultvalue: "Valeur initiale"
+    accept: "Fichier acceptés"
+    accept_placeholder: ".pdf audio/* .mp3 (séparés par des espaces)"
+    timepicker: "Timepicker"
+    range: "Intervale de dates"
+    reversedBy: "Inversée par"
+    reversedBy_placeholder: "Le nom d'un autre champ de type \"lien vers un autre élément\""
+    multiple: "Plusieurs choix"
+    propNameOptions: "Choisissez un champ existant ou entrez un nouveau champ"
+    roles:
+      1: "Administrateur"
+    subtype:
+      text: "Texte"
+      tel: "Téléphone"
+      email: "Courriel"
+      url: "URL"
+      textarea: "Editeur simple"
+      wysiwyg: "Editeur enrichi"
+    options:
+      normal: "Normal"
+      filled: "Plein"
+      no: "Non cochée"
+      yes: "Cochée"
+    fields: 
+      title: "Titre de la fiche (obligatoire)"
+      title_help: "Ce champ est indispensable"
+      taxonomy: "Catégories (obligatoire)"
+      address: "Adresse (obligatoire)"
+      address_help: "Ce champ est indispensable"
+      openhours: "Horaires d'ouvertures"
+      openhours_help: "Bloc contenant un selecteur d'horaires"
+      separator: "Séparateur de section"
+      checkbox: "Case à cocher"
+      email: "Email principal"
+      email_help: "Ce champ est conseillé (permet d'envoyer des emails)"
+      images: "Images (upload)"
+      files: "Fichiers (upload)"
+      elements: "Lien vers un autre élément"
+
+  filters_builder:
+    taxonomy: Filtre Catégories
+    gogo_date: Filtre Date
+    gogo_number: Filtre Nombre
+
+  osm_query_builder:
+    title: Liste des requêtes dans la base OpenStreetMap

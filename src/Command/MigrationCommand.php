@@ -59,7 +59,7 @@ class MigrationCommand extends Command
 
     public static $messages = [
         // v2.3.0
-        'Un champ <b>Image (url)</b> est maintenant disponible dans la confiugration du formulaire !', // TODO translate
+        'Un champ <b>Image (url)</b> est maintenant disponible dans la configuration du formulaire !', // TODO translate
         "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup", // TODO translate
         "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie", // TODO translate
         // v2.3.1

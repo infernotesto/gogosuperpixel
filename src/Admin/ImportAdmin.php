@@ -64,27 +64,24 @@ class ImportAdmin extends GoGoAbstractAdmin
                         ], 'required' => true])
                 ->end()
                 ->panel('parameters')
-                    ->add('refreshFrequencyInDays', null, ['required' => false, 'label' => 'Fréquence de mise à jours des données en jours (laisser vide pour ne jamais mettre à jour automatiquement']) // TODO translate
+                    ->add('refreshFrequencyInDays')
                     ->add('usersToNotify', ModelType::class, [
                         'class' => 'App\Document\User',
-                        'required' => false,
                         'multiple' => true,
                         'query' => $usersQuery,
                         'btn_add' => false,
-                        'label' => "Utilisateurs à notifier en cas d'erreur, ou lorsque de nouveaux champs/catégories sont à faire correspondre", ], ['admin_code' => 'admin.option_hidden']) // TODO translate
+                        ], ['admin_code' => 'admin.options'])
                     ->add('isSynchronized', null, [
                         'disabled' => !$this->config->getOsm()->isConfigured(),
                         'required' => false,
                         'attr' => ['class' => 'input-is-synched'],
-                        'label_attr' => ['title' => "Chaque modification sera envoyée à OpenStreetMap"], // TODO translate
-                        'label' => "Autoriser l'édition des données" . ($this->config->getOsm()->isConfigured() ? '' : ' (Vous devez préalablement renseigner des identifiants dans Autre configuration -> OpenStreetMap)') // TODO translate
+                        'label_trans_params' => ['%submessage%' => ($this->config->getOsm()->isConfigured() ? '' : $this->trans('dynamic_imports.fields.submessage'))]
                     ])
                     ->add('moderateElements')
-                    ->add('idsToIgnore', TextType::class, ['mapped' => false, 'required' => false, 
+                    ->add('idsToIgnore', TextType::class, ['mapped' => false, 
                         'attr' => ['class' => 'gogo-display-array', 
                         'value' => $this->getSubject()->getIdsToIgnore()], 
-                        'label' => "Liste des IDs qui seront ignorées lors de l'import",  // TODO translate
-                        'label_attr' => ['title' => "Pour ignorer un élément, supprimer le (définitivement) et il ne sera plus jamais importé. Si vous supprimez un élément dynamiquement importé juste en changeant son status (soft delete), l'élément sera quand meme importé mais conservera son status supprimé. Vous pourrez donc à tout moment restaurer cet élement pour le voir apparaitre de nouveau"]]); // TODO translate
+                        ]);
         } else {
             $formMapper                    
                     ->add('url', UrlType::class)
@@ -143,7 +140,7 @@ class ImportAdmin extends GoGoAbstractAdmin
                             'class' => 'App\Document\Option',
                             'multiple' => true,
                             'btn_add' => false],
-                            ['admin_code' => 'admin.option_hidden'])
+                            ['admin_code' => 'admin.options'])
                         ->add('needToHaveOptionsOtherThanTheOnesAddedToEachElements')
                         ->add('preventImportIfNoCategories')
                     ->end()
@@ -200,16 +197,16 @@ class ImportAdmin extends GoGoAbstractAdmin
         $isDynamic = "App\Document\ImportDynamic" == $this->getClass();
 
         $listMapper
-            ->addIdentifier('sourceName', null, ['label' => 'Nom de la source']) // TODO translate
-            ->add('logs', null, ['label' => "Nombre d'éléments", 'template' => 'admin/partials/import/list_total_count.html.twig']); // TODO translate
+            ->addIdentifier('sourceName')
+            ->add('logs', null, ['template' => 'admin/partials/import/list_total_count.html.twig']);
         if ($isDynamic) {
             $listMapper
-            ->add('idsToIgnore', null, ['label' => 'Infos', 'template' => 'admin/partials/import/list_non_visibles_count.html.twig', 'choices' => $deletedElementsCount]) // TODO translate
-            ->add('refreshFrequencyInDays', null, ['label' => 'Mise à jour', 'template' => 'admin/partials/import/list_refresh_frequency.html.twig']); // TODO translate
+            ->add('idsToIgnore', null, ['template' => 'admin/partials/import/list_non_visibles_count.html.twig', 'choices' => $deletedElementsCount])
+            ->add('refreshFrequencyInDays', null, ['template' => 'admin/partials/import/list_refresh_frequency.html.twig']);
         }
 
         $listMapper
-            ->add('lastRefresh', null, ['label' => 'Dernier import', 'template' => 'admin/partials/import/list_last_refresh.html.twig']) // TODO translate
+            ->add('lastRefresh', null, ['template' => 'admin/partials/import/list_last_refresh.html.twig'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],

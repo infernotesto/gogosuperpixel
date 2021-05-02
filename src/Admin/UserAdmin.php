@@ -162,7 +162,7 @@ class UserAdmin extends GoGoAbstractAdmin
                         'class' => 'App\Document\Option',
                         'multiple' => true,
                         'btn_add' => false,
-                        ], ['admin_code' => 'admin.option_hidden'])
+                        ], ['admin_code' => 'admin.options'])
                     ->add('watchModerationOnlyWithPostCodes')
                 ->end()
             ->end()

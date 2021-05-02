@@ -1,6 +1,6 @@
 <template>
      <div class="osm-query-builder">
-        <label>Liste des requêtes dans la base OpenStreetMap</label>
+        <label>{{ t('osm_query_builder.title') }}</label>
         
         <osm-tag-search></osm-tag-search>
 
@@ -34,6 +34,8 @@
 import OsmCondition from "./OsmQueryBuilderCondition"
 import OsmTagSearch from "./OsmQueryBuilderTagSearch"
 import BoundsPicker from "./BoundsPicker"
+
+// TODO translate .vue file
 
 export default {
     props: [ 'osmQueryObject', 'tileLayer', 'defaultBounds' ],

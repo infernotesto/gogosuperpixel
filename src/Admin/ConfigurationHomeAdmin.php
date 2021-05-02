@@ -22,9 +22,6 @@ class ConfigurationHomeAdmin extends ConfigurationAbstractAdmin
     {
         $imagesOptions = [
             'class' => 'App\Document\ConfImage',
-            'placeholder' => 'Séléctionnez une image déjà importée, ou ajoutez en une !', // TODO translate
-            'required' => false,
-            'label' => 'Logo', // TODO translate
             'mapped' => true,
         ];
 
@@ -35,7 +32,7 @@ class ConfigurationHomeAdmin extends ConfigurationAbstractAdmin
         $featureFormTypeOption = ['edit' => 'inline'];
         $formMapper
             ->add('activateHomePage')
-            ->add('backgroundImage', ModelType::class)
+            ->add('backgroundImage', ModelType::class, $imagesOptions)
             ->add('home.displayCategoriesToPick', CheckboxType::class)
             ->add('home.addElementHintText')
             ->add('home.seeMoreButtonText')

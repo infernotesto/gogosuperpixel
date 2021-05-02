@@ -10,7 +10,7 @@
     {% if extension in ['jpg', 'jpeg', 'png', 'gif', 'svg'] %}
       <img src="{{ filePath }}" class="thumbnail"/>
     {% else %}
-      {{ 'app.fields.actualFile'|trans }} <i>{{ filePath|split('/')|last }}</i>
+      {{ 'commons.actual_file'|trans }} <i>{{ filePath|split('/')|last }}</i>
     {% endif %}
   {% endif %}
 {% endif %}

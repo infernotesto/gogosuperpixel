@@ -4,7 +4,7 @@
 {% set config = form.vars.sonata_admin.admin.config %}
 
 {% if element.isFromOsm %}
-  	<a href={{ element.getOsmUrl(config)  }} target="_blank">{{ 'elements.form.seeOnOSM'|trans }}</a>
+  	<a href={{ element.getOsmUrl(config)  }} target="_blank">{{ 'elements.form.groups.seeOnOSM'|trans }}</a>
 {% endif %}
 
 {% if element.duplicateOf %}
@@ -49,7 +49,7 @@
   </tbody>
   </table>
   <button type="button" class="btn btn-add-field btn-default btn-sm" @click="addField()">
-    {{ 'elements.form.addCustomField'|trans }}
+    {{ 'elements.form.groups.addCustomField'|trans }}
   </button>
 </div>
 <h4>{{ 'elements.form.groups.specialFields'|trans }}</h4>

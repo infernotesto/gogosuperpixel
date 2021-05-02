@@ -1,14 +1,16 @@
+{% trans_default_domain 'admin' %}
+
 {% set duplicates = [duplicateNode]|merge(duplicateNode.potentialDuplicates) %}
 {% if duplicates|length > 1 %}
 <div class="duplicate-node">
   <div class="group-actions">
     <button class="btn-merge btn btn-success waves-effect waves-light" data-id="{{ duplicateNode.id }}"
-            title="Les éléments vont être fusionnés. Seul le premier élément sera conservé, et les attributs du second seront fusionnés"> {# TODO Translation #}
-        Fusionner {# TODO Translation #}
+            title="{{ 'duplicates.node.merge_title'|trans }}">
+        {{ 'duplicates.node.merge'|trans }}
       </button>
       <button class="btn-non-duplicates btn btn-default waves-effect waves-light" data-id="{{ duplicateNode.id }}"
-              title="Rien ne se passe, GoGoCarto se souviendra que ces deux éléments ne sont pas des doublons et ils ne seront plus détectés comme tel"> {# TODO Translation #}
-        Pas doublons {# TODO Translation #}
+              title="{{ 'duplicates.node.non-duplicates_title'|trans }}">
+        {{ 'duplicates.node.non-duplicates'|trans }}
       </button>
   </div>
   <div class="duplicates">
@@ -19,10 +21,10 @@
           <span class='title'>
             <span class="name">{{ duplicate.name }}</span>
             {% if duplicate.sourceKey %} ({{ duplicate.sourceKey }}){% endif %}
-            <span class="updated-at"> - Maj {{ duplicate.updatedAt|date("d/m/Y") }}</span> {# TODO Translation #}
+            <span class="updated-at"> - Maj {{ duplicate.updatedAt|date("d/m/Y") }}</span> {# TODO Translation use local #}
             {% if duplicate.isDeleted %}
               <span style="color: #9c3f3a;margin-left: 5px;">
-                Cet élément a été supprimé. L'élément fusionné restera en status supprimé {# TODO Translation #}
+                {{ 'duplicates.node.deleted'|trans }}
               </span>
             {% endif %}
           </span>
@@ -43,7 +45,7 @@
           {# Address #}
           {% if duplicate.address.getFormatedAddress %}
             <div class="key-value">
-              <span class="key">Adresse</span> {# TODO Translation #}
+              <span class="key">{{ 'duplicates.node.address'|trans }}</span>
               <span class="value">{{ duplicate.address.getFormatedAddress }}</span>
             </div>
           {% endif %}

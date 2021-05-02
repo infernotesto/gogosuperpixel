@@ -1,11 +1,14 @@
+{% trans_default_domain 'admin' %}
+
 {% set formName = form.vars.full_name|split('[')|first %}
 
 <div id="element-import">  
     <select class="source-type form-control" data-sonata-select2="false" v-model="sourceType" name="sourceType">
         <option></option>
-        <option value="csv">Fichier CSV</option> {# TODO Translation #}
-        <option value="json">API Json</option> {# TODO Translation #}
-        <option value="osm">OpenStreetMap</option> {# TODO Translation #}
+        {# TODO translation : add loop #}
+        <option value="csv">{{ 'elements.fields.sourceType_choices.csv'|trans }}</option>
+        <option value="json">{{ 'elements.fields.sourceType_choices.json'|trans }}</option>
+        <option value="osm">{{ 'elements.fields.sourceType_choices.osm'|trans }}</option>
     </select>
 
     <osm-query-builder v-if="sourceType == 'osm'"
@@ -16,7 +19,7 @@
                        @osm-url-changed="url = $event">
     </osm-query-builder>
 
-    <!--Input to save OSM query as Json  -->
+    <!--Input to save OSM query as JSON  -->
     <input type="hidden" :name="formName + '[osmQueriesJson]'" :value="osmQueryInputValue"/>
 
     <div v-show="sourceType == 'csv'" class="file-container">
@@ -24,7 +27,7 @@
     </div>
     
     <div v-show="sourceType == 'json'">
-        <label>Url de l'API JSON</label> {# TODO Translation #}
+        <label>{{ 'elements.fields.sourceTypeJSON'|trans }}</label>
         <input type="url" class="form-control" v-model="url" :name="`${formName}[url]`"/>
     </div>
 </div>

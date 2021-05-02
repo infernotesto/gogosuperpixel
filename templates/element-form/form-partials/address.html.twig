@@ -1,8 +1,8 @@
 <!-- Input adresse element -->
-<div class="input-field col s12" id="input-address-field">
+<div class="input-field col s12" id="input-address-field" data-error-msg="{{ 'element.form.error_geocode'|trans }}">
   <i class="material-icons gogo-icon-marker-symbol prefix"></i>
   {{ form_widget(form.fullAddress, {'id': 'input-address', 'value': element.getFormatedAddress(),
-                  'attr': {'class': 'validate'  }}) }}
+                  'attr': {'class': 'validate' }}) }}
   <label for="input-address" class="gogo-form-label to-html">{{ field.label|raw }}</label>
   <div class="btn-geolocalize btn btn-secondary waves-effect waves-light">{{ "element.form.localize"|trans }}</div>
   {% if config.elementFormGeocodingHelp %}

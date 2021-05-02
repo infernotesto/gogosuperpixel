@@ -39,7 +39,7 @@ class CheckExternalSourceToUpdateCommand extends GoGoAbstractCommand
                 ->getCursor();
 
         if ($count = $dynamicImports->count() > 0) {
-            $this->log("CheckExternalSourceToUpdate : Nombre de sources à mettre à jour : $count"); // TODO translate
+            $this->log("CheckExternalSourceToUpdate : # sources to update : $count"); // TODO translate ?
 
             $command = $this->getApplication()->find('app:elements:importSource');            
 

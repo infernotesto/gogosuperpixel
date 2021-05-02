@@ -9,7 +9,7 @@
 {% else %}
     <span class="label label-success">
 {% endif %}
-{% set result = object.isExternal ? "Import - " : "" %} {# TODO Translation #}
-{% set result = result ~ ('elements.fields.status_choices.' ~ value)|trans({}, 'admin') %}
+{% set result = object.isExternal ? 'imports.import'|trans : '' %}
+{% set result = result ~ ('elements.fields.status_choices.' ~ value)|trans %}
 {{ result }}
 </span>

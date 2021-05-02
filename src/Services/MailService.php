@@ -9,6 +9,7 @@ use App\Document\User;
 use App\Document\UserInteractionReport;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Twig\Environment;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MailService
 {
@@ -23,7 +24,7 @@ class MailService
 
     public function __construct(DocumentManager $dm, \Swift_Mailer $mailer, Environment $twig, 
                                 UrlService $urlService,
-                                $fromEmail, $instanceName)
+                                $fromEmail, $instanceName, TranslatorInterface $t)
     {
         $this->dm = $dm;
         $this->newsRepository = $this->dm->getRepository(News::class);
@@ -32,6 +33,12 @@ class MailService
         $this->twig = $twig;
         $this->email = $fromEmail;
         $this->instanceName = $instanceName;
+        $this->t = $t;
+    }
+
+    private function trans($key, $params = [])
+    {
+        return $this->t->trans($key, $params, 'admin');
     }
 
     public function sendMail($to, $subject, $content, $from = null, $toBCC = null)
@@ -59,12 +66,12 @@ class MailService
 
             $this->mailer->send($message);
         } catch (\Swift_RfcComplianceException $e) {
-            $error = 'Une erreur est survenue : '.$e->getMessage(); // TODO translate
+            $error = $this->trans('emails.service.error').$e->getMessage();
 
             return ['success' => false, 'message' => $error];
         }
-
-        return ['success' => true, 'message' => 'The message has been send']; // TODO translate
+        
+        return ['success' => true, 'message' => $this->trans('emails.service.success')];
     }
 
     public function sendAutomatedMail($mailType, $element, $customMessage = null, $option = null)
@@ -74,14 +81,14 @@ class MailService
         } // do not send email to dynamically imported elements
 
         if (!$customMessage) {
-            $customMessage = 'Pas de message particulier'; // TODO translate
+            $customMessage = $this->trans('emails.service.no_specific_message');
         }
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
         if (!$mailConfig) {
-            return ['success' => false, 'message' => $mailType.' configuration does not exist']; // TODO translate
+            return [ 'success' => false, 'message' => $this->trans('emails.service.unknown_config', ['%config%' => $mailType]) ];
         }
         if (!$mailConfig->getActive()) {
-            return ['success' => false, 'message' => $mailType.' automated mail disabled']; // TODO translate
+            return [ 'success' => false, 'message' => $this->trans('emails.service.inactive_config', ['%config%' => $mailType]) ];
         }
 
         $draftResponse = $this->draftEmail($mailType, $element, $customMessage, $option);
@@ -98,7 +105,7 @@ class MailService
             if ($mailTo && 'no email' != $mailTo) {
                 return $this->sendMail($mailTo, $draftResponse['subject'], $draftResponse['content']);
             } else {
-                return ['success' => false, 'message' => 'No email address to deliver to']; // TODO translate
+                return ['success' => false, 'message' => $this->trans('emails.service.no_email')];
             }
         } else {
             return $draftResponse;
@@ -110,14 +117,14 @@ class MailService
         $mailConfig = $this->getAutomatedMailConfigFromType($mailType);
 
         if (null == $mailConfig) {
-            return ['success' => false, 'message' => $mailType.' automated mail does not exist']; // TODO translate
+            return [ 'success' => false, 'message' => $this->trans('emails.service.no_automatic_mail', ['%config%' => $mailType]) ];
         }
 
         $subject = $mailConfig->getSubject();
         $content = $mailConfig->getContent();
 
         if (!$mailConfig->getSubject() || !$mailConfig->getContent()) {
-            return ['success' => false, 'message' => $mailType.' automated mail missing subject or content']; // TODO translate
+            return [ 'success' => false, 'message' => $this->trans('emails.service.no_subject_or_content', ['%config%' => $mailType]) ];
         }
 
         if ('newsletter' == $mailType) {
@@ -174,7 +181,7 @@ class MailService
                 if ('report' == $mailType && $option && $option instanceof UserInteractionReport) {
                     $user = $option->getUserDisplayName();
                 } else {
-                    $user = $contribution ? $contribution->getUserDisplayName() : 'Inconnu'; // TODO translate
+                    $user = $contribution ? $contribution->getUserDisplayName() : $this->trans('emails.service.unknown');
                 }
 
                 $string = preg_replace('/({{((?:\s)+)?element((?:\s)+)?}})/i', $elementName, $string);
