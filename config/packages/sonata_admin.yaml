@@ -25,23 +25,30 @@ sonata_admin:
             - { position: top, class: col-md-12, type: gogo.block.service.charts}
         groups:
             contents:
-                label: menu.contents
+                label: dashboard.menu.contents
+                label_catalogue: admin
                 icon: <i class='fa fa-file-text'></i>
             data:
-                label: menu.data
+                label: dashboard.menu.data
+                label_catalogue: admin
                 icon: <i class='fa fa-database'></i>
             custom:
-                label: menu.custom
+                label: dashboard.menu.custom
+                label_catalogue: admin
                 icon: <i class='fa fa-paint-brush'></i>
             emailing:
-                label: menu.emailing
+                label: dashboard.menu.emailing
+                label_catalogue: admin
                 icon: <i class='fa fa-envelope'></i>
             other_config:
-                label: menu.other_config
+                label: dashboard.menu.other_config
+                label_catalogue: admin
                 icon: <i class='fa fa-cogs'></i>
             sonata_user:
-                label: menu.users
+                label: dashboard.menu.users
+                label_catalogue: admin
                 icon: <i class='fa fa-users'></i>
             saas:
-                label: menu.saas
+                label: dashboard.menu.saas
+                label_catalogue: admin
                 icon: <i class='fa fa-cogs saas-menu'></i>

@@ -1182,6 +1182,15 @@ dashboard:
     gogo_directory: "La Carte"
     gogo_element_add: "Formulaire"
     gogo_partners: "Qui sommes nous"
+  menu:
+    contents: Contenus
+    custom: Personnalisation
+    data: Données / Import
+    emailing: Mails / Newsletter
+    other_config: Autre Configuration
+    saas: Ferme de Carto 
+    users: Utilisateurs
+
 
 bulk:
   _label: "Actions de masse"
