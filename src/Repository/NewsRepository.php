@@ -9,14 +9,14 @@ use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 
 final class NewsRepository extends DocumentRepository
 {
-    public function findLastPublishedNews(\DateTime $lastNewsletterSentAt)
+    public function findLastPublishedNews($lastNewsletterSentAt)
     {
-        return $this->createQueryBuilder()
+        $qb = $this->createQueryBuilder()
             ->field('status')->equals(NewsStatus::PUBLISHED)
             ->sort('publicationDate', 'desc')
-            ->field('publicationDate')->lte(new \DateTime())
-            ->field('publicationDate')->gte($lastNewsletterSentAt)
-            ->getQuery()
-            ->execute();
+            ->field('publicationDate')->lte(new \DateTime());
+        if ($lastNewsletterSentAt !== null)
+            $qb->field('publicationDate')->gte($lastNewsletterSentAt);
+        return $qb->getQuery()->execute();
     }
 }
