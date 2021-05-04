@@ -17,7 +17,7 @@ config_infobar:
       distance: "Si une adresse a été rentrée, distance entre le point et cette adresse"
       isPending: "Raccourci pour status == En attente (modifs ou ajout)"
       isDeleted: "Raccourci pour status = Refusé ou Supprimé"
-      colorOptionId: "L'id de la categorie qui donne la couleur principale de cet élément"
+      colorOptionId: "L'id de la catégorie qui donne la couleur principale de cet élément"
       images: "Tableau des urls des différentes images"
       createdAt: "Date de la création dans la base de donnée"
       updatedAt: "Date de la dernière mise à jour"
@@ -142,6 +142,7 @@ elements:
   _label: "Éléments"
   proposedBy: "Proposé par <u>{name}</u>"
   proposedAt: "le {date}"
+  recent_elements: "Derniers éléments"
   fields:
       name: "Nom"
       newsletterFrequency: "Réception newsletter"
@@ -408,7 +409,7 @@ imports:
     newTaxonomyToMap: "Nouvelles catégories à mapper"
     deletedCount: "{count} localement supprimés"
     elementsMissingGeoCount: "{count} sans géoloc"
-    elementsMissingTaxoCount: "{count} sans categories"
+    elementsMissingTaxoCount: "{count} sans catégories"
     elementsPreventImportedNoTaxo: "{count} non importés car sans catégories"
 
     # templates/admin/partials/import/list_refresh_frequency.html.twig
@@ -567,7 +568,7 @@ config_home:
     backgroundImage: "Image de fond (le nom du fichier ne doit pas contenir d'espaces ou de caractères spéciaux)"
     backgroundImage_placeholder: "Sélectionnez une image déjà importée, ou ajoutez en une !"
     home:
-      displayCategoriesToPick: "Afficher les catégories principales selectionnables pour la recherche"
+      displayCategoriesToPick: "Afficher les catégories principales sélectionnables pour la recherche"
       addElementHintText: "Texte au dessus du bouton \"Ajouter un élément\""
       addElementHintText_placeholder: "Exemple: \"Aidez nous à renrichir la base de donnée en ajoutant un élément !\""
       seeMoreButtonText: "Texte pour inviter à scroller (si des bandeaux de la page d'accueil existent)"
@@ -660,12 +661,12 @@ categories:
       Vous pouvez avoir plusieurs Groupes de catégories en parrallèle. Pour cela créez un nouveau groupe, enregistrez, puis ajoutez lui ensuite des catégories</br></br>
 
       Une catégorie peut elle même contenir un sous groupe avec des sous catégories à l''intérieur. Lorsque vous éditer une catégorie, en bas de la page vous pouvez y ajouter un sous groupe puis le remplir avec de nouvelles catégories.</br></br>
-      <b>(Groupe) GROUPE DE CATEGORIES 1</b>
+      <b>(Groupe) GROUPE DE CATÉGORIES 1</b>
       <ul>
         <li>Catégorie 1</li>
         <li>Catégorie 2</li>
       </ul>
-      <b>(Groupe) GROUPE DE CATEGORIES 2</b>
+      <b>(Groupe) GROUPE DE CATÉGORIES 2</b>
       <ul>
         <li>Catégorie 1</li>
         <li>Catégorie 2</li>
@@ -690,7 +691,7 @@ categories:
     isMandatory: "Choix obligatoire"
     isMandatory_help: "Une catégorie de ce groupe doit être obligatoirement selectionnée"
     singleOption: "Choix unique"
-    singleOption_help: "Une seule catégorie est selectionnable à la fois"
+    singleOption_help: "Une seule catégorie est sélectionnable à la fois"
     enableDescription: "Activer la description des catégories"
     enableDescription_help: "On pourra renseigner un texte pour décrire chaque catégorie. Par example, pour un catégorie Agriculture, on pourrait ajouter comme texte \"Maraîchage, produits transformés...\""
     descriptionLabel: Label pour le champ de description
@@ -1109,6 +1110,9 @@ news:
 
 sonata.user.user:
   _label: Utilisateurs
+  forgottedPassword: "Mot de passe oublié"
+  login_with: "Se connecter avec {provider}"
+  facebook_warning: "ATTENTION ! Si votre mail est privé sur Facebook, vous ne serez pas informé de l'évolution de vos contributions"
   fields:
     contributionsCount: Contributions
     votesCount: Votes
@@ -1172,6 +1176,17 @@ config_users:
       loginWithFacebook: Activer la connexion avec Facebook
 
 dashboard:
+  _label: "GoGoCarto Administration"
+  messages: "{count, plural, 
+                =1 {# message}
+                other {# messages}
+              }"
+  errors: "{count, plural, 
+                =1 {# erreur}
+                other {# erreurs}
+            }"
+  delete: "Supprimer ce projet"
+  confirm: "Cette action ne peux pas être annulée. Vous allez supprimer entièrement votre projet. Êtes vous sur de vouloir continuer ?"
   welcome: >-
       <b>Bienvenue dans votre espace Administrateur !</b></br>
       L'aventure commence tout juste pour vous, il vous faut maintenant commencer à configurer votre site :)</br>
@@ -1242,6 +1257,7 @@ config_saas:
       newProjectInstructions: "Texte personnalisé affiché en haut du formulaire de création d'un nouveau projet"
 
 emails:
+  show_map: "Voir la carte près de chez vous"
   template:
     fields:
       active: "Activé"
@@ -1267,9 +1283,25 @@ emails:
     no_subject_or_content: "Pas de sujet ou de contenu pour le mail automatique {config}"
     unknown: "Inconnu"
 
+api_ui: # templates/api/api-ui.html.twig
+    _label: "Configurer une API"
+    title: "Accédez aux données via une API"
+    format: "Format :"
+    json: "JSON"
+    jsonld: "JSON-LD (Sémantique)"
+    use_categories: "Restreindre par catégories"
+    include_external: "Inclure les sources externes de la base de donnée"
+    use_bounds: "Restreindre sur une zone géographique (dessinez un rectangle sur la carte)"
+    use_limit: "Limiter le nombre de résultat"
+    api_url: "Url de l'API"
+    test: "Tester"
+
 js: # Below keys are available to javascript  
   import:
     source_this_map: "Cette Carte"
+
+  api:
+    placeholder: "Sélectionnez une ou plusieurs catégories"      
 
   mapping_ontology: # templates/admin/core_custom/custom-fields/mapping-ontology.html.twig
     id: "Identifiant unique (dans l'ancienne base de donnée)"
@@ -1303,6 +1335,10 @@ js: # Below keys are available to javascript
     info_title: "Ce champ sera éditable dans le formulaire public"
     primary: "Non éditable"
     primary_title: "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous"
+
+  mapping_taxonomy:
+    selectCategory: "Sélectionnez une catégorie existante ou entrez le nom d'une nouvelle catégorie à créer"
+    createTerm: "{term} (Sera créé au moment de sauvegarder)"
 
   element_form:
     geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
@@ -1367,6 +1403,28 @@ js: # Below keys are available to javascript
     taxonomy: Filtre Catégories
     gogo_date: Filtre Date
     gogo_number: Filtre Nombre
+    used_field: "Champ utilisé : {field}"
+    choose_field: "Veuillez choisir le champ à utiliser"
+    customize_field: "Personnaliser ce filtre dans le menu des catégories"
+    field_name: "Nom du champ à utiliser"
+    contracted_field: "Filtre replié par défaut"
+    date_views:
+      day: "Jour"
+      week: "Semaine"
+      month: "Mois"
+      year: "Année"
+      range: "Plage"
+    field_end: "Champ pour la Date de fin (optionel)"
+    multiday: "Plusieurs jours sélectionnable"
+    select_views: "Vues (Ctrl + Click)"
+    default_view: "Vue par défaut"
+    min: "Mini"
+    max: "Maxi"
+    step: "Pas"
+    type: "Type"
+    options:
+      slider: "Slider"
+      value: "Valeur"
 
   osm_query_builder:
     title: Liste des requêtes dans la base OpenStreetMap

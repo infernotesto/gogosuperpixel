@@ -60,19 +60,19 @@
     {% spaceless %}
         <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
             <img src="{{ asset('img/default-icon.png') }}">
-            <span>GoGoCarto Administration</span> {# TODO Translation #}
+            <span>{{ 'dashboard._label'|trans }}</span>
             {% set newMsgsCount = new_msgs_count() %}
             {% if newMsgsCount > 0 %}
                 <label class="label label-info" style="margin-left: 6px">
                     <i class="fa fa-bell" style="margin-right: 3px;"></i>
-                    {{ newMsgsCount }} {{ newMsgsCount == 1 ? ' message' : ' messages' }} {# TODO Translation plurals #}
+                    {{ 'dashboard.messages'|trans({'%count%': newMsgsCount}) }}
                 </label>
             {% endif %}
             {% set newErrorsCount = errors_count() %}
             {% if newErrorsCount > 0 %}
                 <label class="label label-danger" style="margin-left: 6px">
                     <i class="fa fa-warning" style="margin-right: 3px;"></i>
-                    {{ newErrorsCount }} {{ newErrorsCount == 1 ? 'erreur' : 'erreurs' }} {# TODO Translation plurals #}
+                    {{ 'dashboard.errors'|trans({'%count%': newErrorsCount}) }}
                 </label>
             {% endif %}
 
@@ -107,8 +107,8 @@
         </li>
         {% if use_as_saas and is_granted("ROLE_SUPER_ADMIN") and not is_root_project() %}
             <li>
-                <a href="{{ path('gogo_project_delete_my_project') }}" onclick="return confirm('Cette action ne peux pas être annulée. Vous allez supprimer entièrement votre projet. Etes vous sur de vouloir continuer?')"> {# TODO translate #}
-                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i><span>Supprimer ce projet</span></button> {# TODO translate #}
+                <a href="{{ path('gogo_project_delete_my_project') }}" onclick="return confirm('{{ 'dashboard.confirm'|trans }}')">
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i><span>{{ 'dashboard.delete'|trans }}</span></button>
                 </a>
             </li>
         {% endif %}

@@ -186,38 +186,39 @@ contributor-login:
   error:
     #inactive_feature: "Désolé, cette fonctionnalité n'est pas activée pour le moment" # TODO translation pb avec ces chaines ?????
     #inactive_iframe: "Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe"
-    admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
-    invalid_email: Veuillez renseigner une adresse mail valide
-    used_email: Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre adresse !
-  oauth: Connectez-vous avec votre compte
+    admin_only: "Attention ! Cette fonctionnalité est reservée aux administrateur"
+    invalid_email: V"euillez renseigner une adresse mail valide"
+    used_email: "Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre adresse !"
+  oauth: "Connectez-vous avec votre compte"
   printemps: "Printemps de l'éducation"
-  communs: LesCommuns.org
-  login: Se connecter
-  email: Entrez simplement une adresse mail
+  communs: "LesCommuns.org"
+  login: "Se connecter"
+  email: "Entrez simplement une adresse mail"
     
 commons:
-  newsletter-explanation: Soyez informé par mail des nouveaux points référencés près de chez vous !
+  newsletter-explanation: "Soyez informé par mail des nouveaux points référencés près de chez vous !"
   every:
-    week: Chaque semaine
-    month: Chaque mois
-  never: Jamais
-  username: Nom d'utilisateur
-  menu: Menu
-  choose_one_option: Veuillez choisir au moins une option
-  choose_category: Choisissez {cat}
-  optional: (optionnel)
-  category_placeholder: Précisez si nécessaire
-  validation: Validation
+    week: "Chaque semaine"
+    month: "Chaque mois"
+  never: "Jamais"
+  username: "Nom d'utilisateur"
+  email: "Adresse e-mail"
+  password: "Mot de passe"
+  check_password: "Retapez votre mot de passe"
+  register: "Créer un compte"
+  location: "Votre adresse ou votre ville"
+  menu: "Menu"
+  choose_one_option: "Veuillez choisir au moins une option"
+  choose_category: "Choisissez {cat}"
+  optional: "(optionnel)"
+  category_placeholder: "Précisez si nécessaire"
+  validation: "Validation"
   errors:
-    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size} Mb
-    bad_email: Veuillez renseigner une adresse email valide
-    bad_url: Veuillez renseigner une url du type http://...
-    bad_number: Ceci n'est pas un nombre !
-    too_long: Oups, ce texte est un peu long !
-
-errors: # TODO erreurs ajax
-  e1: "Les identifiants de connexion ne sont pas corrects"
-  e2: "Une erreur s'est produite lors de la tentative de connexion"
+    file-too-big: "Ce fichier est trop lourd, la taille maximum autorisée est {size} Mb"
+    bad_email: "Veuillez renseigner une adresse email valide"
+    bad_url: "Veuillez renseigner une url du type http://..."
+    bad_number: "Ceci n'est pas un nombre !"
+    too_long: "Oups, ce texte est un peu long !"
 
 action:
   search: "Rechercher"
@@ -267,3 +268,6 @@ action:
 js: # Below keys are available to javascript  
   element_form:
     geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+  login:
+    wrong_id: "Les identifiants de connexion ne sont pas corrects"
+    exception: "Une erreur s'est produite lors de la tentative de connexion"    

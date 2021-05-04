@@ -24,36 +24,44 @@
 ];
 
       var displayFilter = function(fieldData) {
-        result = fieldData.field ? "Champ utilisé : " + fieldData.field : "Veuillez choisir le champ à utiliser" // TODO translate
+        result = fieldData.field ? t('js.filters_builder.used_field', {field: fieldData.field})  : t('js.filters_builder.choose_field')
         return { field: result };
       }
       var templates = {
-        taxonomy: function(fieldData) { return { field: 'Personnaliser ce filtre dans le menu des catégories' }; }, // TODO translate
+        taxonomy: function(fieldData) { return { field: t('js.filters_builder.customize_field') }; },
         gogo_date: displayFilter,
         gogo_number: displayFilter,
       };
-      var fieldAttr = { label: "Nom du champ à utiliser", options: fieldsChoices} // TODO translate
-      var contractedAttr = { label: "Filtre replié par defaut", type: 'checkbox'} // TODO translate
-      var dateViews = { "day": "Jour", "week": "Semaine", "month": "Mois", "year": "Année", "range": "Plage" } // TODO translate
+      var fieldAttr = { label: t('js.filters_builder.field_name'), options: fieldsChoices}
+      var contractedAttr = { label: t('js.filters_builder.contracted_field'), type: 'checkbox'}
+      var dateViews = { "day": t('js.filters_builder.date_views.day'),
+                        "week": t('js.filters_builder.date_views.week'),
+                        "month": t('js.filters_builder.date_views.month'),
+                        "year": t('js.filters_builder.date_views.year'),
+                        "range": t('js.filters_builder.date_views.range')
+                      }
 
       var fieldsAttrs = {
         taxonomy: {},
         gogo_date: {
           field: fieldAttr,
-          fieldEnd: { label: "Champ pour la Date de fin (optionel)", options: fieldsChoices}, // TODO translate
+          fieldEnd: { label: t('js.filters_builder.field_end'), options: fieldsChoices},
           contracted: contractedAttr,
-          multiday: { label: "Plusieurs jours selectionnable", type: 'checkbox' }, // TODO translate
+          multiday: { label: t('js.filters_builder.multiday'), type: 'checkbox' },
           views: { label: "Hidden Views" },
-          select_views: { label: "Vues (Ctrl + Click)", options: dateViews, multiple: "multiple" }, // TODO translate
-          defaultView: { label: "Vue par défaut", options: dateViews }, // TODO translate
+          select_views: { label: t('js.filters_builder.select_views'), options: dateViews, multiple: "multiple" },
+          defaultView: { label: t('js.filters_builder.default_view'), options: dateViews },
         },
         gogo_number: {
           field: fieldAttr,
           contracted: contractedAttr,
-          min: {label: "min", type: "number", required: "true", value: "0"},
-          max: {label: "max", type: "number", required: "true", value: "100"},
-          step: {label: "step", type: "number", required: "true", value: "1"},
-          subtype: {label: "Type", options: { 'slider': 'Slider', 'value': 'Valeur' }} // TODO translate
+          min: {label: t('js.filters_builder.min'), type: "number", required: "true", value: "0"},
+          max: {label: t('js.filters_builder.max'), type: "number", required: "true", value: "100"},
+          step: {label: t('js.filters_builder.step'), type: "number", required: "true", value: "1"},
+          subtype: {label: t('js.filters_builder.type'), options: {
+            'slider': t('js.filters_builder.options.slider'),
+            'value': t('js.filters_builderoptions.value')
+          }}
         }
       };
 
@@ -70,7 +78,7 @@
         controlOrder: ['taxonomy', 'gogo_date', 'gogo_number', 'header', 'paragraph'],
         disabledAttrs: ['required', 'name', 'access', 'placeholder', 'value', 'className', 'inline', 'toggle', 'description', 'other', 'multiple'],
         formData: {{ filtersData|json_encode|raw }},
-        roles: { 1: "Administrateur" }, // TODO translate ?
+        roles: { 1: t('js.form_builder.roles.1') },
         typeUserAttrs: fieldsAttrs
       });
 
@@ -102,8 +110,8 @@
 
         // Changes icons and icones helpers
         $('a[type=remove].icon-cancel').removeClass('icon-cancel').addClass('fa fa-trash-alt');
-        $('a[type=copy].icon-copy').attr('title', 'Dupliquer'); // TODO translate
-        $('a[type=edit].icon-pencil').attr('title', 'Editer/Masquer'); // TODO translate
+        $('a[type=copy].icon-copy').attr('title', t('form_builder.copy_icon'));
+        $('a[type=edit].icon-pencil').attr('title', t('form_builder.edit_icon'));
       }, 300);
     });
   }
