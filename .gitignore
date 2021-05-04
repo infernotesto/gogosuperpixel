@@ -7,7 +7,8 @@
 .sass-cache
 *.DS_Store
 ssh_password
-/web/uploads/*
+/web/uploads/**
+!/web/uploads/**/.gitkeep
 *.csv
 *~
 .idea

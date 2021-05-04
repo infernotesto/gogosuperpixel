@@ -39,7 +39,7 @@ warmup: ## Warmump the cache
 	$(SYMFONY) cache:warmup
 
 fix-perms: ## Fix permissions of all var files
-	chmod 777 -R var/
+	chmod 777 -R var/ web/uploads/
 
 install-assets: ## Install the assets
 	$(SYMFONY) assets:install web/ --symlink
