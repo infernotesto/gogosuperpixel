@@ -108,30 +108,30 @@
     var dataProperties = {{ form.vars.attr["data-props"]|raw }};
     var coreFields = ['id', 'name', 'categories', 'streetAddress', 'addressLocality', 'postalCode', 'addressCountry', 'latitude', 'longitude', 'images', 'files', 'owner', 'source', 'email', 'openhours', 'streetNumber', 'fullAddress'];
     var coreData = [], specificData = [], allProperties = [], otherData = []; var importedData = [];
-    coreData.push({id: 'id', text: "Identifiant unique (dans l'ancienne base de donnée)"}); // TODO Translation
-    coreData.push({id: 'name', text: 'Titre de la fiche'}); // TODO Translation
-    coreData.push({id: 'categories', text: 'Catégories (plusieurs champs sélectionnable)'}); // TODO Translation
-    coreData.push({id: 'latitude', text: 'Latitude'}); // TODO Translation
-    coreData.push({id: 'longitude', text: 'Longitude'}); // TODO Translation
-    coreData.push({id: 'fullAddress', text: 'Adresse complète'}); // TODO Translation
-    coreData.push({id: 'streetNumber', text: 'Adresse: numéro de rue'}); // TODO Translation
-    coreData.push({id: 'streetAddress', text: 'Adresse: rue'}); // TODO Translation
-    coreData.push({id: 'addressLocality', text: 'Adresse: ville'}); // TODO Translation
-    coreData.push({id: 'postalCode', text: 'Adresse: code postal'}); // TODO Translation
-    coreData.push({id: 'addressCountry', text: 'Adresse: pays'});     // TODO Translation
-    specificData.push({id: 'images', text: "Image(s) sous forme d'url, en tableau, ou séparées par des virgules"}); // TODO Translation
-    specificData.push({id: 'files', text: "Fichier(s) sous forme d'url, en tableau, ou séparées par des virgules"}); // TODO Translation
-    specificData.push({id: 'email', text: "Email de l'élement"}); // TODO Translation
-    specificData.push({id: 'owner', text: "Email de l'utilisateur propriétaire de la fiche"}); // TODO Translation
+    coreData.push({id: 'id', text: t('js.mapping_ontology.id')});
+    coreData.push({id: 'name', text: t('js.mapping_ontology.name')});
+    coreData.push({id: 'categories', text: t('js.mapping_ontology.categories')});
+    coreData.push({id: 'latitude', text: t('js.mapping_ontology.latitude')});
+    coreData.push({id: 'longitude', text: t('js.mapping_ontology.longitude')});
+    coreData.push({id: 'fullAddress', text: t('js.mapping_ontology.fullAddress')});
+    coreData.push({id: 'streetNumber', text: t('js.mapping_ontology.streetNumber')});
+    coreData.push({id: 'streetAddress', text: t('js.mapping_ontology.streetAddress')});
+    coreData.push({id: 'addressLocality', text: t('js.mapping_ontology.addressLocality')});
+    coreData.push({id: 'postalCode', text: t('js.mapping_ontology.postalCode')});
+    coreData.push({id: 'addressCountry', text: t('js.mapping_ontology.addressCountry')});
+    specificData.push({id: 'images', text: t('js.mapping_ontology.images')});
+    specificData.push({id: 'files', text: t('js.mapping_ontology.files')});
+    specificData.push({id: 'email', text: t('js.mapping_ontology.email')});
+    specificData.push({id: 'owner', text: t('js.mapping_ontology.owner')});
     if (!importIsDynamic)
-      specificData.push({id: 'source', text: "Origine de l'élément (source)"});    // TODO Translation 
-    specificData.push({id: 'openHours', text: "Horaires d'ouverture (format GoGoCarto)"}); // TODO Translation
+      specificData.push({id: 'source', text: t('js.mapping_ontology.source')});
+    specificData.push({id: 'openHours', text: t('js.mapping_ontology.openHours')});
     if (importType == 'osm') {
-      specificData.push({id: 'osm_source', text: "Source de la donnée OpenStreetMap"});
-      specificData.push({id: 'osm_opening_hours', text: "Horaires d'ouverture (format OSM)"});
-      specificData.push({id: 'osm_version', text: "OSM Version (mappé automatiquement)"});
-      specificData.push({id: 'osm_timestamp', text: "OSM Timestamp (mappé automatiquement)"});
-      specificData.push({id: 'osm_url', text: "OSM Url (mappé automatiquement)"});
+      specificData.push({id: 'osm_source', text: t('js.mapping_ontology.osm_source')});
+      specificData.push({id: 'osm_opening_hours', text: t('js.mapping_ontology.osm_opening_hours')});
+      specificData.push({id: 'osm_version', text: t('js.mapping_ontology.osm_version')});
+      specificData.push({id: 'osm_timestamp', text: t('js.mapping_ontology.osm_timestamp')});
+      specificData.push({id: 'osm_url', text: t('js.mapping_ontology.osm_url')});
     }    
 
     allProperties = $.map(coreData.concat(specificData), function(el) { return el.id });
@@ -169,11 +169,11 @@
     {% endfor %}
 
     options = [{ id: "/", text: ""}]
-    options.push({ text: "Champs principaux", children: coreData}); // TODO Translation
-    options.push({ text: "Champs spécifiques", children: specificData}); // TODO Translation
-    options.push({ text: "Champs du formulaire", children: formData}); // TODO Translation
-    if (otherData.length > 0) options.push({text: "Autres champs déjà présent dans la base de donnée", children: otherData}); // TODO Translation
-    options.push({ text: "Champs originaux de l'import", children: importedData}); // TODO Translation
+    options.push({ text: t('js.mapping_ontology.coreData'), children: coreData});
+    options.push({ text: t('js.mapping_ontology.specificData'), children: specificData});
+    options.push({ text: t('js.mapping_ontology.formData'), children: formData});
+    if (otherData.length > 0) options.push({text: t('js.mapping_ontology.otherData'), children: otherData});
+    options.push({ text: t('js.mapping_ontology.importedData'), children: importedData});
 
     $(".property-selector")
       .select2({
@@ -192,13 +192,13 @@
       $row.find('.field-info').removeClass('label-primary label-info label-success')
       var text = '', type = '', title = ''
       if (coreData.map(el => el.id).concat(formProperties).indexOf(newVal) > -1) {
-        text = "Éditable" // TODO Translation
+        text = t('js.mapping_ontology.info')
         type = "info"
-        title = "Ce champ sera éditable dans le formulaire public" // TODO Translation
+        title = t('js.mapping_ontology.info_title')
       } else if (newVal != '/' && newVal != '') {
-        text = "Non éditable" // TODO Translation
+        text = t('js.mapping_ontology.primary')
         type = "primary"
-        title = "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous" // TODO Translation
+        title = t('js.mapping_ontology.primary_title')
       }
       $row.find('.field-info').addClass('label-'+type).text(text).attr('title', title)
     }).trigger('change')
