@@ -1269,8 +1269,41 @@ emails:
 
 js: # Below keys are available to javascript  
   import:
-    source_this_map: Cette Carte
-    
+    source_this_map: "Cette Carte"
+
+  mapping_ontology: # templates/admin/core_custom/custom-fields/mapping-ontology.html.twig
+    id: "Identifiant unique (dans l'ancienne base de donnée)"
+    name: "Titre de la fiche"
+    categories: "Catégories (plusieurs champs sélectionnable)"
+    latitude: "Latitude"
+    longitude: "Longitude"
+    fullAddress: "Adresse complète"
+    streetNumber: "Adresse: numéro de rue"
+    streetAddress: "Adresse: rue"
+    addressLocality: "Adresse: ville"
+    postalCode: "Adresse: code postal"
+    addressCountry: "Adresse: pays"
+    images: "Image(s) sous forme d'url, en tableau, ou séparées par des virgules"
+    files: "Fichier(s) sous forme d'url, en tableau, ou séparées par des virgules"
+    email: "Email de l'élement"
+    owner: "Email de l'utilisateur propriétaire de la fiche"
+    source: "Origine de l'élément (source)"
+    openHours: "Horaires d'ouverture (format GoGoCarto)"
+    osm_source: "Source de la donnée OpenStreetMap"
+    osm_opening_hours: "Horaires d'ouverture (format OSM)"
+    osm_version: "OSM Version (mappé automatiquement)"
+    osm_timestamp: "OSM Timestamp (mappé automatiquement)"
+    osm_url: "OSM Url (mappé automatiquement)"
+    coreData: "Champs principaux"
+    specificData: "Champs spécifiques"
+    formData: "Champs du formulaire"
+    otherData: "Autres champs déjà présent dans la base de donnée"
+    importedData: "Champs originaux de l'import"
+    info: "Éditable"
+    info_title: "Ce champ sera éditable dans le formulaire public"
+    primary: "Non éditable"
+    primary_title: "Ce champ n'est actuellement pas présent dans le formulaire public. Il sera uniquement éditable depuis l'interface administrateur. Vous pouvez modifier le formulaire public pour rendre ce champ éditable par tous"
+
   element_form:
     geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
     geocode_error: Erreur lors de la géolocalisation de "{address}"
