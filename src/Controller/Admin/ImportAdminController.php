@@ -222,7 +222,8 @@ class ImportAdminController extends Controller
                         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
                         $dm->query('Element')->field('source')->references($object)->batchRemove();
                         $this->addFlash('sonata_flash_success', "Les éléments liés à cet import ont été effacés"); // TODO translate
-                    } elseif ($request->get('collect') || $oldUpdatedAt != $object->getMainConfigUpdatedAt()) {
+                    } elseif ($request->get('collect') || ($oldUpdatedAt != $object->getMainConfigUpdatedAt() && $object->getSourceType() != 'osm')) {
+                        // auto collect if we just changed the import config (unless it's an OSM import, cause it might take too much time)
                         $url = $this->admin->generateUrl('collect', ['id' => $object->getId()]);
                     } else {
                         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
