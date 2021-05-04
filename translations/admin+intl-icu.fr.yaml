@@ -1280,6 +1280,7 @@ js: # Below keys are available to javascript
     icon_placeholder: "Choisissez une icône"
     remove_icon: "Supprimer"
     copy_icon: "Dupliquer"
+    checked_value: Valeur du champ si coché
     edit_icon: "Editer/Masquer"
     label: "Libellé"
     errorMsg: "Msg. Erreur"

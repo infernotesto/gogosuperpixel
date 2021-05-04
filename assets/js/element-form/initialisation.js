@@ -41,6 +41,12 @@ jQuery(document).ready(function()
 
   initializeToHtml()
 
+  // Checkboxes, use custom checked value
+  $('input[type=checkbox]').change(function() {
+    if ($(this).val() == 'on' && $(this).data('checked-value') != 'on') 
+      $(this).val($(this).data('checked-value'))
+  })
+
   // TIMEPICKERS
   $('.timepicker').each(function(e) {
     var start_time;
