@@ -307,6 +307,9 @@ imports:
     clear-elements: "Effacer tous les éléments"
     delete: "Supprimer l'import (ainsi que tous les éléments importés)"
     saving: "Sauvegarde et lecture des données en cours..."
+    test_export:
+      see_osm_export: Tester à quoi ressemblera l'export OSM d'un élément
+      no_element: Aucun élément trouvé. Veuillez d'abords importer des données avant de pouvoir faire un test
   last: # templates/admin/partials/import/list_last_refresh.html.twig
   import: "Import - "
   progress: # templates/admin/pages/import/import-progress.html.twig
@@ -348,28 +351,28 @@ imports:
       customCodeForExportTab: "Convertir les données pour l'export"
       customCodeForExportPanel: "Entrez du code qui sera exécuté lors de l'export, avant leur envoi pour synchronisation"
       customCodeForExportPanel_description: >-
-        La variable <b>$element</b> représente l'élément dans GoGoCarto, la variable <b>$osmFeature</b> représente la donnée OSM reconstruite à partir de l''élement GoGoCarto</br>
+        La variable <b>$element</b> représente l'élément dans GoGoCarto, la variable <b>$gogoFeature</b> représente la donnée OSM reconstruite à partir de l''élement GoGoCarto</br>
         <pre>Quelques examples de transformations simple:</pre>
         Si l''élement contient la catégorie "Vrac", on rajoute un tag OSM
-        <pre>&lt;?php
+        <pre>
         if (in_array(''Vrac'', $element->getCategoriesNames())) '{
-            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
         '}</pre>
         Si l''élement contient la catégorie numéro 12, on rajoute un tag OSM<br/>
         Cette méthode est à préférer car si on change le nom de la catégorie le code fonctionnera toujours<br/>
         L''ID d''une catégorie est noté entre parenthèse après son nom dans Personnalisation / Catégories
-        <pre>&lt;?php
+        <pre>
         if (in_array(12, $element->getCategoriesIds())) '{
-            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
         '}</pre>
         Si l''élement a une valeur spécifique pour un champ définit dans le formulaire
-        <pre>&lt;?php
+        <pre>
         if ($element->getProperty(''vrac'') == ''oui'') '{
-            $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
         '}</pre>
         On ajoute un tag pour tous les éléments
-        <pre>&lt;?php
-        $osmFeature[''tags''][''bulk_purchase''] = ''yes'';
+        <pre>
+        $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
         </pre>
       historic: "Historique"
       dynamicList: "Liste des imports dynamiques (les données importées seront en lecture seule car elles sont gérées par un autre site)"

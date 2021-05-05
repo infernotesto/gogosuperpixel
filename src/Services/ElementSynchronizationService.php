@@ -260,7 +260,9 @@ class ElementSynchronizationService
         // execute custom code
         try {
             eval(str_replace('<?php', '', $element->getSource()->getCustomCodeForExport()));
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+            $gogoFeature['error'] = $e;
+        }
 
         return $gogoFeature;
     }

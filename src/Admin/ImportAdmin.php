@@ -16,6 +16,7 @@ use App\Helper\GoGoHelper;
 class ImportAdmin extends GoGoAbstractAdmin
 {
     public $config;
+    public $elementId;
     
     public function getTemplate($name)
     {
@@ -149,10 +150,17 @@ class ImportAdmin extends GoGoAbstractAdmin
 
             if ($this->getSubject()->isDynamicImport() && $this->getSubject()->getIsSynchronized()) {
                 // TAB - Custom Code For Export
+                $elementIdToTest = $dm->query('Element')->field('source')->references($this->getSubject())->getOne();
+                $this->elementId = $elementIdToTest ? $elementIdToTest->getId() : null;
                 $formMapper->tab('customCodeForExportTab')
                     ->panel('customCodeForExportPanel')
                         ->add('customCodeForExport', null, [
                             'attr' => ['class' => 'gogo-code-editor', 'format' => 'php', 'height' => '500']])
+                        ->add('test', TextType::class, [
+                            'mapped' => false,
+                            'label' => false,
+                            'attr' => ['class' => 'gogo-import-test-osm-export']
+                        ])
                     ->end()
                 ->end();
             }
@@ -164,6 +172,7 @@ class ImportAdmin extends GoGoAbstractAdmin
         $collection->add('refresh', $this->getRouterIdParameter().'/refresh');
         $collection->add('collect', $this->getRouterIdParameter().'/collect');
         $collection->add('showData', $this->getRouterIdParameter().'/show-data');
+        $collection->add('testElementExport', $this->getRouterIdParameter().'/show-data');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

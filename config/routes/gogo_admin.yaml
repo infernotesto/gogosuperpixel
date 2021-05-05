@@ -61,3 +61,7 @@ gogo_element_generate:
     defaults:
         nombre: '1'
         generateVotes: '0'
+
+gogo_element_test_export:
+    path: /elements/{id}/test-export
+    controller: App\Controller\ImportController::testElementExportAction
