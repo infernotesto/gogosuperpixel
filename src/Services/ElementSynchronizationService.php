@@ -70,6 +70,8 @@ class ElementSynchronizationService
                             if ($osmFeature->getVersion() == intval($gogoFeature['version'])) {
                                 if ($this->editOsmFeatureWithGoGoFeature($osmFeature, $gogoFeature))
                                     $toAdd = $osmFeature;
+                                else
+                                    return $promise->resolve(new Response(200, [], null, '1.1', ''));
                             }
                             else {
                                 $message = 'Feature versions mismatch: '.$gogoFeature['version'].' on our side, '.$osmFeature->getVersion().' on OSM';
@@ -115,7 +117,7 @@ class ElementSynchronizationService
                             return $promise->resolve(new Response(200, [], null, '1.1', 'Success')); // TODO translate ?
                         }
                         catch(\Exception $e) {
-                            $message = 'Error when sending changeset'; // TODO translate
+                            $message = 'Error when sending changeset';
                             return $promise->resolve(new Response($e->getCode(), [], null, '1.1', $message));
                         }
                     }
