@@ -71,14 +71,13 @@ class OptionAdmin extends GoGoAbstractAdmin
             ->add('displayInInfoBar')
             ->add('displayInForm')
          ->end()
-        // 05/2021 not working properly so hiding
-        //  ->panel('subcategories', array('class' => 'col-xs-12 sub-categories-container'))
-        //     ->add('subcategories', CollectionType::class, array(
-        //       'by_reference' => false,
-        //       'entry_type' => CategoryLiteType::class,
-        //       'allow_add' => true,
-        //       'label_attr'=> ['style'=> 'display:none']))
-        //  ->end()
+         ->panel('subcategories', array('class' => 'col-xs-12 sub-categories-container'))
+            ->add('subcategories', CollectionType::class, array(
+              'by_reference' => false,
+              'entry_type' => CategoryLiteType::class,
+              'allow_add' => true,
+              'label_attr'=> ['style'=> 'display:none']))
+         ->end()
         ->end()
       ->tab('advanced')
         ->halfPanelDefault('secondary')

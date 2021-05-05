@@ -74,15 +74,14 @@ class CategoryAdmin extends GoGoAbstractAdmin
             ->add('displayInInfoBar')
             ->add('displayInForm')
           ->end()
-          // 05/2021 not working properly so hiding
-          // ->panel('categories', array('class' => 'col-xs-12 sub-options-container'))
-          //   ->add('isFixture', HiddenType::class, ['attr' => ['class' => 'gogo-sort-options'], 'label_attr' => ['style' => 'display:none']])
-          //   ->add('options', CollectionType::class, array(
-          //   'by_reference' => false,
-          //   'entry_type' => OptionLiteType::class,
-          //   'allow_add' => true,
-          //   'label_attr'=> ['style'=> 'display:none']))
-          // ->end()
+          ->panel('categories', array('class' => 'col-xs-12 sub-options-container'))
+            ->add('isFixture', HiddenType::class, ['attr' => ['class' => 'gogo-sort-options'], 'label_attr' => ['style' => 'display:none']])
+            ->add('options', CollectionType::class, array(
+            'by_reference' => false,
+            'entry_type' => OptionLiteType::class,
+            'allow_add' => true,
+            'label_attr'=> ['style'=> 'display:none']))
+          ->end()
         ;
     }
 
