@@ -10,6 +10,7 @@ use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -27,12 +28,19 @@ class RecentElementsBlockService extends AbstractBlockService
      * @param EngineInterface $templating
      * @param Pool            $adminPool
      */
-    public function __construct(Environment $twig, DocumentManager $dm, Pool $adminPool = null)
+    public function __construct(Environment $twig, DocumentManager $dm, Pool $adminPool = null, TranslatorInterface $t)
     {
         $this->manager = $dm;
         $this->adminPool = $adminPool;
         parent::__construct($twig);
+        $this->t = $t;
     }
+
+    private function trans($key, $params = [])
+    {
+        return $this->t->trans($key, $params, 'admin');
+    }
+
 
     /**
      * {@inheritdoc}
@@ -62,7 +70,7 @@ class RecentElementsBlockService extends AbstractBlockService
     {
         $resolver->setDefaults([
             'number' => 5,
-            'title' => 'Derniers elements', // TODO translate
+            'title' => $this->trans('elements.recent_elements'),
             'class' => '',
             'filterStatus' => 0,
             'template' => 'admin/blocks/block_recent_elements.html.twig',

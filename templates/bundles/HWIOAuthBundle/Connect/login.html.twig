@@ -1,4 +1,5 @@
 {% extends 'HWIOAuthBundle::layout.html.twig' %}
+{% trans_default_domain 'admin' %}
 
 {% block hwi_oauth_content %}
 
@@ -6,7 +7,7 @@
     {% if error is defined and error %}
         <div class="row">
             <div class="col-md-12 alert alert-danger text-center">
-                <span class="error">{{ error }}</span> {# TODO Translation ? #}
+                <span class="error">{{ error }}</span>
             </div>
         </div>
     {% endif %}
@@ -14,9 +15,9 @@
     {# HWIOAuthBundle integration #}
 
     <ul class="top-social">
-       <li><a class="#" href="{{ hwi_oauth_login_url('facebook') }}">Se connecter avec Facebook</a></li> {# TODO Translation #}
-       <li><a class="#" href="{{ hwi_oauth_login_url('gplus') }}">Se connecter avec Google</a></li> {# TODO Translation #}
-       <li><a class="#" href="{{ hwi_oauth_login_url('communs') }}">Se connecter avec Les communs</a></li> {# TODO Translation #}
+       <li><a class="#" href="{{ hwi_oauth_login_url('facebook') }}">{{ 'sonata.user.user.login_with'|trans({'%provider': 'Facebook'}) }}</a></li>
+       <li><a class="#" href="{{ hwi_oauth_login_url('gplus') }}">{{ 'sonata.user.user.login_with'|trans({'%provider': 'Google'}) }}</a></li>
+       <li><a class="#" href="{{ hwi_oauth_login_url('communs') }}">{{ 'sonata.user.user.login_with'|trans({'%provider': 'Les communs'}) }}</a></li>
     </ul>
 
 {% endblock hwi_oauth_content %}

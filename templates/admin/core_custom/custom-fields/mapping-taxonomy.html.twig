@@ -49,7 +49,7 @@
 
     var taxonomy = {{ form.vars.attr["data-options"]|raw }};
     var mappingOptionNameToId = {}
-    var formData = [{ id: "", text: "Selectionnez une catégorie existant ou entrez le nom d'une nouvelle catégorie à créer", disabled: true}] // TODO Translation
+    var formData = [{ id: "", text: t('mapping_taxonomy.selectCategory'), disabled: true}]
 
     function recursivelyAddOption(category, parentOption)
     {
@@ -79,7 +79,7 @@
             if ($(data).filter(function() {
                 return this.text.localeCompare(term)===0;
             }).length===0) {
-              return {id: `@create:${term}`, text: term + ' (Sera créé au moment de sauvegarder)'}; // TODO Translation
+              return {id: `@create:${term}`, text: t('js.mapping_taxonomy.createTerm', {term: term}) };
             }
         },
         multiple: true
@@ -98,7 +98,7 @@
       }
       else if (Object.keys(formData).filter(v => [newCategoryId, newCategoryIdIfCreated].includes(v)).length === 0) {
         newCategoryId = newCategoryIdIfCreated
-        formData.push({id: newCategoryId, text: originCategoryName + ' (Sera créé au moment de sauvegarder)'}) // TODO Translation
+        formData.push({id: newCategoryId, text: t('js.mapping_taxonomy.createTerm', {term: originCategoryName}) });
       }        
       const input = $parent.find('.category-selector:not(.select2-container)')
       input.val(newCategoryId).trigger('change');

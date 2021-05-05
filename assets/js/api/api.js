@@ -15,7 +15,7 @@ if ($('#page-content.api').length > 0)
     });
 
     $('.select-categories').select2({
-      placeholder: "Selectionnez une ou plusieurs catégories",
+      placeholder: t('js.api.placeholder'),
       allowClear: true
     });
 
@@ -77,4 +77,3 @@ if ($('#page-content.api').length > 0)
      return ret.join('&');
   }
 }
-

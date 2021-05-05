@@ -162,11 +162,11 @@ function submitAjaxLogin()
           }
           else
           {
-            $('.error-message').text("Les identifiants de connexion ne sont pas corrects").show(); // TODO  translate
+            $('.error-message').text(t('js.login.wrong_id')).show();
           }
       },
       error: function(data, status, object){
-          $('.error-message').text("Une erreur s'est produite lors de la tentative de connexion").show(); // TODO  translate
+          $('.error-message').text(t('js.login.exception')).show();
       }
   });
 }

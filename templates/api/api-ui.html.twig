@@ -1,9 +1,10 @@
 {% extends "page-layout.html.twig" %}
+{% trans_default_domain 'admin' %}
 
 {% set pageName = 'api' %}
-{% set navTitle = "Configurer une API" %} {# TODO Translation #}
+{% set navTitle = 'api_ui._label'|trans %}
 
-{% block title %}Configurer une API{% endblock %} {# TODO Translation #}
+{% block title %}{{ 'api_ui._label'|trans }}{% endblock %}
 
 {% block stylesheets %}
 
@@ -17,22 +18,22 @@
 {# BODY CONTENT #}
 {% block body_content %}
   <section>
-    <h1>Accédez aux données via une API</h1> {# TODO Translation #}
+    <h1>{{ 'api_ui.title'|trans }}</h1> 
 
     {# FORMAT #}
     <p class="format-container">
-      <span class="forma-label">Format :</span> {# TODO Translation #}
+      <span class="forma-label">{{ 'api_ui.format'|trans }}</span>
       <input name="format" type="radio" id="format-json" data-value="json" checked class="url-update" />
-      <label for="format-json">Json</label>
+      <label for="format-json">{{ 'api_ui.json'|trans }}</label>
 
       <input name="format" type="radio" id="format-jsonld"  data-value="jsonld" class="url-update" />
-      <label for="format-jsonld">Json-LD (Sémantique)</label> {# TODO Translation #}
+      <label for="format-jsonld">{{ 'api_ui.jsonld'|trans }}</label>
     </p>
 
     {# CATEGORIES #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-categories" id="use-categories" checked class="url-update" />
-      <label id="label-use-categories" for="use-categories">Restreindre par categories</label> {# TODO Translation #}
+      <label id="label-use-categories" for="use-categories">{{ 'api_ui.use_categories'|trans }}</label>
     </div>
     <div class="select-categories-container">
       <select class="select-categories browser-default url-update" multiple>
@@ -44,30 +45,30 @@
 
     <div class="col s12 option-container">
       <input type="checkbox" name="include-external" id="include-external" checked class="url-update" />
-      <label id="label-include-external" for="include-external">Inclure les sources externes de la base de donnée</label> {# TODO Translation #}
+      <label id="label-include-external" for="include-external">{{ 'api_ui.include_external'|trans }}</label>
     </div>
 
     {# BOUNDS #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-bounds" id="use-bounds" checked class="url-update" />
-      <label id="label-use-bounds" for="use-bounds">Restreindre sur une zone géographique (dessinez un rectangle sur la carte)</label> {# TODO Translation #}
+      <label id="label-use-bounds" for="use-bounds">{{ 'api_ui.use_bounds'|trans }}</label>
     </div>
     <div id="map-bounds-select"></div>
 
     {# LIMIT #}
     <div class="col s12 option-container">
       <input type="checkbox" name="use-limit" id="use-limit" class="url-update" checked/>
-      <label id="label-use-limit" for="use-limit">Limiter le nombre de résultat</label> {# TODO Translation #}
+      <label id="label-use-limit" for="use-limit">{{ 'api_ui.use_limit'|trans }}</label>
       <input type="number" id="limit-input" class="url-update" value="100"/>
     </div>
 
     {# URL #}
-    <h2>Url de l'API</h2>
+    <h2>{{ 'api_ui.api_url'|trans }}</h2>
     <div class="col s12 input-field">
       <input type="text" id="api-url" onClick="this.setSelectionRange(0, this.value.length)"/>
     </div>
 
-    <button id="test-api" class="btn btn-primary">Tester</button> {# TODO Translation #}
+    <button id="test-api" class="btn btn-primary">{{ 'api_ui.test'|trans }}</button>
 
   </section>
 
@@ -83,6 +84,3 @@
     var apiUrlBase = "{{ url('gogo_api_elements_index') }}";
   </script>
 {% endblock %}
-
-
-
