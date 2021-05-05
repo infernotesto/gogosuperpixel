@@ -52,10 +52,10 @@
           label: labelAttr,
           separator: { label: '' }, // separate important attrs from others
           subtype: { label: 'Type', options: {
-              'text': t('js.form_builder.subtype.text'),
-              'tel': t('js.form_builder.subtype.tel'),
-              'email': t('js.form_builder.subtype.email'),
-              'url': t('js.form_builder.subtype.url')
+              'text': t('js.form_builder.subtype_options.text'),
+              'tel': t('js.form_builder.subtype_options.tel'),
+              'email': t('js.form_builder.subtype_options.email'),
+              'url': t('js.form_builder.subtype_options.url')
             },
           },
           search: searchAttrs,
@@ -67,8 +67,8 @@
           icon: iconAttr,
           label: labelAttr,
           subtype: { label: 'Type', options: {
-              'textarea': t('js.form_builder.subtype.textarea'),
-              'wysiwyg': t('js.form_builder.subtype.wysiwyg')
+              'textarea': t('js.form_builder.subtype_options.textarea'),
+              'wysiwyg': t('js.form_builder.subtype_options.wysiwyg')
             },
           },
           search: searchAttrs,
@@ -156,14 +156,58 @@
         fields: fields,
         templates: templates,
         i18n: {
-          locale: 'fr-FR',
-          location: '{{ asset("js/") }}'
+          // we pretend to use en local but in fact we overide all used translation keys with following
+          // preloaded attribute. So translations will be loaded according to gogocarto locale
+          locale: 'en-US',
+          preloaded: { 'en-US': {
+            // find all available keys at : https://github.com/kevinchappell/formBuilder-languages/blob/master/en-US.lang
+            addOption: t('js.form_builder.addOption'),
+            checkboxGroup: t('js.form_builder.checkboxGroup'),
+            checkbox: t('js.form_builder.checkbox'),
+            class: t('js.form_builder.class'),
+            close: t('js.form_builder.close'),
+            dateField: t('js.form_builder.dateField'),
+            description: t('js.form_builder.description'),
+            header: t('js.form_builder.header'),
+            limitRole: t('js.form_builder.limitRole'),
+            mandatory: t('js.form_builder.mandatory'),
+            maxlength: t('js.form_builder.maxlength'),
+            name: t('js.form_builder.name'),
+            number: t('js.form_builder.number'),
+            option: t('js.form_builder.option'),
+            optional: t('js.form_builder.optional'),
+            paragraph: t('js.form_builder.paragraph'),
+            placeholder: t('js.form_builder.placeholder'),
+            placeholder_value: t('js.form_builder.placeholder_value'),
+            placeholder_label: t('js.form_builder.placeholder_label'),
+            placeholder_text: t('js.form_builder.placeholder_text'),
+            placeholder_textarea: t('js.form_builder.placeholder_textarea'),
+            placeholder_email: t('js.form_builder.placeholder_email'),
+            placeholder_placeholder: t('js.form_builder.placeholder_placeholder'),
+            placeholder_className: t('js.form_builder.placeholder_className'),
+            placeholder_password: t('js.form_builder.placeholder_password'),
+            radioGroup: t('js.form_builder.radioGroup'),
+            radio: t('js.form_builder.radio'),
+            required: t('js.form_builder.required'),
+            richText: t('js.form_builder.richText'),
+            roles: t('js.form_builder.roles'),
+            selectOptions: t('js.form_builder.selectOptions'),
+            select: t('js.form_builder.select'),
+            subtype: t('js.form_builder.subtype'),
+            text: t('js.form_builder.text'),
+            textArea: t('js.form_builder.textArea'),
+            toggle: t('js.form_builder.toggle'),
+            value: t('js.form_builder.value'),
+            label: t('js.form_builder.label'),
+            optionLabelPlaceholder: t('js.form_builder.optionLabelPlaceholder'),
+            optionValuePlaceholder: t('js.form_builder.optionValuePlaceholder')
+          }}
         },
         disableFields: ['hidden', 'file', 'button', 'autocomplete', 'title', 'taxonomy', 'address', 'image'],
         controlOrder: ['text', 'email', 'images', 'textarea', 'checkbox', 'checkbox-group', 'radio-group', 'select', 'date', 'number', 'files', 'elements'],
         disabledAttrs: ['className', 'inline', 'toggle', 'description', 'other', 'multiple'],
         formData: {{ formData|json_encode|raw }},
-        roles: { 1: t('js.form_builder.roles.1') },
+        roles: { 1: t('js.form_builder.roles_admin') },
         typeUserAttrs: typeUserAttrs
       });
 
@@ -174,7 +218,6 @@
           });
           $('input[type="checkbox"][value="true"]').prop('checked', true);
         }, 0);
-
       });
       
       setInterval(function() {
