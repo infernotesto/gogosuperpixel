@@ -55,6 +55,11 @@ services:
       arguments:
         $rootDB: '%root_db%'
 
+    App\Services\TwigHelperService:
+      arguments:
+        $baseUrl: '%base_url%'
+        $useAsSaas: '%use_as_saas%'
+
     # Commands
     App\Command\RemoveAbandonnedProjectsCommand:
       arguments:

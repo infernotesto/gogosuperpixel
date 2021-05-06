@@ -7,10 +7,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TwigHelperService
 {
-  public function __construct(DocumentManager $dm, TranslatorInterface $t)
+  public function __construct(DocumentManager $dm, TranslatorInterface $t, $baseUrl, $useAsSaas)
   {
     $this->dm = $dm;
     $this->t = $t;
+    $this->baseUrl = $baseUrl;
+    $this->useAsSaas = $useAsSaas;
   }
 
   public function config()
@@ -21,6 +23,16 @@ class TwigHelperService
   public function translator()
   {
     return $this->t;
+  }
+
+  public function mainUrl()
+  {
+    if ($url = $this->config()->getCustomDomain())
+      return explode('://', $url)[1];
+    elseif ($this->useAsSaas)
+      return $this->config()->getDbName() . '.' . $this->baseUrl;
+    else
+      return $this->baseUrl;
   }
 
   public function listAbouts()

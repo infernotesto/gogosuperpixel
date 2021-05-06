@@ -1306,6 +1306,19 @@ js: # Below keys are available to javascript
   api:
     placeholder: "Sélectionnez une ou plusieurs catégories"      
 
+  charts:
+    period:
+      day: Jour
+      week: Semaine
+      month: Mois
+      year: Année
+    field:
+      nb_visits: Nombre de visites
+      avg_time_on_page: Temps moyen sur la page (secondes)
+    title_visitors: Statistiques des visiteurs
+    display: Afficher
+    last: Les derniers
+    reload: Recharger
   mapping_ontology: # templates/admin/core_custom/custom-fields/mapping-ontology.html.twig
     id: "Identifiant unique (dans l'ancienne base de donnée)"
     name: "Titre de la fiche"
