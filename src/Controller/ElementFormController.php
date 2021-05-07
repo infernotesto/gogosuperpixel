@@ -295,14 +295,14 @@ class ElementFormController extends GoGoController
 
             $isAllowedPending = $configService->isUserAllowed('pending');
 
-            $showResultLink = 'stayonform' == $submitOption && ($isAllowedDirectModeration || $isAllowedPending);
+            $showResultLink = $submitOption == 'stayonform' && ($isAllowedDirectModeration || $isAllowedPending);
             if ($showResultLink) {
                 $noticeText .= '</br><a href="'.$elementShowOnMapUrl.'">Voir le résultat sur la carte</a>';
             }
 
             $session->getFlashBag()->add('success', $noticeText);
 
-            if ('stayonform' != $submitOption && !$recopyInfo) {
+            if ($submitOption != 'stayonform' && !$recopyInfo) {
                 return $this->redirect($elementShowOnMapUrl);
             }
 
