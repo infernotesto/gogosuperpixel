@@ -701,6 +701,7 @@ categories:
     nameShort: "Nom (version courte)"
     nameShort_help: "La version courte est utilisée dans le menu, car souvent on manque de place"
     index: "Position"
+    customId: "Id personnalisé"
     showExpanded: "En position intiale afficher les catégories (sinon il faudra cliquer pour les afficher)"
     unexpandable: "Ne pas pouvoir reduire ce groupe de catégories"
     unexpandable_help: "Dans le menu, les catégories de ce groupe seront toujours affichées"

@@ -16,7 +16,6 @@ class Category
 {
     /**
      * @var int
-     * @Exclude
      * @MongoDB\Id(strategy="INCREMENT")
      */
     private $id;
@@ -233,6 +232,11 @@ class Category
     public function setId($value = null)
     {
         return $this;
+    }
+
+    public function getCustomStringId()
+    {
+        return $this->customId ?: strval($this->id);
     }
 
     /**

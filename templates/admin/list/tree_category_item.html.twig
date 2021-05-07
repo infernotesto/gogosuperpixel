@@ -4,6 +4,7 @@
 
 	<span class="category-item {{ category.options|length and not category.unexpandable ? 'expandable':'unexpandable' }}" {% if not category.displayInForm or not category.displayInMenu %}style="opacity: 0.5"{% endif %}>
 		<span class="name">(Groupe) {{ category.name|capitalize }}</span>
+    <span style="opacity: .6;margin-right: 10px;">( {{ category.customStringId }} )</span>
     {% if not category.displayInForm or not category.displayInMenu %}<span class="fa fa-eye-slash"></span>{% endif %}
 		{% if category.options|length and not category.unexpandable %}<span class="arrow-after"></span>{% endif %}
     {% if category.isMandatory %}<span class="label label-warning">Obligatoire</span>{% endif %}

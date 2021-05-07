@@ -64,6 +64,7 @@ class CategoryAdmin extends GoGoAbstractAdmin
           ->end()
           ->halfPanel('secondary')
              ->add('nameShort')
+             ->add('customId')
              ->add('index')
              ->add('showExpanded')
                    ->add('unexpandable')
