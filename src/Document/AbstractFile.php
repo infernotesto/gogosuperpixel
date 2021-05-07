@@ -6,6 +6,7 @@ use App\Services\UploadDirectoryNamer;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\PropertyMapping;
 
 /**
  * Represent a common File. Need to be extended by real Document
@@ -44,7 +45,7 @@ class AbstractFile implements \Serializable
 
     public function __toString()
     {
-        return $this->getFileUrl();
+        return $this->getFileName();
     }
 
     /**
@@ -129,7 +130,7 @@ class AbstractFile implements \Serializable
         global $kernel;
         $container = $kernel->getContainer();
         $uploadDirHelper = $container->get(UploadDirectoryNamer::class);
-        $filePath = $uploadDirHelper->getDirectoryPathFromKey($this->vichUploadFileKey).'/'.$this->fileName;
+        $filePath = $uploadDirHelper->getDirectoryPath($this).'/'.$this->fileName;
         if ($suffix) {
             return preg_replace(
                 '/(\.jpe?g|\.png)$/',
@@ -154,6 +155,11 @@ class AbstractFile implements \Serializable
         $url = str_replace('/index.php', '', $url);
 
         return $url;
+    }
+
+    public function getCustomDirectory()
+    {
+        return '';
     }
 
     public function getFile()

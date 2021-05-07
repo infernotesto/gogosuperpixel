@@ -22,6 +22,7 @@ class UploadDirectoryNamer implements DirectoryNamerInterface
       'partner_image' => '/images/partners',
       'config_image' => '/images/config',
       'import_file' => '/imports',
+      'general_file' => '/files',
       'default_file' => '/default',
     ];
 
@@ -32,13 +33,13 @@ class UploadDirectoryNamer implements DirectoryNamerInterface
 
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        $name = $this->getDirectoryPathFromKey($object->getVichUploadFileKey());
-
-        return $name;
+        return $this->getDirectoryPath($object);
     }
 
-    public function getDirectoryPathFromKey($key)
+    public function getDirectoryPath($object)
     {
-        return $this->BASE_PATH . $this->dmFactory->getCurrentDbName() . $this->PATHS[$key];
+        $path = $this->BASE_PATH . $this->dmFactory->getCurrentDbName() . $this->PATHS[$object->getVichUploadFileKey()];
+        $path .= $object->getCustomDirectory();
+        return $path;
     }
 }

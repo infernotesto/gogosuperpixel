@@ -643,6 +643,19 @@ duplicates:
     merge: "Fusionnez les doublons"
     wantMore: "J'en veux encore ! (Plus que {count} doublons à traiter)"
 
+files:
+  _label: Uploader des fichiers
+  fields:
+    file: Fichier
+    fileName: Nom du fichier
+    fileUrl: Url
+  form:
+    fileName: Changer le nom du fichier (optionel)
+    fileName_placeholder: "nouveau_nom.png"
+    customDirectory: Changer le répertoire d'upload
+    customDirectory_help: Dans certains cas, par l'exemple pour l'upload d'une police d'icones, vous devez respecter une arborescence de fichier précise (le fichier CSS à la racine, et les fichiers polices dans un répertoire fonts par exemple)
+    customDirectory_placeholder: "/fonts"
+
 categories:
   _label: "Catégories"
   list: 
