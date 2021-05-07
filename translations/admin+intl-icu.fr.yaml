@@ -231,6 +231,9 @@ elements:
         json: "API JSON"
         osm: "OpenStreetMap"
   form:
+    duplicateOf: "Cet élément a été fusionné avec un autre :"
+    seeDuplicate: "voir l'élément fusionné"
+    addCustomField: "Ajouter un champ personnalisé"
     groups:
       general: "Informations générales"
       localisation: "Localisation"
@@ -239,10 +242,7 @@ elements:
       show_contributions: "Historique des contributions"
       pending: En attente
       seeOnOSM: "Voir cet élément sur OpenStreetMap"
-      customFields: "Champs Personnalisés"
-      duplicateOf: "Cet élément a été fusionné avec un autre :"
-      seeDuplicate: "voir l'élément fusionné"
-      addCustomField: "Ajouter un champ personnalisé"
+      customFields: "Champs Personnalisés"      
       specialFields: "Champs Spéciaux"
   filter:
     name: "Nom"

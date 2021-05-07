@@ -29,7 +29,7 @@
       var templates = {
         title: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' +t('js.form_builder.fields.title_help') + '</span>' }; },
         address: function(fieldData) { return { field: '<input id="' + fieldData.name + '"><span class="mandatory">' +t('js.form_builder.fields.address_help') + '</span>' }; },
-        taxonomy: function(fieldData) { return { field: '<select id="' + fieldData.name + '"><option>Choisissez une catégorie principale</option></select><span class="mandatory">' +t('js.form_builder.fields.taxonomy_help') + '</span>' }; },
+        taxonomy: function(fieldData) { return { field: '<select id="' + fieldData.name + '"><option>Choisissez une catégorie principale</option></select><span class="mandatory">' +t('js.form_builder.fields.taxonomy') + '</span>' }; },
         openhours: function(fieldData) { return { field: t('js.form_builder.fields.openhours_help') }; },
         separator: function(fieldData) { return { field: '<hr>' }; },
         checkbox: function(fieldData) { return { field: '<input id="' + fieldData.name + '"' + (fieldData.defaultvalue == "yes" ? 'checked="checked"' : '') + ' type="checkbox"/>' }; },
