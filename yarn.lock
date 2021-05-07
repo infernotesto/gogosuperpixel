@@ -4124,10 +4124,10 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-gogocarto-js@^1.7.3:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/gogocarto-js/-/gogocarto-js-1.7.3.tgz#c79f430d422b089e5a4bca154529a5cc2bba0424"
-  integrity sha512-lBgCNymbkUopiLgB4POk4W90ZoL679ImVA9J9kgA/0wjgovau0i94dopBxGRdFbxVzAglSlKdxg/4rea48NFHQ==
+gogocarto-js@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/gogocarto-js/-/gogocarto-js-1.7.5.tgz#b159ba6b5a37fd09e70876542e2340c2f5afcf05"
+  integrity sha512-K5RtAz+FraM3cPCARpKySKic/V1o7fivFeCN3rsU/y/eqIZJfXroZ/NLkaslFOnDzgRM9Y+dfb6VMIuA4Je1Cg==
   dependencies:
     commonmark "^0.29.0"
     diff "^4.0.1"
