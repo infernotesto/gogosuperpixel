@@ -115,7 +115,7 @@ class ElementFormController extends GoGoController
                 ->add('email', EmailType::class, ['required' => false])
                 ->getForm();
 
-            $userEmail = $request->request->get('user')['email'];
+            $userEmail = $request->request->get('user')['email'] ?? '';
             $emailAlreadyUsed = false;
             if ($userEmail) {
                 $othersUsers = $dm->get('User')->findByEmail($userEmail);
