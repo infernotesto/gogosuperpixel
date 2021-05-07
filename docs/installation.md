@@ -8,6 +8,8 @@ Installation with Docker
 
 With the Docker installation, you have all the required softwares installed in two containers (`gogocarto` and `mongo`).
 
+* Assuming user is `gogocarto`, Add user in group docker : `# /usr/sbin/usermod -aG docker gogocarto`
+
 * Run `make docker-build` to build the container images.
 
 * Run `make up` to launch the containers.
