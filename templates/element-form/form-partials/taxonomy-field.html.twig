@@ -14,19 +14,22 @@
 
 {% if category.displayInForm %}
   {% set categoryDepth = parentDepth is defined ? parentDepth + 1 : 0 %}
-  <div class="category-field {{ displayInline ? 'inline' : ''}} {{ category.isMandatory ? 'mandatory' : '' }}" data-error-msg="{{ 'commons.choose_one_option'|trans }}">
+  <div class="category-field {{ displayInline ? 'inline' : ''}} {{ category.isMandatory ? 'mandatory' : '' }}" 
+       data-id="{{ category.id }}"
+	   data-custom-id="{{ category.customId }}"
+	   data-error-msg="{{ 'commons.choose_one_option'|trans }}">
 
   	<span class="category-field-select input-field" data-picking-text='{{ category.pickingOptionText }}'>
       <select id="category-field-{{category.id}}" class="category-select keep-title-option depth-{{ categoryDepth }}"
               data-id="{{category.id}}" name="category-field-{{category.id}}"
               data-single-option="{{category.singleOption}}">
-     	  <option disabled selected>{{ 'commons.choose_category'|trans({cat: category.pickingOptionText}) }} {{ category.isMandatory ? '' : 'commons.optional'|trans }}</option>
-
+     	
+		<option disabled selected>{{ 'commons.choose_category'|trans({cat: category.pickingOptionText}) }} {{ category.isMandatory ? '' : 'commons.optional'|trans }}</option>
         {% for key, option in category.options %}
         	{% if option.displayInForm %}
-            <option value="{{option.id}}">
-          		{{ option.name }} {% if (option.textHelper is defined and option.textHelper) %} ({{ option.textHelper }}) {% endif %}
-          	</option>
+				<option value="{{option.id}}" data-custom-id="{{option.customId}}">
+					{{ option.name }} {% if (option.textHelper is defined and option.textHelper) %} ({{ option.textHelper }}) {% endif %}
+				</option>
           {% endif %}
         {% endfor %}
       </select>
@@ -48,7 +51,7 @@
 
   		<div class="option-field depth-{{ categoryDepth }} {{ displayInline and not option.enableDescription ? 'inline' : ''}} {{ displayOption ? 'selected' : '' }}" 
 		     id="option-field-{{option.id}}"
-  			 data-id="{{option.id}}" data-index={{curr_index}}>
+  			 data-id="{{option.id}}" data-custom-id="{{option.customId}}" data-index={{curr_index}}>
 
   			<div class="option-field-value {{ (option.enableDescription or category.enableDescription) ? "with-description" : "" }}">
 
@@ -73,8 +76,8 @@
         {% if option.displayChildrenInForm %}
     	  	<div class="subcategories-wrapper ">
     		    {% for subkey, subcategory in option.subcategories %}
-    					{% include 'element-form/form-partials/taxonomy-field.html.twig' with {'category': subcategory, 'parentDepth': categoryDepth } %}
-    				{% endfor %}
+					{% include 'element-form/form-partials/taxonomy-field.html.twig' with {'category': subcategory, 'parentDepth': categoryDepth } %}
+				{% endfor %}
     			</div>
         {% endif %}
   		</div>
