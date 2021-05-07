@@ -236,6 +236,14 @@
           textarea.title = this.title
           return textarea
         })
+
+        $('.search-wrap:not(.initialized)').each(function() {
+          $(this).addClass('initialized')
+          var $weightWrapper = $(this).siblings('.searchWeight-wrap')
+          $(this).find('input').change(function() {
+            $weightWrapper.toggle($(this).is(':checked'))
+          }).trigger('change')
+        })
         // $('.name-wrap input[name=name]').val('email');
         // get all input names (used to check for uniqueness)
         var allNames = [];
@@ -384,5 +392,9 @@
   /* Fix menu action soemtime not clickable */
   .form-wrap.form-builder .frmb .field-actions {
     z-index: 500000;
+  }
+
+  .searchWeight-wrap {
+    display: none;
   }
 </style>
