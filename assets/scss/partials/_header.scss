@@ -92,9 +92,9 @@ header
 		#nav-page-title
 		{
 			font-size: 1.5rem;
-	    display: inline-block;
-	    padding-left: 1rem;
-	    line-height: 2.1rem;
+			display: inline-block;
+			padding-left: 1rem;
+			line-height: 2.1rem;
 
 	    @media screen and (min-width: 701px) { display:none }
 		}
@@ -115,14 +115,15 @@ header
 			{
 				display: none;
 				line-height: 2.5rem;
-		    position: absolute;
-		    padding: .5rem 0;
-		    left: 0;
-		    right: 0;
-		    top: 3rem;
-		    padding-bottom: 1rem;
-		    text-align: center;
-		    background-color: inherit;
+				position: absolute;
+				padding: .5rem 0;
+				left: 0;
+				right: 0;
+				top: 3rem;
+				padding-bottom: 1rem;
+				text-align: center;
+				background-color: inherit;
+				z-index: 500;
 			}		
 	    
 
