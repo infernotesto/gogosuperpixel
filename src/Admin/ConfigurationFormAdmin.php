@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Helper\GoGoHelper;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
 class ConfigurationFormAdmin extends ConfigurationAbstractAdmin
 {
@@ -33,7 +34,9 @@ class ConfigurationFormAdmin extends ConfigurationAbstractAdmin
             ->end()
             ->tab('other')
                 ->panel('other', ['class' => 'col-md-12'])
-                    ->add('elementFormIntroText', TextareaType::class)
+                    ->add('elementFormIntroText', SimpleFormatterType::class, [
+                        'format' => 'richhtml', 'ckeditor_context' => 'full',
+                    ])
                     ->add('elementFormValidationText', TextareaType::class)
                     ->add('elementFormOwningText', TextareaType::class)
                     ->add('elementFormGeocodingHelp')
