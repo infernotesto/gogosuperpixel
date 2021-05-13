@@ -1,273 +1,281 @@
-home:
-  pick_category: "Choisissez une catégorie (par défaut : toutes)"
-  geolocalize: Géolocalisez votre position
-  admin_interface: Interface admin
-  my_space: Mon Espace
-  logout: Se Déconnecter
-  credits: Propulsé par {ggc}
-  search:
-    placeholder: Entrez
-    address: une adresse
-    category: une catégorie
-    all: Toutes
+action:
+  cancel: Annuler
+  continue: Continuer
+  create: Créer
+  element:
+    delete:
+      done: L'élément a bien été supprimé
+      unallowed: Désolé, vous n'êtes pas autorisé à supprimer un élément !
+      uncomplete: Les paramètres sont incomplets
+    report:
+      done: Merci, votre signalement a bien été enregistré !
+      unallowed: Désolé, vous n'êtes pas autorisé à signaler d'erreurs !
+    resolveReports:
+      done: L'élément a bien été modéré
+      unallowed: Désolé, vous n'êtes pas autorisé à modérer cet élément !
+      uncomplete: Les paramètres sont incomplets
+    sendEditLink:
+      done: Un lien d'édition a bien été envoyé à {email}
+      emailContent: >-
+        <p>Bonjour <i>'{{ element '}}</i>,</p> <p><a href="'{{ directEditElementUniqueUrl
+        '}}">Cliquez ici</a> pour modifier votre fiche</p>
+    sendMail:
+      done: L'email a bien été envoyé
+      emailContent: >-
+        <p>Bonjour <i>{element}</i>,</p> <p>Vous avez reçu un message de la part de <a
+        href="mailto:{sender}">{sender}</a></br> </p> <p><b>Titre du message</b></p><p>
+        {subject}</p> <p><b>Contenu</b></p><p>{content}</p>
+      emailSubject: Message reçu depuis la plateforme {instance}
+      uncomplete: Les paramètres sont incomplets
+    stamp:
+      done: L'étiquette a bien été modifiée
+      unallowed: Vous n'êtes pas autorisé à utiliser cette étiquette
+      uncomplete: Les paramètres sont incomplets
+    vote:
+      unallowed: Désolé, vous n'êtes pas autorisé à voter !
+      uncomplete: Les paramètres du vote sont incomplets
+  error: 'Erreur : {message}'
+  geolocalize_me: Géolocaliser ma position
+  search: Rechercher
+  send: Envoyer
+  send_stay: Envoyer et rester sur le formulaire
+  submit: Enregistrer
 
-element.form:
-  title_add: Ajouter {element}
-  title_edit: Modification des données
-  need_help: Aide ?
-  localize: Localiser
-  success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !'
-  error_becomeOwner: Désolé, cet élément appartient déjà à quelqu'un !
-  info_saved: Modifications sauvegardées !
-  error_username: Ce nom d'utilisateur est déjà pris !
-  error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
-  error_geocode: Impossible de localiser cette adresse
-  controller:
-    error_dont_exist: L'élément demandé n'existe pas...
-    error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
-    thankyou:
-      edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
-      added: Merci de votre aide ! {name} a bien été ajouté
-    success: 'Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}" >votre profil</a> !'
-    pending: "Votre contribution est pour l'instant en attente de validation, <a class='validation-process' onclick=\"$('#popup-collaborative-explanation').openModal()\">cliquez ici</a> pour en savoir plus sur le processus de modération collaborative !"
-    user_contributions: 'Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes Contributions</a>'
-  open_hours:
-    recopy_tooltip: Recopier les horaires précédents
-    add_tooltip: Ajouter plage horaire
-    from: De
-    to: à
-    and: Et
-  create_user: Mot de passe pour créer votre compte
-  admin_section:
-    _label: Validation
-    send_mail:
-      modify: "Avertir des modifications d''{element} en lui envoyant un mail"
-      add: "Avertir de l'ajout d''{element} en lui envoyant un mail"
-    recopy_info: Recopier les informations dans un nouveau formulaire
-    admin_message: "Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques"
+commons:
+  category_placeholder: Précisez si nécessaire
+  check_password: Retapez votre mot de passe
+  choose_category: Choisissez {cat}
+  choose_one_option: Veuillez choisir au moins une option
+  email: Adresse e-mail
+  errors:
+    bad_email: Veuillez renseigner une adresse email valide
+    bad_number: Ceci n'est pas un nombre !
+    bad_url: Veuillez renseigner une url du type http://...
+    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size} Mb
+    too_long: Oups, ce texte est un peu long !
+  every:
+    month: Chaque mois
+    week: Chaque semaine
+  location: Votre adresse ou votre ville
+  menu: Menu
+  never: Jamais
+  newsletter-explanation: Soyez informé par mail des nouveaux points référencés près de chez vous !
+  optional: (optionnel)
+  password: Mot de passe
+  register: Créer un compte
+  username: Nom d'utilisateur
+  validation: Validation
+
+contributor-login:
+  _label: Identification
+  communs: LesCommuns.org
+  email: Entrez simplement une adresse mail
+  error:
+    admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
+    invalid_email: V"euillez renseigner une adresse mail valide"
+    used_email: >-
+      Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre
+      adresse !
+  login: Se connecter
+  oauth: Connectez-vous avec votre compte
+  printemps: Printemps de l'éducation
 
 directory:
   _label: La carte
 
-my_parameters:
-  _label: Mes paramètres
-  input_location: Votre adresse ou votre ville
-  range: 'Rayon de recherche :' # TODO add plurals ?
-  unit: kilomètres
+duplicates:
+  controller:
+    marked: Marqué comme non doublon
+    marked_long: Les éléments ont bien été marqués comme non doublons
+    merged: Cet élément a été fusionné avec un doublon potentiel
+  duplicated_element: C'est lui !
+  label: Détection de doublons
+  new_element: Non, c'est un nouvel élément, je continue !
+  see_on_map: (Voir sur OpenStreetMap)
+  subtitle: Des éléments similaires ont été détectés, vous vouliez peut être ajouter l'un d'eux ?
+  title: Recherche de doublons
+
+element.form:
+  admin_section:
+    _label: Validation
+    admin_message: Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques
+    recopy_info: Recopier les informations dans un nouveau formulaire
+    send_mail:
+      add: Avertir de l'ajout d''{element} en lui envoyant un mail
+      modify: Avertir des modifications d''{element} en lui envoyant un mail
+  controller:
+    error_dont_exist: L'élément demandé n'existe pas...
+    error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
+    pending: >-
+      Votre contribution est pour l'instant en attente de validation, <a class='validation-process'
+      onclick="$('#popup-collaborative-explanation').openModal()">cliquez ici</a> pour en savoir
+      plus sur le processus de modération collaborative !
+    success: >-
+      Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}" >votre
+      profil</a> !
+    thankyou:
+      added: Merci de votre aide ! {name} a bien été ajouté
+      edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
+    user_contributions: Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes Contributions</a>
+  create_user: Mot de passe pour créer votre compte
+  error_becomeOwner: Désolé, cet élément appartient déjà à quelqu'un !
+  error_geocode: Impossible de localiser cette adresse
+  error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
+  error_username: Ce nom d'utilisateur est déjà pris !
+  info_saved: Modifications sauvegardées !
+  localize: Localiser
+  need_help: Aide ?
+  open_hours:
+    add_tooltip: Ajouter plage horaire
+    and: Et
+    from: De
+    recopy_tooltip: Recopier les horaires précédents
+    to: à
+  success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !'
+  title_add: Ajouter {element}
+  title_edit: Modification des données
+
+home:
+  admin_interface: Interface admin
+  credits: Propulsé par {ggc}
+  geolocalize: Géolocalisez votre position
+  logout: Se Déconnecter
+  my_space: Mon Espace
+  pick_category: 'Choisissez une catégorie (par défaut : toutes)'
+  search:
+    address: une adresse
+    all: Toutes
+    category: une catégorie
+    placeholder: Entrez
+
+js:
+  element_form:
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+  login:
+    exception: Une erreur s'est produite lors de la tentative de connexion
+    wrong_id: Les identifiants de connexion ne sont pas corrects
+
+load_configuration:
+  AboutHeaderTitle: A propos
+  AddElementHintText: Contribuez à enrichir la base de donnée !
+  AppBaseline: Créez des cartes à GoGo
+  CollaborativeModerationExplanations: ' <p> Lorsqu''un élément est ajouté ou modifié, la mise à jour des données n''est pas instantanée. L''élément va d''abords apparaître "grisé" sur la carte, et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément. Ce vote n''est pas une opinion, mais un partage de connaissance. Si vous connaissez cet élément, ou savez que cet élément n''existe pas, alors votre savoir nous intéresse ! </p> <p> Au bout d''un certain nombre de votes, l''élément pourra alors être automatiquement validé ou refusé. En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous! </p>'
+  ElementFormGeocodingHelp: >-
+    Ne mettez pas de ponctuation, les noms tout en majuscules ne sont pas reconnus non plus. Si la
+    localisation ne fonctionne pas (il arrive que certaines adresses ne soient pas reconnues),
+    entrez le nom de la ville/le village le plus proche, cliquez sur « Localiser », puis placer le
+    point de localisation manuellement. Re-rentrez l’adresse complète dans la barre et passez à la
+    suite du formulaire sans re-cliquer sur « localiser ».
+  PartnerPageTitle: Partenaires
+  SeeMoreButtonText: En savoir plus
+
+login:
+  _label: Connexion
+  register: Besoin d'un compte ? <a href="{url}">S'inscrire</a>
 
 my_contributions:
   _label: Mes contributions
-  name: "Nom"
-  history: Historique de mes contributions
-  my_elements: Mes Fiches
-  my_votes: Mes votes
-  my_reports: Mes signalements
-  element: Fiche
-  type: Type
-  date: Date
-  status: Status
-  owner: Propriétaire
   action: Action
-  none: Vous n'avez encore fait aucune contribution
-  element_contributed: Autres fiches auxquelles j'ai contribué
-  me: Moi
   become_owner: Devenir Propriétaire
-  edit: Editer # TODO move to action ?
-  show: Voir   # TODO move to action ?
   confirmation: Confirmation
-  confirmation_hint: Pour devenir propriétaire d'une fiche, vous devez certifier participer à la gestion de cette structure
   confirmation_button: Je confirme
   confirmation_cancel: Annuler
+  confirmation_hint: >-
+    Pour devenir propriétaire d'une fiche, vous devez certifier participer à la gestion de cette
+    structure
+  date: Date
+  edit: Editer
+  element: Fiche
+  element_contributed: Autres fiches auxquelles j'ai contribué
+  history: Historique de mes contributions
+  me: Moi
+  my_elements: Mes Fiches
+  my_reports: Mes signalements
+  my_votes: Mes votes
+  name: Nom
+  none: Vous n'avez encore fait aucune contribution
+  owner: Propriétaire
+  show: Voir
+  status: Status
+  type: Type
+
+my_parameters:
+  _label: Mes paramètres
+  input_location: Votre adresse ou votre ville
+  range: 'Rayon de recherche :'
+  unit: kilomètres
 
 pending-contributions:
   _label: Mes contributions en attente
+  empty_section: >-
+    Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter une
+    fiche</a> !
   form: Fiche
-  empty_section: Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter une fiche</a> !
 
-login:
-  _label: Connexion # voir aussi layout.login dans src/Application/Sonata/UserBundle/Resources/translations/FOSUserBundle.fr.yml
-  register: Besoin d'un compte ? <a href="{url}">S'inscrire</a>
-
-duplicates:
-  label: Détection de doublons
-  title: Recherche de doublons
-  subtitle: Des éléments similaires ont été détectés, vous vouliez peut être ajouter l'un d'eux ?
-  see_on_map: (Voir sur OpenStreetMap)
-  duplicated_element: C'est lui !
-  new_element: Non, c'est un nouvel élément, je continue !
-  controller:
-    merged: Cet élément a été fusionné avec un doublon potentiel
-    marked: Marqué comme non doublon
-    marked_long: Les éléments ont bien été marqués comme non doublons
-
-vote:
-  user_vote_for_him: 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
-                        Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! '
-  vote_modified: 'Merci {user} : votre vote a bien été modifié !'
-  vote_added: Merci de votre contribution !
-  collaborative:
-      positive: Félicitations, {element} a reçu assez de vote pour être validé !
-      negative: '{element} a reçu suffisamment de votes négatifs, il va être supprimé.'
-  admin:
-    positive: '{element} a bien été validé'
-    negative: '{element} a bien été refusé'
-  pending:
-    admin_validated:
-      positive: Les modifications ont bien été acceptées
-      negative: Les modifications ont bien été refusées
-    user_validated:
-      positive: Félicitations, les modifications ont reçues assez de vote pour être validées !
-      negative: La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.
-
-votes:
-  _label: Mes Votes
-  element: Nom
-  vote: Vote
-  date: Date
-  status: Status
-  empty: Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la modération collaborative !
+project.create:
+  _label: GoGoCarto - Des cartes à GoGo
+  accept_cgu: J'accepte les conditions générales d'utilisation
+  cgu: Conditions d'utilisation
+  contrib: Ouverture à la contribution publique
+  contribHints:
+    closed: Seuls les administrateurs peuvent contribuer
+    inherit: Utiliser les paramètres par défaut de {base_url}
+    intermediate: >-
+      Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des
+      administrateurs
+    open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
+  contribOptions:
+    closed: Fermé
+    inherit: Défaut
+    intermediate: Intermédiaire
+    open: Ouvert
+  data-error: Oups, ce nom est trop long !
+  domaine_name: Nom du domaine
+  message: Votre projet est en cours de création, veuillez patienter...
+  project_name: Nom du projet
+  title: Créer un projet
 
 reports:
   _label: Mes Signalements
-  element: Nom
-  report: Signalement
   date: Date
-  status: Status
+  element: Nom
+  empty: Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle parfaite ? :P
   pending_moderation: En attente de modération
-  empty: "Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle parfaite ? :P"
+  report: Signalement
   reportValues:
     v0: L'élément n'existe plus
     v1: Les informations sont incorrectes
     v2: L'élément ne respecte pas la charte
     v3: L'élément est référencé plusieurs fois
+  status: Status
 
-project.create:
-  _label: GoGoCarto - Des cartes à GoGo
-  title: Créer un projet
-  project_name: Nom du projet
-  data-error: Oups, ce nom est trop long !
-  domaine_name: Nom du domaine
-  contrib: Ouverture à la contribution publique
-  contribOptions:
-    open: Ouvert
-    intermediate: Intermédiaire
-    closed: Fermé
-    inherit: Défaut
-  contribHints:
-    open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
-    intermediate: Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des administrateurs
-    closed: Seuls les administrateurs peuvent contribuer
-    inherit: 'Utiliser les paramètres par défaut de {base_url}'
-  cgu: Conditions d'utilisation
-  accept_cgu: J'accepte les conditions générales d'utilisation
-  message: Votre projet est en cours de création, veuillez patienter...
+vote:
+  admin:
+    negative: '{element} a bien été refusé'
+    positive: '{element} a bien été validé'
+  collaborative:
+    negative: '{element} a reçu suffisamment de votes négatifs, il va être supprimé.'
+    positive: Félicitations, {element} a reçu assez de vote pour être validé !
+  pending:
+    admin_validated:
+      negative: Les modifications ont bien été refusées
+      positive: Les modifications ont bien été acceptées
+    user_validated:
+      negative: La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.
+      positive: Félicitations, les modifications ont reçues assez de vote pour être validées !
+  user_vote_for_him: >-
+    Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ?
+    Laissez-en un peu pour les autres !</br> Attention les petits malins, si vous utilisez une autre
+    de vos adresse perso on le verra aussi ! 
+  vote_added: Merci de votre contribution !
+  vote_modified: 'Merci {user} : votre vote a bien été modifié !'
 
-load_configuration:
-  AppBaseline: Créez des cartes à GoGo
-  PartnerPageTitle: Partenaires
-  AboutHeaderTitle: A propos
-  AddElementHintText: Contribuez à enrichir la base de donnée !
-  SeeMoreButtonText: En savoir plus
-  ElementFormGeocodingHelp: Ne mettez pas de ponctuation, les noms tout en majuscules ne sont pas reconnus non plus. Si la localisation ne fonctionne pas (il arrive que certaines adresses ne soient pas reconnues), entrez le nom de la ville/le village le plus proche, cliquez sur « Localiser », puis placer le point de localisation manuellement. Re-rentrez l’adresse complète dans la barre et passez à la suite du formulaire sans re-cliquer sur « localiser ».
-  CollaborativeModerationExplanations: "
-            <p>
-              Lorsqu'un élément est ajouté ou modifié, la mise à jour des données n'est pas instantanée. L'élément va d'abords apparaître \"grisé\" sur la carte,
-              et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément.
-              Ce vote n'est pas une opinion, mais un partage de connaissance.
-              Si vous connaissez cet élément, ou savez que cet élément n'existe pas, alors votre savoir nous intéresse !
-            </p>
-            <p>
-              Au bout d'un certain nombre de votes, l'élément pourra alors être automatiquement validé ou refusé.
-              En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous!
-            </p>"
-
-contributor-login:
-  _label: Identification
-  error:
-    #inactive_feature: "Désolé, cette fonctionnalité n'est pas activée pour le moment" # TODO translation pb avec ces chaines ?????
-    #inactive_iframe: "Désolé, cette fonctionnalité n'est pas disponible à l'intérieur d'une iframe"
-    admin_only: "Attention ! Cette fonctionnalité est reservée aux administrateur"
-    invalid_email: V"euillez renseigner une adresse mail valide"
-    used_email: "Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre adresse !"
-  oauth: "Connectez-vous avec votre compte"
-  printemps: "Printemps de l'éducation"
-  communs: "LesCommuns.org"
-  login: "Se connecter"
-  email: "Entrez simplement une adresse mail"
-    
-commons:
-  newsletter-explanation: "Soyez informé par mail des nouveaux points référencés près de chez vous !"
-  every:
-    week: "Chaque semaine"
-    month: "Chaque mois"
-  never: "Jamais"
-  username: "Nom d'utilisateur"
-  email: "Adresse e-mail"
-  password: "Mot de passe"
-  check_password: "Retapez votre mot de passe"
-  register: "Créer un compte"
-  location: "Votre adresse ou votre ville"
-  menu: "Menu"
-  choose_one_option: "Veuillez choisir au moins une option"
-  choose_category: "Choisissez {cat}"
-  optional: "(optionnel)"
-  category_placeholder: "Précisez si nécessaire"
-  validation: "Validation"
-  errors:
-    file-too-big: "Ce fichier est trop lourd, la taille maximum autorisée est {size} Mb"
-    bad_email: "Veuillez renseigner une adresse email valide"
-    bad_url: "Veuillez renseigner une url du type http://..."
-    bad_number: "Ceci n'est pas un nombre !"
-    too_long: "Oups, ce texte est un peu long !"
-
-action:
-  search: "Rechercher"
-  submit: "Enregistrer"
-  geolocalize_me: "Géolocaliser ma position"
-  create: "Créer"
-  send: "Envoyer"
-  send_stay: "Envoyer et rester sur le formulaire"
-  cancel: "Annuler"
-  continue: "Continuer"
-  error: "Erreur : {message}"
-  
-  element: # element controller
-    vote:
-      unallowed: "Désolé, vous n'êtes pas autorisé à voter !"
-      uncomplete: "Les paramètres du vote sont incomplets"
-    report:
-      unallowed: "Désolé, vous n'êtes pas autorisé à signaler d'erreurs !"
-      done: "Merci, votre signalement a bien été enregistré !"
-    delete:
-      unallowed: "Désolé, vous n'êtes pas autorisé à supprimer un élément !"
-      uncomplete: "Les paramètres sont incomplets"
-      done: "L'élément a bien été supprimé"
-    resolveReports:
-      unallowed: "Désolé, vous n'êtes pas autorisé à modérer cet élément !"
-      uncomplete: "Les paramètres sont incomplets"
-      done: "L'élément a bien été modéré"
-    sendMail:
-      uncomplete: "Les paramètres sont incomplets"
-      emailSubject: 'Message reçu depuis la plateforme {instance}'
-      emailContent: '<p>Bonjour <i>{element}</i>,</p>
-            <p>Vous avez reçu un message de la part de <a href="mailto:{sender}">{sender}</a></br>
-            </p>
-            <p><b>Titre du message</b></p><p> {subject}</p>
-            <p><b>Contenu</b></p><p>{content}</p>'
-      done: "L'email a bien été envoyé"
-    sendEditLink:
-      emailContent: >-
-        <p>Bonjour <i>'{{ element '}}</i>,</p>
-        <p><a href="'{{ directEditElementUniqueUrl '}}">Cliquez ici</a> pour modifier votre fiche</p>
-      done: Un lien d'édition a bien été envoyé à {email}       
-    stamp:
-      unallowed: "Vous n'êtes pas autorisé à utiliser cette étiquette"
-      uncomplete: "Les paramètres sont incomplets"
-      done: "L'étiquette a bien été modifiée"
-
-js: # Below keys are available to javascript  
-  element_form:
-    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
-  login:
-    wrong_id: "Les identifiants de connexion ne sont pas corrects"
-    exception: "Une erreur s'est produite lors de la tentative de connexion"    
+votes:
+  _label: Mes Votes
+  date: Date
+  element: Nom
+  empty: >-
+    Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la
+    modération collaborative !
+  status: Status
+  vote: Vote
