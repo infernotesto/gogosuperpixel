@@ -1,6 +1,6 @@
 {
   "name": "gogocarto",
-  "homepage": "https://gitlab.adullact.net/pixelhumain/GoGoCarto",
+  "homepage": "https://gitlab.com/seballot/gogocarto",
   "description": "Collaborative mapping directory",
   "keywords": [
     "map",
@@ -11,7 +11,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.adullact.net/pixelhumain/GoGoCarto.git"
+    "url": "https://gitlab.com/seballot/gogocarto.git"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.33.0",

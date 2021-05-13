@@ -43,7 +43,7 @@ You can also check [the Debian Buster Installation Guide](./installation_debian.
 ### Cloning Repository
 
 ```shell
-git clone https://gitlab.adullact.net/pixelhumain/GoGoCarto.git
+git clone https://gitlab.com/seballot/gogocarto.git
 ```
 
 ### Initialize the Project

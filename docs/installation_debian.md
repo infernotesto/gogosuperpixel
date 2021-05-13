@@ -226,7 +226,7 @@ sudo npm install -g gulp
 cd /var/www
 sudo mkdir gogocarto
 sudo chown gogocarto:gogocarto gogocarto/
-sudo -u gogocarto git clone https://gitlab.adullact.net/pixelhumain/GoGoCarto.git gogocarto/
+sudo -u gogocarto git clone https://gitlab.com/seballot/gogocarto.git gogocarto/
 ```
 
 ## Nginx
