@@ -114,7 +114,12 @@ log-commands-error:
 	tail -n 400 var/log/commands.log | grep -B 1 ERROR
 
 ## —— Deploy & Prod ———————
+
+change-remote: ## Update the remote to new gitlab server url (migrated on May 2021)
+	git remote set-url origin https://gitlab.com/seballot/gogocarto.git
+
 gogo-update: ## Update a PROD server to the lastest version of gogocarto
+	make change-remote
 	sudo /usr/bin/systemctl stop cron
 	$(GIT) reset --hard master
 	$(GIT) pull origin master
@@ -130,6 +135,7 @@ gogo-update: ## Update a PROD server to the lastest version of gogocarto
 	sudo /usr/bin/systemctl start cron
 
 gogo-quick-update:
+	make change-remote
 	sudo /usr/bin/systemctl stop cron
 	$(GIT) reset --hard master
 	$(GIT) pull origin master
