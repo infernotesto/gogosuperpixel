@@ -1,2 +1,4 @@
 config_infobar:
   _label: Info Bar
+abouts:
+  _label: Popups
