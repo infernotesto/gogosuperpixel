@@ -1,1 +1,6 @@
-{}
+commons:
+  menu: Meny
+  email: E-postadresse
+action:
+  continue: Fortsett
+  cancel: Avbryt
