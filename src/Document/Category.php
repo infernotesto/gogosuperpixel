@@ -35,7 +35,6 @@ class Category
 
     /**
      * @var string
-     * @Exclude(if="object.getNameShort() == object.getName()")
      * @MongoDB\Field(type="string")
      */
     private $nameShort;
@@ -47,98 +46,78 @@ class Category
 
     /**
      * @var int
-     * @Exclude
      * @MongoDB\Field(type="int")
      */
     private $index = 0;
 
     /**
      * @var bool
-     * @Exclude
      * @MongoDB\Field(type="boolean")
      */
     private $singleOption = false;
 
     /**
      * @var bool
-     * @Exclude(if="object.getIsMandatory() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $isMandatory = false;
 
     /**
      * @var bool
-     * @Exclude
-     * @MongoDB\Field(type="boolean")
-     */
-    private $useFreeTags = false;
-
-    /**
-     * @var bool
-     * @Exclude(if="object.getEnableDescription() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $enableDescription = false;
 
     /**
      * @var string
-     * @Exclude(if="object.getEnableDescription() == false")
      * @MongoDB\Field(type="string")
      */
     private $descriptionLabel = '';
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInMenu() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInMenu = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInInfoBar() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInInfoBar = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInForm() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInForm = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getUseForFiltering() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $useForFiltering = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplaySuboptionsInline() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $displaySuboptionsInline = false;
 
     /**
      * @var string
-     * @Exclude
      * @MongoDB\Field(type="string")
      */
     private $pickingOptionText;
 
     /**
      * @var string
-     * @Exclude(if="object.getShowExpanded() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $showExpanded = true;
 
     /**
      * @var string
-     * @Exclude(if="object.getUnexpandable() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $unexpandable = false;
@@ -160,7 +139,6 @@ class Category
     /**
      * @Accessor(getter="getOrderedOptions")
      * Force ordering cause the RefeenceMany sort property does not work when the options order have been modified after been loaded in the original order
-     * @Exclude(if="object.getOptionsCount() == 0")
      * @MongoDB\ReferenceMany(targetDocument="App\Document\Option", mappedBy="parent", cascade={"persist", "remove"}, sort={"index"="ASC"})
      */
     private $options;
@@ -544,30 +522,6 @@ class Category
     public function getIsMandatory()
     {
         return $this->isMandatory;
-    }
-
-    /**
-     * Set useFreeTags.
-     *
-     * @param bool $useFreeTags
-     *
-     * @return $this
-     */
-    public function setUseFreeTags($useFreeTags)
-    {
-        $this->useFreeTags = $useFreeTags;
-
-        return $this;
-    }
-
-    /**
-     * Get useFreeTags.
-     *
-     * @return bool $useFreeTags
-     */
-    public function getUseFreeTags()
-    {
-        return $this->useFreeTags;
     }
 
     /**

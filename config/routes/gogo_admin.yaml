@@ -65,3 +65,12 @@ gogo_element_generate:
 gogo_element_test_export:
     path: /elements/{id}/test-export
     controller: App\Controller\ImportController::testElementExportAction
+
+# TAXONOMY
+
+gogo_edit_taxonomy:
+    path: /admin/taxonomy/save
+    controller: App\Controller\Admin\CategoryAdminController::editTaxonomyAction
+    defaults:
+        _sonata_admin: 'admin.categories'
+    methods: POST

@@ -85,50 +85,19 @@ categories:
       primary: Paramètres principaux
       secondary: Paramètres secondaires d'affichage
   list:
-    addCategories: Ajouter un Groupe de catégories
-    addCategory: Ajouter une Catégorie
-    categoriesDescription: Description des catégories
-    empty: >-
-      Aucune catégories. Veuillez créer un nouveau Groupe de catégorie, puis des catégories à
-      l'intérieur de celui-ci. Les catégories sont un élément essentiel dans GoGoCarto. Il se peut
-      que votre carte ne fonctionne plus sans catégories
-    help: Quelques explications
-    help_description: >-
+    video_tutorials: >-
       <div style="float: left;margin-right: 30px;"><iframe height="200" sandbox="allow-same-origin
       allow-scripts"
       src="https://video.colibris-outilslibres.org/videos/embed/4a5b7593-aedb-4983-b562-3cab03bb1691"
       frameborder="0" allowfullscreen></iframe></div>
-
       <div style=""><iframe height="200" sandbox="allow-same-origin allow-scripts"
       src="https://video.colibris-outilslibres.org/videos/embed/6ff39dd4-0db8-435b-a3bd-e87307e7e5d1"
-      frameborder="0" allowfullscreen></iframe></div> </br> Les catégories sont toujours regroupées
-      dans des <b>Groupe de catégories</b></br> Pour ajouter des catégories à un Groupe, le plus
-      simple est d''éditer le Groupe de catégories, et vous allez vous apparaitre en bas de page la
-      liste des catégories contenues dans ce groupe. Vous pourrez alors les éditer et en ajouter de
-      nouvelles</br></br>
-
-      Vous pouvez avoir plusieurs Groupes de catégories en parrallèle. Pour cela créez un nouveau
-      groupe, enregistrez, puis ajoutez lui ensuite des catégories</br></br>
-
-      Une catégorie peut elle même contenir un sous groupe avec des sous catégories à l''intérieur.
-      Lorsque vous éditer une catégorie, en bas de la page vous pouvez y ajouter un sous groupe puis
-      le remplir avec de nouvelles catégories.</br></br> <b>(Groupe) GROUPE DE CATÉGORIES 1</b> <ul>
-        <li>Catégorie 1</li>
-        <li>Catégorie 2</li>
-      </ul> <b>(Groupe) GROUPE DE CATÉGORIES 2</b> <ul>
-        <li>Catégorie 1</li>
-        <li>Catégorie 2</li>
-        <li>Catégorie 3</li>
-      </ul> <ul>
-        <b>(Groupe) SOUS GROUPE 1</b>
-        <ul>
-          <li>Sous Catégorie 1</li>
-          <li>Sous Catégorie 2</li>
-        </ul>
-      </ul>
-    multiple: Multiple
+      frameborder="0" allowfullscreen></iframe></div>
+    empty: >-
+      Aucune catégories. Veuillez créer un nouveau Groupe de catégorie, puis des catégories à
+      l'intérieur de celui-ci. Les catégories sont un élément essentiel dans GoGoCarto. Il se peut
+      que votre carte ne fonctionne plus sans catégories
     title: Liste des catégories
-    unique: Unique
 
 charts:
   collabRefused: Derniers refus collaboratifs
@@ -158,6 +127,7 @@ commons:
   btn_update_and_edit: Mettre à jour
   format: d/m/Y à H:i
   send: Envoyer
+  save: Sauvegarder
 
 config_api:
   _label: APIs
@@ -931,7 +901,6 @@ elements:
       send_mail: Prévenir l'acteur de la modification
       showEdit: Afficher/Editer
       showOnSite: Voir sur le site
-      submit: Sauvegarder
       submit_accept: Valider
       submit_delete: Supprimer
       submit_redirect: Sauvegarder et fermer
@@ -1147,7 +1116,6 @@ imports:
     lastRefresh: 'Dernier import :'
     reimport: Importer de nouveau
     saving: Sauvegarde et lecture des données en cours...
-    submit: Sauvegarder
     test_export:
       no_element: Aucun élément trouvé. Veuillez d'abords importer des données avant de pouvoir faire un test
       see_osm_export: Tester à quoi ressemblera l'export OSM d'un élément
@@ -1342,6 +1310,13 @@ js:
     selectCategory: Sélectionnez une catégorie existante ou entrez le nom d'une nouvelle catégorie à créer
   osm_query_builder:
     title: Liste des requêtes dans la base OpenStreetMap
+  taxonomy:    
+    multiple: Multiple
+    unique: Unique
+    mandatory: Mandatory
+    addCategoryGroup: Ajouter un Groupe de catégories
+    addCategory: Ajouter une Catégorie
+    categoriesDescription: Description des catégories
 
 mapping-ontology:
   alert: >-

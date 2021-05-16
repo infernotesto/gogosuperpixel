@@ -39,7 +39,6 @@ class Option
     /**
      * @var string
      * @Groups({"semantic"})
-     * @Exclude(if="object.getNameShort() == object.getName()")
      * @MongoDB\Field(type="string")
      */
     private $nameShort;
@@ -47,14 +46,12 @@ class Option
     /**
      * @Accessor(getter="getParentOptionId")
      * @Groups({"semantic"})
-     * @Exclude(if="object.getParentOptionId() == null")
      * @MongoDB\ReferenceOne(targetDocument="App\Document\Category", inversedBy="options", cascade={"persist"})
      */
     public $parent;
 
     /**
      * @var int
-     * @Exclude
      * @MongoDB\Field(type="int")
      */
     private $index;
@@ -68,7 +65,6 @@ class Option
 
     /**
      * @var string
-     * @Exclude(if="object.getSoftColor() == object.getColor()")
      * @MongoDB\Field(type="string")
      */
     private $softColor;
@@ -83,7 +79,6 @@ class Option
     /**
      * @var string
      * @Groups({"semantic"})
-     * @Exclude(if="object.getTextHelper() == ''")
      * @MongoDB\Field(type="string")
      */
     private $textHelper;
@@ -91,77 +86,66 @@ class Option
     /**
      * @var string
      * @Groups({"semantic"})
-     * @Exclude(if="object.getUrl() == ''")
      * @MongoDB\Field(type="string")
      */
     private $url;
 
     /**
      * @var bool
-     * @Exclude(if="object.getUseIconForMarker() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $useIconForMarker = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getUseColorForMarker() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $useColorForMarker = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInMenu() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInMenu = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInInfoBar() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInInfoBar = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayInForm() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayInForm = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayChildrenInMenu() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayChildrenInMenu = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayChildrenInInfoBar() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayChildrenInInfoBar = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getDisplayChildrenInForm() == true")
      * @MongoDB\Field(type="boolean")
      */
     private $displayChildrenInForm = true;
 
     /**
      * @var bool
-     * @Exclude(if="object.getShowExpanded() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $showExpanded = false;
 
     /**
      * @var bool
-     * @Exclude(if="object.getUnexpandable() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $unexpandable = false;
@@ -175,7 +159,6 @@ class Option
 
     /**
      * @Accessor(getter="getOrderedSubcategories")
-     * @Exclude(if="object.getSubcategoriesCount() == 0")
      * @MongoDB\ReferenceMany(targetDocument="App\Document\Category", mappedBy="parent",cascade={"persist", "remove"}, sort={"index"="ASC"})
      */
     private $subcategories;
@@ -188,14 +171,12 @@ class Option
 
     /**
      * @var bool
-     * @Exclude(if="object.getEnableDescription() == false")
      * @MongoDB\Field(type="boolean")
      */
     private $enableDescription = false;
 
     /**
      * @var string
-     * @Exclude(if="object.getEnableDescription() == false")
      * @MongoDB\Field(type="string")
      */
     private $descriptionLabel = '';

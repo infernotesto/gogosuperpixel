@@ -8,6 +8,7 @@ import './js/admin/osm-tags'
 import './js/admin/element-edit'
 import './js/admin/source-priority'
 import './js/admin/charts'
+import './js/admin/taxonomy/taxonomy'
 
 
 

@@ -32,7 +32,7 @@
 
                 {% else %}
                     <button type="submit" class="btn btn-success" name="submit"><i class="fa fa-save" aria-hidden="true"></i>
-                     {{ (object.havePendingReports ? 'elements.action.edit.submit_resolve' : 'elements.action.edit.submit')|trans }}</button>
+                     {{ (object.havePendingReports ? 'elements.action.edit.submit_resolve' : 'commons.save')|trans }}</button>
 
                     {% if not object.havePendingReports %} 
                     <button type="submit" class="btn btn-success" name="submit_redirect" value="submit_redirect"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i>

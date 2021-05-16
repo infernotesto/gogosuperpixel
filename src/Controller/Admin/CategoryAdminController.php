@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryAdminController extends Controller
 {
@@ -26,6 +28,12 @@ class CategoryAdminController extends Controller
         return $this->render('admin/list/tree_category.html.twig', [
             'categories' => $rootCategories, 'config' => $config,
         ], null);
+    }
+
+    public function editTaxonomyAction()
+    {
+        dump($this->getRequest()->get('items'));
+        return new Response(json_encode(['result' => 'ok']));
     }
 
     // overide CRUDController method to fix strange issue
