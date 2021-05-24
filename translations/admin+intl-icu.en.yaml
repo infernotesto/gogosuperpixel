@@ -2,3 +2,25 @@ config_infobar:
   _label: Info Bar
 abouts:
   _label: Popups
+  fields:
+    name: Name
+    content: Content
+bulk:
+  delete: Delete the reported elements
+  continue: Continue ({count} remaining)
+  batchDone: All of the elements have been handled successfully
+  automaticMerge: Automatic merge
+  analyse: Analyzing the elements from {first} to {last}
+  _label: Bulk action
+api_ui:
+  use_limit: Limit the number of results
+  use_categories: Filter by categories
+  use_bounds: Bind to a geographical zone (draw a rectangle on the map)
+  title: Access to the data through an API
+  test: Test
+  jsonld: JSON-LD (Semantic)
+  json: JSON
+  include_external: Include the database external sources
+  format: 'Format:'
+  api_url: API URL
+  _label: Configure an API
