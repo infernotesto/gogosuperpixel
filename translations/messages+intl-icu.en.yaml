@@ -1,2 +1,35 @@
 home:
   pick_category: Pick a category
+action:
+  element:
+    vote:
+      unallowed: Sorry but you are not allowed to vote !
+    stamp:
+      uncomplete: The parameters are incomplete
+      unallowed: You are not allowed to use this label
+      done: Label modification confirmed
+    sendMail:
+      uncomplete: The parameters are incomplete
+      emailSubject: Message received from the {instance} instance
+      emailContent: <p>Hello<i>{element}</i>,</p> <p>You have received a message from
+        <a href="mailto:{sender}">{sender}</a></br> </p> <p><b>Subject of the message</b></p><p>
+        {subject}</p> <p><b>Content</b></p><p>{content}</p>
+      done: The email has been sent
+    sendEditLink:
+      emailContent: <p>Hello <i>'{{ element '}}</i>,</p> <p><a href="'{{ directEditElementUniqueUrl
+        '}}">Click here</a> to update your information</p>
+      done: Confirming that an edition link has been sent to {email}
+    resolveReports:
+      uncomplete: Incomplete parameters
+      unallowed: Sorry but you are not authorized to moderate this element !
+      done: Element moderation confirmed
+    report:
+      unallowed: Sorry but you are not authorized to signal errors !
+      done: Thank you, your report has been saved !
+    delete:
+      uncomplete: Missing parameters
+      unallowed: Sorry, you are now allowed to delete an element !
+      done: Element deletion confirmed
+  create: Create
+  continue: Continue
+  cancel: Cancel
