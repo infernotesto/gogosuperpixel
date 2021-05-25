@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Document\ElementStatus;
+use App\Document\ModerationState;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 abstract class ValidationType
@@ -41,7 +42,10 @@ class ElementPendingService
 
         $element->setStatus($editMode ? ElementStatus::PendingModification : ElementStatus::PendingAdd);
 
-        // TODO send mail to contributor?
+        $config = $this->dm->get('Configuration')->findConfiguration();
+        // If collaborative moderation is disabled, then it should directly go to moderation
+        if (!$config->getCollaborativeModerationFeature()->getActive())
+            $element->setModerationState(ModerationState::PendingForTooLong);
     }
 
     // In case of collaborative modification, we actually don't change the elements attributes.

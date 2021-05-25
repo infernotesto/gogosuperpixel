@@ -132,7 +132,8 @@ class ElementVoteService
                 $element->setModerationState(ModerationState::VotesConflicts);
             }
         }
-        if ($daysFromContribution >= $config->getMaxDaysLeavingAnElementPending()) {
+        if (!$config->getCollaborativeModerationFeature()->getActive()
+            || $daysFromContribution > $config->getMaxDaysLeavingAnElementPending()) {
             $element->setModerationState(ModerationState::PendingForTooLong);
         }
     }
