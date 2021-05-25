@@ -131,7 +131,8 @@ class ElementVoteService
             } else {
                 $element->setModerationState(ModerationState::VotesConflicts);
             }
-        } elseif ($daysFromContribution > $config->getMaxDaysLeavingAnElementPending()) {
+        }
+        if ($daysFromContribution >= $config->getMaxDaysLeavingAnElementPending()) {
             $element->setModerationState(ModerationState::PendingForTooLong);
         }
     }
