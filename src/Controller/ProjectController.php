@@ -207,10 +207,10 @@ class ProjectController extends Controller
         $dbName = $dmFactory->getCurrentDbName();
 
         if (!$user || !$user->hasRole('ROLE_SUPER_ADMIN')) {
-            $username = $user ? 'Unknown User' : $user->getUsername(); // TODO translate ??
-            $projectsLogger->error("The user $username have tried to delete $dbName but is not a super admin"); // TODO translate ??
+            $username = $user ? 'Unknown User' : $user->getUsername();
+            $projectsLogger->error("The user $username have tried to delete $dbName but is not a super admin");
         } else {
-            $projectsLogger->info("Project $dbName being deleted by {$user->getUsername()}"); // TODO translate ??
+            $projectsLogger->info("Project $dbName being deleted by {$user->getUsername()}");
         }    
 
         $mongo = $dm->getConnection()->getMongoClient();

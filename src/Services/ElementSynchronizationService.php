@@ -114,7 +114,7 @@ class ElementSynchronizationService
                                 $this->dm->flush();
                             }
 
-                            return $promise->resolve(new Response(200, [], null, '1.1', 'Success')); // TODO translate ?
+                            return $promise->resolve(new Response(200, [], null, '1.1', 'Success'));
                         }
                         catch(\Exception $e) {
                             $message = 'Error when sending changeset';

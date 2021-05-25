@@ -119,8 +119,8 @@
     function slugify(text)
     {
       if (!text) return '';
-      var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;"; // TODO translation ß, nordic letters...
-      var to   = "aaaaaeeeeeiiiiooooouuuunc------"; // TODO translation ß, nordic letters...
+      var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+      var to   = "aaaaaeeeeeiiiiooooouuuunc------"; 
       for (var i = 0, len = from.length; i < len; i++)
       {
         text = text.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));

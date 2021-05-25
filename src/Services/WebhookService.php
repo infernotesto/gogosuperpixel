@@ -109,7 +109,7 @@ class WebhookService
     private function handlePostFailure($errorMessage, $post, $contribution, $code = 500)
     {
         $attemps = $post->incrementNumAttempts();
-        $this->logger->error("Webhook for contribution {$contribution->getId()} : $errorMessage"); // TODO translate
+        $this->logger->error("Webhook for contribution {$contribution->getId()} : $errorMessage"); 
         // After first try, wait 5m, 25m, 2h, 10h, 2d
         $intervalInMinutes = pow(5, $attemps);
         $elName = "\"{$contribution->getElement()->getName()}\" ({$contribution->getElement()->getId()})";
@@ -161,13 +161,13 @@ class WebhookService
         $element = $this->getConfig()->getElementDisplayName();
         switch ($result['action']) {
             case 'add':
-                return "**AJOUT** {$element} **{$result['data']['name']}** ajouté par {$result['user']}\n[Lien vers la fiche]({$result['link']})"; // TODO translate
+                return "**ADD** {$element} **{$result['data']['name']}** created by {$result['user']}\n[Link]({$result['link']})";
             case 'edit':
-                return "**MODIFICATION** {$element} **{$result['data']['name']}** mis à jour par *{$result['user']}*\n[Lien vers la fiche]({$result['link']})"; // TODO translate
+                return "**EDIT** {$element} **{$result['data']['name']}** updated by *{$result['user']}*\n[Link]({$result['link']})";
             case 'delete':
-                return "**SUPPRESSION** {$element} **{$result['data']['name']}** supprimé par *{$result['user']}*"; // TODO translate
+                return "**DELETION** {$element} **{$result['data']['name']}** deleted by *{$result['user']}*";
             default:
-                throw new \InvalidArgumentException(sprintf('The webhook action "%s" is invalid.', $result['action'])); // TODO translate ?
+                throw new \InvalidArgumentException(sprintf('The webhook action "%s" is invalid.', $result['action']));
         }
     }
 
@@ -209,7 +209,7 @@ class WebhookService
                 return ['text' => $data['text']];
 
             default:
-                throw new InvalidArgumentException(sprintf('The webhook format "%s" is invalid.', $format)); // TODO translate ?
+                throw new InvalidArgumentException(sprintf('The webhook format "%s" is invalid.', $format));
         }
     }
 }

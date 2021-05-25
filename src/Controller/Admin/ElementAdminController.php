@@ -16,7 +16,7 @@ class ElementAdminController extends ElementAdminBulkController
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
 
         return $this->redirectToRoute('gogo_element_edit', ['id' => $object->getId()]);
@@ -27,7 +27,7 @@ class ElementAdminController extends ElementAdminBulkController
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
 
         return $this->redirect($object->getShowUrlFromController($this->get('router')));
@@ -46,7 +46,7 @@ class ElementAdminController extends ElementAdminBulkController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $this->admin->checkAccess('edit', $object);
@@ -78,7 +78,7 @@ class ElementAdminController extends ElementAdminBulkController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $this->admin->checkAccess('edit', $object);

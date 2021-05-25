@@ -79,7 +79,7 @@ class UserInteractionService
         } else {
             $text = $isAccepted ? 'Cette contribution a été approuvée le processus de modération collaborative' : 'Cette contribution a été refusée par le processus de modération collaborative'; // TODO translate
             $contribution->setResolvedMessage($text);
-            $contribution->setResolvedby('Collaborative process'); // TODO translate ?
+            $contribution->setResolvedby('Collaborative process');
             $contribution->setStatus($isAccepted ? ElementStatus::CollaborativeValidate : ElementStatus::CollaborativeRefused);
         }
     }

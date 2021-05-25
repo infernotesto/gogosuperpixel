@@ -5,10 +5,9 @@
 <div id="element-import">  
     <select class="source-type form-control" data-sonata-select2="false" v-model="sourceType" name="sourceType">
         <option></option>
-        {# TODO translation : add loop #}
-        <option value="csv">{{ 'elements.fields.sourceType_choices.csv'|trans }}</option>
-        <option value="json">{{ 'elements.fields.sourceType_choices.json'|trans }}</option>
-        <option value="osm">{{ 'elements.fields.sourceType_choices.osm'|trans }}</option>
+        {% for type in ['csv', 'json', 'osm'] %}
+            <option value="{{ type }}">{{ ('elements.fields.sourceType_choices.' ~ type)|trans }}</option>
+        {% endfor %}
     </select>
 
     <osm-query-builder v-if="sourceType == 'osm'"

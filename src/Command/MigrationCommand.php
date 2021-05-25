@@ -23,7 +23,6 @@ class MigrationCommand extends Command
     // -----------------------------------------------------------------
     public static $migrations = [
       // v2.4.6
-       // TODO translate attributions ?
       'db.TileLayer.updateMany({name:"cartodb"}, {$set: {attribution:"&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> &copy; <a href=\"http://cartodb.com/attributions\">CartoDB</a>"}})',
       'db.TileLayer.updateMany({name:"hydda"}, {$set: {attribution:"Tiles courtesy of <a href=\"http://openstreetmap.se/\" target=\"_blank\">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>"}})',
       'db.TileLayer.updateMany({name:"wikimedia"}, {$set: {attribution:"<a href=\"https://wikimediafoundation.org/wiki/Maps_Terms_of_Use\">Wikimedia</a> | Map data © <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap contributors</a>"}})',
@@ -57,29 +56,30 @@ class MigrationCommand extends Command
       'app:elements:updateJson all',
     ];
 
+    // TODO Translation : write those messages in different languages? or all in English?
     public static $messages = [
         // v2.3.0
-        'Un champ <b>Image (url)</b> est maintenant disponible dans la configuration du formulaire !', // TODO translate
-        "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup", // TODO translate
-        "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie", // TODO translate
+        'Un champ <b>Image (url)</b> est maintenant disponible dans la configuration du formulaire !', 
+        "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup", 
+        "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie", 
         // v2.3.1
-        'Vous pouvez maintenant renseigner la licence qui protège vos données dans Personnalisation -> Configuration Générale', // TODO translate
+        'Vous pouvez maintenant renseigner la licence qui protège vos données dans Personnalisation -> Configuration Générale', 
         // v2.3.4
-        "Amélioration du <b>système d'import</b>: vous pouvez maintenant faire correspondre les champs et les catégories avant d'importer. Des vidéos tutoriels ont été réalisés. <u>Merci de parcourir vos imports dynamiques pour les mettre à jour avec le nouveau système</u>", // TODO translate
-        "<b>La gestion des permissions des utilisateurs fait peau neuve !</b> <u>Votre ancienne configuration ne sera peut être plus valide</u>. Veuillez vous rendre dans le <b>menu Utilisateurs pour mettre à jour les roles des utilisateurs et des groupes</b> d'utilisateurs.", // TODO translate
-        'Vous pouvez maintenant configurer des mot clés à exclure dans la recherche des éléments. Rendez-vous dans Personnalisation -> La Carte -> Onglet Recherche', // TODO translate
+        "Amélioration du <b>système d'import</b>: vous pouvez maintenant faire correspondre les champs et les catégories avant d'importer. Des vidéos tutoriels ont été réalisés. <u>Merci de parcourir vos imports dynamiques pour les mettre à jour avec le nouveau système</u>", 
+        "<b>La gestion des permissions des utilisateurs fait peau neuve !</b> <u>Votre ancienne configuration ne sera peut être plus valide</u>. Veuillez vous rendre dans le <b>menu Utilisateurs pour mettre à jour les roles des utilisateurs et des groupes</b> d'utilisateurs.", 
+        'Vous pouvez maintenant configurer des mot clés à exclure dans la recherche des éléments. Rendez-vous dans Personnalisation -> La Carte -> Onglet Recherche', 
         // v2.5
-        "Il est maintenant possible de <b>téléverser des images et des fichiers</b> depuis le formulaire d'ajout d'un élément ! Paramétrez ces nouveaux champs dans Modèle de Données -> Formulaire", // TODO translate
+        "Il est maintenant possible de <b>téléverser des images et des fichiers</b> depuis le formulaire d'ajout d'un élément ! Paramétrez ces nouveaux champs dans Modèle de Données -> Formulaire", 
         // v3.0
-        "Vous pouvez maintenant écrire des actualités qui seront incluses dans la newsletter automatique! Allez dans Mails/Newsletter -> Actualités", // TODO translate
-        "L'export des éléments depuis la page Données -> Elements fonctionne de nouveau et inclus cette fois correctement tous les champs personnalisés (y compris fichiers et images)", // TODO translate
-        "Depuis le site, la recherche par élément peut maintenant fonctionenr sur plusieurs champs. Dans Modèle de Données -> Formulaire, editez un champ pour voir apparaitre la configuration liée à la recherche. Vous pouvez aussi donner des poids différents à chaque champs, par exemple la recherche sur le titre avec un poids de 3 et la recherche dans la description avec un poids de 1", // TODO translate
-        "Nouveau moteur de recherche ! Sur la carte, lorsqu'on tape une recherche des suggestions apparaissent pour les éléments et les catégories (bientôt aussi pour les recherchent géographiques)", // TODO translate
+        "Vous pouvez maintenant écrire des actualités qui seront incluses dans la newsletter automatique! Allez dans Mails/Newsletter -> Actualités", 
+        "L'export des éléments depuis la page Données -> Elements fonctionne de nouveau et inclus cette fois correctement tous les champs personnalisés (y compris fichiers et images)", 
+        "Depuis le site, la recherche par élément peut maintenant fonctionenr sur plusieurs champs. Dans Modèle de Données -> Formulaire, editez un champ pour voir apparaitre la configuration liée à la recherche. Vous pouvez aussi donner des poids différents à chaque champs, par exemple la recherche sur le titre avec un poids de 3 et la recherche dans la description avec un poids de 1", 
+        "Nouveau moteur de recherche ! Sur la carte, lorsqu'on tape une recherche des suggestions apparaissent pour les éléments et les catégories (bientôt aussi pour les recherchent géographiques)", 
         // v3.2
-        "Vous pouvez maintenant configurer l'url de votre carte si vous possédez un nom de domaine (ou un sous domaine). Allez dans Personnalisation -> Configuration Générale et suivez les instructions !", // TODO translate
-        "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration", // TODO translate
+        "Vous pouvez maintenant configurer l'url de votre carte si vous possédez un nom de domaine (ou un sous domaine). Allez dans Personnalisation -> Configuration Générale et suivez les instructions !", 
+        "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration", 
         // 3.2.3
-        "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)", // TODO translate
+        "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)", 
     ];
 
     public function __construct(DocumentManagerFactory $dmFactory, LoggerInterface $commandsLogger,

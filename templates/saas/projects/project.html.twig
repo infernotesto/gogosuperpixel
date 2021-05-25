@@ -9,7 +9,7 @@
     <div class="project-content">
       <div class="name gogo-neutral">{{ project.name|capitalize }}</div>
       {% set date = project.publishedAt ? project.publishedAt : project.createdAt %}
-      <div class="published-at">{{ date|date("m/d/Y") }}</div> {# TODO translation #}
+      <div class="published-at">{{ date|date('commons.date_format'|trans) }}</div>
       <div class="published-at-int">{{ date ? date.getTimestamp : '' }}</div>
       <div class="tags">{{ project.tags }}</div>
       <div class="data-size gogo-bg-primary">

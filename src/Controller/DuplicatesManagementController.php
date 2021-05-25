@@ -46,7 +46,7 @@ class DuplicatesManagementController extends GoGoController
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
-                return new Response('Missing elementId param'); // TODO translate ??
+                return new Response('Missing elementId param');
             }
             $element = $dm->get('Element')->find($request->get('elementId'));
             $duplicates = array_merge([$element], $element->getPotentialDuplicates()->toArray());
@@ -59,9 +59,9 @@ class DuplicatesManagementController extends GoGoController
             }            
             $dm->flush();
             
-            return new Response('Elements successfully merged'); # TODO translation ??
+            return new Response('Elements successfully merged');
         } else {
-            return new Response('Not valid ajax request'); # TODO translation ??
+            return new Response('Not valid ajax request');
         }
     }
 
@@ -71,7 +71,7 @@ class DuplicatesManagementController extends GoGoController
     {
         if ($request->isXmlHttpRequest()) {
             if (!$request->get('elementId')) {
-                return new Response('Missing elementId param'); // TODO translate ??
+                return new Response('Missing elementId param');
             }
 
             $element = $dm->get('Element')->find($request->get('elementId'));
@@ -99,7 +99,7 @@ class DuplicatesManagementController extends GoGoController
 
             return new Response($t->trans('duplicates.controller.marked_long'));
         } else {
-            return new Response('Not valid ajax request'); # TODO translation ??
+            return new Response('Not valid ajax request');
         }
     }
 }

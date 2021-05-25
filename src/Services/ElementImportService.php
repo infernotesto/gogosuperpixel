@@ -184,13 +184,13 @@ class ElementImportService
                         $this->elementIdsErrors[] = ''.$row['id'];
                         $newlyImportedElementIds[] = ''.$row['id'];
                     }
-                    $msgCode = $e->getMessage() && strlen($e->getMessage()) > 0 ? $e->getMessage() : 'error'; // TODO translate ?
+                    $msgCode = $e->getMessage() && strlen($e->getMessage()) > 0 ? $e->getMessage() : 'error'; 
                     if (!array_key_exists($msgCode, $this->errorsCount)) {
                         $this->errorsCount[$msgCode] = 1;
                     } else {
                         ++$this->errorsCount[$msgCode];
                     }
-                    $message = '<u>'.$e->getMessage().'</u> <b>(x'.$this->errorsCount[$msgCode].')</b></br>'.$e->getFile().' LINE '.$e->getLine().'</br>'; // TODO translate ?
+                    $message = '<u>'.$e->getMessage().'</u> <b>(x'.$this->errorsCount[$msgCode].')</b></br>'.$e->getFile().' LINE '.$e->getLine().'</br>';
                     $message .= 'CONTEXT : <pre>'.print_r($row, true).'</pre>';
                     $this->errorsMessages[$msgCode] = $message;
                 }
@@ -343,7 +343,7 @@ class ElementImportService
 
             $this->dm->flush();
         } catch (\Error $e) {
-            $message = '<u>'.$e->getMessage().'</u></br>'.$e->getFile().' LINE '.$e->getLine().'</br>'; // TODO translate ?
+            $message = '<u>'.$e->getMessage().'</u></br>'.$e->getFile().' LINE '.$e->getLine().'</br>';
             $import->setCurrMessage($message);
             $import->setCurrState(ImportState::Errors);
             $this->dm->flush();
