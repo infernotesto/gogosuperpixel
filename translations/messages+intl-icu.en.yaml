@@ -36,12 +36,68 @@ action:
   cancel: Cancel
   error: 'Error : {message}'
   submit: Save
-  send_stay: Send and stay on the form
+  send_stay: Send and remain on the form
   send: Send
   search: Search
-  geolocalize_me: Locate my postion
+  geolocalize_me: Geolocate my position
 commons:
-  choose_one_option: Please choose at least one
+  choose_one_option: Please choose at least one option
   choose_category: Choose {cat}
   check_password: Re-enter your password
   category_placeholder: Specify (if necessary)
+  validation: Validation
+  username: Username
+  register: Sign-up
+  password: Password
+  optional: (optional)
+  newsletter-explanation: Stay informed by email of new references near you !
+  never: Never
+  menu: Menu
+  location: Your city or address
+  every:
+    week: Every week
+    month: Every month
+  errors:
+    too_long: Bummer, this text is a little too long !
+    file-too-big: This file is too big, the maximum allowed size is {size} MB
+    bad_url: Please enter a URL of the http://... type
+    bad_number: This is not a number !
+    bad_email: Please enter a valid email address
+  email: email address
+element.form:
+  controller:
+    error_unauthorized: You are not allowed to modify this element, sorry !
+    error_dont_exist: The requested element does not exist...
+  admin_section:
+    send_mail:
+      modify: Notify the {element} changes by sending an email
+      add: Notify the addition of {element} by sending an email
+    recopy_info: Copy the information in a new form
+    admin_message: Change details, this text will replace 'customMessage' in the automatic
+      emails
+    _label: Validation
+duplicates:
+  title: Duplicate detection
+  subtitle: Similar elements have been detected, maybe you wanted to add one of them
+    ?
+  see_on_map: (Access on OpenStreetMap)
+  new_element: No, this is a new element, let's continue !
+  label: Duplicate detection
+  duplicated_element: It's him !
+  controller:
+    merged: This element has been merged with a potential duplicate
+    marked_long: The elements has been confirmed as non-duplicates
+    marked: Flagged as not a duplicate
+directory:
+  _label: The map
+contributor-login:
+  printemps: Education spring
+  oauth: Sign-in with your account
+  login: Sign-in
+  error:
+    used_email: Sorry, an account already exists with that email address ! Please
+      sign-in or use another address !
+    invalid_email: Please enter a valid email address
+    admin_only: 'Warning: this functionality is only for administrators'
+  email: Simply enter an email address
+  communs: LesCommuns.org
