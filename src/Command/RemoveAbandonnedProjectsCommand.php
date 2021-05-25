@@ -32,7 +32,7 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
     {
         $this
           ->setName('app:projects:check-for-deleting')
-          ->setDescription('Check project that are abandonned (no login, no elements...) and ask owner to remove them') // TODO translate ?
+          ->setDescription('Check project that are abandonned (no login, no elements...) and ask owner to remove them') // 
        ;
     }
 
@@ -43,18 +43,18 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
         $projectsToWarn = $qb
             ->addAnd(
                 $qb->expr()->addOr(
-                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-8 month"))), // TODO translate ?
-                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-4 month")))->field('dataSize')->lte(5) // TODO translate ?
+                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-8 month"))), 
+                    $qb->expr()->field('lastLogin')->lte($date->setTimestamp(strtotime("-4 month")))->field('dataSize')->lte(5)
                 ),
                 $qb->expr()->addOr(
                     $qb->expr()->field('warningToDeleteProjectSentAt')->exists(false),
                     // resend the message every month
-                    $qb->expr()->field('warningToDeleteProjectSentAt')->lte($date->setTimestamp(strtotime("-1 month"))) // TODO translate ?
+                    $qb->expr()->field('warningToDeleteProjectSentAt')->lte($date->setTimestamp(strtotime("-1 month"))) 
                 )
             )->getCursor();
                         
         if ($projectsToWarn->count() > 0)
-            $this->log('Nombre de projets avertis de la suppression : '. $projectsToWarn->count()); // TODO translate
+            $this->log('Project warned count : '. $projectsToWarn->count());
 
         foreach ($projectsToWarn as $project) {
             $subject = "Votre carte créée sur $this->baseUrl peut elle être effacée?"; // TODO translate

@@ -19,7 +19,7 @@
             <a href="{{ path('gogo_directory_showElement', {'id': element.id, 'name': element.name}) | replace({"%23":'#'}) }}">{{ element.name }}</a>
           </td>
           <td>{{ ('elements.fields.contributionType_choices.' ~ contribution.type)|trans({}, 'admin') }}</td>
-          <td>{{ contribution.createdAt|date("d/m/Y")}}</td> {# TODO Translation use local #}
+          <td>{{ contribution.createdAt|date('commons.date_format'|trans({}, 'admin'))}}</td> {# TODO Translation use local #}
           <td>{{ ('elements.fields.status_choices.' ~ contribution.status)|trans({}, 'admin') }}</td>
         </tr>
       {% endfor %}

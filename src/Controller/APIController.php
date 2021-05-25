@@ -75,7 +75,6 @@ class APIController extends GoGoController
 
         // TODO count how much a user is using the API
         // $responseSize = strlen($elementsJson);
-        // $date = date('d/m/Y');
 
         return $this->createResponse($elementsJson, $config, $status);
     }

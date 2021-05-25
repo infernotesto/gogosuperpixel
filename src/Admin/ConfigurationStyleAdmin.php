@@ -21,7 +21,7 @@ class ConfigurationStyleAdmin extends ConfigurationAbstractAdmin
     {
         $formMapper
             ->panel('theme', ['class' => 'col-md-6'])
-                ->add('theme', ChoiceType::class, ['choices' => ['Défaut' => 'default', 'Flat' => 'flat', 'Près de chez Nous' => 'presdecheznous', 'Transiscope' => 'transiscope']]) # TODO translation ??
+                ->add('theme', ChoiceType::class, ['choices' => [$this->trans('commons.default') => 'default', 'Flat' => 'flat', 'Près de chez Nous' => 'presdecheznous', 'Transiscope' => 'transiscope']])
                 ->add('mainFont', null, ['attr' => ['class' => 'gogo-font-picker']])
                 ->add('titleFont', null, ['attr' => ['class' => 'gogo-font-picker']])
 

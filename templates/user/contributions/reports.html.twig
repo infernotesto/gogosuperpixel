@@ -24,7 +24,7 @@
                 <a href="{{ path('gogo_directory_showElement', {'id': report.element.id, 'name': report.element.name}) | replace({"%23":'#'}) }}">{{ report.element.name }}</a>
               </td>
               <td>{{ ('elements.fields.reportValues_choices.' ~ report.value)|trans({}, 'admin') }}</td>
-              <td>{{ report.createdAt|date("d/m/Y")}}</td> {# TODO Translation use local #}
+              <td>{{ report.createdAt|date('commons.date_format'|trans({}, 'admin'))}}</td>
               <td>
                 {% if report.isResolved %}
                   <span>{{ ('elements.fields.status_choices.' ~ report.element.status)|trans({}, 'admin') }}</span>

@@ -21,7 +21,7 @@
           <span class='title'>
             <span class="name">{{ duplicate.name }}</span>
             {% if duplicate.sourceKey %} ({{ duplicate.sourceKey }}){% endif %}
-            <span class="updated-at"> - Maj {{ duplicate.updatedAt|date("d/m/Y") }}</span> {# TODO Translation use local #}
+            <span class="updated-at"> - Maj {{ duplicate.updatedAt|date('commons.date_format'|trans) }}</span> {# TODO Translation use local #}
             {% if duplicate.isDeleted %}
               <span style="color: #9c3f3a;margin-left: 5px;">
                 {{ 'duplicates.node.deleted'|trans }}

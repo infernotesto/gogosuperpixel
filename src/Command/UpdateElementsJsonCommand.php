@@ -25,8 +25,8 @@ class UpdateElementsJsonCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:elements:updateJson')
-        ->addArgument('ids', InputArgument::REQUIRED, 'ids to update') // TODO translate ?
-        ->setDescription('Calculate again all the element json representation'); // TODO translate ?
+        ->addArgument('ids', InputArgument::REQUIRED, 'ids to update') 
+        ->setDescription('Calculate again all the element json representation');
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
@@ -42,7 +42,7 @@ class UpdateElementsJsonCommand extends GoGoAbstractCommand
 
             $count = $elements->count();
 
-            $this->log('Generating json representation for '.$count.' elements...'); // TODO translate ?
+            $this->log('Generating json representation for '.$count.' elements...'); 
 
             $i = 0;
             foreach ($elements as $key => $element) {
@@ -53,14 +53,14 @@ class UpdateElementsJsonCommand extends GoGoAbstractCommand
                     $dm->clear();
                 }
                 if (0 == ($i % 1000)) {
-                    $this->log($i.' / '.$count.' elements completed...'); // TODO translate ?
+                    $this->log($i.' / '.$count.' elements completed...');
                 }
             }
 
             $dm->flush();
             $dm->clear();
 
-            $this->log('All elements successfully updated'); // TODO translate ?
+            $this->log('All elements successfully updated');
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

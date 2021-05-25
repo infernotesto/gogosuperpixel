@@ -37,7 +37,7 @@ class ProjectUpdateCommand extends Command
     protected function configure()
     {
         $this->setName('app:project:update');
-        $this->addArgument('dbname', InputArgument::OPTIONAL, 'Db name'); // TODO translate ?
+        $this->addArgument('dbname', InputArgument::OPTIONAL, 'Db name'); // 
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -72,7 +72,7 @@ class ProjectUpdateCommand extends Command
                 $rootDm->flush();
 
                 if (!$result) {
-                    $this->logger->error('Error while update project info'); // TODO translate ?
+                    $this->logger->error('Error while update project info'); // 
                     return;   
                 }             
 
@@ -94,7 +94,7 @@ class ProjectUpdateCommand extends Command
 
             $config = $dm->get('Configuration')->findConfiguration();
             if (!$config) {
-                $this->logger->error("Project {$project->getDomainName()} does not have config"); // TODO translate ?
+                $this->logger->error("Project {$project->getDomainName()} does not have config"); // 
                 return false;
             }
 

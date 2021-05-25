@@ -3,7 +3,7 @@
 <div {% if not loop.last and not itemContainer|default(true) %}class="item-container"{% endif %}>
 	<div style="margin-bottom:5px">
     <span class="label {{ labelClass }}">{{ ('elements.fields.itemValues_choices' ~ item.value)|trans }}</span> 
-    <div style="float:right">{{ item.createdAt|date('commons.format'|trans)}}</div>
+    <div style="float:right">{{ item.createdAt|date('commons.date_time_format'|trans)}}</div>
     {% if smallWidth|default(false) %}
       </br>
       <span style="display:block;padding-top: 5px;">

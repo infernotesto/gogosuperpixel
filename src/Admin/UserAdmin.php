@@ -43,7 +43,7 @@ class UserAdmin extends GoGoAbstractAdmin
             ->add('contributionsCount')
             ->add('votesCount')
             ->add('reportsCount')
-            ->add('createdAt', 'date', ['format' => 'd/m/Y'])
+            ->add('createdAt', 'date', ['format' => $this->trans('commons.date_format')])
         ;
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {

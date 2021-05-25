@@ -23,7 +23,6 @@ function endsWith( $haystack, $needle ) {
 function slugify($text, $lowercase = true) {
     if ($lowercase) $text = strtolower($text); // lowercase
     
-     // TODO translate add ß, nordic letters... ?
     $text = str_replace('é', 'e', $text);
     $text = str_replace('è', 'e', $text);
     $text = str_replace('ê', 'e', $text);

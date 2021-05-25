@@ -78,7 +78,7 @@ class FOSUBUserProvider extends BaseClass
         $this->userManager->updateUser($user);        
         
         // Adds flash message
-        $this->flash->add('success', "Authentification réussie via \"$service\", vous êtes maintenant connecté !"); // TODO translate
+        $this->flash->add('success', "Authentification réussie via \"$service\", vous êtes maintenant connecté !"); 
         return $user;
     }
 }

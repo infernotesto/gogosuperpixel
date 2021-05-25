@@ -16,7 +16,7 @@
             <a href="{{ path('gogo_directory_showElement', {'id': contribution.element.id, 'name': contribution.element.name}) | replace({"%23":'#'}) }}">{{ contribution.element.name }}</a>
           </td>
           <td>{{ ('elements.fields.contributionType_choices.' ~ contribution.type)|trans({}, 'admin') }}</td>
-          <td>{{ contribution.createdAt|date("d/m/Y")}}</td> {# TODO Translation use local #}
+          <td>{{ contribution.createdAt|date('commons.date_format'|trans({}, 'admin'))}}</td> {# TODO Translation use local #}
           <td>
             <a href="{{ path('gogo_element_edit', {'id': contribution.element.id, 'hash': contribution.element.randomHash}) }}">
               <button class="btn-gogo btn-secondary small waves-light waves-effect btn">{{ 'my_contributions.edit'|trans }}</button>

@@ -9,7 +9,7 @@
 					{{ 'elements.proposedBy'|trans({'%name%': value.getUserDisplayName})|raw }}
 					<span class="label label-default">{{ ('elements.fields.userRoles_choices.' ~ value.userRole)|trans({}, 'admin') }}</span>
 					<span><i>{{ value.resolvedMessage}}</i><span>
-					<div style="float:right">{{ value.updatedAt|date('commons.format'|trans)}}</div>
+					<div style="float:right">{{ value.updatedAt|date('commons.date_time_format'|trans)}}</div>
 			</div>
 		{% else %}
 			<div class="small-margin">
@@ -19,14 +19,14 @@
 					{% if value.resolvedBy %}<span>(<u>{{value.resolvedBy }}</u>)</span>{% endif %}
 
 					{% if showResolved|default(false) %}
-						<div style="float:right">{{ value.updatedAt|date('commons.format'|trans)}}</div>
+						<div style="float:right">{{ value.updatedAt|date('commons.date_time_format'|trans)}}</div>
 					{% endif %}
 			</div>
 
 			<div class="small-margin">
 				{{ 'elements.proposedBy'|trans({'%name%': value.getUserDisplayName})|raw }}
 				<span class="label label-default">{{ ('elements.fields.userRoles_choices.' ~ value.userRole)|trans({}, 'admin') }}</span>
-				{{ 'elements.proposedAt'|trans({'%date%': value.createdAt|date('commons.format'|trans)}) }}
+				{{ 'elements.proposedAt'|trans({'%date%': value.createdAt|date('commons.date_time_format'|trans)}) }}
 			</div>
 		{% endif %}
 

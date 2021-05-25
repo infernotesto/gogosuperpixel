@@ -25,10 +25,10 @@ class GenerateElementsCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:elements:generate')
-        ->setDescription('Generate random elements.') // TODO translate ?
-        ->setHelp('This command allows you generate random elements')  // TODO translate ?
-        ->addArgument('number', InputArgument::REQUIRED, 'The number of generated elements') // TODO translate ?
-        ->addArgument('generateVotes', InputArgument::OPTIONAL, 'If we generate somes fake votes') // TODO translate ?
+        ->setDescription('Generate random elements.') 
+        ->setHelp('This command allows you generate random elements')  
+        ->addArgument('number', InputArgument::REQUIRED, 'The number of generated elements')
+        ->addArgument('generateVotes', InputArgument::OPTIONAL, 'If we generate somes fake votes') 
     ;
     }
 
@@ -38,6 +38,6 @@ class GenerateElementsCommand extends GoGoAbstractCommand
 
         $randomService->generate($input->getArgument('number'), $input->getArgument('generateVotes'));
 
-        $this->log('Element generated !'); // TODO translate ?
+        $this->log('Elements generated !');
     }
 }

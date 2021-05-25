@@ -78,12 +78,8 @@ class ChartBlockService extends AbstractBlockService
         $this->mongoDateEnd = new \MongoDate($timestampEnd);        // Round to the day
         $this->mongoDateStart = new \MongoDate($timestampStart);    // Add one day to that
 
-        $this->dateEnd = date('m/d/Y', $timestampEnd); // TODO translate ?
-        $this->dateStart = date('m/d/Y', $timestampStart); // TODO translate ?
-
-        // TODO translate
-        // "chart context menu" not set
-        // date/time must use locale
+        $this->dateEnd = date('m/d/Y', $timestampEnd); 
+        $this->dateStart = date('m/d/Y', $timestampStart); 
 
         // ----------------------
         // USER INTERACTION CHART
@@ -170,7 +166,7 @@ class ChartBlockService extends AbstractBlockService
         return $contribsResolvedPie;
     }
 
-    private function dateRange($first, $last, $step = '+1 day', $format = 'm/d/Y') // TODO translate use local ?
+    private function dateRange($first, $last, $step = '+1 day', $format = 'm/d/Y')
     {
         $dates = [];
         $current = strtotime($first);
@@ -230,7 +226,7 @@ class ChartBlockService extends AbstractBlockService
             ->expression(
                 $builder->expr()
                     ->field('day')
-                    ->dateToString('%m/%d/%Y', '$'.$groupField) // TODO translate use locale ?
+                    ->dateToString('%m/%d/%Y', '$'.$groupField)
                 )
             ->field('count')
                 ->sum(1)

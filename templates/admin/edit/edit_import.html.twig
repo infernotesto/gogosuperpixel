@@ -6,7 +6,7 @@
 
 {% block sonata_form_actions %}
   {% if object.lastRefresh %}
-    <p>{{ 'imports.edit.lastRefresh'|trans }} {{ object.lastRefresh|date('commons.format'|trans) }}</p>
+    <p>{{ 'imports.edit.lastRefresh'|trans }} {{ object.lastRefresh|date('commons.date_time_format'|trans) }}</p>
   {% endif %}
 
   <button type="submit" class="btn btn-success" name="submit">

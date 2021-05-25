@@ -73,8 +73,8 @@ class ElementAdminShowEdit extends ElementAdminList
             ->add('randomHash')
             ->add('oldId')
             ->add('sourceKey')
-            ->add('createdAt', 'datetime', ['format' => $this->t('commons.format')])
-            ->add('updatedAt', 'datetime', ['format' => $this->t('commons.format')])
+            ->add('createdAt', 'datetime', ['format' => $this->t('commons.date_time_format')])
+            ->add('updatedAt', 'datetime', ['format' => $this->t('commons.date_time_format')])
           ->end();
 
         if ($this->subject->isPending()) {

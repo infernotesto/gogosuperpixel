@@ -24,14 +24,14 @@ class NotifyModerationCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:notify-moderation')
-        ->setDescription('Notify users about pending moderation or problem on an import'); // TODO translate ?
+        ->setDescription('Notify users about pending moderation or problem on an import'); // 
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
     {
         $userNotified = $this->notifService->sendModerationNotifications();
         if ($userNotified) {
-            $this->log("Notify Moderation, $userNotified users notified"); // TODO translate ?
+            $this->log("Notify Moderation, $userNotified users notified"); // 
         }        
     }
 }

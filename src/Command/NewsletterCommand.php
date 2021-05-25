@@ -24,7 +24,7 @@ final class NewsletterCommand extends GoGoAbstractCommand
     {
         $this
           ->setName('app:users:sendNewsletter')
-          ->setDescription('Send the newsletter to each user') // TODO translate ?
+          ->setDescription('Send the newsletter to each user') // 
        ;
     }
 
@@ -44,7 +44,7 @@ final class NewsletterCommand extends GoGoAbstractCommand
         $this->remainingEmailsCount -= $usersCount;
 
         if ($usersCount)
-            $this->log("Send Newsletter for $usersCount users"); // TODO translate ?
+            $this->log("Send Newsletter for $usersCount users"); // 
 
         foreach ($users as $user) {
             $dm->persist($user);

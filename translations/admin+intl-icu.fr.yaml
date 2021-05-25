@@ -176,7 +176,9 @@ commons:
   actual_file: 'Fichier actuel :'
   anonymous: Anonyme
   btn_update_and_edit: Mettre à jour
-  format: d/m/Y à H:i
+  default: Défaut
+  date_format: d/m/Y
+  date_time_format: d/m/Y à H:i
   send: Envoyer
 
 config_api:

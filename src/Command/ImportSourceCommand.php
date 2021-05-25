@@ -31,9 +31,9 @@ class ImportSourceCommand extends GoGoAbstractCommand
     {
         $this
         ->setName('app:elements:importSource')
-        ->setDescription('Check for updating external sources')  // TODO translate ?
-        ->addArgument('sourceNameOrImportId', InputArgument::REQUIRED, 'The name of the source') // TODO translate ?
-        ->addArgument('manuallyStarted', InputArgument::REQUIRED, 'Started by a user from the UI or by gogocarto crontab'); // TODO translate ?
+        ->setDescription('Check for updating external sources')  // 
+        ->addArgument('sourceNameOrImportId', InputArgument::REQUIRED, 'The name of the source') // 
+        ->addArgument('manuallyStarted', InputArgument::REQUIRED, 'Started by a user from the UI or by gogocarto crontab'); // 
     }
 
     protected function gogoExecute(DocumentManager $dm, InputInterface $input, OutputInterface $output): void
@@ -50,7 +50,7 @@ class ImportSourceCommand extends GoGoAbstractCommand
                 $this->error($message);
                 return;
             }
-            $this->log("Updating source {$import->getSourceName()} begins..."); // TODO translate ?
+            $this->log("Updating source {$import->getSourceName()} begins..."); // 
             $result = $this->importService->startImport($import, $input->getArgument('manuallyStarted'));
             $this->log($result);
         } catch (\Exception $e) {

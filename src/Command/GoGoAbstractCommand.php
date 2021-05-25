@@ -46,7 +46,7 @@ class GoGoAbstractCommand extends Command
             $this->output = $output;
 
             // create dummy user, as some code called from command will maybe need the current user informations
-            $token = new AnonymousToken('admin', 'GoGo Gadget au Bot', ['ROLE_ADMIN']); // TODO translate ?
+            $token = new AnonymousToken('admin', 'GoGoBot', ['ROLE_ADMIN']);
             $this->security->setToken($token);
 
             if ($this->runOnlyOnRootDatabase) {
@@ -71,7 +71,7 @@ class GoGoAbstractCommand extends Command
             }
         } catch (\Exception $e) {
             $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine();
-            $this->error('Error executing command: '.$message);  // TODO translate ?
+            $this->error('Error executing command: '.$message);
         }
         return 1;
     }
@@ -103,7 +103,7 @@ class GoGoAbstractCommand extends Command
         $this->dm->persist($log);
         $message = "DB {$this->dm->getConfiguration()->getDefaultDB()} : $message";
         $this->logger->error($message);
-        $this->output->writeln('ERROR '.$message);  // TODO translate ?
+        $this->output->writeln('ERROR '.$message);
         $this->dm->flush();
     }
 }

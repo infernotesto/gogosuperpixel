@@ -100,7 +100,7 @@ class MigrationCommand extends Command
     protected function configure(): void
     {
         $this->setName('db:migrate')
-             ->setDescription('Update datatabse each time after code update'); // TODO translate ?
+             ->setDescription('Update datatabse each time after code update'); // 
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -125,13 +125,13 @@ class MigrationCommand extends Command
                 $this->current = 0;
                 foreach ($dbs as $db) {
                     foreach ($migrationsToRun as $migration) {
-                        $this->log('run migration '.$migration, $db); // TODO translate ?
+                        $this->log('run migration '.$migration, $db); // 
                         $this->runMongoCommand($dm, $db, $migration);
                         $this->current++;
                     }
                 }
             } else {
-                $this->log('No Migrations to perform'); // TODO translate ?
+                $this->log('No Migrations to perform'); // 
             }
 
             // run them syncronously otherwise all the command will be run at once
@@ -142,32 +142,32 @@ class MigrationCommand extends Command
                 $this->current = 0;
                 foreach ($dbs as $db) {
                     foreach ($commandsToRun as $command) {
-                        $this->log('call command '.$command, $db); // TODO translate ?
+                        $this->log('call command '.$command, $db); // 
                         $this->asyncService->callCommand($command, [], $db);
                         $this->current++;
                     }
                 }
             } else {
-                $this->log('No commands to run'); // TODO translate ?
+                $this->log('No commands to run'); // 
             }
 
             if (count(self::$messages) > $migrationState->getMessagesIndex()) {
                 $messagesToAdd = array_slice(self::$messages, $migrationState->getMessagesIndex());
                 $this->current = 0;
                 foreach ($dbs as $db) {
-                    $this->log(count($messagesToAdd).' messages to add', $db); // TODO translate ?
+                    $this->log(count($messagesToAdd).' messages to add', $db); // 
                     foreach ($messagesToAdd as $message) {
                         // create a GoGoLogUpdate
-                        $this->asyncService->callCommand('gogolog:add:message', ['"'.$message.'"'], $db); // TODO translate ?
+                        $this->asyncService->callCommand('gogolog:add:message', ['"'.$message.'"'], $db); // 
                     }
                     $this->current++;
                 }
             } else {
-                $this->log('No Messages to add to dashboard'); // TODO translate ?
+                $this->log('No Messages to add to dashboard'); // 
             }
         } catch (\Exception $e) {
-            $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine(); // TODO translate ?
-            $this->error('Error performing migrations: '.$message); // TODO translate ?
+            $message = $e->getMessage().'</br>'.$e->getFile().' LINE '.$e->getLine(); // 
+            $this->error('Error performing migrations: '.$message); // 
         }
 
         $migrationState->setMigrationIndex(count(self::$migrations));
@@ -185,15 +185,15 @@ class MigrationCommand extends Command
 
     protected function log($message, $db = null)
     {
-        if ($db) $message = "DB {$db} ($this->current/$this->count) : $message"; // TODO translate ?
+        if ($db) $message = "DB {$db} ($this->current/$this->count) : $message"; // 
         $this->logger->info($message);
         $this->output->writeln($message);
     }
 
     protected function error($message, $db = null)
     {
-        if ($db) $message = "DB {$this->db} ($this->current/$this->count) : $message"; // TODO translate ?
+        if ($db) $message = "DB {$this->db} ($this->current/$this->count) : $message"; // 
         $this->logger->error($message);
-        $this->output->writeln('ERROR '.$message);  // TODO translate ?
+        $this->output->writeln('ERROR '.$message);  // 
     }
 }

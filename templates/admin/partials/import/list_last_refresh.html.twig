@@ -3,7 +3,7 @@
 
 {% block field %}
   {% spaceless %}
-    <span style="margin-right: 8px">{{ object.lastRefresh ? object.lastRefresh|date('commons.format'|trans) : '' }}</span>
+    <span style="margin-right: 8px">{{ object.lastRefresh ? object.lastRefresh|date('commons.date_time_format'|trans) : '' }}</span>
     {% if object.logs|length > 0 and object.isDynamicImport %}
       {% set log = object.logs[0] %}
       {% if log.getDataProp('elementsCreatedCount') > 0 %}
