@@ -35,3 +35,13 @@ action:
   continue: Continue
   cancel: Cancel
   error: 'Error : {message}'
+  submit: Save
+  send_stay: Send and stay on the form
+  send: Send
+  search: Search
+  geolocalize_me: Locate my postion
+commons:
+  choose_one_option: Please choose at least one
+  choose_category: Choose {cat}
+  check_password: Re-enter your password
+  category_placeholder: Specify (if necessary)
