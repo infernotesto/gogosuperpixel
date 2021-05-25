@@ -12,6 +12,22 @@ bulk:
   automaticMerge: Automatic merge
   analyse: Analyzing the elements from {first} to {last}
   _label: Bulk action
+  update_gamification: Update the scores (vote numbers, and total score per user)
+  updateUser: '{count, plural, =0 {no updated user} =1 {# updated user} other {# updated
+    users} }'
+  return: Back to duplicates handling
+  results: Results
+  manualMerge: Potential duplicates detected
+  managed: Handle the detected duplicates
+  isDuplicateAction: Duplicate detection
+  errorElement: 'Error while considering the {id} element: FILE {file}, LINE {line}:
+    {error}'
+  duplicateKept: Duplicate kept
+  duplicateDeleted: Duplicate deleted
+  done: All the elements have been successfully considered
+  detectDuplicatesAction: Duplicate detection
+  deleteElement: '{count, plural,  =0 {No element has been deleted} =1 {# element
+    has been deleted} other {# elements have been deleted} }'
 api_ui:
   use_limit: Limit the number of results
   use_categories: Filter by categories
@@ -28,3 +44,75 @@ js:
   element_form:
     geocoded_marker_text: Move me to specify the position</br>(in the centre of the
       building)
+categories:
+  list:
+    multiple: Multiple
+    help_description: "<div style=\"float: left;margin-right: 30px;\"><iframe height=\"\
+      200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/4a5b7593-aedb-4983-b562-3cab03bb1691\"\
+      \ frameborder=\"0\" allowfullscreen></iframe></div>\n<div style=\"\"><iframe\
+      \ height=\"200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/6ff39dd4-0db8-435b-a3bd-e87307e7e5d1\"\
+      \ frameborder=\"0\" allowfullscreen></iframe></div> </br>Categories are always\
+      \ grouped within <b>categories groups</b></br> In order to add categories to\
+      \ a group, the simplest thing is to edit the category group. You will then see\
+      \ at the bottom of the page the list of group's categories. You can the edit\
+      \ them or add new ones.</br></br>\nYou can have multiple groups of categories\
+      \ in parallel. To do that, create a new group, save it and add categories to\
+      \ it</br></br>\nA category can itself contain a subgroup containing subcategories\
+      \ inside it. When editing a category at the bottom of the page, you can add\
+      \ a subgroup to it and then populate it with new categories.</br></br> <b>(Group)\
+      \ CATEGORY GROUP 1</b> <ul>\n  <li>Category 1</li>\n  <li>Category 2</li>\n\
+      </ul> <b>(Group) CATEGORY GROUP 2</b> <ul>\n  <li>Category 1</li>\n  <li>Category\
+      \ 2</li>\n  <li>Category 3</li>\n</ul> <ul>\n  <b>(Group) SUBCATEGORY GROUP\
+      \ 1</b>\n  <ul>\n    <li>subcategory 1</li>\n    <li>subcategory 2</li>\n  </ul>\n\
+      </ul>"
+    help: Some help
+    empty: No available categories. Please create a new group of categories and fill
+      in categories inside it. Categories are an essential element of GoGoCarto. Your
+      map may not work at all without available categories
+    categoriesDescription: Describe the categories
+    addCategory: Add a category
+    addCategories: Add a group of categories
+  form:
+    groups:
+      primary: Main settings
+      secondary: Secondary display options
+      display: Display this group
+      categories: Categories of this group
+  fields:
+    unexpandable_help: In this menu, this group categories will always be displayed
+    unexpandable: Make this group of categories nonexpendable
+    singleOption_help: Only one category at a time can be selected
+    singleOption: Single option
+    showExpanded: Display the categories in the initial position (or else one will
+      have to click to display them)
+    pickingOptionText: 'Text to display in the form: Choose…'
+    parent_placeholder: Root
+    parent: Parent category
+    option:
+      name: Name
+      index: Position
+      id: More options
+      icon: Icon
+      color: Color
+    nameShort_help: The code sign will be used in the menu as we are often short on
+      space
+    name: Group name
+    isMandatory_help: A category from this group must be selected
+    isMandatory: Mandatory choice
+    index: Position
+    enableDescription_help: Allows to write a description for each categories. For
+      example the Agriculture category could be associated with "Market gardening,
+      processed goods, ..."
+    enableDescription: Activate the categories description
+    displaySuboptionsInline: Display the sub-categories in one line
+    displayInMenu_help: The group name won't be displayed, but the categories will
+    displayInMenu: In the menu
+    displayInInfoBar_help: The group name will not be displayed, but the categories
+      will
+    displayInInfoBar: In the information bar
+    displayInForm_help: Neither the group nor the categories will be displayed in
+      the form
+    displayInForm: In the form
+    descriptionLabel: Description area label
+    customId: Personalized id
+  _label: Categories
