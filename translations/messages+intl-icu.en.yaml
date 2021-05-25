@@ -4,6 +4,7 @@ action:
   element:
     vote:
       unallowed: Sorry but you are not allowed to vote !
+      uncomplete: 'Vote action : missing parameters'
     stamp:
       uncomplete: The parameters are incomplete
       unallowed: You are not allowed to use this label
@@ -33,3 +34,4 @@ action:
   create: Create
   continue: Continue
   cancel: Cancel
+  error: 'Error : {message}'
