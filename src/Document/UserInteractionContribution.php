@@ -67,8 +67,8 @@ class UserInteractionContribution extends UserInteraction
         $result .= ', "userRole":'.$this->getUserRole();
         $result .= ', "resolvedMessage":'.json_encode($this->getResolvedMessage());
         $result .= ', "resolvedBy":"'.$this->getResolvedBy().'"';
-        $result .= ', "updatedAt":"'.$this->formatDate($this->getCreatedAt()).'"';
-        $result .= ', "createdAt":"'.$this->formatDate($this->getUpdatedAt()).'"';
+        $result .= ', "createdAt":"'.$this->formatDate($this->getCreatedAt()).'"';
+        $result .= ', "updatedAt":"'.$this->formatDate($this->getUpdatedAt()).'"';
         $result .= '}';
 
         return $result;
