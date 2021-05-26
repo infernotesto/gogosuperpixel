@@ -68,6 +68,9 @@ element.form:
   controller:
     error_unauthorized: You are not allowed to modify this element, sorry !
     error_dont_exist: The requested element does not exist...
+    pending: Your contribution is currently pending validation. <a class='validation-process'
+      onclick="$('#popup-collaborative-explanation').openModal()">click here</a> to
+      learn more about the collective moderation process !
   admin_section:
     send_mail:
       modify: Notify the {element} changes by sending an email
