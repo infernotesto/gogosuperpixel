@@ -1,10 +1,19 @@
 home:
-  pick_category: Pick a category
+  pick_category: 'Pick a category (by default: all)'
+  search:
+    placeholder: Enter
+    category: a category
+    all: All
+    address: an address
+  logout: Log out
+  geolocalize: Geolocate your position
+  credits: Powered by {ggc}
+  admin_interface: Admin interface
 action:
   element:
     vote:
-      unallowed: Sorry but you are not allowed to vote !
-      uncomplete: 'Vote action : missing parameters'
+      unallowed: Sorry, you are not allowed to vote!
+      uncomplete: 'The voting parameters are incomplete'
     stamp:
       uncomplete: The parameters are incomplete
       unallowed: You are not allowed to use this label
@@ -34,7 +43,7 @@ action:
   create: Create
   continue: Continue
   cancel: Cancel
-  error: 'Error : {message}'
+  error: 'Error: {message}'
   submit: Save
   send_stay: Send and remain on the form
   send: Send
@@ -47,30 +56,35 @@ commons:
   category_placeholder: Specify (if necessary)
   validation: Validation
   username: Username
-  register: Sign up
+  register: Create account
   password: Password
   optional: (optional)
   newsletter-explanation: Be informed by email of new references near you!
   never: Never
   menu: Menu
-  location: Your city or address
+  location: Your address or town
   every:
     week: Every week
     month: Every month
   errors:
-    too_long: Bummer, this text is a little too long !
-    file-too-big: This file is too big, the maximum allowed size is {size} MB
-    bad_url: Please enter a URL of the http://... type
-    bad_number: This is not a number !
+    too_long: Oops, this text is a little too long!
+    file-too-big: This file is too large, the maximum size allowed is {size} MB
+    bad_url: Please enter a URL such as http://…
+    bad_number: This is not a number!
     bad_email: Please enter a valid email address
   email: Email address
 element.form:
   controller:
-    error_unauthorized: You are not allowed to modify this element, sorry !
-    error_dont_exist: The requested element does not exist...
+    error_unauthorized: You are not allowed to edit this element, sorry!
+    error_dont_exist: The requested element does not exist…
     pending: Your contribution is currently pending validation. <a class='validation-process'
       onclick="$('#popup-collaborative-explanation').openModal()">click here</a> to
       learn more about the collective moderation process !
+    thankyou:
+      edited: Thank you for your help! The changes have been taken into account!
+      added: Thank you for your help! {name} has been added
+    success: Your account has been created! You can now complete <a href="{url}" >your
+      profile</a>!
   admin_section:
     send_mail:
       modify: Notify the {element} changes by sending an email
@@ -79,29 +93,84 @@ element.form:
     admin_message: Change details, this text will replace 'customMessage' in the automatic
       emails
     _label: Validation
+  error_becomeOwner: Sorry, this element already belongs to someone!
+  create_user: Password to create your account
+  title_edit: Editing data
+  success_becomeOwner: You now own {name}!
+  open_hours:
+    to: to
+    recopy_tooltip: Copy the previous schedules
+    from: From
+    and: And
+    add_tooltip: Add time slot
+  need_help: Help?
+  localize: Locate
+  info_saved: Changes saved!
+  error_username: This username is already taken!
 duplicates:
   title: Duplicate detection
-  subtitle: Similar elements have been detected, maybe you wanted to add one of them
-    ?
-  see_on_map: (Access on OpenStreetMap)
-  new_element: No, this is a new element, let's continue !
+  subtitle: Similar elements have been detected, maybe you wanted to add one of them?
+  see_on_map: (View on OpenStreetMap)
+  new_element: No, this is a new element, let's proceed!
   label: Duplicate detection
-  duplicated_element: It's him !
+  duplicated_element: This is it!
   controller:
     merged: This element has been merged with a potential duplicate
-    marked_long: The elements has been confirmed as non-duplicates
+    marked_long: The elements have been confirmed as non-duplicates
     marked: Flagged as not a duplicate
 directory:
   _label: The map
 contributor-login:
   printemps: Education spring
-  oauth: Sign-in with your account
-  login: Sign-in
+  oauth: Sign in with your account
+  login: Sign in
   error:
     used_email: Sorry, an account already exists with this email address! Please sign
       in or use another address!
     invalid_email: Please enter a valid email address
-    admin_only: 'Warning: this functionality is only for administrators'
+    admin_only: 'Warning: This feature is only for administrators'
   email: Simply enter an email address
   communs: LesCommuns.org
-  _label: Identification
+  _label: Authentication
+js:
+  element_form:
+    geocoded_marker_text: Move me to specify the position</br>(in the centre of the
+      building)
+my_parameters:
+  input_location: Your address or town
+  _label: My settings
+  unit: kilometres
+pending-contributions:
+  _label: My pending contributions
+project.create:
+  domaine_name: Domain name
+  data-error: Oops, this name is too long!
+reports:
+  empty: You haven't reported any errors yet. Could our database be perfect? :P
+  element: Name
+  reportValues:
+    v0: The element does not exist any more
+    v2: The element does not respect the charter
+    v1: Information is wrong
+  report: Reporting
+vote:
+  vote_modified: 'Thank you {user}: your vote has been edited!'
+votes:
+  empty: You haven't voted yet! You have to start :) </br>Voting allows collaborative
+    moderation!
+my_contributions:
+  name: Name
+  me: Me
+  edit: Edit
+  date: Date
+  confirmation_cancel: Cancel
+  confirmation_button: I confirm
+  action: Action
+  _label: My contributions
+login:
+  register: Need an account? <a href="{url}">Sign up</a>
+  _label: Log in
+load_configuration:
+  AppBaseline: Create maps à gogo
+  AddElementHintText: Contribute to the database!
+  AboutHeaderTitle: About
