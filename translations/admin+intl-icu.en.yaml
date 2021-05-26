@@ -1,5 +1,8 @@
 config_infobar:
   _label: Info Bar
+  fields:
+    description:
+      colorOptionId: The category ID that gives its main colour to this element
 abouts:
   _label: Popups
   fields:
@@ -93,7 +96,7 @@ categories:
       index: Position
       id: More options
       icon: Icon
-      color: Color
+      color: Colour
     nameShort_help: The code sign will be used in the menu as we are often short on
       space
     name: Group name
@@ -116,3 +119,77 @@ categories:
     descriptionLabel: Description area label
     customId: Personalized id
   _label: Categories
+config_style:
+  fields:
+    searchBarColor: Search bar colour
+    textLightSoftColor: Softened light text colour
+    textLightColor: Clear text colour
+    textDarkSoftColor: Softened dark text colour
+    textDarkColor: Dark text colour
+    textColor: Text colour
+    secondaryColor: Secondary colour
+    primaryColor: Primary colour
+    pendingColor: Colour pending validation
+    interactiveSectionColor: Colour section to vote in detail sheet
+    homeBackgroundColor: Home page background colour
+    headerTextColor: Header text colour
+    headerHoverColor: Header hover text colour
+    headerColor: Header background colour
+    errorColor: Error colour
+    disableColor: Colour disabled
+    contentBackgroundElementBodyColor: Background colour of detail sheet content
+    contentBackgroundColor: Background colour of page content
+    choose_color: Click to choose a colour
+    backgroundColor: Page background colour
+  form:
+    groups:
+      secondaryColor: Other colours
+      primaryColors: Main colours
+      advancedColor: Advanced colours
+projects:
+  initialize:
+    plainPassword-1: Password
+    email: E-mail address
+partners:
+  form:
+    websiteUrl: Website's URL
+sonata.user.user:
+  batch:
+    error: 'ERROR: {message}'
+    usersWithoutEmail: '{count, plural =1 {# e-mail could not be sent, because no
+      e-mail address was given} other {# e-mails could not be sent, because no e-mail
+      address was given} }'
+  fields:
+    content: Message
+    gamification: Interactions
+    email: E-mail
+    sendMail: Send e-mail
+  facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
+    be informed of the evolution of your contributions'
+  form:
+    plainPassword: Password
+    main-roles: Main roles
+    watchModeration: Send notification e-mail when items are to be moderated
+config_emails:
+  form:
+    groups:
+      mailForElements: Automatic e-mails for {element}
+      mailForContributors: Automatic e-mails for contributors
+      infosNewletter: Information about the newsletter
+      infosElements: Information about automatic e-mails
+      infosContributors: Information about automatic e-mails
+  _label: E-mails / newsletter
+wrappers:
+  fields:
+    textColor: Text colour
+    backgroundColor: Background colour
+options:
+  fields:
+    useColorForMarker_help: If an item has several categories that give the colour,
+      the lowest level category is used
+    useColorForMarker: Use the colour of this category for the marker
+    softColor_help: Some colours suit the marker (a bit flashy) but don't really suit
+      the header of the detail sheet. In this case, the ‘softened’ version is used
+      if it has been filled in
+    softColor: Softened colour
+    color: Colour
