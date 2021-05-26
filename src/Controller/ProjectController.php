@@ -174,7 +174,7 @@ class ProjectController extends Controller
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             $userManager->updateUser($user, true);
 
-            $this->addFlash('success', $t->trans('dashboard.welcome')); 
+            $this->addFlash('success', $t->trans('dashboard.welcome', [], 'admin')); 
             $response = $this->redirectToRoute('sonata_admin_dashboard');
 
             $this->authenticateUser($user, $response, $loginManager);

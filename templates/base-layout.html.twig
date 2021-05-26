@@ -4,7 +4,7 @@
 
 <html class="no-js gogo-load-css" lang="fr">
   <head>
-    <title>{% block title %}config.appName{% endblock %}</title>
+    <title>{{ config.appName }}{% if pageTitle is defined %}{{ ' - ' ~ pageTitle }}{% endif %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     {# gogocarto contains materializeCss lib, so we load it for all pages #}

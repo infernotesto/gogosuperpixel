@@ -10,6 +10,20 @@ home:
   credits: Powered by {ggc}
   admin_interface: Admin interface
   my_space: My Space
+
+api_ui:
+  use_limit: Limit the number of results
+  use_categories: Filter by categories
+  use_bounds: Bind to a geographical zone (draw a rectangle on the map)
+  title: Access data through an API
+  test: Test
+  jsonld: JSON-LD (Semantic)
+  json: JSON
+  include_external: Include the database external sources
+  format: 'Format:'
+  api_url: API URL
+  _label: Configure API
+  
 action:
   element:
     vote:

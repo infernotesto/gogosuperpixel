@@ -1,3 +1,18 @@
+
+api_ui:
+  _label: Configurer une API
+  api_url: URL de l'API
+  format: 'Format :'
+  include_external: Inclure les sources externes de la base de donnée
+  json: JSON
+  jsonld: JSON-LD (Sémantique)
+  test: Tester
+  title: Accédez aux données via une API
+  use_bounds: Restreindre sur une zone géographique (dessinez un rectangle sur la
+    carte)
+  use_categories: Restreindre par catégories
+  use_limit: Limiter le nombre de résultat
+  
 action:
   cancel: Annuler
   continue: Continuer
@@ -171,6 +186,7 @@ load_configuration:
 
 login:
   _label: Connexion
+  login_with: Se connecter avec {provider}
   register: Besoin d'un compte ? <a href="{url}">S'inscrire</a>
 
 my_contributions:
@@ -212,28 +228,35 @@ pending-contributions:
     fiche</a> !
   form: Fiche
 
-project.create:
-  _label: GoGoCarto - Des cartes à GoGo
-  accept_cgu: J'accepte les conditions générales d'utilisation
-  cgu: Conditions d'utilisation
-  contrib: Ouverture à la contribution publique
-  contribHints:
-    closed: Seuls les administrateurs peuvent contribuer
-    inherit: Utiliser les paramètres par défaut de {base_url}
-    intermediate: >-
-      Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des
-      administrateurs
-    open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
-  contribOptions:
-    closed: Fermé
-    inherit: Défaut
-    intermediate: Intermédiaire
-    open: Ouvert
-  data-error: Oups, ce nom est trop long !
-  domaine_name: Nom du domaine
-  message: Votre projet est en cours de création, veuillez patienter...
-  project_name: Nom du projet
-  title: Créer un projet
+projects:
+  pitch: Créez des cartes à GoGo !   
+  form:
+    _label: Créer un projet
+    accept_cgu: J'accepte les conditions générales d'utilisation
+    cgu: Conditions d'utilisation
+    contrib: Ouverture à la contribution publique
+    contribHints:
+      closed: Seuls les administrateurs peuvent contribuer
+      inherit: Utiliser les paramètres par défaut de {base_url}
+      intermediate: >-
+        Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des
+        administrateurs
+      open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
+    contribOptions:
+      closed: Fermé
+      inherit: Défaut
+      intermediate: Intermédiaire
+      open: Ouvert
+    data-error: Oups, ce nom est trop long !
+    domaine_name: Nom du domaine
+    message: Votre projet est en cours de création, veuillez patienter...
+    project_name: Nom du projet  
+  initialize:
+    _label: Créer un compte administrateur
+    email: Adresse e-mail
+    plainPassword-1: Mot de passe
+    plainPassword-2: Retapez votre mot de passe
+    username: Nom d'utilisateur
 
 reports:
   _label: Mes Signalements

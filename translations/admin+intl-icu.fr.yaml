@@ -4,20 +4,6 @@ abouts:
     content: Contenu
     name: Nom
 
-api_ui:
-  _label: Configurer une API
-  api_url: URL de l'API
-  format: 'Format :'
-  include_external: Inclure les sources externes de la base de donnée
-  json: JSON
-  jsonld: JSON-LD (Sémantique)
-  test: Tester
-  title: Accédez aux données via une API
-  use_bounds: Restreindre sur une zone géographique (dessinez un rectangle sur la
-    carte)
-  use_categories: Restreindre par catégories
-  use_limit: Limiter le nombre de résultat
-
 bulk:
   _label: Actions de masse
   analyse: Analyse des éléments de {first} à {last}
@@ -1707,12 +1693,6 @@ partners:
 
 projects:
   _label: Liste des Projets
-  initialize:
-    _label: Créer un compte administrateur
-    email: Adresse e-mail
-    plainPassword-1: Mot de passe
-    plainPassword-2: Retapez votre mot de passe
-    username: Nom d'utilisateur
 
 sonata.user.user:
   _label: Utilisateurs
@@ -1768,7 +1748,6 @@ sonata.user.user:
       département, par
       example : 40*, 47*, 48500
     watchModerationOnlyWithPostCodes_placeholder: 40*, 47*, 48500
-  login_with: Se connecter avec {provider}
   role:
     ROLE_ADMIN: >-
       MODERATEUR (Accès aux fonctions de modérations, à détailler dans

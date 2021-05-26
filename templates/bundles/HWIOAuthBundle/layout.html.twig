@@ -1,7 +1,7 @@
 {# extends your own base template #}
 {% extends "page-layout.html.twig" %}
 
-{% block title %}{{ 'Login' | trans }}{% endblock %}
+{% set pageTitle = 'login._label' | trans %}
 
 {% block body %}
     {% block hwi_oauth_content %}

@@ -4,19 +4,6 @@ abouts:
     content: ''
     name: ''
 
-api_ui:
-  _label: ''
-  api_url: ''
-  format: ''
-  include_external: ''
-  json: ''
-  jsonld: ''
-  test: ''
-  title: ''
-  use_bounds: ''
-  use_categories: ''
-  use_limit: ''
-
 bulk:
   _label: ''
   analyse: ''
@@ -1145,15 +1132,6 @@ partners:
     logo_placeholder: ''
     name: ''
     websiteUrl: ''
-
-projects:
-  _label: ''
-  initialize:
-    _label: ''
-    email: ''
-    plainPassword-1: ''
-    plainPassword-2: ''
-    username: ''
 
 sonata.user.user:
   _label: ''
