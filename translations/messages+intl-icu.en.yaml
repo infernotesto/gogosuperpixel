@@ -80,7 +80,7 @@ element.form:
     error_dont_exist: The requested element does not exist…
     pending: Your contribution is currently pending validation. <a class='validation-process'
       onclick="$('#popup-collaborative-explanation').openModal()">click here</a> to
-      learn more about the collective moderation process !
+      learn more about the collective moderation process!
     thankyou:
       edited: Thank you for your help! The changes have been taken into account!
       added: Thank you for your help! {name} has been added
@@ -111,7 +111,7 @@ element.form:
   info_saved: Changes saved!
   error_username: This username is already taken!
   title_add: Add {element}
-  error_missing_adress: You need to put an address in order to be notified of the
+  error_missing_adress: You need to enter an address in order to be notified of the
     latest additions
   error_geocode: Impossible to locate this address
 duplicates:
@@ -152,9 +152,25 @@ my_parameters:
   unit: kilometres
 pending-contributions:
   _label: My pending contributions
+  form: File
+  empty_section: You have no pending contributions. Feel free to <a href="{url}">add
+    a file</a>!
 project.create:
   domaine_name: Domain name
   data-error: Oops, this name is too long!
+  title: Create a project
+  project_name: Project name
+  message: Your project is being created, please wait…
+  contribOptions:
+    open: Open
+    intermediate: Intermediate
+    inherit: Default
+    closed: Closed
+  contribHints:
+    closed: Only administrators can contribute
+  cgu: Terms of use
+  accept_cgu: I accept the general terms of use
+  _label: GoGoCarto – Maps à gogo
 reports:
   empty: You haven't reported any errors yet. Could our database be perfect? :P
   element: Name
@@ -163,6 +179,9 @@ reports:
     v2: The element does not respect the charter
     v1: Information is wrong
   report: Reporting
+  pending_moderation: Waiting for moderation
+  date: Date
+  _label: My reports
 vote:
   vote_modified: 'Thank you {user}: your vote has been edited!'
 votes:
@@ -188,17 +207,17 @@ load_configuration:
   AboutHeaderTitle: About
   SeeMoreButtonText: More information
   PartnerPageTitle: Partners
-  ElementFormGeocodingHelp: Don't put any punctuation, the name in all capitals are
-    not accepted either. If the localization doesn't work (some addresses do fail
+  ElementFormGeocodingHelp: Don’t put any punctuation, the name in all capitals are
+    not accepted either. If the localization doesn’t work (some addresses do fail
     to be recognized), enter the name of the nearest town or village then click on
-    "Localize" and put the localization point manually. Re-enter the complete address
-    into the text area, skip the "Localize" button and continue to fill in the form.
+    ‘Localize’ and put the localization point manually. Re-enter the complete address
+    into the text area, skip the ‘Localize’ button and continue to fill in the form.
   CollaborativeModerationExplanations: " <p> When an element is added or modified,\
-    \ the data is not updated immediately. The element will first appeared grayed\
-    \ out on the map and it becomes possible for all logged users to vote once and\
-    \ once only about the change. This vote is not an opinion but a knowledge sharing.\
-    \ If you know this element, or know that the element doesn't exists, then we want\
-    \ your knowledge ! </p> <p> After a number of votes, the element can then be automatically\
+    \ the data is not updated immediately. The element will first appear greyed out\
+    \ on the map and it becomes possible for all logged users to vote once and once\
+    \ only about the change. This vote is not an opinion but knowledge sharing. If\
+    \ you know this element, or know that the element doesn’t exist, then we want\
+    \ your knowledge! </p> <p> After a number of votes, the element can then be automatically\
     \ validated or rejected. In case of dispute (presence of positive and negative\
-    \ votes), a moderator will check it out as soon as possible. We count on you !\
+    \ votes), a moderator will check it out as soon as possible. We count on you!\
     \ </p>"
