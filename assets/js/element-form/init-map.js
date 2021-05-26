@@ -1,5 +1,4 @@
-var map;
-var marker;
+var map, marker, markerPosition, mapZoom, firstGeocodeDone;
 
 // Google map initialisation
 function initMap()

@@ -64,11 +64,11 @@ function geocodeAddress(address) {
 				streetNumber = potentialStreetNumber;
 			}
 
-			streetAddress = '';
+			let streetAddress = '';
 			if (streetNumber && results[0].streetName) streetAddress += streetNumber + ' ';
 			if (results[0].streetName) streetAddress +=  results[0].streetName;
 
-			geocodedFormatedAddress = "";
+			let geocodedFormatedAddress = "";
 			if (streetAddress) geocodedFormatedAddress += streetAddress + ', ';
 			if (results[0].postalCode) geocodedFormatedAddress += results[0].postalCode + ' ';
 			if (results[0].locality) geocodedFormatedAddress += results[0].locality;

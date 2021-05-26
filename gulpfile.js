@@ -11,20 +11,26 @@ const gulp = require('gulp'),
     footer = require('gulp-footer'),
     workboxBuild = require('workbox-build'),
     tap = require('gulp-tap'),
+    babel = require('gulp-babel'),
     log = require('fancy-log');
+
+const babelConf = {presets: ['@babel/env'], "sourceType": "script"}; // sourceType=script disable strict mode
 
 const scriptsHome = () =>
   gulp.src(['assets/js/home.js'])
+    .pipe(babel(babelConf))
     .pipe(concat('home.js'))
     .pipe(gulp.dest('web/js'));
 
 const scriptsExternalPages = () =>
   gulp.src(['assets/js/api/**/*.js', 'assets/js/duplicates/**/*.js'])
+    .pipe(babel(babelConf))
     .pipe(concat('external-pages.js'))
     .pipe(gulp.dest('web/js'));
 
 const scriptsElementForm = () =>
   gulp.src(['assets/js/element-form/**/*.js', 'node_modules/universal-geocoder/dist/universal-geocoder.js'])
+    .pipe(babel(babelConf))
     .pipe(concat('element-form.js'))
     .pipe(gulp.dest('web/js'));
 
@@ -58,13 +64,20 @@ const buildTranslations = () => {
   return merge(admin, public)
 }
 
+const scriptsCustom = () => 
+  gulp.src(['custom/**/*.js'])
+      .pipe(concat('custom.js'))
+      .pipe(babel(babelConf))      
+      .pipe(gulp.dest('web/js'))
+
+
 const scriptsLibs = () => {
   const gogocarto = gulp.src([
       'node_modules/gogocarto-js/dist/gogocarto.js', 
       'assets/js/init-sw.js', 
-      'custom/**/*.js',
+      'web/js/custom.js',
       'assets/js/i18n.js',
-      'web/js/javascripts-translations.js'])
+      'web/js/javascripts-translations.js'], {allowEmpty: true})
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('web/js'));
   const sw = gulp.src(['assets/js/vendor/**/*'])
@@ -144,7 +157,7 @@ exports.watch = () => {
               gulp.series(gogocarto_assets, serviceWorker));
 
   gulp.watch(['assets/js/vendor/**/*.js','assets/js/admin/**/*.js', 'node_modules/gogocarto-js/dist/gogocarto.js', 'custom/**/*.js', 'assets/js/i18n.js', 'translations/*.yaml'],
-              gulp.series(buildTranslations, scriptsLibs, serviceWorker));
+              gulp.series(buildTranslations, scriptsCustom, scriptsLibs, serviceWorker));
 
   gulp.watch(['assets/js/home.js'], gulp.series(scriptsHome, serviceWorker));
 };
@@ -155,7 +168,7 @@ const cleanCss = () =>
 const cleanJs = () =>
   del(['web/js']);
 
-exports.build = gulp.series(cleanJs, cleanCss, buildTranslations, gulp.parallel(stylesBuild, scriptsLibs, scriptsHome, scriptsExternalPages, scriptsElementForm, gogocarto_assets), serviceWorker);
+exports.build = gulp.series(cleanJs, cleanCss, buildTranslations, scriptsCustom, gulp.parallel(stylesBuild, scriptsLibs, scriptsHome, scriptsExternalPages, scriptsElementForm, gogocarto_assets), serviceWorker);
 
 exports.production = gulp.parallel(gulp.series(prod_styles, gzip_styles), gulp.series(prod_js, gzip_js));
 
