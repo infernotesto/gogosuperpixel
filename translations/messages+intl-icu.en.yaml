@@ -150,6 +150,7 @@ my_parameters:
   input_location: Your address or town
   _label: My settings
   unit: kilometres
+  range: 'Search range:'
 pending-contributions:
   _label: My pending contributions
   form: File
@@ -198,6 +199,19 @@ my_contributions:
   _label: My contributions
   confirmation: Confirmation
   become_owner: Take ownership
+  type: Type
+  status: Status
+  show: Show
+  owner: Owner
+  none: You don't have any contribution yet
+  my_votes: My votes
+  my_reports: My reports
+  my_elements: My files
+  history: My contributions history
+  element_contributed: Other files I contributed to
+  element: File
+  confirmation_hint: In order to become owner of a file, you need to commit to participate
+    to the structure management
 login:
   register: Need an account? <a href="{url}">Sign up</a>
   _label: Log in
