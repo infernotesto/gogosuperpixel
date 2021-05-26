@@ -47,10 +47,10 @@ commons:
   category_placeholder: Specify (if necessary)
   validation: Validation
   username: Username
-  register: Sign-up
+  register: Sign up
   password: Password
   optional: (optional)
-  newsletter-explanation: Stay informed by email of new references near you !
+  newsletter-explanation: Be informed by email of new references near you!
   never: Never
   menu: Menu
   location: Your city or address
@@ -63,7 +63,7 @@ commons:
     bad_url: Please enter a URL of the http://... type
     bad_number: This is not a number !
     bad_email: Please enter a valid email address
-  email: email address
+  email: Email address
 element.form:
   controller:
     error_unauthorized: You are not allowed to modify this element, sorry !
@@ -95,8 +95,8 @@ contributor-login:
   oauth: Sign-in with your account
   login: Sign-in
   error:
-    used_email: Sorry, an account already exists with that email address ! Please
-      sign-in or use another address !
+    used_email: Sorry, an account already exists with this email address! Please sign
+      in or use another address!
     invalid_email: Please enter a valid email address
     admin_only: 'Warning: this functionality is only for administrators'
   email: Simply enter an email address
