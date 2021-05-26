@@ -9,6 +9,7 @@ home:
   geolocalize: Geolocate your position
   credits: Powered by {ggc}
   admin_interface: Admin interface
+  my_space: My Space
 action:
   element:
     vote:
@@ -85,6 +86,8 @@ element.form:
       added: Thank you for your help! {name} has been added
     success: Your account has been created! You can now complete <a href="{url}" >your
       profile</a>!
+    user_contributions: Find and modify your contributions in the <a href="{url}">My
+      Contributions</a> page
   admin_section:
     send_mail:
       modify: Notify the {element} changes by sending an email
@@ -107,6 +110,10 @@ element.form:
   localize: Locate
   info_saved: Changes saved!
   error_username: This username is already taken!
+  title_add: Add {element}
+  error_missing_adress: You need to put an address in order to be notified of the
+    latest additions
+  error_geocode: Impossible to locate this address
 duplicates:
   title: Duplicate detection
   subtitle: Similar elements have been detected, maybe you wanted to add one of them?
@@ -136,6 +143,9 @@ js:
   element_form:
     geocoded_marker_text: Move me to specify the position</br>(in the centre of the
       building)
+  login:
+    wrong_id: Wrong credentials
+    exception: An error occurred while attempting to log in
 my_parameters:
   input_location: Your address or town
   _label: My settings
@@ -167,6 +177,8 @@ my_contributions:
   confirmation_button: I confirm
   action: Action
   _label: My contributions
+  confirmation: Confirmation
+  become_owner: Take ownership
 login:
   register: Need an account? <a href="{url}">Sign up</a>
   _label: Log in
@@ -174,3 +186,19 @@ load_configuration:
   AppBaseline: Create maps à gogo
   AddElementHintText: Contribute to the database!
   AboutHeaderTitle: About
+  SeeMoreButtonText: More information
+  PartnerPageTitle: Partners
+  ElementFormGeocodingHelp: Don't put any punctuation, the name in all capitals are
+    not accepted either. If the localization doesn't work (some addresses do fail
+    to be recognized), enter the name of the nearest town or village then click on
+    "Localize" and put the localization point manually. Re-enter the complete address
+    into the text area, skip the "Localize" button and continue to fill in the form.
+  CollaborativeModerationExplanations: " <p> When an element is added or modified,\
+    \ the data is not updated immediately. The element will first appeared grayed\
+    \ out on the map and it becomes possible for all logged users to vote once and\
+    \ once only about the change. This vote is not an opinion but a knowledge sharing.\
+    \ If you know this element, or know that the element doesn't exists, then we want\
+    \ your knowledge ! </p> <p> After a number of votes, the element can then be automatically\
+    \ validated or rejected. In case of dispute (presence of positive and negative\
+    \ votes), a moderator will check it out as soon as possible. We count on you !\
+    \ </p>"
