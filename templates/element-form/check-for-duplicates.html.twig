@@ -56,7 +56,7 @@
 						{{ 'duplicates.duplicated_element'|trans }}
 					</button>
 				{% else %}
-					{% set url = path('gogo_directory_showElement', {'id': element.id }) | replace({"%23":'#'}) %}
+					{% set url = path('gogo_element_edit', {'id': element.id }) %}
 					<a href="{{ url }}"><button type="button" class="btn-gogo btn-secondary small waves-light waves-effect btn">
 						{{ 'duplicates.duplicated_element'|trans }}
 					</button></a>
