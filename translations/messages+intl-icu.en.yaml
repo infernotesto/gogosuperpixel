@@ -101,3 +101,4 @@ contributor-login:
     admin_only: 'Warning: this functionality is only for administrators'
   email: Simply enter an email address
   communs: LesCommuns.org
+  _label: Identification
