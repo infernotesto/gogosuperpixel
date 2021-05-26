@@ -16,11 +16,15 @@ api_ui:
   use_limit: Limit the number of results
   use_categories: Filter by categories
   use_bounds: Bind to a geographical zone (draw a rectangle on the map)
-  title: Access to the data through an API
+  title: Access data through an API
   test: Test
   jsonld: JSON-LD (Semantic)
   json: JSON
   include_external: Include the database external sources
   format: 'Format:'
   api_url: API URL
-  _label: Configure an API
+  _label: Configure API
+js:
+  element_form:
+    geocoded_marker_text: Move me to specify the position</br>(in the centre of the
+      building)
