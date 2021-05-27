@@ -216,7 +216,7 @@ config_contributions:
     collaborativeModerationExplanations: Explications au sujet de la modération collaborative
     maxDaysLeavingAnElementPending: Nombre de jours au bout desquels un élément toujours
       en attente apparaîtra à modérer
-    maxOppositeVoteTolerated: Nombres maximum de vos contradictoires tolérés
+    maxOppositeVoteTolerated: Nombres maximum de votes contradictoires tolérés
     minDayBetweenContributionAndCollaborativeValidation: Nombre de jours minimum avant
       une validation/refus collaboratif
     minVoteToChangeStatus: Nombre votes pour valider/refuser automatiquement
@@ -855,7 +855,7 @@ config_style:
     mainFont: Police principale
     pendingColor: Couleur en attente de validation
     primaryColor: Couleur Primaire
-    searchBarColor: Couleur bar de recherche
+    searchBarColor: Couleur barre de recherche
     secondaryColor: Couleur Secondaire
     textColor: Couleur de texte
     textDarkColor: Couleur text foncé
