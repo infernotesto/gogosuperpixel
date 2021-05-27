@@ -1,1 +1,100 @@
-{}
+commons:
+  errors:
+    file-too-big: Diese Datei ist zu groß, die maximal zulässige Größe ist {size} MB
+    bad_url: Bitte geben Sie eine URL wie http://… ein
+    bad_number: Dies ist keine Zahl!
+    too_long: Hoppla, dieser Text ist ein bisschen lang!
+    bad_email: Bitte geben Sie eine gültige E-Mail Adresse ein
+  choose_one_option: Bitte wählen Sie mindestens eine Option
+  choose_category: Wählen Sie {cat}
+  category_placeholder: Spezifizieren Sie (falls benötigt)
+  check_password: Geben Sie Ihr Passwort erneut ein
+  every:
+    week: Jede Woche
+    month: Jeden Monat
+  location: Ihre Adresse oder Ihre Stadt
+  never: Nie
+  menu: Menü
+  password: Passwort
+  optional: (optional)
+  validation: Validierung
+  username: Benutzername
+  register: Konto erstellen
+  newsletter-explanation: Lassen Sie sich per E-Mail über die neuen Referenzpunkte
+    in Ihrer Nähe informieren!
+  email: E-Mail-Adresse
+duplicates:
+  controller:
+    marked: Markiert als nicht dupliziert
+directory:
+  _label: Die Karte
+contributor-login:
+  printemps: Bildungsfrühling
+  error:
+    admin_only: Achtung! Diese Funktion ist für Administratoren reserviert
+    used_email: Hoppla, ein Konto mit dieser E-Mail-Adresse existiert bereits! Melden
+      Sie sich an oder verwenden Sie eine andere Adresse!
+    invalid_email: Bitte geben Sie eine gültige E-Mail-Adresse ein
+  oauth: Melden Sie sich mit Ihrem Konto an
+  login: Anmelden
+  communs: LesCommuns.org
+  _label: Identifizierung
+  email: Geben Sie einfach eine E-Mail Adresse ein
+action:
+  element:
+    vote:
+      uncomplete: Die Abstimmungsparameter sind unvollständig
+      unallowed: Sie sind leider nicht stimmberechtigt!
+    stamp:
+      uncomplete: Parameter sind unvollständig
+      unallowed: Sie dürfen dieses Etikett nicht benutzen
+      done: Das Etikett ist geändert worden
+    sendMail:
+      uncomplete: Parameter sind unvollständig
+      emailContent: <p>Hallo <i>{element}</i>,</p> <p>Sie haben eine Nachricht von
+        <a href="mailto:{sender}">{sender}</a> empfangen</br> </p> <p><b>Nachrichtsbetreff</b></p><p>
+        {subject}</p> <p><b>Inhalt</b></p><p>{content}</p>
+      done: Die E-Mail ist gesendet worden
+    sendEditLink:
+      emailContent: <p>Hallo <i>'{{ element '}}</i>,</p><p><a href="'{{ directEditElementUniqueUrl
+        '}}">Klicken Sie hier</a>, um Ihr Datenblatt zu bearbeiten</p>
+      done: Ein Bearbeitungslink ist an {email} gesendet worden
+    resolveReports:
+      uncomplete: Parameter sind unvollständig
+      unallowed: Entschuldigung, Sie dürfen dieses Element nicht moderieren!
+      done: Das Element ist moderiert worden
+    report:
+      unallowed: Entschuldigung, Sie dürfen keine Fehler melden!
+      done: Vielen Dank, Ihr Bericht wurde registriert!
+    delete:
+      uncomplete: Parameter sind unvollständig
+      unallowed: Entschuldigung, Sie dürfen ein Element nicht löschen!
+      done: Das Element ist gelöscht worden
+  submit: Speichern
+  send: Senden
+  search: Suchen
+  geolocalize_me: Meine Position geolokalisieren
+  error: 'Fehler: {message}'
+  create: Erstellen
+  continue: Fortsetzen
+  cancel: Abbrechen
+login:
+  register: Sie benötigen ein Konto? <a href="{url}">Registrieren</a>
+element.form:
+  create_user: Passwort zum Erstellen Ihres Kontos
+  controller:
+    thankyou:
+      edited: Vielen Dank für Ihre Hilfe! Die Änderungen sind berücksichtigt worden!
+    success: Ihr Konto ist erstellt worden! Sie können jetzt <a href="{url}" >Ihr
+      Profil</a> vervollständigen!
+  admin_section:
+    send_mail:
+      modify: Benachrichtigen über Bearbeitungen zu {element} per E-Mail
+      add: Benachrichtigen über Aktualisierungen zu {element} per E-Mail
+    admin_message: Detail der Änderung; dieser Text wird 'customMessage' in den automatischen
+      E-Mails ersetzen
+home:
+  logout: Abmelden
+my_contributions:
+  edit: Bearbeiten
+  me: Ich

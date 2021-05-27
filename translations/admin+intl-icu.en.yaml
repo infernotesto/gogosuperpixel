@@ -1,5 +1,8 @@
 config_infobar:
   _label: Info Bar
+  fields:
+    description:
+      colorOptionId: The category ID that gives its main colour to this element
 abouts:
   _label: Popups
   fields:
@@ -61,6 +64,8 @@ categories:
     categoriesDescription: Describe the categories
     addCategory: Add a category
     addCategories: Add a group of categories
+    unique: Unique
+    title: List of categories
   form:
     groups:
       primary: Main settings
@@ -82,7 +87,7 @@ categories:
       index: Position
       id: More options
       icon: Icon
-      color: Color
+      color: Colour
     nameShort_help: The code sign will be used in the menu as we are often short on
       space
     name: Group name
@@ -105,3 +110,204 @@ categories:
     descriptionLabel: Description area label
     customId: Personalized id
   _label: Categories
+config_style:
+  fields:
+    searchBarColor: Search bar colour
+    textLightSoftColor: Softened light text colour
+    textLightColor: Clear text colour
+    textDarkSoftColor: Softened dark text colour
+    textDarkColor: Dark text colour
+    textColor: Text colour
+    secondaryColor: Secondary colour
+    primaryColor: Primary colour
+    pendingColor: Colour pending validation
+    interactiveSectionColor: Colour section to vote in detail sheet
+    homeBackgroundColor: Home page background colour
+    headerTextColor: Header text colour
+    headerHoverColor: Header hover text colour
+    headerColor: Header background colour
+    errorColor: Error colour
+    disableColor: Colour disabled
+    contentBackgroundElementBodyColor: Background colour of detail sheet content
+    contentBackgroundColor: Background colour of page content
+    choose_color: Click to choose a colour
+    backgroundColor: Page background colour
+  form:
+    groups:
+      secondaryColor: Other colours
+      primaryColors: Main colours
+      advancedColor: Advanced colours
+projects:
+  initialize:
+    plainPassword-1: Password
+    email: E-mail address
+partners:
+  form:
+    websiteUrl: Website's URL
+sonata.user.user:
+  batch:
+    error: 'ERROR: {message}'
+    usersWithoutEmail: '{count, plural =1 {# e-mail could not be sent, because no
+      e-mail address was given} other {# e-mails could not be sent, because no e-mail
+      address was given} }'
+  fields:
+    content: Message
+    gamification: Interactions
+    email: E-mail
+    sendMail: Send e-mail
+  facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
+    be informed of the evolution of your contributions'
+  form:
+    plainPassword: Password
+    main-roles: Main roles
+    watchModeration: Send notification e-mail when items are to be moderated
+config_emails:
+  form:
+    groups:
+      mailForElements: Automatic e-mails for {element}
+      mailForContributors: Automatic e-mails for contributors
+      infosNewletter: Information about the newsletter
+      infosElements: Information about automatic e-mails
+      infosContributors: Information about automatic e-mails
+      edit: During an update - <a href=''{url}'' target='_blank'>TEST</a>
+      delete: During a deletion - <a href=''{url}'' target='_blank'>TEST</a>
+      add: During an addition - <a href=''{url}'' target='_blank'>TEST</a>
+  _label: E-mails / newsletter
+wrappers:
+  fields:
+    textColor: Text colour
+    backgroundColor: Background colour
+options:
+  fields:
+    useColorForMarker_help: If an item has several categories that give the colour,
+      the lowest level category is used
+    useColorForMarker: Use the colour of this category for the marker
+    softColor_help: Some colours suit the marker (a bit flashy) but don't really suit
+      the header of the detail sheet. In this case, the ‘softened’ version is used
+      if it has been filled in
+    softColor: Softened colour
+    color: Colour
+config_contributions:
+  fields:
+    maxOppositeVoteTolerated: Number of allowed opposite votes
+    minVoteToForceChangeStatus: Number of votes to validate / reject automatically
+      regardless of the voting time
+    minVoteToChangeStatus: Number of votes for an automatic validation / rejection
+    minDayBetweenContributionAndCollaborativeValidation: Number of days before a collaborative
+      validation / rejection
+    maxDaysLeavingAnElementPending: Number of days before an element still pending
+      validation will appear as needing to be moderated
+    collaborativeModerationExplanations: Explanations about collaborative moderation
+  form:
+    groups:
+      text: Text
+      editFeature: Ability to edit an element
+      directModerationFeature: Direct moderation
+      deleteFeature: Ability to delete an element
+      collaborativeModerationParameters: Collaborative moderation options
+      collaborativeModerationFeature: Collective moderation (ability to vote)
+      addFeature: Be allowed to add an element
+  _label: Who can contribute ?
+config_duplicates:
+  form:
+    groups:
+      manualDetection: Limit the manual detection (optional)
+      fusion: Merge duplicates
+      configuration: Configuration
+  fields:
+    gogo_duplicates_index: Handle the detected duplicates
+    gogo_bulk_actions_detect_duplicates: Detect duplicates
+    duplicates:
+      useGlobalSearch_help: The global search is configured in the form personalization
+        (configuration of the searched fields, by default only the title of the file
+        will be scanned). In case of soft search, close values will be considered
+        as a match ("A tEsT" will match "test"). A perfect match will only happen
+        for very similar values "test" and "A tEsT" won't mach while "test" and "tEsT"
+        will
+      useGlobalSearch: Use the global search to look for duplicates (soft search in
+        {fields})
+      sourcesToDetectWith: And the sources (leave empty to search through the entire
+        database)
+      sourcesToDetectFrom: Look for duplicates between the given sources (leave the
+        field empty too search through the entire database)
+      sourcePriorityInAutomaticMerge: During a merge, which source would you mainly
+        like to keep ?
+      rangeInMeters: Max distance (in meters) between duplicates
+      fieldsToBeUsedForComparaison_help: Only perfectly matching values will be detected.
+        A match between any of these fields will be interpreted as a perfect match
+        between the two elements
+      fieldsToBeUsedForComparaison: Other fields uses for duplicate detection (pure
+        search)
+      detectAfterImport_help: For every new element added during the import, a full
+        scan of the database will be done to find potential duplicates
+      detectAfterImport: Look for duplicates after every import
+      automaticMergeIfPerfectMatch: Merge in case of perfect match
+  _label: Duplicates handling
+config_api:
+  form:
+    groups:
+      apis: Available APIs
+      config_description: <div class="iframe-container"><iframe height="200" sandbox="allow-same-origin
+        allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/aa05a654-a5d6-472a-bb12-108e0f6ce18e"
+        frameborder="0" allowfullscreen></iframe></div>
+      config: Configuration
+  fields:
+    gogo_element_import_available_options: Available options
+    gogo_api_ui: Graphical interface to build an API
+    gogo_api_semanatic_taxonomy: Semantic taxonomy
+    gogo_api_gogocartojs_configuration: GoGoCartoJs Configuration
+    gogo_api_elements_from_text: Search an element
+    gogo_api_element_get: An element (change ID by the element id)
+    text: your_searched_text
+    gogo_api_taxonomy_show: A Category (replace ID par by the category id)
+    gogo_api_taxonomy_mapping: Options list with their corresponding id
+    gogo_api_taxonomy: Taxonomy
+    gogo_api_configuration: GoGoCarto configuration
+    api.publicApiPrivateProperties: List of private properties that you don't want
+      to share
+  taxonomy: Taxonomy / Categories
+  elements: Elements
+  config: Configuration
+  _label: APIs
+commons:
+  send: Send
+  date_time_format: d/m/Y at H:i
+  date_format: d/m/Y
+  default: Default
+  btn_update_and_edit: Update
+  anonymous: Anonymous
+  actual_file: 'Current file:'
+charts:
+  collabResolve:
+    title: Collaborative Validations/Refusals
+    refused: Collaborative refusals
+    axisTitle: Collaborative Validations/Refusals
+    validate: Collaborative Validations
+  collabRefused: Latest collaborative refusals
+  userInteract:
+    voted: Votes
+    title: User interactions metrics
+    subtitle: Click & drag to focus on a period
+    reported: Reported elements
+    modified: Changes
+    added: Additions
+  showAll: Show all
+  empty: No found elements
+  contribsResolved:
+    resolved: Contributions' resolution
+    edited: Resolved changes
+    added: Resolved additions
+  collabValidated: Latest collaborative validations
+config_custom_js_css:
+  form:
+    groups:
+      custom_style_hint: Enter the CSS code that will be loaded in all of the public
+        pages
+      custom_style: Custom style
+      custom_javascript_hint: Enter the Javascript code that will be loaded in all
+        of the public pages
+      custom_javascript: Custom Javascript
+  _label: Custom CSS / JS
+  fields:
+    customCSS: Custom CSS
+    customJavascript: Custom Javascript

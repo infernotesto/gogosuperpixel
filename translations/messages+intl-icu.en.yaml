@@ -183,9 +183,14 @@ project.create:
     closed: Closed
   contribHints:
     closed: Only administrators can contribute
+    open: All the users can freely add, modify and delete
+    intermediate: Al the users can contribute, but the contributions need to be moderated
+      by the admins
+    inherit: Use {base_url} default parameters
   cgu: Terms of use
   accept_cgu: I accept the general terms of use
-  _label: GoGoCarto – Maps à gogo
+  _label: GoGoCarto – Plenty of Maps
+  contrib: Open to public contribution
 reports:
   empty: You haven't reported any errors yet. Could our database be perfect? :P
   element: Name
