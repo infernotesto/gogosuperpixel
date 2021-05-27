@@ -221,7 +221,7 @@ my_contributions:
   none: Vous n'avez encore fait aucune contribution
   owner: Propriétaire
   show: Voir
-  status: Status
+  status: Statut
   type: Type
 
 my_parameters:
