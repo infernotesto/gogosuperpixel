@@ -22,7 +22,8 @@ action:
     sendMail:
       done: L'email a bien été envoyé
       emailContent: >-
-        <p>Bonjour <i>{element}</i>,</p> <p>Vous avez reçu un message de la part de <a
+        <p>Bonjour <i>{element}</i>,</p> <p>Vous avez reçu un message de la part de
+        <a
         href="mailto:{sender}">{sender}</a></br> </p> <p><b>Titre du message</b></p><p>
         {subject}</p> <p><b>Contenu</b></p><p>{content}</p>
       emailSubject: Message reçu depuis la plateforme {instance}
@@ -51,7 +52,8 @@ commons:
     bad_email: Veuillez renseigner une adresse email valide
     bad_number: Ceci n'est pas un nombre !
     bad_url: Veuillez renseigner une url du type http://...
-    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size} Mb
+    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size}
+      Mo
     too_long: Oups, ce texte est un peu long !
   every:
     month: Chaque mois
@@ -59,7 +61,8 @@ commons:
   location: Votre adresse ou votre ville
   menu: Menu
   never: Jamais
-  newsletter-explanation: Soyez informé par mail des nouveaux points référencés près de chez vous !
+  newsletter-explanation: Soyez informé par mail des nouveaux points référencés près
+    de chez vous !
   optional: (optionnel)
   password: Mot de passe
   register: Créer un compte
@@ -74,7 +77,8 @@ contributor-login:
     admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
     invalid_email: V"euillez renseigner une adresse mail valide"
     used_email: >-
-      Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez une autre
+      Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez
+      une autre
       adresse !
   login: Se connecter
   oauth: Connectez-vous avec votre compte
@@ -92,13 +96,15 @@ duplicates:
   label: Détection de doublons
   new_element: Non, c'est un nouvel élément, je continue !
   see_on_map: (Voir sur OpenStreetMap)
-  subtitle: Des éléments similaires ont été détectés, vous vouliez peut être ajouter l'un d'eux ?
+  subtitle: Des éléments similaires ont été détectés, vous vouliez peut être ajouter
+    l'un d'eux ?
   title: Recherche de doublons
 
 element.form:
   admin_section:
     _label: Validation
-    admin_message: Détail de la modification, ce texte remplacera 'customMessage' dans les mails automatiques
+    admin_message: Détail de la modification, ce texte remplacera 'customMessage'
+      dans les mails automatiques
     recopy_info: Recopier les informations dans un nouveau formulaire
     send_mail:
       add: Avertir de l'ajout d''{element} en lui envoyant un mail
@@ -108,19 +114,24 @@ element.form:
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
     pending: >-
       Votre contribution est pour l'instant en attente de validation, <a class='validation-process'
-      onclick="$('#popup-collaborative-explanation').openModal()">cliquez ici</a> pour en savoir
+      onclick="$('#popup-collaborative-explanation').openModal()">cliquez ici</a>
+      pour en savoir
       plus sur le processus de modération collaborative !
     success: >-
-      Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}" >votre
+      Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}"
+      >votre
       profil</a> !
     thankyou:
       added: Merci de votre aide ! {name} a bien été ajouté
-      edited: Merci de votre aide ! Les modifications ont bien été prises en compte !
-    user_contributions: Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes Contributions</a>
+      edited: Merci de votre aide ! Les modifications ont bien été prises en compte
+        !
+    user_contributions: Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes
+      Contributions</a>
   create_user: Mot de passe pour créer votre compte
   error_becomeOwner: Désolé, cet élément appartient déjà à quelqu'un !
   error_geocode: Impossible de localiser cette adresse
-  error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
+  error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner
+    une adresse
   error_username: Ce nom d'utilisateur est déjà pris !
   info_saved: Modifications sauvegardées !
   localize: Localiser
@@ -150,7 +161,8 @@ home:
 
 js:
   element_form:
-    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du bâtiment)
+    geocoded_marker_text: Déplacez moi pour préciser la position</br>(au centre du
+      bâtiment)
   login:
     exception: Une erreur s'est produite lors de la tentative de connexion
     wrong_id: Les identifiants de connexion ne sont pas corrects
@@ -159,12 +171,24 @@ load_configuration:
   AboutHeaderTitle: A propos
   AddElementHintText: Contribuez à enrichir la base de donnée !
   AppBaseline: Créez des cartes à GoGo
-  CollaborativeModerationExplanations: ' <p> Lorsqu''un élément est ajouté ou modifié, la mise à jour des données n''est pas instantanée. L''élément va d''abords apparaître "grisé" sur la carte, et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément. Ce vote n''est pas une opinion, mais un partage de connaissance. Si vous connaissez cet élément, ou savez que cet élément n''existe pas, alors votre savoir nous intéresse ! </p> <p> Au bout d''un certain nombre de votes, l''élément pourra alors être automatiquement validé ou refusé. En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous! </p>'
+  CollaborativeModerationExplanations: ' <p> Lorsqu''un élément est ajouté ou modifié,
+    la mise à jour des données n''est pas instantanée. L''élément va d''abords apparaître
+    "grisé" sur la carte, et il sera alors possible à tous les utilisateurs logué
+    de voter une et une seule fois pour cet élément. Ce vote n''est pas une opinion,
+    mais un partage de connaissance. Si vous connaissez cet élément, ou savez que
+    cet élément n''existe pas, alors votre savoir nous intéresse ! </p> <p> Au bout
+    d''un certain nombre de votes, l''élément pourra alors être automatiquement validé
+    ou refusé. En cas de litige (des votes à la fois positifs et négatifs), un modérateur
+    interviendra au plus vite. On compte sur vous! </p>'
   ElementFormGeocodingHelp: >-
-    Ne mettez pas de ponctuation, les noms tout en majuscules ne sont pas reconnus non plus. Si la
-    localisation ne fonctionne pas (il arrive que certaines adresses ne soient pas reconnues),
-    entrez le nom de la ville/le village le plus proche, cliquez sur « Localiser », puis placer le
-    point de localisation manuellement. Re-rentrez l’adresse complète dans la barre et passez à la
+    Ne mettez pas de ponctuation, les noms tout en majuscules ne sont pas reconnus
+    non plus. Si la
+    localisation ne fonctionne pas (il arrive que certaines adresses ne soient pas
+    reconnues),
+    entrez le nom de la ville/le village le plus proche, cliquez sur « Localiser »,
+    puis placer le
+    point de localisation manuellement. Re-rentrez l’adresse complète dans la barre
+    et passez à la
     suite du formulaire sans re-cliquer sur « localiser ».
   PartnerPageTitle: Partenaires
   SeeMoreButtonText: En savoir plus
@@ -181,7 +205,8 @@ my_contributions:
   confirmation_button: Je confirme
   confirmation_cancel: Annuler
   confirmation_hint: >-
-    Pour devenir propriétaire d'une fiche, vous devez certifier participer à la gestion de cette
+    Pour devenir propriétaire d'une fiche, vous devez certifier participer à la gestion
+    de cette
     structure
   date: Date
   edit: Editer
@@ -208,7 +233,8 @@ my_parameters:
 pending-contributions:
   _label: Mes contributions en attente
   empty_section: >-
-    Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter une
+    Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter
+    une
     fiche</a> !
   form: Fiche
 
@@ -221,7 +247,8 @@ project.create:
     closed: Seuls les administrateurs peuvent contribuer
     inherit: Utiliser les paramètres par défaut de {base_url}
     intermediate: >-
-      Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des
+      Tous les utilisateurs peuvent contribuer, mais les contributions doivent être
+      modérées par des
       administrateurs
     open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
   contribOptions:
@@ -239,7 +266,8 @@ reports:
   _label: Mes Signalements
   date: Date
   element: Nom
-  empty: Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle parfaite ? :P
+  empty: Vous n'avez pas encore signalé d'erreur. Notre base de donnée serait-elle
+    parfaite ? :P
   pending_moderation: En attente de modération
   report: Signalement
   reportValues:
@@ -261,11 +289,15 @@ vote:
       negative: Les modifications ont bien été refusées
       positive: Les modifications ont bien été acceptées
     user_validated:
-      negative: La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.
-      positive: Félicitations, les modifications ont reçues assez de vote pour être validées !
+      negative: La proposition de modification a reçu suffisamment de votes négatifs,
+        elle est annulée.
+      positive: Félicitations, les modifications ont reçues assez de vote pour être
+        validées !
   user_vote_for_him: >-
-    Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ?
-    Laissez-en un peu pour les autres !</br> Attention les petits malins, si vous utilisez une autre
+    Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution
+    si ?
+    Laissez-en un peu pour les autres !</br> Attention les petits malins, si vous
+    utilisez une autre
     de vos adresse perso on le verra aussi ! 
   vote_added: Merci de votre contribution !
   vote_modified: 'Merci {user} : votre vote a bien été modifié !'
@@ -275,7 +307,8 @@ votes:
   date: Date
   element: Nom
   empty: >-
-    Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes permettent la
+    Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes
+    permettent la
     modération collaborative !
   status: Status
   vote: Vote
