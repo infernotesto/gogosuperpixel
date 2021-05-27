@@ -23,7 +23,7 @@ api_ui:
   format: 'Format:'
   api_url: API URL
   _label: Configure API
-  
+
 action:
   element:
     vote:
@@ -198,15 +198,40 @@ reports:
     v0: The element does not exist any more
     v2: The element does not respect the charter
     v1: Information is wrong
+    v3: The element is referenced several times
   report: Reporting
   pending_moderation: Waiting for moderation
   date: Date
   _label: My reports
+  status: Status
 vote:
   vote_modified: 'Thank you {user}: your vote has been edited!'
+  vote_added: Thanks for your contribution!
+  user_vote_for_him: "Come on, you weren't planning to vote for your own contribution,\
+    \ were you? Leave some for others! </br> Attention clever ones, if you use another\
+    \ of your personal address we will see it too! "
+  pending:
+    user_validated:
+      positive: Congratulations, the changes received enough votes to be validated!
+      negative: The proposed amendment has received sufficient negative votes, it
+        is revoked.
+    admin_validated:
+      positive: The changes have been accepted
+      negative: The changes have been refused
+  collaborative:
+    positive: Congratulations, the {element} has received enough votes to be validated!
+    negative: the {element} has received enough negative votes, it will be deleted.
+  admin:
+    positive: the {element} has been validated
+    negative: the {element} was rejected
 votes:
   empty: You haven't voted yet! You have to start :) </br>Voting allows collaborative
     moderation!
+  vote: Vote
+  status: Status
+  element: Name
+  date: Date
+  _label: My Votes
 my_contributions:
   name: Name
   me: Me
@@ -234,6 +259,7 @@ my_contributions:
 login:
   register: Need an account? <a href="{url}">Sign up</a>
   _label: Log in
+  login_with: Connect with {provider}
 load_configuration:
   AppBaseline: Create maps à gogo
   AddElementHintText: Contribute to the database!
@@ -254,3 +280,31 @@ load_configuration:
     \ validated or rejected. In case of dispute (presence of positive and negative\
     \ votes), a moderator will check it out as soon as possible. We count on you!\
     \ </p>"
+projects:
+  initialize:
+    username: User name
+    plainPassword-2: Re-enter your password
+    plainPassword-1: password
+    email: Email address
+    _label: Create an admin account
+  form:
+    project_name: Project name
+    message: your project is being created, please wait...
+    domaine_name: Domain name
+    data-error: Oops, this name is too long!
+    contribOptions:
+      open: Open
+      intermediate: Intermediate
+      inherit: Default
+      closed: Closed
+    contribHints:
+      open: All users can add / edit / delete freely
+      intermediate: All users can contribute, but contributions must be moderated
+        by administrators
+      inherit: Use {base_url} default settings
+      closed: Only administrators can contribute
+    contrib: Open to public contribution
+    accept_cgu: I accept the general terms of use
+    cgu: Terms of use
+    _label: Create a project
+  pitch: Create GoGo maps!
