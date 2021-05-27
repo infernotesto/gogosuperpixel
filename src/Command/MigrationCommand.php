@@ -80,6 +80,9 @@ class MigrationCommand extends Command
         "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration", 
         // 3.2.3
         "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)", 
+        // 3.3.0
+        "La lecture et l'écriture de donnée dans OpenStreetMap est maintenant possible via les import dynamiques",
+        "GoGoCarto est maintenant traductible dans différente langue. Si vous voulez contribuer aux traductions rendez-vous sur <a href=\"https://hosted.weblate.org/projects/gogocarto/\">l'outil en ligne Weblate</a>"
     ];
 
     public function __construct(DocumentManagerFactory $dmFactory, LoggerInterface $commandsLogger,

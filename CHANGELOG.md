@@ -1,3 +1,9 @@
+v3.3.0
+======
+* FEATURE: Read and write data to OpenStreetMap with dynamic import
+* FEATURE: Visitor stats component on dashboard, connected with matomo instance
+* FEATURE: The app can now internationalized, translations are in progress
+
 v3.2.7
 ======
 * BREAKING CHANGE: the docker-composer.yml has been moved to the root of the project. If you have any docker-compose.local.yml, please move it also to the root
